@@ -146,21 +146,53 @@ body {
 
 /* Section padding */
 .section {
-  padding: 96px 24px;
+  padding: 112px 24px;
   max-width: 900px;
   margin: 0 auto;
 }
 
 .section-wide {
-  padding: 96px 24px;
+  padding: 112px 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .section, .section-wide {
-    padding: 72px 20px;
+    padding: 80px 20px;
   }
+}
+
+/* Alternate section background — very subtle lift */
+.section-alt-wrap {
+  background: linear-gradient(180deg, rgba(255,255,255,0.018) 0%, rgba(255,255,255,0.012) 100%);
+  position: relative;
+}
+
+.section-alt-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+}
+
+.section-alt-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+}
+
+/* Gold-tinted alt section */
+.section-gold-wrap {
+  background: linear-gradient(180deg, rgba(201,168,76,0.03) 0%, rgba(201,168,76,0.015) 50%, transparent 100%);
+  position: relative;
 }
 
 @keyframes border-spin {
