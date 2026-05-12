@@ -43,37 +43,41 @@ export default function TheAudit() {
 
   const container = {
     hidden: {},
-    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.12, delayChildren: 0.2 } },
+    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.1, delayChildren: 0.15 } },
   }
   const item = {
-    hidden: shouldReduce ? { opacity: 1 } : { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+    hidden: shouldReduce ? { opacity: 1 } : { opacity: 0, x: -16 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
   }
 
   return (
     <section className="section">
       <AnimatedBorderCard active>
-        <div className="flex flex-col gap-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-            <div>
+        <div className="flex flex-col gap-10">
+
+          {/* Header row */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+            <div className="flex flex-col gap-2">
+              <p className="text-gold text-xs tracking-[0.25em] uppercase font-medium">
+                The Offer
+              </p>
               <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
                 <TextReveal text="The AI Ops Audit" />
               </h2>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl md:text-4xl font-semibold gold-shimmer">
+            <div className="flex items-center gap-4">
+              <span className="text-4xl md:text-5xl font-semibold text-gold leading-none">
                 $2,500
               </span>
-              <span className="text-xs border border-gold/50 text-gold px-3 py-1 tracking-widest uppercase">
-                5 Spots Available
+              <span className="text-[10px] border border-gold/40 text-gold/80 px-3 py-1.5 tracking-[0.2em] uppercase">
+                5 Spots
               </span>
             </div>
           </div>
 
           {/* Bullets */}
           <motion.ul
-            className="space-y-4"
+            className="space-y-5"
             variants={container}
             initial="hidden"
             whileInView="visible"
@@ -83,9 +87,9 @@ export default function TheAudit() {
               <motion.li
                 key={i}
                 variants={item}
-                className="flex items-start gap-3 text-white/70 text-sm md:text-base leading-relaxed"
+                className="flex items-start gap-4 text-white/65 text-sm md:text-base leading-relaxed"
               >
-                <span className="text-gold mt-1 flex-shrink-0">→</span>
+                <span className="text-gold/60 mt-0.5 flex-shrink-0 text-xs">✦</span>
                 <span>{b}</span>
               </motion.li>
             ))}
@@ -93,17 +97,18 @@ export default function TheAudit() {
 
           {/* CTA */}
           <motion.div
-            className="flex flex-col items-start gap-3"
-            initial={shouldReduce ? false : { opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-start gap-3 pt-2"
+            initial={shouldReduce ? false : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <CTAButton onClick={handleCheckout} loading={loading}>
+            <CTAButton onClick={handleCheckout} loading={loading} size="large">
               Claim Your Spot
             </CTAButton>
             {error && <p className="text-red-400 text-xs">{error}</p>}
           </motion.div>
+
         </div>
       </AnimatedBorderCard>
     </section>

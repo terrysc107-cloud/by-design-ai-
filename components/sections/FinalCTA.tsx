@@ -34,57 +34,44 @@ export default function FinalCTA() {
   }
 
   return (
-    <section className="section text-center">
-      <div className="flex flex-col items-center gap-8">
-        {/* Ambient glow behind CTA */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: '500px',
-            height: '300px',
-            background:
-              'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-          aria-hidden="true"
-        />
+    <section className="section">
+      <div className="flex flex-col gap-8">
 
-        <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="5 Spots. This Month Only." />
-        </h2>
+        <div className="flex flex-col gap-4">
+          <p className="text-gold text-xs tracking-[0.25em] uppercase font-medium">
+            This Month Only
+          </p>
+          <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight leading-[1.1]">
+            <TextReveal text="5 Spots. That's It." />
+          </h2>
+        </div>
 
         <motion.p
-          className="text-white/55 text-sm md:text-base leading-relaxed max-w-md"
+          className="text-white/50 text-base md:text-lg leading-relaxed max-w-lg"
           initial={shouldReduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
           When they&apos;re gone they&apos;re gone. Next availability opens the following month. No waitlist. No exceptions.
         </motion.p>
 
         <motion.div
-          className="flex flex-col items-center gap-4"
-          initial={shouldReduce ? false : { opacity: 0, y: 12 }}
+          className="flex flex-col items-start gap-4"
+          initial={shouldReduce ? false : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
         >
           <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            I&apos;m Ready — Claim My Spot
+            Book the Audit — $2,500
           </CTAButton>
           {error && <p className="text-red-400 text-xs">{error}</p>}
+          <p className="text-white/25 text-xs tracking-wide leading-relaxed max-w-sm">
+            By Design AI works with a small number of operators at a time — by design.
+          </p>
         </motion.div>
 
-        <motion.p
-          className="text-white/30 text-xs tracking-wide max-w-sm leading-relaxed"
-          initial={shouldReduce ? false : { opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          By Design AI works with a small number of operators at a time — by design.
-        </motion.p>
       </div>
     </section>
   )
