@@ -46,12 +46,33 @@ export default function FinalCTA() {
           </h2>
         </div>
 
+        {/* Spots availability visual */}
+        <motion.div
+          className="flex flex-col gap-2"
+          initial={shouldReduce ? false : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+        >
+          <div className="flex items-center gap-1.5">
+            {[true, true, true, false, false].map((filled, i) => (
+              <span
+                key={i}
+                className={`inline-block w-5 h-1.5 rounded-sm transition-colors ${
+                  filled ? 'bg-gold' : 'bg-white/15'
+                }`}
+              />
+            ))}
+            <span className="text-white/40 text-xs ml-2">3 of 5 spots filled this month</span>
+          </div>
+        </motion.div>
+
         <motion.p
           className="text-white/50 text-base md:text-lg leading-relaxed max-w-lg"
           initial={shouldReduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
         >
           When they&apos;re gone they&apos;re gone. Next availability opens the following month. No waitlist. No exceptions.
         </motion.p>
@@ -61,14 +82,14 @@ export default function FinalCTA() {
           initial={shouldReduce ? false : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
         >
           <CTAButton onClick={handleCheckout} loading={loading} size="large">
             Book the Audit — $2,500
           </CTAButton>
           {error && <p className="text-red-400 text-xs">{error}</p>}
           <p className="text-white/25 text-xs tracking-wide leading-relaxed max-w-sm">
-            By Design AI works with a small number of operators at a time — by design.
+            Secure checkout · Powered by Stripe · By Design AI works with a small number of operators at a time — by design.
           </p>
         </motion.div>
 

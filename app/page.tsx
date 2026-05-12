@@ -6,8 +6,10 @@ import PainPoints from '@/components/sections/PainPoints'
 import VideoSection from '@/components/sections/VideoSection'
 import TheAudit from '@/components/sections/TheAudit'
 import TheOperator from '@/components/sections/TheOperator'
+import Testimonials from '@/components/sections/Testimonials'
 import WhatHappensNext from '@/components/sections/WhatHappensNext'
 import OfferLadder from '@/components/sections/OfferLadder'
+import FAQ from '@/components/sections/FAQ'
 import FinalCTA from '@/components/sections/FinalCTA'
 import Footer from '@/components/layout/Footer'
 import StickyMobileCTA from '@/components/layout/StickyMobileCTA'
@@ -35,10 +37,16 @@ export default function Home() {
       <TheOperator />
 
       <GoldRule />
+      <Testimonials />
+
+      <GoldRule />
       <WhatHappensNext />
 
       <GoldRule />
       <OfferLadder />
+
+      <GoldRule />
+      <FAQ />
 
       <GoldRule />
       <FinalCTA />
