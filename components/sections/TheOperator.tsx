@@ -4,14 +4,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 
 const credentials = [
-  'Director of Sterile Processing — Virtua Health',
-  'Co-founder — CRCST Certification Training Program',
-  'Founder — Executive Advisory Firm',
-  'Founder — ST108 Water Quality Consulting Practice',
-  'Real Estate Portfolio Operator',
-  'Author — CAPACITY (systems thinking)',
-  'High Reliability Hero 2024',
-  'Live automations: Make.com, n8n, Notion, Supabase, Claude Code',
+  'Founders running 2+ businesses simultaneously.',
+  'Real estate investors managing rental portfolios.',
+  'Operators who need information centralized, proactive, and out of the way.',
+  'Anyone who is still the bottleneck in their own intelligence flow.',
+  'Live stack: Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram',
+  'Same setup running the operator\'s own portfolio — not theory, not a template.',
 ]
 
 export default function TheOperator() {
@@ -30,7 +28,7 @@ export default function TheOperator() {
     <section className="section">
       <div className="flex flex-col gap-10">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Why This Works" />
+          <TextReveal text="Built For Operators" />
         </h2>
 
         <motion.ul
@@ -59,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;Everything taught here is running in one of my businesses right now.&rdquo;
+          &ldquo;Everything in North Star is running in my own operation right now.&rdquo;
         </motion.p>
       </div>
     </section>

@@ -8,22 +8,22 @@ const offers = [
   {
     title: 'AI Ops Audit',
     price: '$2,500',
-    description: 'Find exactly where your operation breaks down and what to build first.',
+    description: 'We map your operation, surface exactly where you\'re losing time and leverage, and deliver a priority build plan. This is where everyone starts.',
     badge: 'Start Here',
     active: true,
   },
   {
-    title: '90-Day AI Integration',
-    price: '$10,000',
-    description: 'Done-with-you build. We implement the full system together.',
-    badge: 'By Application',
+    title: 'North Star OS Setup',
+    price: 'From $5,000',
+    description: 'After the audit, we build your full personal OS. Gmail, Calendar, Notion, Supabase, Plaid, Telegram — all configured to your operation and deployed.',
+    badge: 'Full Build',
     active: false,
   },
   {
-    title: 'Inner Circle',
-    price: '$2,500/month',
-    description: 'Ongoing access. Continued architecture. Stay ahead of the curve.',
-    badge: 'Invite Only',
+    title: 'Concierge',
+    price: '$1,500 / mo',
+    description: 'Ongoing system tuning, new automations, monthly review call, and support as your portfolio and businesses grow.',
+    badge: 'Ongoing',
     active: false,
   },
 ]
@@ -44,7 +44,7 @@ export default function OfferLadder() {
     <section className="section-wide">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight text-center">
-          <TextReveal text="The Audit Is the Entry Point" />
+          <TextReveal text="Two Ways to Work Together" />
         </h2>
 
         <motion.div

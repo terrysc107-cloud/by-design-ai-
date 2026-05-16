@@ -16,18 +16,18 @@ export default function PatternInterrupt() {
       >
         <div className="space-y-5 text-white/70 text-base md:text-lg leading-loose">
           <p>
-            This isn&apos;t a course. There&apos;s no community. No Slack group. No certificate.
+            Most founders are reactive. Three inboxes. Two calendars. A Notion board they check when they remember. And still missing what matters.
           </p>
           <p>
-            You get 60 minutes with someone who operates five businesses simultaneously — a health system, a certification training company, an executive advisory firm, a water quality consulting practice, and real estate.
+            North Star flips that. Before you open your phone, your system has already read your email, scanned your calendar, checked your habits, and flagged what needs your attention — delivered as a single Telegram message.
           </p>
           <p>
-            Not theory. Not a framework someone read about. Live systems. Running right now.
+            It&apos;s not an app. It&apos;s not a dashboard. It&apos;s an operating layer that runs underneath everything else — wired into Gmail, Google Calendar, Notion, Supabase, and Plaid.
           </p>
           <p className="text-white font-medium">
-            You&apos;ll walk away knowing exactly what to fix, in what order, and how.
+            You don&apos;t go to it. It comes to you.
           </p>
-          <p>That&apos;s it.</p>
+          <p>Every build starts with an audit. We map your operation first — what you have, what you need, what to build in what order. Then we build it. Personalized to your properties, your habits, your accounts.</p>
         </div>
       </motion.div>
     </section>

@@ -7,10 +7,15 @@ import CTAButton from '@/components/ui/CTAButton'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
 
 const bullets = [
-  'A 60-minute operational deep dive into your business.',
-  'A custom workflow map showing exactly where you\'re losing time and leverage.',
-  'A priority stack — what to build first, what to ignore.',
-  'A Loom walkthrough and action doc. Delivered same day.',
+  'Morning Brief — 6am daily Telegram report: habits, flagged emails, next 7 days of calendar, active goals.',
+  'Telegram Command Center — Reply to log a habit, capture a brain dump, check your calendar, or scan your inbox.',
+  'Habit Tracking & Streak Engine — Custom cadences, streak calculations, overdue alerts, Supabase backend.',
+  'Calendar Intelligence — All your Google Calendars unified. Evening prep alerts for tomorrow\'s events.',
+  'Email Priority Monitoring — Gmail integration surfaces invoices, disputes, legal, and overdue items. Auto-flags to Notion.',
+  'Rental Property Alerts — Rent reminders 3 and 1 day before due. Lease-end warnings at 90, 60, 30, and 14 days.',
+  'Weekly Review — Sunday 7pm structured review delivered to Telegram. Habit summary, open loops, next-week prep.',
+  'Notion Integration — Brain Dump, Flag Queue, Goal Tracker, and Expense Tracker all wired in from Telegram.',
+  'Financial Dashboard — Net worth history, real estate portfolio, business income, cash flow, and Plaid transaction intelligence.',
 ]
 
 export default function TheAudit() {
@@ -55,20 +60,10 @@ export default function TheAudit() {
       <AnimatedBorderCard active>
         <div className="flex flex-col gap-8">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-                <TextReveal text="The AI Ops Audit" />
-              </h2>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl md:text-4xl font-semibold gold-shimmer">
-                $2,500
-              </span>
-              <span className="text-xs border border-gold/50 text-gold px-3 py-1 tracking-widest uppercase">
-                5 Spots Available
-              </span>
-            </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
+              <TextReveal text="What's Running Inside North Star" />
+            </h2>
           </div>
 
           {/* Bullets */}
@@ -100,7 +95,7 @@ export default function TheAudit() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <CTAButton onClick={handleCheckout} loading={loading}>
-              Claim Your Spot
+              Book Your Setup Call
             </CTAButton>
             {error && <p className="text-red-400 text-xs">{error}</p>}
           </motion.div>

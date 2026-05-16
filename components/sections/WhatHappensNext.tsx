@@ -6,18 +6,18 @@ import TextReveal from '@/components/ui/TextReveal'
 const steps = [
   {
     num: '01',
-    title: 'Book and Pay',
-    body: 'Stripe checkout. Instant confirmation. No back and forth.',
+    title: 'Book a Setup Call',
+    body: 'We walk through your properties, habits, calendars, inboxes, and Notion workspace. One session, 60–90 minutes.',
   },
   {
     num: '02',
-    title: 'Complete Your Intake',
-    body: '5 questions. Sent automatically after payment. Takes 10 minutes. Required before the call.',
+    title: 'We Build and Deploy',
+    body: 'We configure your personal bot, wire up all your accounts — Gmail, Google Calendar, Notion, Supabase, Plaid — and deploy your automations.',
   },
   {
     num: '03',
-    title: 'Get Your Audit',
-    body: '60-minute call. Loom walkthrough. Action doc. All delivered within 48 hours.',
+    title: 'Wake Up to Your Brief',
+    body: 'The next morning at 6am, your first brief arrives in Telegram. From there, the system runs 24/7.',
   },
 ]
 
@@ -37,7 +37,7 @@ export default function WhatHappensNext() {
     <section className="section">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Here's Exactly What Happens" />
+          <TextReveal text="How It Works" />
         </h2>
 
         <motion.div
