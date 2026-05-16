@@ -7,15 +7,12 @@ import CTAButton from '@/components/ui/CTAButton'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
 
 const bullets = [
-  'Morning Brief — 6am daily Telegram report: habits, flagged emails, next 7 days of calendar, active goals.',
-  'Telegram Command Center — Reply to log a habit, capture a brain dump, check your calendar, or scan your inbox.',
-  'Habit Tracking & Streak Engine — Custom cadences, streak calculations, overdue alerts, Supabase backend.',
-  'Calendar Intelligence — All your Google Calendars unified. Evening prep alerts for tomorrow\'s events.',
-  'Email Priority Monitoring — Gmail integration surfaces invoices, disputes, legal, and overdue items. Auto-flags to Notion.',
-  'Rental Property Alerts — Rent reminders 3 and 1 day before due. Lease-end warnings at 90, 60, 30, and 14 days.',
-  'Weekly Review — Sunday 7pm structured review delivered to Telegram. Habit summary, open loops, next-week prep.',
-  'Notion Integration — Brain Dump, Flag Queue, Goal Tracker, and Expense Tracker all wired in from Telegram.',
-  'Financial Dashboard — Net worth history, real estate portfolio, business income, cash flow, and Plaid transaction intelligence.',
+  'Apex OS — Your personal AI operating system. Morning briefs, Telegram command center, habit tracking, email triage, calendar intelligence, and financial dashboard.',
+  'Agentic Workflow Builds — Custom multi-step AI automations wired into your existing tools. Make.com, n8n, Zapier, or custom code.',
+  'Course Infrastructure — We design and build the systems that let educators and entrepreneurs package their expertise and sell it.',
+  'AI Ops Strategy — For businesses that need a clear AI roadmap. What to build, what to buy, what to ignore, and in what order.',
+  '1-on-1 AI Coaching — Private coaching for professionals who want to understand and implement AI without the overwhelm.',
+  'Concierge — Ongoing system tuning, new automations, and monthly check-ins as your operation grows.',
 ]
 
 export default function TheAudit() {
@@ -62,7 +59,7 @@ export default function TheAudit() {
           {/* Header */}
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-              <TextReveal text="What's Running Inside Apex OS" />
+              <TextReveal text="What We Build" />
             </h2>
           </div>
 

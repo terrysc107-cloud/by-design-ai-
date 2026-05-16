@@ -16,18 +16,18 @@ export default function PatternInterrupt() {
       >
         <div className="space-y-5 text-white/70 text-base md:text-lg leading-loose">
           <p>
-            Most founders are reactive. Three inboxes. Two calendars. A Notion board they check when they remember. And still missing what matters.
+            Most people know AI is changing everything. But they&apos;re stuck watching tutorials, buying tools they don&apos;t use, and still doing everything manually.
           </p>
           <p>
-            Apex OS flips that. Before you open your phone, your system has already read your email, scanned your calendar, checked your habits, and flagged what needs your attention — delivered as a single Telegram message.
+            The gap isn&apos;t information. It&apos;s execution. You need someone who builds it — not explains it.
           </p>
           <p>
-            It&apos;s not an app. It&apos;s not a dashboard. It&apos;s an operating layer that runs underneath everything else — wired into Gmail, Google Calendar, Notion, Supabase, and Plaid.
+            By Design AI works with operators, creators, investors, and educators to design and install the systems that actually run their businesses.
           </p>
           <p className="text-white font-medium">
-            You don&apos;t go to it. It comes to you.
+            You bring the vision. We build the machine.
           </p>
-          <p>Every build starts with an audit. We map your operation first — what you have, what you need, what to build in what order. Then we build it. Personalized to your properties, your habits, your accounts.</p>
+          <p>Every engagement starts with an audit. We map your operation, identify the highest-leverage builds, and get to work. The audit fee is credited toward whatever we build together.</p>
         </div>
       </motion.div>
     </section>

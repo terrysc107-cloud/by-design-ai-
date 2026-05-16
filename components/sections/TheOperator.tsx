@@ -4,12 +4,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 
 const credentials = [
-  'Founders running 2+ businesses simultaneously.',
-  'Real estate investors managing rental portfolios.',
-  'Operators who need information centralized, proactive, and out of the way.',
-  'Anyone who is still the bottleneck in their own intelligence flow.',
-  'Live stack: Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram',
-  'Same setup running the operator\'s own portfolio — not theory, not a template.',
+  'Business owners running 2+ revenue streams who need AI integrated, not explained.',
+  'Content creators who want automated publishing, repurposing, and audience intelligence workflows.',
+  'Real estate professionals managing rental portfolios, deal pipelines, and investor communications.',
+  'Educators and entrepreneurs who want to build, package, and sell their expertise as a course.',
+  'Anyone who\'s spent money on AI tools and still isn\'t running on them.',
+  'Live stack: Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram · Claude',
 ]
 
 export default function TheOperator() {
@@ -57,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;Everything in Apex OS is running in my own operation right now.&rdquo;
+          &ldquo;We don&apos;t teach you to fish. We build you a fishing machine.&rdquo;
         </motion.p>
       </div>
     </section>

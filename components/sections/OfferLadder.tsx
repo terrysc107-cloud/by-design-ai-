@@ -4,27 +4,31 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
 
-const offers = [
+const specializations = [
   {
-    title: 'AI Ops Audit',
-    price: '$2,500',
-    description: 'We map your operation, surface exactly where you\'re losing time and leverage, and deliver a priority build plan. This is where everyone starts.',
-    badge: 'Start Here',
-    active: true,
+    title: 'Apex OS',
+    description:
+      'Your personal AI operating system. Morning briefs, email triage, habit tracking, calendar intelligence, and financial dashboard — all delivered to Telegram.',
   },
   {
-    title: 'Apex OS Setup',
-    price: 'From $5,000',
-    description: 'After the audit, we build your full personal OS. Gmail, Calendar, Notion, Supabase, Plaid, Telegram — all configured to your operation and deployed.',
-    badge: 'Full Build',
-    active: false,
+    title: 'Agentic Workflow Builds',
+    description:
+      'Custom multi-step AI automations wired into your existing tools. We map the process, build the flow, and deploy it.',
   },
   {
-    title: 'Concierge',
-    price: '$500 / mo',
-    description: 'Ongoing system tuning, new automations, monthly review call, and support as your portfolio and businesses grow.',
-    badge: 'Ongoing',
-    active: false,
+    title: 'Course Infrastructure',
+    description:
+      'We design and build the course systems that let educators and entrepreneurs package their expertise and sell it.',
+  },
+  {
+    title: 'AI Ops Strategy',
+    description:
+      'For businesses that need a clear AI roadmap — what to build, what to buy, what to ignore, and in what order.',
+  },
+  {
+    title: '1-on-1 AI Coaching',
+    description:
+      'Private coaching for professionals who want to understand and implement AI without the overwhelm.',
   },
 ]
 
@@ -33,7 +37,7 @@ export default function OfferLadder() {
 
   const container = {
     hidden: {},
-    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.15, delayChildren: 0.1 } },
+    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.12, delayChildren: 0.1 } },
   }
   const card = {
     hidden: shouldReduce ? { opacity: 1 } : { opacity: 0, y: 30 },
@@ -44,55 +48,47 @@ export default function OfferLadder() {
     <section className="section-wide">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight text-center">
-          <TextReveal text="The Path In" />
+          <TextReveal text="What We Specialize In" />
         </h2>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
         >
-          {offers.map((offer, i) => (
+          {specializations.map((spec, i) => (
             <motion.div
               key={i}
               variants={card}
               whileHover={shouldReduce ? {} : { scale: 1.02, y: -4 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className={offer.active ? '' : 'opacity-60'}
             >
-              <AnimatedBorderCard active={offer.active} className="h-full">
-                <div className="flex flex-col gap-5 h-full">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-white font-semibold text-base md:text-lg">
-                      {offer.title}
-                    </h3>
-                    <span
-                      className={`text-xs px-2 py-1 tracking-widest uppercase flex-shrink-0 ml-2 ${
-                        offer.active
-                          ? 'bg-gold text-black font-semibold'
-                          : 'border border-gold/40 text-gold/60'
-                      }`}
-                    >
-                      {offer.badge}
-                    </span>
-                  </div>
-                  <p
-                    className={`text-2xl md:text-3xl font-semibold ${
-                      offer.active ? 'gold-shimmer' : 'text-white/60'
-                    }`}
-                  >
-                    {offer.price}
-                  </p>
+              <AnimatedBorderCard active={false} className="h-full">
+                <div className="flex flex-col gap-4 h-full">
+                  <h3 className="text-white font-semibold text-base md:text-lg">
+                    {spec.title}
+                  </h3>
                   <p className="text-white/55 text-sm leading-relaxed flex-1">
-                    {offer.description}
+                    {spec.description}
                   </p>
                 </div>
               </AnimatedBorderCard>
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.p
+          className="text-center text-white/45 text-sm md:text-base leading-relaxed max-w-2xl mx-auto"
+          initial={shouldReduce ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+        >
+          Not sure which applies to you? The audit figures that out. Every engagement starts there
+          — and the audit fee is credited toward whatever we build.
+        </motion.p>
       </div>
     </section>
   )

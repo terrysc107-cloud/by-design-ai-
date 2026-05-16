@@ -62,13 +62,13 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          Apex OS
+          AI Strategy · Agentic Systems · Course Builds · 1-on-1 Coaching
         </motion.p>
 
         {/* Headline */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-white max-w-3xl">
           <TextReveal
-            text="Your AI runs your life before you open your phone."
+            text="Stop Learning About AI. Start Running on It."
             delay={0.2}
           />
         </h1>
@@ -80,7 +80,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
         >
-          Every morning at 6am, your system has already scanned your inboxes, checked your calendar, reviewed your habits, and sent you a briefing — straight to Telegram. No app to open. No dashboard to check. It finds you.
+          By Design AI builds custom AI systems for business owners, content creators, and real estate professionals — from agentic workflows and personal OS builds to course infrastructure and private coaching. Done for you. Done right.
         </motion.p>
 
         {/* Micro-copy */}
@@ -90,7 +90,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          Starts with an audit. Built for your operation. Runs 24/7.
+          Starts with an audit. Built for your operation.
         </motion.p>
 
         {/* CTA */}

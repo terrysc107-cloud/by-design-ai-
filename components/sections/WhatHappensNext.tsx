@@ -11,13 +11,13 @@ const steps = [
   },
   {
     num: '02',
-    title: 'We Build Your Apex OS',
-    body: 'We configure your personal bot, wire up all your accounts — Gmail, Google Calendar, Notion, Supabase, Plaid — and deploy your automations. Personalized to your portfolio.',
+    title: 'We Scope and Build',
+    body: 'Based on the audit, we scope your build — Apex OS, agentic workflows, course infrastructure, or a combination. We handle the entire implementation.',
   },
   {
     num: '03',
-    title: 'Wake Up to Your Brief',
-    body: 'The next morning at 6am, your first brief arrives in Telegram. From there, the system runs 24/7.',
+    title: 'Your System Runs for You',
+    body: 'Automations active. Briefs arriving. Workflows running. You focus on the business — the machine handles the rest.',
   },
 ]
 

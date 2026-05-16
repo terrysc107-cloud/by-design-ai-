@@ -50,7 +50,7 @@ export default function FinalCTA() {
         />
 
         <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="Start with the Audit. Wake Up to Your Brief." />
+          <TextReveal text="The First Call That Changes How You Work." />
         </h2>
 
         <motion.p
@@ -60,7 +60,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         >
-          One setup session. We configure everything. The next morning at 6am, Apex OS finds you.
+          Book the AI Ops Audit. Walk away knowing exactly what to build and how. The $2,500 audit fee is credited toward any service we take on together.
         </motion.p>
 
         <motion.div
