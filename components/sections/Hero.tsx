@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
+
+// To activate your photo: drop your image at public/hero-bg.jpg and set this to '/hero-bg.jpg'
+const HERO_PHOTO = ''
 
 export default function Hero() {
   const [loading, setLoading] = useState(false)
@@ -38,12 +42,31 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax background glow */}
+      {/* Background photo layer */}
+      {HERO_PHOTO ? (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={HERO_PHOTO}
+            alt=""
+            fill
+            priority
+            className="object-cover object-top"
+            style={{ opacity: 0.4 }}
+          />
+        </div>
+      ) : (
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950" />
+      )}
+
+      {/* Dark overlay — softens photo and keeps text readable */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/80 via-black/55 to-black/90 pointer-events-none" />
+
+      {/* Parallax gold glow — sits above photo, below text */}
       <motion.div
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{ y: bgY }}
       >
-        <div className="absolute inset-0 bg-gold-radial opacity-60" />
+        <div className="absolute inset-0 bg-gold-radial opacity-50" />
         <div
           className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
           style={{
