@@ -62,7 +62,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          North Star Personal OS
+          Apex OS
         </motion.p>
 
         {/* Headline */}
@@ -90,7 +90,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          Setup takes one session. Runs 24/7 from there.
+          Starts with an audit. Built for your operation. Runs 24/7.
         </motion.p>
 
         {/* CTA */}
@@ -101,7 +101,7 @@ export default function Hero() {
           className="flex flex-col items-center gap-3"
         >
           <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            Book Your Setup Call
+            Book the Audit — $2,500
           </CTAButton>
           {error && (
             <p className="text-red-400 text-xs">{error}</p>

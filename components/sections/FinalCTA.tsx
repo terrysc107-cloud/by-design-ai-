@@ -50,7 +50,7 @@ export default function FinalCTA() {
         />
 
         <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="Your Brief. Every Morning. Starting Tomorrow." />
+          <TextReveal text="Start with the Audit. Wake Up to Your Brief." />
         </h2>
 
         <motion.p
@@ -60,7 +60,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         >
-          One setup session. We configure everything. The next morning at 6am, North Star finds you.
+          One setup session. We configure everything. The next morning at 6am, Apex OS finds you.
         </motion.p>
 
         <motion.div
@@ -71,7 +71,7 @@ export default function FinalCTA() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         >
           <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            Book Your Setup Call
+            Book the Audit — $2,500
           </CTAButton>
           {error && <p className="text-red-400 text-xs">{error}</p>}
         </motion.div>
@@ -83,7 +83,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          North Star Personal OS is configured to your operation — by design.
+          Apex OS is configured to your operation — by design.
         </motion.p>
       </div>
     </section>

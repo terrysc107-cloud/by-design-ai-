@@ -62,7 +62,7 @@ export default function TheAudit() {
           {/* Header */}
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-              <TextReveal text="What's Running Inside North Star" />
+              <TextReveal text="What's Running Inside Apex OS" />
             </h2>
           </div>
 
@@ -95,7 +95,7 @@ export default function TheAudit() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <CTAButton onClick={handleCheckout} loading={loading}>
-              Book Your Setup Call
+              Book the Audit — $2,500
             </CTAButton>
             {error && <p className="text-red-400 text-xs">{error}</p>}
           </motion.div>

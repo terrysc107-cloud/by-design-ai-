@@ -57,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;Everything in North Star is running in my own operation right now.&rdquo;
+          &ldquo;Everything in Apex OS is running in my own operation right now.&rdquo;
         </motion.p>
       </div>
     </section>

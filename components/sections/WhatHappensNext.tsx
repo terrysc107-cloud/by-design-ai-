@@ -6,13 +6,13 @@ import TextReveal from '@/components/ui/TextReveal'
 const steps = [
   {
     num: '01',
-    title: 'Book a Setup Call',
-    body: 'We walk through your properties, habits, calendars, inboxes, and Notion workspace. One session, 60–90 minutes.',
+    title: 'Book the AI Ops Audit',
+    body: 'A 60-minute deep dive into your operation. We map what you have, identify what to build, and deliver a full priority plan. This is where everyone starts.',
   },
   {
     num: '02',
-    title: 'We Build and Deploy',
-    body: 'We configure your personal bot, wire up all your accounts — Gmail, Google Calendar, Notion, Supabase, Plaid — and deploy your automations.',
+    title: 'We Build Your Apex OS',
+    body: 'We configure your personal bot, wire up all your accounts — Gmail, Google Calendar, Notion, Supabase, Plaid — and deploy your automations. Personalized to your portfolio.',
   },
   {
     num: '03',

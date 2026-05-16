@@ -19,7 +19,7 @@ export default function PatternInterrupt() {
             Most founders are reactive. Three inboxes. Two calendars. A Notion board they check when they remember. And still missing what matters.
           </p>
           <p>
-            North Star flips that. Before you open your phone, your system has already read your email, scanned your calendar, checked your habits, and flagged what needs your attention — delivered as a single Telegram message.
+            Apex OS flips that. Before you open your phone, your system has already read your email, scanned your calendar, checked your habits, and flagged what needs your attention — delivered as a single Telegram message.
           </p>
           <p>
             It&apos;s not an app. It&apos;s not a dashboard. It&apos;s an operating layer that runs underneath everything else — wired into Gmail, Google Calendar, Notion, Supabase, and Plaid.

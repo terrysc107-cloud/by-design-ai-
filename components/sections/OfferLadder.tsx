@@ -13,7 +13,7 @@ const offers = [
     active: true,
   },
   {
-    title: 'North Star OS Setup',
+    title: 'Apex OS Setup',
     price: 'From $5,000',
     description: 'After the audit, we build your full personal OS. Gmail, Calendar, Notion, Supabase, Plaid, Telegram — all configured to your operation and deployed.',
     badge: 'Full Build',
@@ -21,7 +21,7 @@ const offers = [
   },
   {
     title: 'Concierge',
-    price: '$1,500 / mo',
+    price: '$500 / mo',
     description: 'Ongoing system tuning, new automations, monthly review call, and support as your portfolio and businesses grow.',
     badge: 'Ongoing',
     active: false,
@@ -44,7 +44,7 @@ export default function OfferLadder() {
     <section className="section-wide">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight text-center">
-          <TextReveal text="Two Ways to Work Together" />
+          <TextReveal text="The Path In" />
         </h2>
 
         <motion.div
