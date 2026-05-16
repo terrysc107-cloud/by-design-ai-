@@ -46,7 +46,7 @@ export default function StickyMobileCTA() {
             Processing…
           </>
         ) : (
-          '5 Spots Left — Book the Audit $2,500'
+          'Book the Audit — $2,500'
         )}
       </button>
     </motion.div>

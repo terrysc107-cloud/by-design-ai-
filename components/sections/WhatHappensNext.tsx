@@ -6,18 +6,18 @@ import TextReveal from '@/components/ui/TextReveal'
 const steps = [
   {
     num: '01',
-    title: 'Book and Pay',
-    body: 'Stripe checkout. Instant confirmation. No back and forth.',
+    title: 'Book the AI Ops Audit',
+    body: 'A 60-minute deep dive into your operation. We map what you have, identify what to build, and deliver a full priority plan. This is where everyone starts.',
   },
   {
     num: '02',
-    title: 'Complete Your Intake',
-    body: '5 questions. Sent automatically after payment. Takes 10 minutes. Required before the call.',
+    title: 'We Scope and Build',
+    body: 'Based on the audit, we scope your build — Apex OS, agentic workflows, course infrastructure, or a combination. We handle the entire implementation.',
   },
   {
     num: '03',
-    title: 'Get Your Audit',
-    body: '60-minute call. Loom walkthrough. Action doc. All delivered within 48 hours.',
+    title: 'Your System Runs for You',
+    body: 'Automations active. Briefs arriving. Workflows running. You focus on the business — the machine handles the rest.',
   },
 ]
 
@@ -37,7 +37,7 @@ export default function WhatHappensNext() {
     <section className="section">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Here's Exactly What Happens" />
+          <TextReveal text="How It Works" />
         </h2>
 
         <motion.div

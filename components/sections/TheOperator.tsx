@@ -4,14 +4,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 
 const credentials = [
-  'Director of Sterile Processing — Virtua Health',
-  'Co-founder — CRCST Certification Training Program',
-  'Founder — Executive Advisory Firm',
-  'Founder — ST108 Water Quality Consulting Practice',
-  'Real Estate Portfolio Operator',
-  'Author — CAPACITY (systems thinking)',
-  'High Reliability Hero 2024',
-  'Live automations: Make.com, n8n, Notion, Supabase, Claude Code',
+  'Business owners running 2+ revenue streams who need AI integrated, not explained.',
+  'Content creators who want automated publishing, repurposing, and audience intelligence workflows.',
+  'Real estate professionals managing rental portfolios, deal pipelines, and investor communications.',
+  'Educators and entrepreneurs who want to build, package, and sell their expertise as a course.',
+  'Anyone who\'s spent money on AI tools and still isn\'t running on them.',
+  'Live stack: Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram · Claude',
 ]
 
 export default function TheOperator() {
@@ -30,7 +28,7 @@ export default function TheOperator() {
     <section className="section">
       <div className="flex flex-col gap-10">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Why This Works" />
+          <TextReveal text="Built For Operators" />
         </h2>
 
         <motion.ul
@@ -59,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;Everything taught here is running in one of my businesses right now.&rdquo;
+          &ldquo;We don&apos;t teach you to fish. We build you a fishing machine.&rdquo;
         </motion.p>
       </div>
     </section>

@@ -7,10 +7,12 @@ import CTAButton from '@/components/ui/CTAButton'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
 
 const bullets = [
-  'A 60-minute operational deep dive into your business.',
-  'A custom workflow map showing exactly where you\'re losing time and leverage.',
-  'A priority stack — what to build first, what to ignore.',
-  'A Loom walkthrough and action doc. Delivered same day.',
+  'Apex OS — Your personal AI operating system. Morning briefs, Telegram command center, habit tracking, email triage, calendar intelligence, and financial dashboard.',
+  'Agentic Workflow Builds — Custom multi-step AI automations wired into your existing tools. Make.com, n8n, Zapier, or custom code.',
+  'Course Infrastructure — We design and build the systems that let educators and entrepreneurs package their expertise and sell it.',
+  'AI Ops Strategy — For businesses that need a clear AI roadmap. What to build, what to buy, what to ignore, and in what order.',
+  '1-on-1 AI Coaching — Private coaching for professionals who want to understand and implement AI without the overwhelm.',
+  'Concierge — Ongoing system tuning, new automations, and monthly check-ins as your operation grows.',
 ]
 
 export default function TheAudit() {
@@ -55,20 +57,10 @@ export default function TheAudit() {
       <AnimatedBorderCard active>
         <div className="flex flex-col gap-8">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-                <TextReveal text="The AI Ops Audit" />
-              </h2>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl md:text-4xl font-semibold gold-shimmer">
-                $2,500
-              </span>
-              <span className="text-xs border border-gold/50 text-gold px-3 py-1 tracking-widest uppercase">
-                5 Spots Available
-              </span>
-            </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
+              <TextReveal text="What We Build" />
+            </h2>
           </div>
 
           {/* Bullets */}
@@ -100,7 +92,7 @@ export default function TheAudit() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <CTAButton onClick={handleCheckout} loading={loading}>
-              Claim Your Spot
+              Book the Audit — $2,500
             </CTAButton>
             {error && <p className="text-red-400 text-xs">{error}</p>}
           </motion.div>

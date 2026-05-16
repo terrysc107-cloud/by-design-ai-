@@ -50,7 +50,7 @@ export default function FinalCTA() {
         />
 
         <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="5 Spots. This Month Only." />
+          <TextReveal text="The First Call That Changes How You Work." />
         </h2>
 
         <motion.p
@@ -60,7 +60,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         >
-          When they&apos;re gone they&apos;re gone. Next availability opens the following month. No waitlist. No exceptions.
+          Book the AI Ops Audit. Walk away knowing exactly what to build and how. The $2,500 audit fee is credited toward any service we take on together.
         </motion.p>
 
         <motion.div
@@ -71,7 +71,7 @@ export default function FinalCTA() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         >
           <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            I&apos;m Ready — Claim My Spot
+            Book the Audit — $2,500
           </CTAButton>
           {error && <p className="text-red-400 text-xs">{error}</p>}
         </motion.div>
@@ -83,7 +83,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          By Design AI works with a small number of operators at a time — by design.
+          Apex OS is configured to your operation — by design.
         </motion.p>
       </div>
     </section>

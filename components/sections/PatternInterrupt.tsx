@@ -16,18 +16,18 @@ export default function PatternInterrupt() {
       >
         <div className="space-y-5 text-white/70 text-base md:text-lg leading-loose">
           <p>
-            This isn&apos;t a course. There&apos;s no community. No Slack group. No certificate.
+            Most people know AI is changing everything. But they&apos;re stuck watching tutorials, buying tools they don&apos;t use, and still doing everything manually.
           </p>
           <p>
-            You get 60 minutes with someone who operates five businesses simultaneously — a health system, a certification training company, an executive advisory firm, a water quality consulting practice, and real estate.
+            The gap isn&apos;t information. It&apos;s execution. You need someone who builds it — not explains it.
           </p>
           <p>
-            Not theory. Not a framework someone read about. Live systems. Running right now.
+            By Design AI works with operators, creators, investors, and educators to design and install the systems that actually run their businesses.
           </p>
           <p className="text-white font-medium">
-            You&apos;ll walk away knowing exactly what to fix, in what order, and how.
+            You bring the vision. We build the machine.
           </p>
-          <p>That&apos;s it.</p>
+          <p>Every engagement starts with an audit. We map your operation, identify the highest-leverage builds, and get to work. The audit fee is credited toward whatever we build together.</p>
         </div>
       </motion.div>
     </section>
