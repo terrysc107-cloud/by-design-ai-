@@ -1,48 +1,20 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
+import { bookDiscoveryCall } from '@/lib/cta'
 
-// To activate your photo: drop your image at public/hero-bg.jpg and set this to '/hero-bg.jpg'
 const HERO_PHOTO = ''
 
 export default function Hero() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
   const shouldReduce = useReducedMotion()
-
   const { scrollY } = useScroll()
   const bgY = useTransform(scrollY, [0, 600], [0, shouldReduce ? 0 : 180])
 
-  const handleCheckout = async () => {
-    if (loading) return
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      })
-      const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      } else {
-        setError('Something went wrong. Please try again.')
-        setLoading(false)
-      }
-    } catch {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-    }
-  }
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background photo layer */}
       {HERO_PHOTO ? (
         <div className="absolute inset-0 z-0">
           <Image
@@ -58,10 +30,8 @@ export default function Hero() {
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950" />
       )}
 
-      {/* Dark overlay — softens photo and keeps text readable */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/80 via-black/55 to-black/90 pointer-events-none" />
 
-      {/* Parallax gold glow — sits above photo, below text */}
       <motion.div
         className="absolute inset-0 z-[2] pointer-events-none"
         style={{ y: bgY }}
@@ -78,57 +48,49 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 section text-center flex flex-col items-center gap-8 pt-32 pb-24">
-        {/* Eyebrow */}
         <motion.p
           className="text-gold text-xs tracking-[0.3em] uppercase font-medium"
           initial={shouldReduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          AI Strategy · Agentic Systems · Course Builds · 1-on-1 Coaching
+          Go High Level Management · Automation Builds · Custom AI Workflows
         </motion.p>
 
-        {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-white max-w-3xl">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-white max-w-4xl">
           <TextReveal
-            text="Stop Learning About AI. Start Running on It."
+            text="Your GHL Platform. Built Right. Running Right. Scaling Right."
             delay={0.2}
           />
         </h1>
 
-        {/* Subheadline */}
         <motion.p
           className="text-base md:text-lg text-white/60 leading-relaxed max-w-xl"
           initial={shouldReduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
         >
-          By Design AI builds custom AI systems for business owners, content creators, and real estate professionals — from agentic workflows and personal OS builds to course infrastructure and private coaching. Done for you. Done right.
+          By Design AI is a specialist Go High Level agency. We set up, automate, and manage GHL for agencies and businesses who want it done properly — so you can focus on closing, not configuring.
         </motion.p>
 
-        {/* Micro-copy */}
         <motion.p
           className="text-xs text-white/35 tracking-widest uppercase"
           initial={shouldReduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          Starts with an audit. Built for your operation.
+          Free discovery call · Clear scope on day one · No commitment
         </motion.p>
 
-        {/* CTA */}
         <motion.div
           initial={shouldReduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 1.2 }}
           className="flex flex-col items-center gap-3"
         >
-          <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            Book the Audit — $2,500
+          <CTAButton onClick={bookDiscoveryCall} size="large">
+            Book a Discovery Call →
           </CTAButton>
-          {error && (
-            <p className="text-red-400 text-xs">{error}</p>
-          )}
         </motion.div>
       </div>
     </section>

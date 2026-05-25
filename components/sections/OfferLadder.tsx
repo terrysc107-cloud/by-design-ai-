@@ -4,31 +4,31 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
 
-const specializations = [
+const services = [
   {
-    title: 'Apex OS',
+    title: 'GHL Setup & Launch',
     description:
-      'Your personal AI operating system. Morning briefs, email triage, habit tracking, calendar intelligence, and financial dashboard — all delivered to Telegram.',
+      'Full Go High Level account configuration from scratch — pipelines, calendars, funnels, forms, email/SMS domains, reputation management, and user roles. Your platform, built to convert.',
   },
   {
-    title: 'Agentic Workflow Builds',
+    title: 'Automation Builds',
     description:
-      'Custom multi-step AI automations wired into your existing tools. We map the process, build the flow, and deploy it.',
+      'Lead follow-up sequences, appointment reminders, pipeline automation, re-engagement campaigns, and custom triggers. We map the process, build the workflow, and deploy it.',
   },
   {
-    title: 'Course Infrastructure',
+    title: 'Custom AI Workflows',
     description:
-      'We design and build the course systems that let educators and entrepreneurs package their expertise and sell it.',
+      'AI layered on top of GHL — smart lead qualification, personalized outreach at scale, AI chat agents, and automated content pipelines. GHL plus intelligence.',
   },
   {
-    title: 'AI Ops Strategy',
+    title: 'Agency Snapshots',
     description:
-      'For businesses that need a clear AI roadmap — what to build, what to buy, what to ignore, and in what order.',
+      'Custom GHL snapshots built for agencies to deploy across client accounts. Fully documented, cleanly structured, and easy to white-label.',
   },
   {
-    title: '1-on-1 AI Coaching',
+    title: 'GHL Management Retainer',
     description:
-      'Private coaching for professionals who want to understand and implement AI without the overwhelm.',
+      'Monthly management of your GHL account — new automation builds, troubleshooting, performance reviews, and platform updates. Done for you, ongoing.',
   },
 ]
 
@@ -48,7 +48,7 @@ export default function OfferLadder() {
     <section className="section-wide">
       <div className="flex flex-col gap-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight text-center">
-          <TextReveal text="What We Specialize In" />
+          <TextReveal text="Our Services" />
         </h2>
 
         <motion.div
@@ -58,7 +58,7 @@ export default function OfferLadder() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
         >
-          {specializations.map((spec, i) => (
+          {services.map((s, i) => (
             <motion.div
               key={i}
               variants={card}
@@ -68,10 +68,10 @@ export default function OfferLadder() {
               <AnimatedBorderCard active={false} className="h-full">
                 <div className="flex flex-col gap-4 h-full">
                   <h3 className="text-white font-semibold text-base md:text-lg">
-                    {spec.title}
+                    {s.title}
                   </h3>
                   <p className="text-white/55 text-sm leading-relaxed flex-1">
-                    {spec.description}
+                    {s.description}
                   </p>
                 </div>
               </AnimatedBorderCard>
@@ -86,8 +86,7 @@ export default function OfferLadder() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
         >
-          Not sure which applies to you? The audit figures that out. Every engagement starts there
-          — and the audit fee is credited toward whatever we build.
+          Not sure which service fits your situation? The discovery call figures that out — no cost, no commitment, just a clear plan.
         </motion.p>
       </div>
     </section>

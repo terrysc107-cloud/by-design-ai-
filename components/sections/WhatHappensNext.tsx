@@ -6,18 +6,18 @@ import TextReveal from '@/components/ui/TextReveal'
 const steps = [
   {
     num: '01',
-    title: 'Book the AI Ops Audit',
-    body: 'A 60-minute deep dive into your operation. We map what you have, identify what to build, and deliver a full priority plan. This is where everyone starts.',
+    title: 'Book a Free Discovery Call',
+    body: 'A 30-minute call where we learn your business, your current GHL setup (or lack of one), and what you actually need built. No pitch. No pressure. Just clarity.',
   },
   {
     num: '02',
     title: 'We Scope and Build',
-    body: 'Based on the audit, we scope your build — Apex OS, agentic workflows, course infrastructure, or a combination. We handle the entire implementation.',
+    body: 'We deliver a clear proposal: what we\'ll build, what it costs, and how long it takes. Once approved, we handle everything — setup, automations, AI integrations, and testing.',
   },
   {
     num: '03',
-    title: 'Your System Runs for You',
-    body: 'Automations active. Briefs arriving. Workflows running. You focus on the business — the machine handles the rest.',
+    title: 'Your Platform Goes Live',
+    body: 'GHL deployed, automations active, follow-ups firing. We hand over a fully documented system and stay available for ongoing management as you scale.',
   },
 ]
 
@@ -50,7 +50,6 @@ export default function WhatHappensNext() {
           {steps.map((step, i) => (
             <motion.div key={i} variants={item} className="relative">
               <div className="flex gap-6 md:gap-8 pb-10">
-                {/* Number + connector */}
                 <div className="flex flex-col items-center gap-0 flex-shrink-0">
                   <div className="w-10 h-10 border border-gold/40 flex items-center justify-center flex-shrink-0">
                     <span className="text-gold text-xs font-medium tracking-widest">
@@ -68,7 +67,6 @@ export default function WhatHappensNext() {
                   )}
                 </div>
 
-                {/* Content */}
                 <div className="pb-2">
                   <h3 className="text-white font-semibold text-base md:text-lg mb-2">
                     {step.title}

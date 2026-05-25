@@ -1,42 +1,16 @@
 'use client'
 
-import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
+import { bookDiscoveryCall } from '@/lib/cta'
 
 export default function FinalCTA() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
   const shouldReduce = useReducedMotion()
-
-  const handleCheckout = async () => {
-    if (loading) return
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      })
-      const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      } else {
-        setError('Something went wrong. Please try again.')
-        setLoading(false)
-      }
-    } catch {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-    }
-  }
 
   return (
     <section className="section text-center">
       <div className="flex flex-col items-center gap-8">
-        {/* Ambient glow behind CTA */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -50,7 +24,7 @@ export default function FinalCTA() {
         />
 
         <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="The First Call That Changes How You Work." />
+          <TextReveal text="One Call. A Platform That Actually Works." />
         </h2>
 
         <motion.p
@@ -60,7 +34,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         >
-          Book the AI Ops Audit. Walk away knowing exactly what to build and how. The $2,500 audit fee is credited toward any service we take on together.
+          Book a free 30-minute discovery call. We&apos;ll map your current setup, identify the highest-leverage builds, and give you a clear scope — before you spend a cent.
         </motion.p>
 
         <motion.div
@@ -70,10 +44,9 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         >
-          <CTAButton onClick={handleCheckout} loading={loading} size="large">
-            Book the Audit — $2,500
+          <CTAButton onClick={bookDiscoveryCall} size="large">
+            Book a Discovery Call →
           </CTAButton>
-          {error && <p className="text-red-400 text-xs">{error}</p>}
         </motion.div>
 
         <motion.p
@@ -83,7 +56,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Apex OS is configured to your operation — by design.
+          Go High Level — built for your business. By design.
         </motion.p>
       </div>
     </section>

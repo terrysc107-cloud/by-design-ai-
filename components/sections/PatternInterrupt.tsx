@@ -16,18 +16,20 @@ export default function PatternInterrupt() {
       >
         <div className="space-y-5 text-white/70 text-base md:text-lg leading-loose">
           <p>
-            Most people know AI is changing everything. But they&apos;re stuck watching tutorials, buying tools they don&apos;t use, and still doing everything manually.
+            Most businesses on Go High Level are running a fraction of what the platform can do. They bought the tool, got overwhelmed by the settings, and handed it off to someone who figured it out as they went.
           </p>
           <p>
-            The gap isn&apos;t information. It&apos;s execution. You need someone who builds it — not explains it.
+            The result? Broken automations, missed follow-ups, pipelines that don&apos;t convert, and a monthly subscription that isn&apos;t earning its keep.
           </p>
           <p>
-            By Design AI works with operators, creators, investors, and educators to design and install the systems that actually run their businesses.
+            By Design AI specializes in GHL — and only GHL. We know the platform inside out: snapshots, sub-accounts, custom workflows, AI-augmented campaigns, and integrations that actually hold together under real volume.
           </p>
           <p className="text-white font-medium">
-            You bring the vision. We build the machine.
+            You bring the business. We make GHL the engine that runs it.
           </p>
-          <p>Every engagement starts with an audit. We map your operation, identify the highest-leverage builds, and get to work. The audit fee is credited toward whatever we build together.</p>
+          <p>
+            Every engagement starts with a free discovery call. We learn your setup, identify the gaps, and give you a clear build plan — before you commit to anything.
+          </p>
         </div>
       </motion.div>
     </section>

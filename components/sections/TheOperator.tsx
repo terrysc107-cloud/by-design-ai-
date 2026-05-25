@@ -3,13 +3,13 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 
-const credentials = [
-  'Business owners running 2+ revenue streams who need AI integrated, not explained.',
-  'Content creators who want automated publishing, repurposing, and audience intelligence workflows.',
-  'Real estate professionals managing rental portfolios, deal pipelines, and investor communications.',
-  'Educators and entrepreneurs who want to build, package, and sell their expertise as a course.',
-  'Anyone who\'s spent money on AI tools and still isn\'t running on them.',
-  'Live stack: Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram · Claude',
+const clients = [
+  'Agencies reselling GHL to clients who need their snapshot built, their clients onboarded, and their platform actually managed.',
+  'Coaches and consultants migrating to GHL from a patchwork of tools — and who need the whole thing wired together, not just the funnel.',
+  'Local service businesses that want automated follow-up, appointment booking, and review management without hiring another staff member.',
+  'Marketing teams who already have GHL but aren\'t seeing results — because the workflows are broken, the sequences are stale, or the setup was never finished.',
+  'Businesses that want AI layered into their GHL — smart routing, personalized outreach, and automated responses that save hours every week.',
+  'Live stack: Go High Level · Make.com · n8n · OpenAI · Stripe · Twilio · Google Workspace · Custom Webhooks',
 ]
 
 export default function TheOperator() {
@@ -28,7 +28,7 @@ export default function TheOperator() {
     <section className="section">
       <div className="flex flex-col gap-10">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Built For Operators" />
+          <TextReveal text="Who We Work With" />
         </h2>
 
         <motion.ul
@@ -38,14 +38,14 @@ export default function TheOperator() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
         >
-          {credentials.map((cred, i) => (
+          {clients.map((c, i) => (
             <motion.li
               key={i}
               variants={item}
               className="flex items-start gap-3 text-white/70 text-sm md:text-base"
             >
               <span className="text-gold mt-0.5 flex-shrink-0 text-lg leading-none">·</span>
-              <span>{cred}</span>
+              <span>{c}</span>
             </motion.li>
           ))}
         </motion.ul>
@@ -57,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;We don&apos;t teach you to fish. We build you a fishing machine.&rdquo;
+          &ldquo;We don&apos;t teach you GHL. We run it for you — until your team is ready to take over.&rdquo;
         </motion.p>
       </div>
     </section>

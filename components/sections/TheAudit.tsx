@@ -1,47 +1,22 @@
 'use client'
 
-import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
+import { bookDiscoveryCall } from '@/lib/cta'
 
-const bullets = [
-  'Apex OS — Your personal AI operating system. Morning briefs, Telegram command center, habit tracking, email triage, calendar intelligence, and financial dashboard.',
-  'Agentic Workflow Builds — Custom multi-step AI automations wired into your existing tools. Make.com, n8n, Zapier, or custom code.',
-  'Course Infrastructure — We design and build the systems that let educators and entrepreneurs package their expertise and sell it.',
-  'AI Ops Strategy — For businesses that need a clear AI roadmap. What to build, what to buy, what to ignore, and in what order.',
-  '1-on-1 AI Coaching — Private coaching for professionals who want to understand and implement AI without the overwhelm.',
-  'Concierge — Ongoing system tuning, new automations, and monthly check-ins as your operation grows.',
+const services = [
+  'GHL Account Setup & Configuration — Full sub-account build from scratch: pipelines, calendars, forms, funnels, email/SMS domains, and user permissions. Done right the first time.',
+  'Snapshot Development & Deployment — We build custom GHL snapshots for your agency and deploy them cleanly across every client sub-account.',
+  'Automation & Workflow Builds — Follow-up sequences, appointment reminders, lead nurture flows, pipeline automations, and trigger logic that actually converts.',
+  'AI-Powered Campaign Systems — Smart workflows that use AI to personalize messaging, qualify leads, and respond to contacts before your team ever needs to step in.',
+  'Custom Integrations — GHL connected to your stack: Make.com, n8n, Zapier, Stripe, Slack, custom webhooks, and third-party CRMs.',
+  'Ongoing GHL Management — Monthly retainer for account maintenance, new automation builds, troubleshooting, and continuous optimization as your operation scales.',
 ]
 
 export default function TheAudit() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
   const shouldReduce = useReducedMotion()
-
-  const handleCheckout = async () => {
-    if (loading) return
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      })
-      const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      } else {
-        setError('Something went wrong. Please try again.')
-        setLoading(false)
-      }
-    } catch {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-    }
-  }
 
   const container = {
     hidden: {},
@@ -56,14 +31,12 @@ export default function TheAudit() {
     <section className="section">
       <AnimatedBorderCard active>
         <div className="flex flex-col gap-8">
-          {/* Header */}
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
               <TextReveal text="What We Build" />
             </h2>
           </div>
 
-          {/* Bullets */}
           <motion.ul
             className="space-y-4"
             variants={container}
@@ -71,19 +44,18 @@ export default function TheAudit() {
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
           >
-            {bullets.map((b, i) => (
+            {services.map((s, i) => (
               <motion.li
                 key={i}
                 variants={item}
                 className="flex items-start gap-3 text-white/70 text-sm md:text-base leading-relaxed"
               >
                 <span className="text-gold mt-1 flex-shrink-0">→</span>
-                <span>{b}</span>
+                <span>{s}</span>
               </motion.li>
             ))}
           </motion.ul>
 
-          {/* CTA */}
           <motion.div
             className="flex flex-col items-start gap-3"
             initial={shouldReduce ? false : { opacity: 0, y: 12 }}
@@ -91,10 +63,9 @@ export default function TheAudit() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <CTAButton onClick={handleCheckout} loading={loading}>
-              Book the Audit — $2,500
+            <CTAButton onClick={bookDiscoveryCall}>
+              Book a Discovery Call →
             </CTAButton>
-            {error && <p className="text-red-400 text-xs">{error}</p>}
           </motion.div>
         </div>
       </AnimatedBorderCard>
