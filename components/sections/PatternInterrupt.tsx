@@ -16,19 +16,19 @@ export default function PatternInterrupt() {
       >
         <div className="space-y-5 text-white/70 text-base md:text-lg leading-loose">
           <p>
-            Most businesses on Go High Level are running a fraction of what the platform can do. They bought the tool, got overwhelmed by the settings, and handed it off to someone who figured it out as they went.
+            A few years ago I was running everything by hand. Replying to leads at midnight, chasing invoices, copy-pasting the same onboarding email, sending reminders, tracking spreadsheets, posting content when I remembered to.
           </p>
           <p>
-            The result? Broken automations, missed follow-ups, pipelines that don&apos;t convert, and a monthly subscription that isn&apos;t earning its keep.
+            It was working — barely. The business was growing. My time wasn&apos;t.
           </p>
           <p>
-            By Design AI specializes in GHL — and only GHL. We know the platform inside out: snapshots, sub-accounts, custom workflows, AI-augmented campaigns, and integrations that actually hold together under real volume.
+            So I rebuilt my entire operation around AI and automation. Lead capture, follow-up, booking, onboarding, reporting, reviews, content — all running in the background. I went from chasing my business to running it.
           </p>
           <p className="text-white font-medium">
-            You bring the business. We make GHL the engine that runs it.
+            Now I do the same thing for other operators.
           </p>
           <p>
-            Every engagement starts with a free discovery call. We learn your setup, identify the gaps, and give you a clear build plan — before you commit to anything.
+            Every engagement starts with a free 15-minute discovery call. You tell me what&apos;s draining your time. I tell you what to build, what it&apos;ll take, and whether I&apos;m the right person to build it.
           </p>
         </div>
       </motion.div>

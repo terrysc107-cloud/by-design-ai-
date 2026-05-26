@@ -4,12 +4,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 
 const clients = [
-  'Agencies reselling GHL to clients who need their snapshot built, their clients onboarded, and their platform actually managed.',
-  'Coaches and consultants migrating to GHL from a patchwork of tools — and who need the whole thing wired together, not just the funnel.',
-  'Local service businesses that want automated follow-up, appointment booking, and review management without hiring another staff member.',
-  'Marketing teams who already have GHL but aren\'t seeing results — because the workflows are broken, the sequences are stale, or the setup was never finished.',
-  'Businesses that want AI layered into their GHL — smart routing, personalized outreach, and automated responses that save hours every week.',
-  'Live stack: Go High Level · Make.com · n8n · OpenAI · Stripe · Twilio · Google Workspace · Custom Webhooks',
+  'Solopreneurs and consultants who are the bottleneck in their own business — every lead, follow-up, and invoice runs through them.',
+  'Clinic and studio owners drowning in admin: scheduling, reminders, intake forms, no-shows, and reviews that never get asked for.',
+  'Creators and artists who post when they remember to and lose momentum the rest of the time — their best work is invisible.',
+  'Service business owners burning hours every week chasing payments, sending the same emails, and answering the same five questions.',
+  'Operators who already tried automating — bought the tool, half-built it, and gave up because nobody walked them through the parts that actually matter.',
+  'CEOs and managers who don’t need more software — they need someone to make the systems they already own actually work.',
 ]
 
 export default function TheOperator() {
@@ -28,7 +28,7 @@ export default function TheOperator() {
     <section className="section">
       <div className="flex flex-col gap-10">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-          <TextReveal text="Who We Work With" />
+          <TextReveal text="Who It's For" />
         </h2>
 
         <motion.ul
@@ -57,7 +57,7 @@ export default function TheOperator() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          &ldquo;We don&apos;t teach you GHL. We run it for you — until your team is ready to take over.&rdquo;
+          &ldquo;If your business depends on you doing the same thing over and over — that&apos;s the thing we automate first.&rdquo;
         </motion.p>
       </div>
     </section>

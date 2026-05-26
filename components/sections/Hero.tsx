@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
@@ -16,34 +15,39 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Higgsfield video background */}
-      <video
-        autoPlay muted loop playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ opacity: 0.18 }}
-      >
-        <source src={ASSETS.heroBgVideo} type="video/mp4" />
-      </video>
+      {/* Layer 1 — walking video, blended dark, far back */}
+      {ASSETS.heroVideo && (
+        <video
+          autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.16, filter: 'grayscale(0.5) blur(1.5px) brightness(0.85)' }}
+        >
+          <source src={ASSETS.heroVideo} type="video/mp4" />
+        </video>
+      )}
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/95 via-black/75 to-zinc-900/90" />
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <NeuralField />
-      </div>
+      {/* Layer 2 — dark gradient wash, makes copy readable */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+
+      {/* Layer 3 — gold glow */}
       <div
-        className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1]"
+        className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1]"
         style={{
           width: 700, height: 500,
-          background: 'radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%)',
           filter: 'blur(80px)',
         }}
       />
 
-      {/* Content grid */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-24 pb-20">
+      {/* Layer 4 — neural field overlay */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <NeuralField />
+      </div>
 
-        {/* Left — Copy */}
-        <div className="flex flex-col gap-7">
+      {/* Content */}
+      <div className="relative z-10 max-w-[1100px] mx-auto px-6 min-h-screen flex flex-col justify-center pt-24 pb-20">
+        <div className="flex flex-col gap-7 max-w-2xl">
           <motion.p
             className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium"
             initial={shouldReduce ? false : { opacity: 0 }}
@@ -53,7 +57,7 @@ export default function Hero() {
             Done For You · Education · Coaching · Management
           </motion.p>
 
-          <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-semibold leading-[1.06] tracking-tight text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-semibold leading-[1.06] tracking-tight text-white">
             <TextReveal
               text="I Automated My Business Life. Let Me Help You Automate Yours."
               delay={0.2}
@@ -61,7 +65,7 @@ export default function Hero() {
           </h1>
 
           <motion.p
-            className="text-white/60 text-base md:text-lg leading-relaxed max-w-lg"
+            className="text-white/65 text-base md:text-lg leading-relaxed max-w-xl"
             initial={shouldReduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
@@ -96,48 +100,6 @@ export default function Hero() {
             </button>
           </motion.div>
         </div>
-
-        {/* Right — Photo */}
-        <motion.div
-          className="flex items-center justify-center lg:justify-end"
-          initial={shouldReduce ? false : { opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-        >
-          {ASSETS.heroPhoto ? (
-            <div className="relative">
-              <div
-                className="absolute -inset-8 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 70%)',
-                  filter: 'blur(40px)',
-                }}
-              />
-              <div className="relative border border-gold/25 p-[3px]">
-                <Image
-                  src={ASSETS.heroPhoto}
-                  alt="By Design AI"
-                  width={400}
-                  height={540}
-                  className="object-cover object-top block"
-                  priority
-                  style={{ filter: 'contrast(1.05) brightness(0.96)' }}
-                />
-              </div>
-              <div className="absolute -top-[3px] -left-[3px] w-6 h-6 border-t-2 border-l-2 border-gold/70" />
-              <div className="absolute -top-[3px] -right-[3px] w-6 h-6 border-t-2 border-r-2 border-gold/70" />
-              <div className="absolute -bottom-[3px] -left-[3px] w-6 h-6 border-b-2 border-l-2 border-gold/70" />
-              <div className="absolute -bottom-[3px] -right-[3px] w-6 h-6 border-b-2 border-r-2 border-gold/70" />
-            </div>
-          ) : (
-            <div className="w-[360px] h-[500px] border border-gold/15 flex flex-col items-center justify-center gap-3">
-              <div className="w-14 h-14 border border-gold/25 rounded-full" />
-              <p className="text-white/20 text-[10px] tracking-widest text-center leading-relaxed">
-                Add your photo at<br />public/hero-photo.jpg<br />then set ASSETS.heroPhoto
-              </p>
-            </div>
-          )}
-        </motion.div>
       </div>
     </section>
   )
