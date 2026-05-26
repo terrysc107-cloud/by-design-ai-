@@ -88,7 +88,7 @@ export default function LeadMagnetModal() {
           />
 
           <motion.div
-            className="relative w-full max-w-3xl bg-zinc-950 border border-gold/30"
+            className="relative w-full max-w-3xl bg-[#1E1B17] border border-gold/30"
             initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}

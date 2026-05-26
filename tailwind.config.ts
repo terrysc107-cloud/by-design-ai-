@@ -12,7 +12,7 @@ const config: Config = {
         gold: '#C9A84C',
         'gold-dim': 'rgba(201,168,76,0.15)',
         'gold-border': 'rgba(201,168,76,0.4)',
-        background: '#0A0A0A',
+        background: '#1E1B17',
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
