@@ -12,4 +12,5 @@ export const ASSETS = {
   sectionBg: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_013703_ebcd8b7d-97de-45cb-ab37-0c26d1dec776.png',
   // Set to '/hero-photo.jpg' once you upload your actual photo to public/hero-photo.jpg
   heroPhoto: '',
+  heroVideo: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_023607_b26a52fc-4528-49d3-885d-5eab5a157e52.mp4',
 }

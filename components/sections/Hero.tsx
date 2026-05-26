@@ -97,14 +97,37 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right — Photo */}
+        {/* Right — Walking video or photo */}
         <motion.div
           className="flex items-center justify-center lg:justify-end"
           initial={shouldReduce ? false : { opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
         >
-          {ASSETS.heroPhoto ? (
+          {ASSETS.heroVideo ? (
+            <div className="relative">
+              <div
+                className="absolute -inset-8 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%)',
+                  filter: 'blur(40px)',
+                }}
+              />
+              <div className="relative border border-gold/25 p-[3px] overflow-hidden" style={{ maxWidth: 340 }}>
+                <video
+                  autoPlay muted loop playsInline
+                  className="block w-full"
+                  style={{ aspectRatio: '9/16', objectFit: 'cover' }}
+                >
+                  <source src={ASSETS.heroVideo} type="video/mp4" />
+                </video>
+              </div>
+              <div className="absolute -top-[3px] -left-[3px] w-6 h-6 border-t-2 border-l-2 border-gold/70" />
+              <div className="absolute -top-[3px] -right-[3px] w-6 h-6 border-t-2 border-r-2 border-gold/70" />
+              <div className="absolute -bottom-[3px] -left-[3px] w-6 h-6 border-b-2 border-l-2 border-gold/70" />
+              <div className="absolute -bottom-[3px] -right-[3px] w-6 h-6 border-b-2 border-r-2 border-gold/70" />
+            </div>
+          ) : ASSETS.heroPhoto ? (
             <div className="relative">
               <div
                 className="absolute -inset-8 pointer-events-none"
@@ -130,7 +153,7 @@ export default function Hero() {
               <div className="absolute -bottom-[3px] -right-[3px] w-6 h-6 border-b-2 border-r-2 border-gold/70" />
             </div>
           ) : (
-            <div className="w-[360px] h-[500px] border border-gold/15 flex flex-col items-center justify-center gap-3">
+            <div className="w-[340px] h-[500px] border border-gold/15 flex flex-col items-center justify-center gap-3">
               <div className="w-14 h-14 border border-gold/25 rounded-full" />
               <p className="text-white/20 text-[10px] tracking-widest text-center leading-relaxed">
                 Add your photo at<br />public/hero-photo.jpg<br />then set ASSETS.heroPhoto
