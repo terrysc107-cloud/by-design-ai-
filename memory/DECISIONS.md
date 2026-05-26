@@ -5,16 +5,26 @@ Record important product, technical, and execution decisions here.
 ## Product Brief
 
 **What are we building?**
-North Star Personal OS — a done-for-you AI-powered operating system for founders and real estate investors.
+By Design AI — a specialist Go High Level agency site. The site profiles GHL setup/management, automation builds, and custom AI OS/workflow services. The primary conversion goal is booking a free discovery call.
 
 **Who is it for?**
-Founders running multiple businesses. Real estate investors managing rental portfolios. Operators who need information centralized, proactive, and out of the way.
+Agencies reselling GHL. Coaches and consultants on GHL. Local service businesses. Marketing teams with broken GHL setups. Businesses wanting AI layered into GHL.
 
 **What does success look like?**
-A fully configured personal OS — wired into Gmail, Google Calendar, Notion, Supabase, Plaid, and Telegram — that delivers a daily 6am intelligence brief and responds to two-way Telegram commands. Sold as a done-for-you setup service at $2,500 one-time + optional $1,500/month concierge.
+A visitor lands on the site, understands immediately that this is a GHL specialist agency, sees the services clearly, and books a free 30-minute discovery call. No payment friction at the point of entry — the CTA is always "Book a Discovery Call."
 
-**Core stack:** Make.com · n8n · Notion · Supabase · Gmail · Google Calendar · Plaid · Telegram
+**Services offered:**
+- GHL Account Setup & Configuration
+- Snapshot Development & Deployment
+- Automation & Workflow Builds
+- AI-Powered Campaign Systems
+- Custom Integrations (Make.com, n8n, Zapier, Stripe, webhooks)
+- Ongoing GHL Management Retainer
 
-**Repositioned from:** AI Ops Audit ($2,500 coaching session) → North Star Personal OS ($2,500 done-for-you setup)
+**Primary CTA:** Book a Discovery Call (calendar link — set in lib/cta.ts)
 
-**Date:** 2026-05-16
+**Core stack:** Go High Level · Make.com · n8n · OpenAI · Stripe · Twilio · Google Workspace · Custom Webhooks
+
+**Repositioned from:** North Star Personal OS ($2,500 paid checkout) → GHL Agency (free discovery call lead gen)
+
+**Date:** 2026-05-25
