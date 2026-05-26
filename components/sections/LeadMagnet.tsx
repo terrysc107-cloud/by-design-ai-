@@ -43,7 +43,7 @@ export default function LeadMagnet() {
           <Image src={ASSETS.sectionBg} alt="" fill className="object-cover opacity-[0.07]" />
         </div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-zinc-950/98 to-black/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1E1B17]/95 via-[#1E1B17]/98 to-[#1E1B17]/95" />
 
       <div className="relative z-10 section">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">

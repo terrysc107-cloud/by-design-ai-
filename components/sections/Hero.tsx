@@ -20,15 +20,15 @@ export default function Hero() {
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.16, filter: 'grayscale(0.5) blur(1.5px) brightness(0.85)' }}
+          style={{ opacity: 0.22, filter: 'grayscale(0.35) blur(1px) brightness(0.9)' }}
         >
           <source src={ASSETS.heroVideo} type="video/mp4" />
         </video>
       )}
 
-      {/* Layer 2 — dark gradient wash, makes copy readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+      {/* Layer 2 — warm gradient wash, makes copy readable */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1E1B17]/95 via-[#1E1B17]/78 to-[#1E1B17]/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1E1B17]/25 via-transparent to-[#1E1B17]/55" />
 
       {/* Layer 3 — gold glow */}
       <div

@@ -13,7 +13,7 @@ export default function StickyMobileCTA() {
     >
       <button
         onClick={bookDiscoveryCall}
-        className="w-full py-4 px-6 bg-black/90 backdrop-blur-md border-t border-gold/40 text-gold text-xs font-medium tracking-widest uppercase flex items-center justify-center gap-2"
+        className="w-full py-4 px-6 bg-[#1E1B17]/92 backdrop-blur-md border-t border-gold/40 text-gold text-xs font-medium tracking-widest uppercase flex items-center justify-center gap-2"
       >
         Book a Discovery Call →
       </button>
