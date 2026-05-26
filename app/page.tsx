@@ -10,6 +10,7 @@ import LeadMagnet from '@/components/sections/LeadMagnet'
 import FinalCTA from '@/components/sections/FinalCTA'
 import Footer from '@/components/layout/Footer'
 import StickyMobileCTA from '@/components/layout/StickyMobileCTA'
+import LeadMagnetModal from '@/components/layout/LeadMagnetModal'
 
 export default function Home() {
   return (
@@ -35,6 +36,7 @@ export default function Home() {
       <Footer />
 
       <StickyMobileCTA />
+      <LeadMagnetModal />
     </main>
   )
 }

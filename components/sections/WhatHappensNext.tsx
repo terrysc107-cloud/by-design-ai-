@@ -7,17 +7,17 @@ const steps = [
   {
     num: '01',
     title: 'Book a Free Discovery Call',
-    body: 'A 30-minute call where we learn your business, your current GHL setup (or lack of one), and what you actually need built. No pitch. No pressure. Just clarity.',
+    body: 'A 15-minute call where you tell me what’s slowing you down. I ask the right questions and tell you what to automate first — even if you never hire me. No pitch. No pressure.',
   },
   {
     num: '02',
-    title: 'We Scope and Build',
-    body: 'We deliver a clear proposal: what we\'ll build, what it costs, and how long it takes. Once approved, we handle everything — setup, automations, AI integrations, and testing.',
+    title: 'We Scope the Build',
+    body: 'If it’s a fit, I write a clear scope: what gets built, what it costs, what it saves you, and how long it takes. You approve it before anything starts.',
   },
   {
     num: '03',
-    title: 'Your Platform Goes Live',
-    body: 'GHL deployed, automations active, follow-ups firing. We hand over a fully documented system and stay available for ongoing management as you scale.',
+    title: 'We Ship It',
+    body: 'I build, test, and hand over a system that runs in the background of your business. You get documentation, a walkthrough, and ongoing support if you want it.',
   },
 ]
 

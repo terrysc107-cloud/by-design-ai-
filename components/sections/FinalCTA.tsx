@@ -24,7 +24,7 @@ export default function FinalCTA() {
         />
 
         <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">
-          <TextReveal text="One Call. A Platform That Actually Works." />
+          <TextReveal text="One Call. We Figure Out Exactly What You Need." />
         </h2>
 
         <motion.p
@@ -34,7 +34,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         >
-          Book a free 30-minute discovery call. We&apos;ll map your current setup, identify the highest-leverage builds, and give you a clear scope — before you spend a cent.
+          15 minutes. Tell me what&apos;s draining your time. I&apos;ll tell you exactly what to automate first — and whether I&apos;m the right person to build it. No pitch. No pressure.
         </motion.p>
 
         <motion.div
@@ -45,7 +45,7 @@ export default function FinalCTA() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         >
           <CTAButton onClick={bookDiscoveryCall} size="large">
-            Book a Discovery Call →
+            Let&apos;s Talk →
           </CTAButton>
         </motion.div>
 
@@ -56,7 +56,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Go High Level — built for your business. By design.
+          Free · No commitment · 15 minutes
         </motion.p>
       </div>
     </section>
