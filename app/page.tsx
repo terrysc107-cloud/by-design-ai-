@@ -14,7 +14,7 @@ import LeadMagnetModal from '@/components/layout/LeadMagnetModal'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background">
+    <main className="relative min-h-screen bg-background overflow-x-hidden">
       <NoiseBg />
 
       <Hero />
