@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
 import NeuralField from '@/components/effects/NeuralField'
-import { bookDiscoveryCall, ASSETS } from '@/lib/cta'
+import { openBookingModal, ASSETS } from '@/lib/cta'
 
 export default function Hero() {
   const shouldReduce = useReducedMotion()
@@ -89,7 +89,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 1.2 }}
           >
-            <CTAButton onClick={bookDiscoveryCall} size="large">
+            <CTAButton onClick={openBookingModal} size="large">
               Let&apos;s Talk →
             </CTAButton>
             <button

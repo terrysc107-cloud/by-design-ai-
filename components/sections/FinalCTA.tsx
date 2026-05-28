@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
-import { bookDiscoveryCall } from '@/lib/cta'
+import { openBookingModal } from '@/lib/cta'
 
 export default function FinalCTA() {
   const shouldReduce = useReducedMotion()
@@ -44,7 +44,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         >
-          <CTAButton onClick={bookDiscoveryCall} size="large">
+          <CTAButton onClick={openBookingModal} size="large">
             Let&apos;s Talk →
           </CTAButton>
         </motion.div>

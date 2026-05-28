@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { bookDiscoveryCall } from '@/lib/cta'
+import { openBookingModal } from '@/lib/cta'
 
 export default function StickyMobileCTA() {
   return (
@@ -12,7 +12,7 @@ export default function StickyMobileCTA() {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 1 }}
     >
       <button
-        onClick={bookDiscoveryCall}
+        onClick={openBookingModal}
         className="w-full py-4 px-6 bg-[#1E1B17]/92 backdrop-blur-md border-t border-gold/40 text-gold text-xs font-medium tracking-widest uppercase flex items-center justify-center gap-2"
       >
         Book a Discovery Call →

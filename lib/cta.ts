@@ -1,7 +1,8 @@
-export const DISCOVERY_CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
+export const BOOKING_MODAL_EVENT = 'bda:open-booking-modal'
 
-export function bookDiscoveryCall() {
-  window.open(DISCOVERY_CALL_URL, '_blank', 'noopener,noreferrer')
+export function openBookingModal() {
+  if (typeof window === 'undefined') return
+  window.dispatchEvent(new CustomEvent(BOOKING_MODAL_EVENT))
 }
 
 // Higgsfield-generated assets

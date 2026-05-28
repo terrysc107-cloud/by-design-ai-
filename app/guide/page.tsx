@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import BookingTriggerButton from '@/components/ui/BookingTriggerButton'
 
 const items = [
   {
@@ -221,14 +222,9 @@ export default function GuidePage() {
           Book a free 15-minute call. Tell me which of these is costing you the most. I&apos;ll tell
           you exactly what to build and what it takes.
         </p>
-        <a
-          href="https://calendly.com/terrysc107/15-min-ai-discovery-call"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block border border-amber-500 text-amber-500 px-10 py-4 text-xs tracking-widest uppercase hover:bg-amber-500 hover:text-black transition-colors duration-200"
-        >
+        <BookingTriggerButton className="inline-block border border-amber-500 text-amber-500 px-10 py-4 text-xs tracking-widest uppercase hover:bg-amber-500 hover:text-black transition-colors duration-200">
           Let&apos;s Talk →
-        </a>
+        </BookingTriggerButton>
         <p className="text-zinc-600 text-[10px] tracking-widest uppercase mt-6">
           Free · No commitment · 15 minutes
         </p>

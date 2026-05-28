@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import TextReveal from '@/components/ui/TextReveal'
 import CTAButton from '@/components/ui/CTAButton'
 import AnimatedBorderCard from '@/components/ui/AnimatedBorderCard'
-import { bookDiscoveryCall } from '@/lib/cta'
+import { openBookingModal } from '@/lib/cta'
 
 const tracks = [
   {
@@ -87,7 +87,7 @@ export default function TheAudit() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <CTAButton onClick={bookDiscoveryCall}>
+          <CTAButton onClick={openBookingModal}>
             Let&apos;s Talk — Book a Free Call →
           </CTAButton>
         </motion.div>

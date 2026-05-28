@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
+import BookingModal from '@/components/layout/BookingModal'
 
 export const metadata: Metadata = {
   title: 'By Design AI — AI Expert Consulting',
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.variable}>
       <body className="font-sans bg-background text-white antialiased">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <BookingModal />
       </body>
     </html>
   )
