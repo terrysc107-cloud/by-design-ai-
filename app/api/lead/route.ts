@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend, FROM_EMAIL, LEAD_NOTIFY_EMAIL } from '@/lib/resend'
 import { guideEmail, leadNotifyEmail } from '@/lib/emails'
+import { getSupabase, hasSupabase } from '@/lib/supabase'
+import { nextDripDate } from '@/lib/drip'
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,18 +18,45 @@ export async function POST(req: NextRequest) {
     }
 
     if (!process.env.RESEND_API_KEY) {
-      // Fail loudly in logs but don't break the form during local dev / before keys are set.
       console.error('RESEND_API_KEY not set — lead captured but no email sent:', `${name} <${email}>`)
       return NextResponse.json({ error: 'Email service not configured' }, { status: 503 })
     }
 
+    const cleanName = name.trim()
+    const cleanEmail = email.trim().toLowerCase()
+
+    // Store the lead and enroll them in the drip sequence. Best-effort: a storage
+    // failure should never stop us from delivering the guide they asked for.
+    if (hasSupabase()) {
+      try {
+        const now = new Date()
+        const dripNext = nextDripDate(now, 0) // first drip after signup
+        await getSupabase()
+          .from('bda_leads')
+          .upsert(
+            {
+              name: cleanName,
+              email: cleanEmail,
+              source: 'lead_magnet',
+              drip_stage: 0,
+              drip_next_at: dripNext?.toISOString() ?? null,
+              unsubscribed: false,
+              updated_at: now.toISOString(),
+            },
+            { onConflict: 'email', ignoreDuplicates: false }
+          )
+      } catch (dbErr) {
+        console.error('Supabase lead upsert failed (non-fatal):', dbErr)
+      }
+    }
+
     const resend = getResend()
 
-    // 1. Deliver the guide to the lead. This is the promise we made, so it must succeed.
-    const guide = guideEmail(name)
+    // 1. Deliver the guide to the lead. This is the promise, so it must succeed.
+    const guide = guideEmail(cleanName)
     const { error: guideError } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: email,
+      to: cleanEmail,
       subject: guide.subject,
       html: guide.html,
       text: guide.text,
@@ -38,13 +67,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Could not send the guide. Please try again.' }, { status: 502 })
     }
 
-    // 2. Notify the owner of the new lead. Best-effort — never block the lead on this.
+    // 2. Notify the owner. Best-effort — never block the lead on this.
     try {
-      const notify = leadNotifyEmail(name, email)
+      const notify = leadNotifyEmail(cleanName, cleanEmail)
       await resend.emails.send({
         from: FROM_EMAIL,
         to: LEAD_NOTIFY_EMAIL,
-        replyTo: email,
+        replyTo: cleanEmail,
         subject: notify.subject,
         html: notify.html,
         text: notify.text,
