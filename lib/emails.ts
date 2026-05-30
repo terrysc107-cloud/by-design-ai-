@@ -1,4 +1,5 @@
 import { SITE_URL } from './resend'
+import type { IntakeSubmission } from './ai-review'
 
 const GOLD = '#C9A84C'
 const BG = '#1E1B17'
@@ -180,4 +181,144 @@ export function bookingNotifyEmail(opts: {
   </div>`
   const text = `New booking\nName: ${name || '—'}\nEmail: ${email || '—'}\nEvent: ${eventType || '—'}\nWhen: ${when}`
   return { subject, html, text }
+}
+
+// ── Intake invite (to prospect, after booking) ──────────────────────────────
+export function intakeInviteEmail(name: string, intakeUrl: string): Email {
+  const inner =
+    h1('Before our call — 2 minutes that make it count') +
+    p(`Hey ${first(name)},`) +
+    p("You're booked — thank you. To make our time together count, I put together a short intake so I can review your setup beforehand and show up with a plan already half-built, instead of spending the call asking the basics.") +
+    p('It takes about 2 minutes. The more you share, the more specific I can be.') +
+    goldButton(intakeUrl, 'Complete the Intake →') +
+    p('You can fill it out now or any time before our call — but the sooner I have it, the more prepared I’ll be.') +
+    p('— Terry, By Design AI')
+  const text = `Hey ${first(name)},
+
+You're booked — thank you. To make our call count, please complete this short intake so I can review your setup and arrive with a plan already half-built.
+
+It takes about 2 minutes: ${intakeUrl}
+
+Fill it out any time before our call — the sooner, the better.
+
+— Terry, By Design AI`
+  return {
+    subject: 'Before our call — a quick 2-minute intake',
+    html: wrap(inner),
+    text,
+  }
+}
+
+// ── Intake reminders (to prospect, escalating) ──────────────────────────────
+const INTAKE_REMINDERS: Array<{ subject: string; heading: string; body: string[] }> = [
+  {
+    subject: 'Quick reminder: your pre-call intake',
+    heading: 'A quick nudge before our call',
+    body: [
+      "I noticed you haven't completed your intake yet. It only takes about 2 minutes, and it's the difference between us spending the call on basics versus diving straight into a plan built for your business.",
+      'Knock it out whenever you get a sec:',
+    ],
+  },
+  {
+    subject: 'I need your intake to prep for our call',
+    heading: 'I want to come prepared — help me out',
+    body: [
+      "Our call is coming up and I still don't have your intake. Without it, I'm walking in blind and we'll burn the first half of our time on questions a 2-minute form would answer.",
+      'Please take a moment to complete it so I can do the prep work for you:',
+    ],
+  },
+  {
+    subject: 'Action needed: complete your intake or risk losing your call',
+    heading: 'Last call on your intake',
+    body: [
+      "Your discovery call is almost here and your intake still isn't in. I hold these slots for people who are ready to do the work — if the intake isn't completed before our call, I may need to release your time to someone else.",
+      "Don't lose your spot — it takes 2 minutes:",
+    ],
+  },
+]
+
+export function intakeReminderEmail(name: string, intakeUrl: string, stage: number): Email {
+  // stage is 0-indexed reminder number (0 = first/gentlest).
+  const def = INTAKE_REMINDERS[Math.min(stage, INTAKE_REMINDERS.length - 1)]
+  const inner =
+    h1(def.heading) +
+    p(`Hey ${first(name)},`) +
+    def.body.map(p).join('') +
+    goldButton(intakeUrl, 'Complete the Intake →') +
+    p('— Terry, By Design AI')
+  const text = `Hey ${first(name)},
+
+${def.body.join('\n\n')}
+
+${intakeUrl}
+
+— Terry, By Design AI`
+  return { subject: def.subject, html: wrap(inner), text }
+}
+
+// ── Internal: intake submission + AI review (to owner) ──────────────────────
+export function intakeReviewEmail(
+  submission: IntakeSubmission,
+  aiRecommendations: string | null,
+  aiStatus: 'completed' | 'skipped' | 'failed'
+): Email {
+  const rows: Array<[string, string | undefined]> = [
+    ['Company', submission.company],
+    ['Website', submission.website],
+    ['Industry', submission.industry],
+    ['Years in business', submission.years_in_business],
+    ['Team size', submission.team_size],
+    ['Role', submission.role],
+    ['Current tools / CRM', submission.current_tools],
+    ['Already automated', submission.whats_automated],
+    ['Still manual', submission.whats_manual],
+    ['Tech stack', submission.tech_stack],
+    ['Staff & responsibilities', submission.staff_responsibilities],
+    ['Biggest time sink', submission.biggest_time_sink],
+    ['Current AI usage', submission.ai_usage],
+    ['AI comfort', submission.ai_comfort],
+    ['AI concerns', submission.ai_concerns],
+    ['Goals (90 days)', submission.goals_90d],
+    ['Biggest bottleneck', submission.biggest_bottleneck],
+    ['Budget range', submission.budget_range],
+    ['Anything else', submission.anything_else],
+  ]
+  const filledRows = rows.filter(([, v]) => v && v.trim())
+  const rowHtml = filledRows
+    .map(
+      ([label, v]) =>
+        `<tr><td style="padding:4px 12px 4px 0;color:#888;vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:4px 0;color:#1E1B17;">${escapeHtml(v as string)}</td></tr>`
+    )
+    .join('')
+
+  const aiBlock =
+    aiStatus === 'completed' && aiRecommendations
+      ? `<div style="margin:20px 0 0;padding:16px;background:#1E1B17;color:#EDE8DF;border-radius:4px;"><p style="margin:0 0 8px;color:#C9A84C;font-size:12px;letter-spacing:2px;text-transform:uppercase;">AI Preliminary Plan</p><pre style="margin:0;white-space:pre-wrap;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#EDE8DF;">${escapeHtml(aiRecommendations)}</pre></div>`
+      : `<p style="margin:20px 0 0;color:#a15c00;">AI review ${aiStatus === 'failed' ? 'failed — check logs' : 'unavailable (no API key set)'}. Submission stored above.</p>`
+
+  const name = submission.name || 'Someone'
+  const email = submission.email || ''
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1E1B17;">
+    <p style="margin:0 0 12px;"><strong>New discovery intake — ${escapeHtml(name)}</strong>${email ? ` &lt;<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>&gt;` : ''}</p>
+    <table style="border-collapse:collapse;font-size:14px;">${rowHtml}</table>
+    ${aiBlock}
+  </div>`
+
+  const aiText =
+    aiStatus === 'completed' && aiRecommendations
+      ? `\n\n=== AI PRELIMINARY PLAN ===\n${aiRecommendations}`
+      : `\n\n(AI review ${aiStatus === 'failed' ? 'failed' : 'unavailable'}.)`
+  const text =
+    `New discovery intake — ${name} <${email}>\n\n` +
+    filledRows.map(([label, v]) => `${label}: ${v}`).join('\n') +
+    aiText
+
+  return { subject: `🧭 Intake: ${name}${submission.company ? ` (${submission.company})` : ''}`, html, text }
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 }
