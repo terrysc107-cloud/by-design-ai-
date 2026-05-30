@@ -28,3 +28,16 @@ A visitor lands on the site, understands immediately that this is a GHL speciali
 **Repositioned from:** North Star Personal OS ($2,500 paid checkout) → GHL Agency (free discovery call lead gen)
 
 **Date:** 2026-05-25
+
+## Resend Email Integration
+
+**Date:** 2026-05-30
+
+Wired Resend into the lead magnet flow (`/api/lead`). On submit, the route now:
+1. Sends the lead a branded "here's your guide" email (link to `/guide` + discovery-call CTA) — this is the hard promise, so a send failure returns an error to the form.
+2. Sends the owner a best-effort new-lead notification (reply-to = lead's email).
+
+- Helper: `lib/resend.ts` (lazy client, FROM_EMAIL / LEAD_NOTIFY_EMAIL / SITE_URL config)
+- Templates: `lib/emails.ts` (`guideEmail`, `leadNotifyEmail`)
+- Env vars: `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL` (documented in README §3 / §5b)
+- Sender domain must be verified in Resend; falls back to `onboarding@resend.dev` for testing.

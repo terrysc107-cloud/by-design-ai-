@@ -47,6 +47,9 @@ Copy `.env.example` to `.env.local` and fill in all values:
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Your Stripe publishable key (`pk_test_...` or `pk_live_...`) |
 | `STRIPE_WEBHOOK_SECRET` | Webhook signing secret — see Section 4 for how to get this |
 | `JOTFORM_WEBHOOK_URL` | Your Jotform webhook submission URL — see Section 5 |
+| `RESEND_API_KEY` | Your Resend API key (`re_...`) — powers the lead magnet emails. See Section 5b |
+| `RESEND_FROM_EMAIL` | Sender for guide/notification emails, e.g. `By Design AI <hello@yourdomain.com>`. Must be a verified Resend domain. Defaults to `onboarding@resend.dev` for testing |
+| `LEAD_NOTIFY_EMAIL` | Inbox that receives new-lead notifications. Defaults to `terrysc107@gmail.com` |
 | `NEXT_PUBLIC_SITE_URL` | Full site URL, no trailing slash. Local: `http://localhost:3000`. Production: `https://yourdomain.com` |
 
 **Never commit `.env.local`.** It is gitignored.
@@ -113,6 +116,38 @@ The webhook fires automatically after every successful Stripe payment. Payload s
 
 ---
 
+## 5b. Resend Setup (Lead Magnet Emails)
+
+The lead magnet form (`/api/lead`) uses [Resend](https://resend.com) to deliver
+the free guide to the lead and notify you of every new signup.
+
+### Step 1 — Get an API Key
+
+1. Sign up at [resend.com](https://resend.com)
+2. Go to **API Keys → Create API Key**
+3. Copy the key (`re_...`) → `RESEND_API_KEY`
+
+### Step 2 — Verify a Sending Domain
+
+1. In Resend: **Domains → Add Domain**, enter your domain (e.g. `aixdesign.dev`)
+2. Add the DNS records Resend gives you (SPF/DKIM) to your registrar
+3. Once verified, set `RESEND_FROM_EMAIL` to e.g. `By Design AI <hello@aixdesign.dev>`
+
+> For quick testing without a domain, leave `RESEND_FROM_EMAIL` unset — it falls
+> back to `onboarding@resend.dev`, which only delivers to your own account email.
+
+### Step 3 — Set the Notification Inbox
+
+Set `LEAD_NOTIFY_EMAIL` to the inbox where you want new-lead alerts (defaults to
+`terrysc107@gmail.com`). Each notification has `reply-to` set to the lead's
+address, so you can reply directly.
+
+**What gets sent on submit:**
+- **To the lead** — a branded email with a link to read the guide (`/guide`) plus a discovery-call CTA
+- **To you** — a new-lead notification (name + email)
+
+---
+
 ## 6. Vercel Deployment
 
 ### Step 1 — Import Project
@@ -124,13 +159,16 @@ The webhook fires automatically after every successful Stripe payment. Payload s
 
 ### Step 2 — Environment Variables
 
-In Vercel Project Settings → **Environment Variables**, add all five variables from Section 3:
+In Vercel Project Settings → **Environment Variables**, add all variables from Section 3:
 
 - `STRIPE_SECRET_KEY` — use live key for production
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` — use live key for production
 - `STRIPE_WEBHOOK_SECRET` — use the production Dashboard webhook secret (NOT the CLI secret)
 - `JOTFORM_WEBHOOK_URL`
-- `NEXT_PUBLIC_SITE_URL` — set to your production domain, e.g. `https://bydesignai.com`
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL` — your verified sender, e.g. `By Design AI <hello@aixdesign.dev>`
+- `LEAD_NOTIFY_EMAIL` — inbox for new-lead alerts
+- `NEXT_PUBLIC_SITE_URL` — set to your production domain, e.g. `https://aixdesign.dev`
 
 ### Step 3 — Deploy
 
@@ -141,7 +179,7 @@ Click **Deploy**. Vercel runs `next build` automatically.
 ## 7. Custom Domain
 
 1. In Vercel Project → **Settings → Domains**
-2. Add your domain (e.g. `bydesignai.com`)
+2. Add your domain (e.g. `aixdesign.dev`)
 3. Follow Vercel's instructions to update DNS records at your registrar
 4. After DNS propagates, update `NEXT_PUBLIC_SITE_URL` in Vercel env vars to match your domain
 5. Redeploy to pick up the new env var
