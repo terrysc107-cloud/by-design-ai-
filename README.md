@@ -129,9 +129,9 @@ the free guide to the lead and notify you of every new signup.
 
 ### Step 2 — Verify a Sending Domain
 
-1. In Resend: **Domains → Add Domain**, enter your domain (e.g. `bydesignai.com`)
+1. In Resend: **Domains → Add Domain**, enter your domain (e.g. `aixdesign.dev`)
 2. Add the DNS records Resend gives you (SPF/DKIM) to your registrar
-3. Once verified, set `RESEND_FROM_EMAIL` to e.g. `By Design AI <hello@bydesignai.com>`
+3. Once verified, set `RESEND_FROM_EMAIL` to e.g. `By Design AI <hello@aixdesign.dev>`
 
 > For quick testing without a domain, leave `RESEND_FROM_EMAIL` unset — it falls
 > back to `onboarding@resend.dev`, which only delivers to your own account email.
@@ -166,9 +166,9 @@ In Vercel Project Settings → **Environment Variables**, add all variables from
 - `STRIPE_WEBHOOK_SECRET` — use the production Dashboard webhook secret (NOT the CLI secret)
 - `JOTFORM_WEBHOOK_URL`
 - `RESEND_API_KEY`
-- `RESEND_FROM_EMAIL` — your verified sender, e.g. `By Design AI <hello@bydesignai.com>`
+- `RESEND_FROM_EMAIL` — your verified sender, e.g. `By Design AI <hello@aixdesign.dev>`
 - `LEAD_NOTIFY_EMAIL` — inbox for new-lead alerts
-- `NEXT_PUBLIC_SITE_URL` — set to your production domain, e.g. `https://bydesignai.com`
+- `NEXT_PUBLIC_SITE_URL` — set to your production domain, e.g. `https://aixdesign.dev`
 
 ### Step 3 — Deploy
 
@@ -179,7 +179,7 @@ Click **Deploy**. Vercel runs `next build` automatically.
 ## 7. Custom Domain
 
 1. In Vercel Project → **Settings → Domains**
-2. Add your domain (e.g. `bydesignai.com`)
+2. Add your domain (e.g. `aixdesign.dev`)
 3. Follow Vercel's instructions to update DNS records at your registrar
 4. After DNS propagates, update `NEXT_PUBLIC_SITE_URL` in Vercel env vars to match your domain
 5. Redeploy to pick up the new env var
