@@ -41,3 +41,16 @@ Wired Resend into the lead magnet flow (`/api/lead`). On submit, the route now:
 - Templates: `lib/emails.ts` (`guideEmail`, `leadNotifyEmail`)
 - Env vars: `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL` (documented in README §3 / §5b)
 - Sender domain must be verified in Resend; falls back to `onboarding@resend.dev` for testing.
+
+## Promo Content — Higgsfield (Reel + Carousel)
+
+**Date:** 2026-05-30
+
+Produced a launch promo set (Instagram/TikTok) to position the owner as an AI/automation expert and drive discovery-call bookings. Copy + prompts in `content/social/`.
+
+- **Soul Character:** `Terry-BDA` — `soul_id 96c23098-2bff-4e0b-bdf3-039d30c61205` (trained on 10 owner photos; reusable for all future on-brand media via `soul_2` / `soul_cinema_studio`).
+- **Reel:** `kling3_0`, 9:16, 10s, audio — "I automated my entire business with AI." Start frame = portrait `e48d2d9b`. Clip: `hf_20260530_191448_a3ef72bf-...mp4`.
+- **Carousel:** "5 Things Every Business Needs in 2026 (Or Get Left Behind)" — 7× `nano_banana_pro` 4:5 slides, gold `#C9A84C` on espresso `#1E1B17`, ending on the Calendly CTA.
+- **Deliverables:** `content/social/carousel-2026-5-things.md`, `content/social/reel-automation-shock.md` (full copy, captions, hashtags, asset URLs).
+- **Spend:** ~61 Higgsfield credits (Soul train + 4 portraits + 8 slide renders + 1 reel + virality). Balance after: ~298.
+- **Next:** add on-screen text + trending audio in CapCut/IG before posting; reuse `Terry-BDA` Soul for future posts.

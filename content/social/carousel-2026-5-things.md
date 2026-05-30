@@ -68,14 +68,19 @@
 ---
 
 ## Generated image URLs
-_(filled after generation — model: nano_banana_pro 4:5; face slides use Soul portrait as reference)_
-- Slide 1: `TBD`
-- Slide 2: `TBD`
-- Slide 3: `TBD`
-- Slide 4: `TBD`
-- Slide 5: `TBD`
-- Slide 6: `TBD`
-- Slide 7: `TBD`
+Model: nano_banana_pro (4:5, 928×1152). Face slides use Soul `Terry-BDA` portraits as reference.
+- Slide 1 (Cover): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191233_b051547f-570c-4314-beae-3ccfce33745b.png
+- Slide 2 (01 Instant Lead Follow-Up): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191719_eea3f387-9cb0-45b4-85fa-1f6f87bcfbad.png
+- Slide 3 (02 AI Booking Assistant): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191240_bda666c7-cb42-4298-a71e-16dc61407612.png
+- Slide 4 (03 Automated Onboarding): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191243_c0511b88-edc1-47ae-b506-62b8c421375e.png
+- Slide 5 (04 Review & Reputation): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191246_1f425d11-ac67-4a47-8550-7d5d1eb884eb.png
+- Slide 6 (05 One Connected System): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191249_c86e7b30-8c84-4cbd-b076-32945c90197a.png
+- Slide 7 (CTA): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191253_13383838-90e3-43f0-a6da-47e5a8ae45c7.png
+
+**Source portraits (Soul `Terry-BDA`, soul_id 96c23098-2bff-4e0b-bdf3-039d30c61205):**
+- Hero / cover base (arms crossed): hf_20260530_190838_e48d2d9b-71b0-49f1-9dec-4415186cfb61.png
+- CTA base (leaning, smile): hf_20260530_190839_c2e76af9-45ff-426a-9d2b-bb40998ba5a1.png
+- Alternates: b37d7f1a (arms), 9ea0fb92 (smile)
 
 ---
 

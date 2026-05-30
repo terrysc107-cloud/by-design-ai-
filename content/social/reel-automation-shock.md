@@ -34,9 +34,15 @@
 ---
 
 ## Generated clip URL(s)
-_(filled after generation)_
-- Hero clip: `TBD`
-- Virality score (virality_predictor): `TBD`
+- Hero clip (kling3_0, 9:16, 720×1280, 10s, audio on): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_191448_a3ef72bf-db2e-4fb6-a93d-0266c007d52a.mp4
+- Start frame: Soul portrait `e48d2d9b` (arms crossed, command center)
+- Virality score (virality_predictor job 3e70dabb-13be-4d18-87e5-7436a6fce932): see dashboard
+
+### Post-production checklist (CapCut / IG editor)
+1. Add the on-screen text beats from the shot list above, timed to each ~2s segment.
+2. Layer a trending audio (or keep Kling audio) — hook beat-drop on the 0–2s reveal.
+3. Add captions/subtitles for sound-off viewing.
+4. End card: handle + `calendly.com/terrysc107/15-min-ai-discovery-call`.
 
 ---
 
