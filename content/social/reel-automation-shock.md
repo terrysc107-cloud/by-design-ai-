@@ -38,6 +38,16 @@
 - Start frame: Soul portrait `e48d2d9b` (arms crossed, command center)
 - Virality score (virality_predictor job 3e70dabb-13be-4d18-87e5-7436a6fce932): see dashboard
 
+### Talking-head variant (your real voice, lip-synced)
+- Model: **Wan 2.7** (audio-synced, character-consistent) · 9:16 · 15s
+- Soul: **Tech Mogul** (`soul_id: 9b9d63ab-747c-4f77-bb31-61fa1a87ed67`)
+- Start frame: front-facing portrait `771808a7` (blazer, command center)
+- Voice: your recording, trimmed/cleaned to 14.84s MP3 (`media_id 5983708b`)
+- Raw clip (with top UI strip): https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260530_215622_e2ba57ae-a6a7-43fe-b284-b8b875eaba84.mp4
+- Cleaned clip (top strip cropped, upscaled 1080×1920): delivered in chat (file_uuid bd7dcfcc-3111-4627-942c-d3b99ca84865)
+- Script spoken: "I automated my entire business with AI. Leads answered in seconds. Calls booked while I sleep. The busywork runs itself. If you're still doing it by hand in 2026 — you're behind. Let's fix that."
+- Note: the "Tech Mogul" Soul was trained on screenshot selfies, so a faint phone-UI strip appears at the top edge — cropped out in the cleaned version. For a perfectly clean Soul, retrain with original (non-screenshot) photos.
+
 ### Post-production checklist (CapCut / IG editor)
 1. Add the on-screen text beats from the shot list above, timed to each ~2s segment.
 2. Layer a trending audio (or keep Kling audio) — hook beat-drop on the 0–2s reveal.
