@@ -53,6 +53,8 @@ npm run dev
 | `CRON_SECRET` | Random string protecting the drip cron endpoint. See Section 5d |
 | `CALENDLY_WEBHOOK_SIGNING_KEY` | Calendly webhook signing key (recommended). See Section 5e |
 | `GUIDE_PDF_URL` | Optional override for the guide PDF. Defaults to `<NEXT_PUBLIC_SITE_URL>/guide.pdf` |
+| `OPENAI_API_KEY` | OpenAI key (`sk-...`) — powers the AI review of discovery intake submissions. See Section 5g |
+| `OPENAI_MODEL` | Optional model override for intake review. Defaults to `gpt-4o` |
 | `NEXT_PUBLIC_SITE_URL` | Full site URL, no trailing slash. Local: `http://localhost:3000`. Prod: `https://aixdesign.dev` |
 
 **Never commit `.env.local`.** It is gitignored.
@@ -166,6 +168,37 @@ theme. To update it, edit the Canva design, export to PDF, and replace
 
 ---
 
+## 5g. Discovery Intake + AI Review
+
+After a prospect books a call, they're directed to an in-depth intake
+questionnaire at `/intake` (business basics, current infrastructure, staff,
+AI readiness, goals). On submit:
+
+1. The submission is stored in Supabase (`bda_intake`, RLS-locked).
+2. OpenAI drafts a preliminary plan (quick wins, suggested stack, biggest risk,
+   questions for the call).
+3. You (`LEAD_NOTIFY_EMAIL`) get an email with the full submission + AI plan, so
+   you arrive at the call with it already half-built. The prospect only sees a
+   thank-you.
+
+**Two ways the prospect reaches `/intake`:**
+- **Calendly post-booking redirect** — in Calendly, set the event's confirmation
+  redirect to `https://aixdesign.dev/intake?email={invitee_email}` (Calendly
+  substitutes the invitee's email so the form is pre-filled).
+- **Email** — the Calendly webhook also emails them the intake link automatically.
+
+**Reminders:** a daily cron (`/api/cron/intake-reminders`) emails escalating
+reminders to anyone who booked but hasn't completed the intake — gentle nudge →
+"I need this to prep" → "risk of cancellation" — and stops once they complete it
+or the call time passes. (Reuses `CRON_SECRET`.)
+
+**Setup:**
+1. Get an OpenAI API key → `OPENAI_API_KEY` (optionally pin `OPENAI_MODEL`).
+2. If the key is missing or the AI call fails, the submission is still stored and
+   you're still emailed it — the email just notes AI was unavailable.
+
+---
+
 ## 6. Vercel Deployment
 
 1. [vercel.com](https://vercel.com) → **Add New Project** → import from GitHub (Next.js auto-detected).
@@ -175,6 +208,7 @@ theme. To update it, edit the Canva design, export to PDF, and replace
    - `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL`
    - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
    - `CRON_SECRET`, `CALENDLY_WEBHOOK_SIGNING_KEY`
+   - `OPENAI_API_KEY` (+ optional `OPENAI_MODEL`)
    - `NEXT_PUBLIC_SITE_URL`
 3. **Deploy.** Env-var changes require a redeploy to take effect.
 
