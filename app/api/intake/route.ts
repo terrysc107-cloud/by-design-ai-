@@ -17,6 +17,15 @@ const TEXT_FIELDS: Array<keyof IntakeSubmission> = [
 
 const MAX_LEN = 4000
 
+// Required fields — the questionnaire is a serious-buyer filter. Mirrors the
+// client-side list; only tech_stack, budget_range, and anything_else are optional.
+const REQUIRED_FIELDS: Array<keyof IntakeSubmission> = [
+  'company', 'website', 'industry', 'years_in_business', 'team_size', 'role',
+  'current_tools', 'whats_automated', 'whats_manual', 'staff_responsibilities',
+  'biggest_time_sink', 'ai_usage', 'ai_comfort', 'ai_concerns', 'goals_90d',
+  'biggest_bottleneck',
+]
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -37,13 +46,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
 
-    // Collect + cap the optional text fields.
+    // Collect + cap the text fields.
     const submission: IntakeSubmission = { name, email }
     for (const f of TEXT_FIELDS) {
       const v = body[f]
       if (typeof v === 'string' && v.trim()) {
         submission[f] = v.trim().slice(0, MAX_LEN)
       }
+    }
+
+    // Enforce required fields server-side so the filter can't be bypassed.
+    const missing = REQUIRED_FIELDS.filter((f) => !submission[f])
+    if (missing.length > 0) {
+      return NextResponse.json(
+        { error: 'Please complete all required fields.' },
+        { status: 400 }
+      )
     }
 
     // 1. Store the raw submission first so AI/email failures never lose data.

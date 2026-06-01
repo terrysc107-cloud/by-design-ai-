@@ -11,6 +11,15 @@ const INPUT_CLASS =
 
 const LABEL_CLASS = 'text-white/50 text-xs mb-1.5 block'
 
+// Required fields — the questionnaire is a serious-buyer filter, so most of it
+// is mandatory. Only budget and the two genuinely-optional notes are skippable.
+const REQUIRED_FIELDS = [
+  'name', 'email', 'company', 'website', 'industry', 'years_in_business',
+  'team_size', 'role', 'current_tools', 'whats_automated', 'whats_manual',
+  'staff_responsibilities', 'biggest_time_sink', 'ai_usage', 'ai_comfort',
+  'ai_concerns', 'goals_90d', 'biggest_bottleneck',
+] as const
+
 function Field({
   label,
   children,
@@ -53,8 +62,9 @@ function IntakeForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name?.trim() || !form.email?.trim()) {
-      setErrorMsg('Please add your name and email.')
+    const missing = REQUIRED_FIELDS.filter((f) => !form[f]?.trim())
+    if (missing.length > 0) {
+      setErrorMsg('Please complete every field — this helps me come to the call ready to build.')
       setStatus('error')
       return
     }
@@ -118,55 +128,55 @@ function IntakeForm() {
         <input type="email" className={INPUT_CLASS} value={form.email || ''} onChange={set('email')} required />
       </Field>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Company">
-          <input className={INPUT_CLASS} value={form.company || ''} onChange={set('company')} />
+        <Field label="Company *">
+          <input className={INPUT_CLASS} value={form.company || ''} onChange={set('company')} required />
         </Field>
-        <Field label="Website">
-          <input className={INPUT_CLASS} value={form.website || ''} onChange={set('website')} placeholder="https://" />
+        <Field label="Website *">
+          <input className={INPUT_CLASS} value={form.website || ''} onChange={set('website')} placeholder="https://" required />
         </Field>
-        <Field label="Industry">
-          <input className={INPUT_CLASS} value={form.industry || ''} onChange={set('industry')} />
+        <Field label="Industry *">
+          <input className={INPUT_CLASS} value={form.industry || ''} onChange={set('industry')} required />
         </Field>
-        <Field label="Years in business">
-          <input className={INPUT_CLASS} value={form.years_in_business || ''} onChange={set('years_in_business')} />
+        <Field label="Years in business *">
+          <input className={INPUT_CLASS} value={form.years_in_business || ''} onChange={set('years_in_business')} required />
         </Field>
-        <Field label="Team size">
-          <input className={INPUT_CLASS} value={form.team_size || ''} onChange={set('team_size')} />
+        <Field label="Team size *">
+          <input className={INPUT_CLASS} value={form.team_size || ''} onChange={set('team_size')} required />
         </Field>
-        <Field label="Your role">
-          <input className={INPUT_CLASS} value={form.role || ''} onChange={set('role')} />
+        <Field label="Your role *">
+          <input className={INPUT_CLASS} value={form.role || ''} onChange={set('role')} required />
         </Field>
       </div>
 
       <SectionLabel>Current Setup</SectionLabel>
-      <Field label="What tools / CRM do you use today?">
-        <input className={INPUT_CLASS} value={form.current_tools || ''} onChange={set('current_tools')} placeholder="GHL, HubSpot, spreadsheets…" />
+      <Field label="What tools / CRM do you use today? *">
+        <input className={INPUT_CLASS} value={form.current_tools || ''} onChange={set('current_tools')} placeholder="GHL, HubSpot, spreadsheets…" required />
       </Field>
-      <Field label="What's already automated?">
-        <textarea className={INPUT_CLASS} rows={2} value={form.whats_automated || ''} onChange={set('whats_automated')} />
+      <Field label="What's already automated? *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.whats_automated || ''} onChange={set('whats_automated')} required />
       </Field>
-      <Field label="What's still done manually?">
-        <textarea className={INPUT_CLASS} rows={2} value={form.whats_manual || ''} onChange={set('whats_manual')} />
+      <Field label="What's still done manually? *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.whats_manual || ''} onChange={set('whats_manual')} required />
       </Field>
       <Field label="Anything else in your tech stack?">
         <input className={INPUT_CLASS} value={form.tech_stack || ''} onChange={set('tech_stack')} />
       </Field>
 
       <SectionLabel>Team & Time</SectionLabel>
-      <Field label="Who does what on your team?">
-        <textarea className={INPUT_CLASS} rows={2} value={form.staff_responsibilities || ''} onChange={set('staff_responsibilities')} />
+      <Field label="Who does what on your team? *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.staff_responsibilities || ''} onChange={set('staff_responsibilities')} required />
       </Field>
-      <Field label="Where does the most time get wasted?">
-        <textarea className={INPUT_CLASS} rows={2} value={form.biggest_time_sink || ''} onChange={set('biggest_time_sink')} />
+      <Field label="Where does the most time get wasted? *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.biggest_time_sink || ''} onChange={set('biggest_time_sink')} required />
       </Field>
 
       <SectionLabel>AI Readiness</SectionLabel>
-      <Field label="How are you using AI today (if at all)?">
-        <textarea className={INPUT_CLASS} rows={2} value={form.ai_usage || ''} onChange={set('ai_usage')} />
+      <Field label="How are you using AI today (if at all)? *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.ai_usage || ''} onChange={set('ai_usage')} required />
       </Field>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Comfort level with AI / tech">
-          <select className={INPUT_CLASS} value={form.ai_comfort || ''} onChange={set('ai_comfort')}>
+        <Field label="Comfort level with AI / tech *">
+          <select className={INPUT_CLASS} value={form.ai_comfort || ''} onChange={set('ai_comfort')} required>
             <option value="">Select…</option>
             <option>Beginner</option>
             <option>Some experience</option>
@@ -174,20 +184,28 @@ function IntakeForm() {
             <option>Advanced</option>
           </select>
         </Field>
-        <Field label="Any concerns about AI?">
-          <input className={INPUT_CLASS} value={form.ai_concerns || ''} onChange={set('ai_concerns')} />
+        <Field label="Any concerns about AI? *">
+          <input className={INPUT_CLASS} value={form.ai_concerns || ''} onChange={set('ai_concerns')} required />
         </Field>
       </div>
 
       <SectionLabel>Goals</SectionLabel>
-      <Field label="Top outcomes you want in the next 90 days">
-        <textarea className={INPUT_CLASS} rows={2} value={form.goals_90d || ''} onChange={set('goals_90d')} />
+      <Field label="Top outcomes you want in the next 90 days *">
+        <textarea className={INPUT_CLASS} rows={2} value={form.goals_90d || ''} onChange={set('goals_90d')} required />
       </Field>
-      <Field label="Your single biggest bottleneck right now">
-        <input className={INPUT_CLASS} value={form.biggest_bottleneck || ''} onChange={set('biggest_bottleneck')} />
+      <Field label="Your single biggest bottleneck right now *">
+        <input className={INPUT_CLASS} value={form.biggest_bottleneck || ''} onChange={set('biggest_bottleneck')} required />
       </Field>
-      <Field label="Budget range (optional)">
-        <input className={INPUT_CLASS} value={form.budget_range || ''} onChange={set('budget_range')} />
+      <Field label="Budget range">
+        <select className={INPUT_CLASS} value={form.budget_range || ''} onChange={set('budget_range')}>
+          <option value="">Prefer not to say</option>
+          <option>Under $1k/mo</option>
+          <option>$1k–$3k/mo</option>
+          <option>$3k–$5k/mo</option>
+          <option>$5k–$10k/mo</option>
+          <option>$10k+/mo</option>
+          <option>One-time project</option>
+        </select>
       </Field>
       <Field label="Anything else I should know before our call?">
         <textarea className={INPUT_CLASS} rows={3} value={form.anything_else || ''} onChange={set('anything_else')} />
@@ -230,9 +248,9 @@ export default function IntakePage() {
           Help me come prepared
         </h1>
         <p className="text-white/55 text-sm md:text-base leading-relaxed mb-10">
-          The more I know before our call, the more we can get done in it. This takes about 2 minutes —
-          only your name and email are required, so share as much or as little as you like. Everything
-          you write helps me arrive with a plan already half-built for your business.
+          This isn&apos;t for everyone — it&apos;s for operators serious about putting AI to work. Take a few
+          minutes to answer in full, and I&apos;ll review it before we talk and arrive with a plan already
+          half-built for your business. The more complete your answers, the more we get done on the call.
         </p>
 
         <Suspense fallback={<p className="text-white/40 text-sm">Loading…</p>}>
