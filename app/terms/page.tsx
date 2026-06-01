@@ -23,27 +23,21 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Agreement to Terms</h2>
             <p>
-              By purchasing a service from By Design AI, you agree to be bound by these Terms of Service. If you do not agree, do not purchase or use our services. By Design AI is a professional services company governed under the laws of the Commonwealth of Pennsylvania.
+              By using the By Design AI website, requesting our free guide, or booking a discovery call, you agree to be bound by these Terms of Service. If you do not agree, do not use our services. By Design AI is a professional services company governed under the laws of the Commonwealth of Pennsylvania.
             </p>
           </section>
 
           <section>
             <h2 className="text-white font-semibold mb-3">Services</h2>
             <p>
-              By Design AI provides AI operations coaching and advisory services, including the AI Ops Audit (a 60-minute operational consultation delivered with a Loom walkthrough and action document). Services are delivered on a schedule agreed upon between the client and By Design AI following payment and completion of the intake form.
+              By Design AI provides AI automation and consulting services. Our entry point is a free discovery call booked through our website. Any paid engagement that follows is governed by a separate agreement made directly between you and By Design AI. The free guide and discovery call are provided at no cost and with no obligation.
             </p>
           </section>
 
           <section>
-            <h2 className="text-white font-semibold mb-3">No Refund Policy</h2>
+            <h2 className="text-white font-semibold mb-3">Free Consultation</h2>
             <p>
-              <strong className="text-white">All sales are final. No refunds will be issued under any circumstances.</strong>
-            </p>
-            <p className="mt-3">
-              This includes but is not limited to: change of mind, failure to complete the intake form, failure to appear for a scheduled call, scheduling conflicts, or dissatisfaction with outcomes. By purchasing our services, you acknowledge and accept this policy unconditionally.
-            </p>
-            <p className="mt-3">
-              If you are unable to attend a scheduled call, we will make one attempt to reschedule at our sole discretion. We are not obligated to reschedule and may consider the service delivered.
+              The discovery call is free and carries no purchase obligation. If you are unable to attend a scheduled call, you may reschedule via the link in your booking confirmation. Repeated no-shows may result in us declining to reschedule.
             </p>
           </section>
 
@@ -57,7 +51,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Client Responsibilities</h2>
             <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>Complete the intake form in full prior to your scheduled call</li>
+              <li>Complete the pre-call intake questionnaire in full prior to your scheduled call</li>
               <li>Appear for scheduled calls on time and prepared</li>
               <li>Provide accurate and complete information about your business</li>
               <li>Implement recommendations at your own discretion and risk</li>
@@ -84,7 +78,7 @@ export default function TermsPage() {
               To the maximum extent permitted by applicable law, By Design AI and its owners, employees, and advisors shall not be liable for any indirect, incidental, consequential, special, or punitive damages arising out of or relating to your use of our services, including but not limited to lost profits, lost revenue, lost data, or business interruption, even if we have been advised of the possibility of such damages.
             </p>
             <p className="mt-3">
-              Our total liability to you for any claims arising from these Terms or our services shall not exceed the amount you paid for the specific service giving rise to the claim.
+              Our total liability to you for any claims arising from these Terms or our free services shall not exceed one hundred US dollars ($100).
             </p>
           </section>
 
@@ -107,10 +101,10 @@ export default function TermsPage() {
             <p>
               For legal inquiries, contact us at:{' '}
               <a
-                href="mailto:legal@bydesignai.com"
+                href="mailto:legal@aixdesign.dev"
                 className="text-gold/70 hover:text-gold transition-colors"
               >
-                legal@bydesignai.com
+                legal@aixdesign.dev
               </a>
             </p>
           </section>

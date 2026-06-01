@@ -23,7 +23,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Overview</h2>
             <p>
-              By Design AI (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website bydesignai.com and provides AI operations coaching services. This Privacy Policy explains how we collect, use, and protect your information when you visit our site or purchase our services. We do not sell your data. Ever.
+              By Design AI (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website aixdesign.dev and provides AI automation and consulting services. This Privacy Policy explains how we collect, use, and protect your information when you visit our site, request our free guide, or book a discovery call. We do not sell your data. Ever.
             </p>
           </section>
 
@@ -32,13 +32,10 @@ export default function PrivacyPage() {
             <p>We collect the following types of information:</p>
             <ul className="list-disc list-inside space-y-2 mt-3 ml-2">
               <li>
-                <strong className="text-white/80">Payment information:</strong> When you purchase a service, your payment is processed by Stripe. We do not store your credit card number, CVV, or billing information. Stripe handles all payment data in accordance with PCI-DSS standards.
+                <strong className="text-white/80">Contact and identity information:</strong> Your name and email address, collected when you request our free guide or book a discovery call.
               </li>
               <li>
-                <strong className="text-white/80">Contact and identity information:</strong> Your name and email address, collected during checkout and via our intake form (hosted by Jotform).
-              </li>
-              <li>
-                <strong className="text-white/80">Business information:</strong> Details about your business operations that you share during the intake form and audit call.
+                <strong className="text-white/80">Business information:</strong> Details about your business operations that you share in our pre-call intake questionnaire and on your discovery call.
               </li>
               <li>
                 <strong className="text-white/80">Usage data:</strong> Standard web analytics data such as pages visited, time on site, and browser type, collected via server logs.
@@ -49,10 +46,10 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">How We Use Your Information</h2>
             <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>To process your payment and confirm your purchase</li>
-              <li>To send you intake form instructions after payment</li>
-              <li>To schedule and conduct your audit call</li>
-              <li>To deliver your Loom walkthrough and action document</li>
+              <li>To deliver the free guide you requested</li>
+              <li>To send you occasional educational follow-up emails (you can unsubscribe any time)</li>
+              <li>To schedule and prepare for your discovery call</li>
+              <li>To review your intake questionnaire so we arrive prepared</li>
               <li>To respond to inquiries or support requests</li>
               <li>To improve our services and website</li>
             </ul>
@@ -64,10 +61,16 @@ export default function PrivacyPage() {
             <p>We use the following third-party services to operate our business:</p>
             <ul className="list-disc list-inside space-y-2 mt-3 ml-2">
               <li>
-                <strong className="text-white/80">Stripe:</strong> Payment processing. Stripe may collect your payment card information, billing address, and IP address. Review Stripe&apos;s privacy policy at stripe.com/privacy.
+                <strong className="text-white/80">Resend:</strong> Email delivery. We use Resend to send the guide, follow-up emails, and notifications. Review Resend&apos;s privacy policy at resend.com/legal/privacy-policy.
               </li>
               <li>
-                <strong className="text-white/80">Jotform:</strong> Intake form collection. Your responses to the intake form are stored by Jotform in accordance with their privacy policy at jotform.com/privacy.
+                <strong className="text-white/80">Supabase:</strong> Secure database storage for your contact and questionnaire information. Review Supabase&apos;s privacy policy at supabase.com/privacy.
+              </li>
+              <li>
+                <strong className="text-white/80">Calendly:</strong> Discovery-call scheduling. Calendly collects the details you provide when booking. Review Calendly&apos;s privacy policy at calendly.com/privacy.
+              </li>
+              <li>
+                <strong className="text-white/80">OpenAI:</strong> We use OpenAI&apos;s API to help us review intake questionnaire responses and prepare for your call. Review OpenAI&apos;s privacy policy at openai.com/policies/privacy-policy.
               </li>
               <li>
                 <strong className="text-white/80">Vercel:</strong> Website hosting. Vercel may log standard server request data. Review Vercel&apos;s privacy policy at vercel.com/legal/privacy-policy.
@@ -103,7 +106,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Security</h2>
             <p>
-              We use industry-standard security practices to protect your information, including HTTPS encryption on all pages and secure payment processing through Stripe. No method of transmission over the internet is 100% secure, but we take reasonable steps to protect your data.
+              We use industry-standard security practices to protect your information, including HTTPS encryption on all pages and access-controlled database storage. No method of transmission over the internet is 100% secure, but we take reasonable steps to protect your data.
             </p>
           </section>
 
@@ -119,10 +122,10 @@ export default function PrivacyPage() {
             <p>
               For privacy-related questions or requests, contact us at:{' '}
               <a
-                href="mailto:privacy@bydesignai.com"
+                href="mailto:privacy@aixdesign.dev"
                 className="text-gold/70 hover:text-gold transition-colors"
               >
-                privacy@bydesignai.com
+                privacy@aixdesign.dev
               </a>
             </p>
           </section>

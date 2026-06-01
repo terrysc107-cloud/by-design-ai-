@@ -2,7 +2,7 @@
 
 AI automation agency landing page + lead funnel. Built with Next.js 14 App
 Router, Resend (transactional + nurture email), Supabase (lead/booking storage),
-Stripe Checkout, Framer Motion, and Lenis smooth scroll.
+OpenAI (intake review), Framer Motion, and Lenis smooth scroll.
 
 ---
 
@@ -41,19 +41,15 @@ npm run dev
 
 | Variable | Description |
 |----------|-------------|
-| `STRIPE_SECRET_KEY` | Stripe secret key (`sk_test_...` / `sk_live_...`) |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key (`pk_test_...` / `pk_live_...`) |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret — see Section 4 |
-| `JOTFORM_WEBHOOK_URL` | Jotform webhook submission URL — see Section 5 |
-| `RESEND_API_KEY` | Resend API key (`re_...`) — powers all email. See Section 5b |
+| `RESEND_API_KEY` | Resend API key (`re_...`) — powers all email. See Section 4 |
 | `RESEND_FROM_EMAIL` | Verified sender, e.g. `By Design AI <hello@aixdesign.dev>`. Defaults to `onboarding@resend.dev` for testing |
 | `LEAD_NOTIFY_EMAIL` | Inbox for new-lead + booking alerts. Defaults to `terrysc107@gmail.com` |
-| `SUPABASE_URL` | Supabase project URL (`https://acouuzccqkcpyrckrgwg.supabase.co`). See Section 5c |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service-role** key (server-only secret, bypasses RLS). See Section 5c |
-| `CRON_SECRET` | Random string protecting the drip cron endpoint. See Section 5d |
-| `CALENDLY_WEBHOOK_SIGNING_KEY` | Calendly webhook signing key (recommended). See Section 5e |
+| `SUPABASE_URL` | Supabase project URL (`https://acouuzccqkcpyrckrgwg.supabase.co`). See Section 5 |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service-role** key (server-only secret, bypasses RLS). See Section 5 |
+| `CRON_SECRET` | Random string protecting the drip cron endpoint. See Section 6 |
+| `CALENDLY_WEBHOOK_SIGNING_KEY` | Calendly webhook signing key (recommended). See Section 7 |
 | `GUIDE_PDF_URL` | Optional override for the guide PDF. Defaults to `<NEXT_PUBLIC_SITE_URL>/guide.pdf` |
-| `OPENAI_API_KEY` | OpenAI key (`sk-...`) — powers the AI review of discovery intake submissions. See Section 5g |
+| `OPENAI_API_KEY` | OpenAI key (`sk-...`) — powers the AI review of discovery intake submissions. See Section 9 |
 | `OPENAI_MODEL` | Optional model override for intake review. Defaults to `gpt-4o` |
 | `NEXT_PUBLIC_SITE_URL` | Full site URL, no trailing slash. Local: `http://localhost:3000`. Prod: `https://aixdesign.dev` |
 
@@ -61,25 +57,7 @@ npm run dev
 
 ---
 
-## 4. Stripe Setup
-
-1. [Stripe Dashboard](https://dashboard.stripe.com) → **Developers → API Keys**.
-2. Copy **Secret key** → `STRIPE_SECRET_KEY`, **Publishable key** → `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
-3. Local webhook: `stripe listen --forward-to localhost:3000/api/webhook` → copy the `whsec_...` → `STRIPE_WEBHOOK_SECRET`.
-4. Production webhook: **Developers → Webhooks → Add Endpoint** → `https://aixdesign.dev/api/webhook`, event `checkout.session.completed` → copy the signing secret to Vercel.
-
----
-
-## 5. Jotform Webhook Setup
-
-1. [Jotform](https://jotform.com) → your form → **Settings → Integrations → Webhooks**.
-2. Add your webhook URL → copy it to `JOTFORM_WEBHOOK_URL`.
-
-The webhook fires after every successful Stripe payment.
-
----
-
-## 5b. Resend Setup (All Email)
+## 4. Resend Setup (All Email)
 
 Resend powers the guide delivery, the 4-email nurture drip, and owner
 notifications. All emails are sent as HTML with plain-text fallbacks.
@@ -94,7 +72,7 @@ notifications. All emails are sent as HTML with plain-text fallbacks.
 
 ---
 
-## 5c. Supabase Setup (Lead & Booking Storage)
+## 5. Supabase Setup (Lead & Booking Storage)
 
 Leads and bookings live in Supabase (project `supabase-crimson-ladder`, tables
 `bda_leads` and `bda_bookings`, RLS enabled with no public policies — only the
@@ -111,7 +89,7 @@ View/export leads any time: **Table Editor → bda_leads**.
 
 ---
 
-## 5d. Drip Nurture Sequence
+## 6. Drip Nurture Sequence
 
 After downloading the guide, a lead is enrolled in a 4-email nurture sequence
 sent by a daily cron (`/api/cron/drip`, scheduled in `vercel.json`):
@@ -133,7 +111,7 @@ manually with `GET /api/cron/drip?secret=<CRON_SECRET>`.
 
 ---
 
-## 5e. Calendly Webhook (Booking Alerts)
+## 7. Calendly Webhook (Booking Alerts)
 
 When someone books a call, Calendly POSTs to `/api/calendly`, which logs the
 booking to `bda_bookings` and emails you (`LEAD_NOTIFY_EMAIL`).
@@ -158,7 +136,7 @@ booking to `bda_bookings` and emails you (`LEAD_NOTIFY_EMAIL`).
 
 ---
 
-## 5f. The Guide PDF
+## 8. The Guide PDF
 
 The downloadable guide lives at `public/guide.pdf` (served from
 `https://aixdesign.dev/guide.pdf`) and is referenced by the delivery email via
@@ -168,7 +146,7 @@ theme. To update it, edit the Canva design, export to PDF, and replace
 
 ---
 
-## 5g. Discovery Intake + AI Review
+## 9. Discovery Intake + AI Review
 
 After a prospect books a call, they're directed to an in-depth intake
 questionnaire at `/intake` (business basics, current infrastructure, staff,
@@ -182,10 +160,14 @@ AI readiness, goals). On submit:
    thank-you.
 
 **Two ways the prospect reaches `/intake`:**
-- **Calendly post-booking redirect** — in Calendly, set the event's confirmation
-  redirect to `https://aixdesign.dev/intake?email={invitee_email}` (Calendly
-  substitutes the invitee's email so the form is pre-filled).
-- **Email** — the Calendly webhook also emails them the intake link automatically.
+- **Calendly post-booking redirect** — in Calendly, open the event's
+  **Confirmation Page** settings, choose "Redirect to an external site," set the
+  URL to `https://aixdesign.dev/intake` (no query string — Calendly rejects
+  `{...}` template vars in this field), and tick **"Pass event details to your
+  redirected page"** so the invitee's email is appended automatically and the
+  form pre-fills.
+- **Email** — if the Calendly webhook is configured (paid plan), it also emails
+  them the intake link automatically.
 
 **Reminders:** a daily cron (`/api/cron/intake-reminders`) emails escalating
 reminders to anyone who booked but hasn't completed the intake — gentle nudge →
@@ -199,12 +181,10 @@ or the call time passes. (Reuses `CRON_SECRET`.)
 
 ---
 
-## 6. Vercel Deployment
+## 10. Vercel Deployment
 
 1. [vercel.com](https://vercel.com) → **Add New Project** → import from GitHub (Next.js auto-detected).
 2. **Settings → Environment Variables** → add every variable from Section 3 (use **Production** scope; add **Preview** too if you want preview deploys to send email):
-   - `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`
-   - `JOTFORM_WEBHOOK_URL`
    - `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL`
    - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
    - `CRON_SECRET`, `CALENDLY_WEBHOOK_SIGNING_KEY`
@@ -214,7 +194,7 @@ or the call time passes. (Reuses `CRON_SECRET`.)
 
 ---
 
-## 7. Custom Domain
+## 11. Custom Domain
 
 1. Vercel Project → **Settings → Domains** → add `aixdesign.dev`.
 2. Follow Vercel's DNS instructions at your registrar.
@@ -233,5 +213,6 @@ or the call time passes. (Reuses `CRON_SECRET`.)
 | Scroll | Lenis v1 |
 | Email | Resend |
 | Database | Supabase (Postgres) |
-| Payments | Stripe v16 |
+| AI | OpenAI |
+| Scheduling | Calendly |
 | Hosting | Vercel |
