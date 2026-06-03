@@ -17,30 +17,55 @@ changing the brand).
 | Legal/short | By Design AI |
 | Primary domain | **aixdesign.dev** |
 | Owner | Terry (terrysc107@gmail.com) |
-| Category | GHL (Go High Level) specialist agency + AI automation |
+| Category | AI business coaching & consulting agency — lean, autonomous, custom systems |
 | Tagline (primary) | **Stop learning about AI. Start running on it.** |
-| Tagline (alt, GHL-led) | GHL, built by design. |
-| Tagline (alt, ops-led) | Your business, automated by design. |
-| One-liner | We design, build, and run GHL + AI automations so your business operates by design — not by accident. |
+| Tagline (alt, problem-led) | Your business, solved by design. |
+| Tagline (alt, ops-led) | Lean systems. Autonomous outcomes. |
+| One-liner | We're an AI business coaching & consulting agency. We diagnose the bottleneck, design the system, and ship the lean, autonomous solution — custom to your business. |
 | Primary CTA | **Book a Discovery Call** → calendly.com/terrysc107/15-min-ai-discovery-call |
 
 ### Mission
-Turn fragmented small-business operations into integrated GHL + AI systems
-that run themselves — so owners get their time back and their numbers up.
+Help business owners replace busywork, broken handoffs, and bottlenecks
+with lean, autonomous systems — so the business runs by design, not by
+the owner's stamina.
 
 ### Positioning statement
-> For agencies, coaches, and local service businesses on Go High Level
-> who are tired of patchwork setups and half-finished automations,
-> **By Design AI** is the specialist build partner that designs, deploys,
-> and operates GHL + AI workflows end-to-end — unlike generalist VAs or
-> "AI consultants" who hand you a Notion doc and walk away.
+> For business owners, operators, and small teams drowning in tools,
+> tabs, and tasks that don't add up to outcomes, **By Design AI** is the
+> AI coaching & consulting agency that diagnoses the real bottleneck and
+> ships a lean, autonomous custom solution — unlike course-sellers,
+> generalist VAs, or "AI consultants" who hand you a Notion doc and walk
+> away.
+
+### What we actually do (offer shape)
+1. **AI coaching** — 1:1 and team sessions to install the right thinking
+   and the right operating system for AI in your business.
+2. **Consulting** — diagnostic engagement: map the workflow, find the
+   bottleneck, prescribe the solution.
+3. **Custom solution builds** — lean, autonomous systems built with
+   whatever tool fits (see toolbox below). Shipped and handed over.
+4. **Ongoing operating partner (retainer)** — we run the system, tune
+   it, and add to it as the business grows.
+
+### Toolbox (we use what fits — never tool-led)
+GHL · Make.com · n8n · Zapier · OpenAI / Claude · Stripe · Twilio ·
+Google Workspace · Supabase · Notion · Airtable · custom webhooks /
+Node / Next.js when nothing off-the-shelf works.
+
+> **Important:** GHL is *one* tool in the toolbox, not our identity.
+> Never lead a bio, post, or pitch with "GHL specialist" — lead with the
+> *problem we solve*, then mention the tool only if it's relevant.
 
 ### Audience (in priority order)
-1. Agencies reselling GHL who need snapshot/automation builds
-2. Coaches & consultants running their business on GHL
-3. Local service businesses (home services, med-spa, fitness, real estate)
-4. Marketing teams inheriting a broken GHL setup
-5. Operators who want AI layered into existing GHL workflows
+1. Business owners with a clear bottleneck (sales follow-up, ops,
+   reporting, content, fulfilment) and no system to fix it
+2. Coaches, consultants, and service founders running everything in
+   their head + a calendar
+3. Small teams (2–20 people) buried in tools that don't talk to each
+   other
+4. Operators inheriting a half-built stack who need a sane operating
+   system, not more software
+5. Agencies and creators who want AI-powered leverage without hiring
 
 ---
 
@@ -68,8 +93,9 @@ that run themselves — so owners get their time back and their numbers up.
 | YouTube | Teach-by-doing, full walkthroughs |
 
 ### Words we use
-build • ship • automate • workflow • snapshot • by design • operator •
-system • runs itself • get your time back
+diagnose • design • ship • lean • autonomous • system • bottleneck •
+workflow • operator • by design • runs itself • get your time back •
+custom • outcome
 
 ### Words we avoid
 synergy • cutting-edge • revolutionary • disruptive • leverage •
@@ -160,76 +186,82 @@ don't plan to post on. Squatting protects the brand.
 ## 5. Bios (copy-paste ready, character limits respected)
 
 ### Twitter/X — 160 chars
-> GHL specialist agency. We design, build & run Go High Level + AI
-> automations so your business runs by design — not by accident.
-> Free build → ↓
+> AI business coaching & consulting. We diagnose the bottleneck and ship
+> the lean, autonomous system. Custom to your business. Free call ↓
 
-**(150 chars — fits)**
+**(157 chars — fits)**
 
 ### Instagram — 150 chars
-> Go High Level + AI automations, built by design.
-> Snapshots · Workflows · AI ops
-> Free 30-min build call ↓
+> AI coaching · consulting · custom builds.
+> Lean systems. Autonomous outcomes.
+> Free 30-min discovery call ↓
 
-**(140 chars — fits)**
+**(125 chars — fits)**
 
 ### TikTok — 80 chars
-> GHL + AI automations. Watch us build. Free discovery call ↓
+> AI coaching + custom automations. Watch us solve it. Free call ↓
 
-**(60 chars — fits)**
+**(64 chars — fits)**
 
-### LinkedIn Company — 2,000 chars (using ~600)
-> **By Design AI** is a Go High Level specialist agency. We design, build,
-> and operate the GHL + AI systems that small businesses, coaches, and
-> agencies actually need to run — not just look at.
+### LinkedIn Company — 2,000 chars (using ~700)
+> **By Design AI** is an AI business coaching & consulting agency.
 >
-> What we ship:
-> • GHL Account Setup & Configuration
-> • Snapshot Development & Deployment
-> • Automation & Workflow Builds
-> • AI-Powered Campaign Systems
-> • Custom Integrations (Make.com, n8n, Zapier, Stripe, Twilio, webhooks)
-> • Ongoing GHL Management Retainers
+> We work with owners, operators, and small teams who are buried in
+> tools, tabs, and tasks that don't add up to outcomes. We diagnose the
+> real bottleneck, design the right system, and ship a lean, autonomous
+> custom solution — built with whatever tool actually fits.
 >
-> If your GHL is half-built, half-broken, or fully off — we fix it.
-> If it's working but you want AI layered in — we build it.
+> How we work:
+> • **AI Coaching** — 1:1 & team sessions to install the operating
+>   system for AI in your business
+> • **Consulting** — diagnostic engagements; map the workflow, find the
+>   bottleneck, prescribe the fix
+> • **Custom Solution Builds** — automations, AI workflows, integrations,
+>   and internal tools, shipped and handed over
+> • **Operating Partner (Retainer)** — we run, tune, and grow the system
+>   as your business changes
+>
+> Toolbox (we're tool-agnostic): OpenAI / Claude, Make.com, n8n, Zapier,
+> Go High Level, Stripe, Twilio, Supabase, Notion, Airtable, and custom
+> code when off-the-shelf won't cut it.
 >
 > Book a free 30-min discovery call: aixdesign.dev
 
 ### LinkedIn Personal (Terry) — headline 220 chars
-> Founder, By Design AI · GHL + AI automations for agencies, coaches &
-> service businesses · We design the system; it runs your business ·
-> Book a free discovery call ↓
+> Founder, By Design AI · AI business coaching, consulting & custom
+> automation · We diagnose the bottleneck and ship the lean system that
+> solves it · Free discovery call ↓
 
 ### YouTube — 1,000 chars (using ~500)
-> By Design AI builds Go High Level + AI automation systems for agencies,
-> coaches, and service businesses. On this channel: GHL teardowns,
-> snapshot walkthroughs, AI workflow builds, and "watch me automate this"
-> live builds.
+> By Design AI is an AI business coaching & consulting agency. On this
+> channel: real business bottleneck teardowns, "watch me solve this"
+> custom builds, AI workflow walkthroughs, and the operating-system
+> thinking behind lean, autonomous businesses.
 >
-> If your GHL is broken, half-built, or working but missing AI — start here.
+> If you're an owner or operator drowning in tools and tasks — start here.
 >
 > 🔗 Free 30-min discovery call → aixdesign.dev
 > 📩 hello@aixdesign.dev
 
 ### Facebook Page — short description, 255 chars
-> Go High Level specialist agency. GHL setup, snapshots, automations & AI
-> campaign systems. We build the system — it runs your business. Free
-> discovery call → aixdesign.dev
+> AI business coaching & consulting agency. We diagnose your bottleneck
+> and ship a lean, autonomous custom solution. Tool-agnostic, outcome-led.
+> Free discovery call → aixdesign.dev
 
 ### GitHub — 160 chars
-> By Design AI — GHL + AI automation agency. Snapshots, workflow specs &
-> open scripts we use in client builds. aixdesign.dev
+> By Design AI — AI coaching, consulting & custom automation. Open
+> recipes & scripts we use in client builds. aixdesign.dev
 
 ### Substack / Medium — 300 chars
-> Field notes from a Go High Level specialist agency. GHL builds, AI
-> workflows, automation teardowns, and the systems that quietly run small
-> businesses. Written by Terry @ By Design AI.
+> Field notes from an AI business coaching & consulting agency.
+> Bottleneck teardowns, custom automation builds, and the
+> operating-system thinking behind lean, autonomous businesses.
+> Written by Terry @ By Design AI.
 
 ### Email signature
 ```
 Terry — Founder, By Design AI
-GHL + AI automations, built by design.
+AI coaching, consulting & custom builds. Lean systems. Autonomous outcomes.
 aixdesign.dev · hello@aixdesign.dev
 Book a 30-min call → calendly.com/terrysc107/15-min-ai-discovery-call
 ```
@@ -277,12 +309,13 @@ and can fire pixels — see §10.
 ## 8. Hashtag & keyword strategy
 
 ### Core tags (always-on)
-`#gohighlevel` `#ghl` `#ghlsnapshot` `#ghlagency` `#marketingautomation`
-`#aiautomation` `#smallbusinessautomation`
+`#aiforbusiness` `#aiautomation` `#aiconsulting` `#aicoaching`
+`#businesssystems` `#smallbusinessautomation` `#leanbusiness`
 
 ### Niche / rotation
-`#makedotcom` `#n8n` `#zapier` `#crm` `#leadgen` `#salesfunnel`
-`#localmarketing` `#agencyowner` `#coachingbusiness` `#realestatemarketing`
+`#openai` `#claudeai` `#makedotcom` `#n8n` `#zapier` `#gohighlevel`
+`#agenticworkflows` `#operatingsystem` `#solopreneur` `#agencyowner`
+`#coachingbusiness` `#consultantlife` `#smbsystems`
 
 ### Per-platform rules
 - **X:** 0–2 tags max. Prose-first.
@@ -299,14 +332,16 @@ Always include **`#bydesignai`** so we can collect UGC + repurpose.
 
 ## 9. Content pillars (the only 4 things we post)
 
-1. **Build in public** — "Here's the GHL workflow we shipped this week."
-   Screenshots, Loom, 60-sec phone clip.
-2. **Teardowns** — "What's wrong with this GHL setup." Roast a public
-   funnel; show the fix.
-3. **Primitives** — Reusable automations: snapshot of the week, "steal
-   this workflow," n8n/Make recipe.
-4. **Proof** — Client wins, before/after dashboards, retainer outcomes
-   (with permission).
+1. **Bottleneck teardowns** — "Here's where this business is leaking
+   time/money, and the lean system that fixes it." Anonymised or
+   permissioned real examples.
+2. **Build in public** — "Watch us ship the custom solution." Loom,
+   screen-record, 60-sec phone clip. Show the actual tool we picked and
+   *why*.
+3. **Primitives** — Reusable patterns: prompts, AI workflows, automation
+   recipes, decision frameworks. "Steal this."
+4. **Proof & principles** — Client outcomes (with permission), and the
+   operating-system thinking behind lean, autonomous businesses.
 
 **Ratio per week:** 2 · 1 · 2 · 1 (six pieces total).
 
