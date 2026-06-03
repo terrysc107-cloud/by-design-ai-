@@ -1,4 +1,10 @@
-# By Design AI — Brand Kit
+# AI by Design — Brand Kit
+
+> **Brand name note:** the wordmark is **AI by Design**. The stylized
+> lockup / handle is **aixdesign** (matches the domain `aixdesign.dev` —
+> read as "AI × Design"). Use the variant table in §1 to pick the right
+> form per surface. The legacy name "By Design AI" was taken on LinkedIn,
+> so it's retired as the public-facing name.
 
 The single source of truth for everything brand-facing: identity, voice,
 visual system, social handles, bios, and content rails.
@@ -11,17 +17,36 @@ changing the brand).
 
 ## 1. Brand Identity
 
+### Name variants — pick the right form for the surface
+
+| Variant | Form | Use when |
+|---|---|---|
+| **AI by Design** | Wordmark / display | Default. Bios, headers, voiceover, formal copy. Reads naturally. |
+| **aixdesign** | Lowercase logotype | Logo lockup, favicon, social handle, URL fragments. Stylish, compact. |
+| **AI × Design** | Stylized typographic | Hero, posters, T-shirts. Use the `×` glyph (U+00D7), not `x`. |
+| **AIxDesign** | CamelCase fallback | Where `×` or spaces aren't allowed and lowercase looks weak. |
+| **ai.by.design** | Dotted lowercase | TikTok-style usernames, only where dots are allowed. |
+| **ai/design** | Slash form | Casual signoffs only. Not for primary display. |
+
+Trendier variations on the **same identity** (held in reserve, not active):
+`aixd` · `aixd.studio` · `aixd.co` · `byDesign.ai` · `ai-by.design` ·
+`@aixd_` · `@aixd.dev`
+
+### Core record
+
 | Field | Value |
 |---|---|
-| Brand name | **By Design AI** |
-| Legal/short | By Design AI |
+| Brand name (primary) | **AI by Design** |
+| Stylized lockup / handle root | **aixdesign** |
+| Display on every social | **AI by Design** |
+| Legacy / retired | By Design AI *(taken on LinkedIn — do not use publicly)* |
 | Primary domain | **aixdesign.dev** |
 | Owner | Terry (terrysc107@gmail.com) |
 | Category | AI business coaching & consulting agency — lean, autonomous, custom systems |
 | Tagline (primary) | **Stop learning about AI. Start running on it.** |
 | Tagline (alt, problem-led) | Your business, solved by design. |
 | Tagline (alt, ops-led) | Lean systems. Autonomous outcomes. |
-| One-liner | We're an AI business coaching & consulting agency. We diagnose the bottleneck, design the system, and ship the lean, autonomous solution — custom to your business. |
+| One-liner | **AI by Design** is an AI business coaching & consulting agency. We diagnose the bottleneck, design the system, and ship the lean, autonomous solution — custom to your business. |
 | Primary CTA | **Book a Discovery Call** → calendly.com/terrysc107/15-min-ai-discovery-call |
 
 ### Mission
@@ -31,7 +56,7 @@ the owner's stamina.
 
 ### Positioning statement
 > For business owners, operators, and small teams drowning in tools,
-> tabs, and tasks that don't add up to outcomes, **By Design AI** is the
+> tabs, and tasks that don't add up to outcomes, **AI by Design** is the
 > AI coaching & consulting agency that diagnoses the real bottleneck and
 > ships a lean, autonomous custom solution — unlike course-sellers,
 > generalist VAs, or "AI consultants" who hand you a Notion doc and walk
@@ -132,9 +157,15 @@ on white. Never use gold text smaller than 14px (it loses legibility).
 - Tracking: tight on display (`-0.02em`), normal on body
 
 ### Logo / mark
-- Wordmark: **By Design AI** set in Geist Sans 600, gold on dark
-- Short mark: **bd** or **bdAI** (lowercase, gold)
-- Favicon: gold `bd` glyph on `#1E1B17`
+- **Wordmark:** *AI by Design* set in Geist Sans 600, gold on dark
+- **Stylized lockup:** `aixdesign` set lowercase in Geist Sans 600,
+  with the `x` rendered in gold and `ai` / `design` in white (or all
+  gold on dark). Pronounced "AI by Design" / read as "AI × Design".
+- **Short mark / favicon:** lowercase `aix` glyph in gold on `#1E1B17`
+  (16/32/180/512 sizes), with the `x` slightly tracked-out for the
+  multiplication read.
+- Never render the wordmark on white. Never break the lockup across two
+  lines.
 
 ### Imagery system
 - **Background:** dark, grainy, gold radial-gradient (`bg-gold-radial`)
@@ -145,41 +176,49 @@ on white. Never use gold text smaller than 14px (it loses legibility).
 ### Asset locations
 - Hero video + section bgs: see `lib/cta.ts → ASSETS`
 - Guide PDF: `public/guide.pdf`
-- (TODO) Logo SVGs: `public/brand/logo-wordmark.svg`, `public/brand/logo-mark.svg`
+- (TODO) Logo SVGs: `public/brand/aixdesign-lockup.svg`,
+  `public/brand/aixdesign-mark.svg`, `public/brand/aibydesign-wordmark.svg`
 - (TODO) Open Graph image: `public/og.png` (1200×630)
 
 ---
 
 ## 4. Social Handles
 
-### Handle priority order
-1. `@bydesignai` (preferred everywhere)
-2. `@bydesign_ai` (underscore fallback)
-3. `@bydesignaiagency` (when 1 + 2 taken)
-4. `@aixdesign` (matches domain `aixdesign.dev`)
-5. `@bydesignai.dev` (only where dots allowed)
+### Handle priority order (use the first one available on each platform)
+1. `@aixdesign` — **primary**, matches `aixdesign.dev`
+2. `@aibydesign` — second choice, matches the wordmark
+3. `@aixdesign.dev` — domain-style, where dots are allowed
+4. `@ai.by.design` — dotted lowercase variant
+5. `@aixdesignco` / `@aibydesignco` — "co" suffix fallback
+6. `@aixd` / `@aixd_` — short / underscore-suffix fallback
+7. `@aixdesignhq` / `@aibydesignhq` — last-resort suffix
 
-**Rule:** claim the same handle on every platform you can, even ones you
-don't plan to post on. Squatting protects the brand.
+**Rules**
+- Display name is always **AI by Design** (never the handle).
+- Claim the same handle on every platform you can, even where you
+  don't plan to post. Squatting protects the brand.
+- Don't claim `@bydesignai` anywhere — the LinkedIn collision means the
+  name is contested and we don't want to be downstream of it.
 
 ### Platform-by-platform plan
 
 | Platform | Handle (try in order) | Display name | Notes |
 |---|---|---|---|
-| X / Twitter | `@bydesignai` → `@bydesign_ai` → `@aixdesign` | By Design AI | 15-char max |
-| Instagram | `@bydesignai` → `@bydesign.ai` → `@bydesignai.agency` | By Design AI | Dots allowed |
-| TikTok | `@bydesignai` → `@bydesign.ai` | By Design AI | Dots allowed |
-| LinkedIn (Company) | `linkedin.com/company/bydesignai` | By Design AI | Also claim personal: `linkedin.com/in/terry-bydesignai` |
-| YouTube | `@bydesignai` → `@bydesignai-agency` | By Design AI | Handle = `@`; channel name = display |
-| Facebook (Page) | `facebook.com/bydesignai` | By Design AI | Needed for Meta ads + IG cross-post |
-| Threads | `@bydesignai` (inherits IG) | By Design AI | Auto-created from IG |
-| Pinterest | `@bydesignai` | By Design AI | Optional — only if doing visual carousels |
-| GitHub | `github.com/bydesignai` | By Design AI | Useful: post snapshots, scripts |
-| Medium / Substack | `bydesignai` | By Design AI | Substack = newsletter mirror |
-| Reddit | `u/bydesignai` | — | Lurk first, don't spam |
-| Discord (server) | `By Design AI` | — | Optional community |
-| Skool | `By Design AI` | — | If launching a paid community later |
-| Email (brand) | `hello@aixdesign.dev` | By Design AI | Already used as Resend FROM |
+| X / Twitter | `@aixdesign` → `@aibydesign` → `@aixd_` | AI by Design | 15-char max |
+| Instagram | `@aixdesign` → `@aixdesign.dev` → `@ai.by.design` | AI by Design | Dots allowed |
+| TikTok | `@aixdesign` → `@ai.by.design` → `@aixdesign.dev` | AI by Design | Dots allowed |
+| LinkedIn (Company) | `linkedin.com/company/aixdesign` → `/aibydesign` | AI by Design | Personal: `linkedin.com/in/terry-aixdesign` |
+| YouTube | `@aixdesign` → `@aibydesign` | AI by Design | Handle = `@`; channel name = display |
+| Facebook (Page) | `facebook.com/aixdesign` → `/aibydesign` | AI by Design | Needed for Meta ads + IG cross-post |
+| Threads | `@aixdesign` (inherits IG) | AI by Design | Auto-created from IG |
+| Pinterest | `@aixdesign` | AI by Design | Optional — only if doing visual carousels |
+| GitHub | `github.com/aixdesign` → `/aibydesign` | AI by Design | Open recipes & scripts |
+| Medium / Substack | `aixdesign` → `aibydesign` | AI by Design | Substack = newsletter mirror |
+| Reddit | `u/aixdesign` → `u/aibydesign` | — | Lurk first, don't spam |
+| Discord (server) | `AI by Design` | — | Optional community |
+| Skool | `AI by Design` | — | If launching a paid community later |
+| ProductHunt | `aixdesign` | AI by Design | For future launches |
+| Email (brand) | `hello@aixdesign.dev` | AI by Design | Already used as Resend FROM |
 
 ---
 
@@ -204,7 +243,7 @@ don't plan to post on. Squatting protects the brand.
 **(64 chars — fits)**
 
 ### LinkedIn Company — 2,000 chars (using ~700)
-> **By Design AI** is an AI business coaching & consulting agency.
+> **AI by Design** (`aixdesign.dev`) is an AI business coaching & consulting agency.
 >
 > We work with owners, operators, and small teams who are buried in
 > tools, tabs, and tasks that don't add up to outcomes. We diagnose the
@@ -228,12 +267,12 @@ don't plan to post on. Squatting protects the brand.
 > Book a free 30-min discovery call: aixdesign.dev
 
 ### LinkedIn Personal (Terry) — headline 220 chars
-> Founder, By Design AI · AI business coaching, consulting & custom
+> Founder, AI by Design · AI business coaching, consulting & custom
 > automation · We diagnose the bottleneck and ship the lean system that
 > solves it · Free discovery call ↓
 
 ### YouTube — 1,000 chars (using ~500)
-> By Design AI is an AI business coaching & consulting agency. On this
+> AI by Design is an AI business coaching & consulting agency. On this
 > channel: real business bottleneck teardowns, "watch me solve this"
 > custom builds, AI workflow walkthroughs, and the operating-system
 > thinking behind lean, autonomous businesses.
@@ -249,18 +288,18 @@ don't plan to post on. Squatting protects the brand.
 > Free discovery call → aixdesign.dev
 
 ### GitHub — 160 chars
-> By Design AI — AI coaching, consulting & custom automation. Open
+> AI by Design — AI coaching, consulting & custom automation. Open
 > recipes & scripts we use in client builds. aixdesign.dev
 
 ### Substack / Medium — 300 chars
 > Field notes from an AI business coaching & consulting agency.
 > Bottleneck teardowns, custom automation builds, and the
 > operating-system thinking behind lean, autonomous businesses.
-> Written by Terry @ By Design AI.
+> Written by Terry @ AI by Design.
 
 ### Email signature
 ```
-Terry — Founder, By Design AI
+Terry — Founder, AI by Design
 AI coaching, consulting & custom builds. Lean systems. Autonomous outcomes.
 aixdesign.dev · hello@aixdesign.dev
 Book a 30-min call → calendly.com/terrysc107/15-min-ai-discovery-call
@@ -408,9 +447,10 @@ https://aixdesign.dev/?utm_source=linkedin&utm_medium=post&utm_campaign=snapshot
 
 ## 13. Setup checklist (do these in order)
 
-- [ ] Claim `@bydesignai` on: X, Instagram, TikTok, YouTube, Threads,
-      Facebook, Pinterest, GitHub, Substack, Reddit, Medium
-- [ ] Set display name = **By Design AI** on every platform
+- [ ] Claim `@aixdesign` (fallbacks: `@aibydesign`, `@aixdesign.dev`,
+      `@ai.by.design`) on: X, Instagram, TikTok, YouTube, Threads,
+      Facebook, Pinterest, GitHub, Substack, Reddit, Medium, ProductHunt
+- [ ] Set display name = **AI by Design** on every platform
 - [ ] Paste the right bio from §5 into each profile
 - [ ] Upload avatar (§6) — same image on every platform
 - [ ] Upload header/banner (§6) per platform spec
@@ -418,7 +458,7 @@ https://aixdesign.dev/?utm_source=linkedin&utm_medium=post&utm_campaign=snapshot
 - [ ] Verify Facebook Page → connect Instagram Professional account
 - [ ] Verify Twitter/X for blue-check eligibility (optional)
 - [ ] Create LinkedIn **Company Page** + tag Terry as employee
-- [ ] Set Resend FROM to `By Design AI <hello@aixdesign.dev>` (already
+- [ ] Set Resend FROM to `AI by Design <hello@aixdesign.dev>` (already
       in README §3) and verify domain in Resend
 - [ ] Add `og.png` + favicon to `public/` (specs in §6)
 - [ ] Drop logo SVGs in `public/brand/`
