@@ -5,7 +5,7 @@ Record important product, technical, and execution decisions here.
 ## Product Brief
 
 **What are we building?**
-By Design AI — an AI business coaching & consulting agency. We diagnose the bottleneck in an owner's business, design the right system, and ship a lean, autonomous custom solution. The primary conversion goal is booking a free discovery call.
+**AI by Design** (stylized: *aixdesign*, domain: `aixdesign.dev`) — an AI business coaching & consulting agency. *(Legacy name "By Design AI" was taken on LinkedIn — retired.)* We diagnose the bottleneck in an owner's business, design the right system, and ship a lean, autonomous custom solution. The primary conversion goal is booking a free discovery call.
 
 **Who is it for?**
 Business owners, operators, and small teams (2–20 people) drowning in tools, tabs, and tasks that don't add up to outcomes. Coaches, consultants, and service founders running everything in their head. Operators inheriting a half-built stack who need a sane operating system, not more software. Agencies and creators who want AI-powered leverage without hiring.
@@ -56,8 +56,12 @@ Key decisions captured:
 - Positioning: **AI business coaching & consulting agency** shipping lean,
   autonomous, custom solutions. Tool-agnostic. GHL is one tool, not the
   identity — never lead with it.
-- Primary handle: `@bydesignai` (claim on every platform; fallbacks documented).
-- Display name: **By Design AI** everywhere.
+- Primary handle: `@aixdesign` (fallbacks: `@aibydesign`, `@aixdesign.dev`,
+  `@ai.by.design`). Do NOT claim `@bydesignai` — collides with a different
+  brand on LinkedIn.
+- Display name: **AI by Design** everywhere.
+- Wordmark = *AI by Design*. Stylized lockup = `aixdesign` (lowercase,
+  read as "AI × Design"). Variant table in `docs/BRAND-KIT.md` §1.
 - Tagline (primary): *Stop learning about AI. Start running on it.*
 - Brand pair: gold `#C9A84C` on background `#1E1B17`; Geist Sans.
 - Domain / brand email: `aixdesign.dev` / `hello@aixdesign.dev`.
@@ -72,5 +76,26 @@ Key decisions captured:
 
 Open follow-ups (also tracked in BRAND-KIT §13):
 - Build `/links` page on aixdesign.dev as the link-in-bio hub.
-- Drop logo SVGs + OG image into `public/brand/`.
+- Drop logo SVGs + OG image into `public/brand/` (lockup, mark, wordmark).
 - Wire Calendly webhook to tag GHL contact with `source:{utm_source}`.
+
+## Brand Rename — AI by Design / aixdesign
+
+**Date:** 2026-06-03
+
+"By Design AI" is taken on LinkedIn (different company). Renamed the
+public-facing brand to **AI by Design** with the stylized lockup
+`aixdesign` (matches the existing `aixdesign.dev` domain — read as
+"AI × Design"). All bios, handles, and display names updated.
+
+- Primary handle: `@aixdesign` everywhere (then `@aibydesign`,
+  `@aixdesign.dev`, `@ai.by.design` as documented fallbacks).
+- Display name on every platform: **AI by Design**.
+- Logo work to redo: `aixdesign-lockup.svg`, `aixdesign-mark.svg`,
+  `aibydesign-wordmark.svg` in `public/brand/`.
+- Site/code changes to follow in a separate PR:
+  - `app/layout.tsx` metadata (`title`, OG `siteName`)
+  - `README.md` brand references
+  - `lib/emails.ts` "By Design AI" signatures
+  - Resend FROM string → `AI by Design <hello@aixdesign.dev>`
+- Variant table (when to use which form): `docs/BRAND-KIT.md` §1.
