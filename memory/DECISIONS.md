@@ -41,3 +41,27 @@ Wired Resend into the lead magnet flow (`/api/lead`). On submit, the route now:
 - Templates: `lib/emails.ts` (`guideEmail`, `leadNotifyEmail`)
 - Env vars: `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL` (documented in README §3 / §5b)
 - Sender domain must be verified in Resend; falls back to `onboarding@resend.dev` for testing.
+
+## Brand Kit
+
+**Date:** 2026-06-03
+
+Established the brand kit as the single source of truth for identity, voice,
+visual system, and social setup. Lives at `docs/BRAND-KIT.md`.
+
+Key decisions captured:
+- Primary handle: `@bydesignai` (claim on every platform; fallbacks documented).
+- Display name: **By Design AI** everywhere.
+- Tagline (primary): *Stop learning about AI. Start running on it.*
+- Brand pair: gold `#C9A84C` on background `#1E1B17`; Geist Sans.
+- Domain / brand email: `aixdesign.dev` / `hello@aixdesign.dev`.
+- Content pillars: build-in-public, teardowns, primitives, proof (2·1·2·1/wk).
+- Every post ends with one of two CTAs: free guide (soft) or Book a 30-min
+  discovery call (hard).
+- All social links must use the UTM convention defined in §10 so the
+  Supabase `leads` table can attribute source.
+
+Open follow-ups (also tracked in BRAND-KIT §13):
+- Build `/links` page on aixdesign.dev as the link-in-bio hub.
+- Drop logo SVGs + OG image into `public/brand/`.
+- Wire Calendly webhook to tag GHL contact with `source:{utm_source}`.
