@@ -33,7 +33,7 @@
 ## Objective 4 — Build proof and keep the brand credible
 *Trust is the conversion lever for a custom-build service.*
 - KR4.1 ⚪ First **case study / testimonial** published (with written client permission) after first close.
-- KR4.2 ⚪ Add **social proof + pricing band + FAQ + About** to the homepage (the deferred conversion pass).
+- KR4.2 🟡 Add **social proof + pricing band + FAQ + About** to the homepage (the deferred conversion pass). *2026-06-05: header + hero realignment shipped; social proof / pricing / FAQ / About still owed.*
 - KR4.3 ⚪ Zero brand-guardrail incidents (no unprovable claims, no tool-led pitches, no client data leaks).
 
 ---

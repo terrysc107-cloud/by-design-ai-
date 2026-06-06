@@ -1,7 +1,11 @@
 # AI by Design — Content Engine (CMO)
 
-Output folder for produced marketing content. The CEO drafts/produces here and in PRs; the Chairman
-(or a VA, once the CEO is promoted) approves and publishes.
+> **The CMO is a defined agent — see [`CHARTER.md`](./CHARTER.md).** It owns brand, marketing, and
+> content creation, reports to the CEO, and runs SEO-first under the same guardrails. Invoke prompt
+> is in `CHARTER.md §8`.
+
+Output folder for produced marketing content. The CMO drafts/produces here and in PRs; the Chairman
+(or a VA, once the CMO is promoted) approves and publishes.
 
 ## What lives here
 - `content-out/` — produced assets per piece (social images, repurposed clips, ad creative)

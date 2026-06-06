@@ -54,12 +54,12 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Done For You · Education · Coaching · Management
+            AI Business Coaching &amp; Consulting
           </motion.p>
 
           <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-semibold leading-[1.06] tracking-tight text-white">
             <TextReveal
-              text="I Automated My Business Life. Let Me Help You Automate Yours."
+              text="Stop Learning About AI. Start Running On It."
               delay={0.2}
             />
           </h1>
@@ -70,8 +70,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
           >
-            From a single workflow that saves you 5 hours a week to a fully managed system that runs
-            your operation — I build it, teach it, or manage it. We figure out which on our first call.
+            We diagnose the bottleneck in your business, design the right system, and ship a lean,
+            autonomous solution — custom to you. Coaching, consulting, or done-for-you builds.
+            We figure out which on a free 15-minute call.
           </motion.p>
 
           <motion.p
@@ -80,7 +81,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.05 }}
           >
-            Helping solopreneurs, clinics, agencies, and creators stop running their business manually
+            For owners, operators &amp; small teams drowning in tools, tabs &amp; tasks that don&apos;t add up to outcomes
           </motion.p>
 
           <motion.div
@@ -90,7 +91,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 1.2 }}
           >
             <CTAButton onClick={bookDiscoveryCall} size="large">
-              Let&apos;s Talk →
+              Book a Discovery Call →
             </CTAButton>
             <button
               onClick={scrollToGuide}

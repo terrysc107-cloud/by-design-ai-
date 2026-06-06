@@ -11,11 +11,13 @@ import FinalCTA from '@/components/sections/FinalCTA'
 import Footer from '@/components/layout/Footer'
 import StickyMobileCTA from '@/components/layout/StickyMobileCTA'
 import LeadMagnetModal from '@/components/layout/LeadMagnetModal'
+import Header from '@/components/layout/Header'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background overflow-x-hidden">
+    <main id="top" className="relative min-h-screen bg-background overflow-x-hidden">
       <NoiseBg />
+      <Header />
 
       <Hero />
       <GoldRule />
