@@ -47,6 +47,7 @@
 ---
 
 ### Baseline note
-Foundation shipped 2026-06-05 (brand, SEO, analytics, funnel). This is **pre-traffic** — the first
-job is to instrument the numbers above, then drive the first discovery calls. Reason qualitatively
-until the snapshot has real values.
+Foundation shipped + **deployed to production on aixdesign.dev** 2026-06-05 (brand, SEO, analytics,
+funnel, header/hero). This is **pre-traffic** — the first job is to instrument the numbers above
+(Supabase ref + GA4 ID from the Chairman), then drive the first discovery calls. Reason
+qualitatively until the snapshot has real values.
