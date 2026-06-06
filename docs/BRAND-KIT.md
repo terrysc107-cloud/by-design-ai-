@@ -176,9 +176,19 @@ on white. Never use gold text smaller than 14px (it loses legibility).
 ### Asset locations
 - Hero video + section bgs: see `lib/cta.ts → ASSETS`
 - Guide PDF: `public/guide.pdf`
-- (TODO) Logo SVGs: `public/brand/aixdesign-lockup.svg`,
-  `public/brand/aixdesign-mark.svg`, `public/brand/aibydesign-wordmark.svg`
-- (TODO) Open Graph image: `public/og.png` (1200×630)
+- **Logo SVGs (embedded Geist font, scalable):** `public/brand/aixdesign-lockup.svg`,
+  `public/brand/aix-mark.svg`, `public/brand/aibydesign-wordmark.svg`
+- **Logo PNGs (transparent):** `public/brand/aixdesign-lockup.png`,
+  `public/brand/aix-mark.png`, `public/brand/aibydesign-wordmark.png`
+- **Open Graph / Twitter:** `app/opengraph-image.png`, `app/twitter-image.png` (1200×630,
+  auto-wired by Next.js file conventions)
+- **Favicon / app icons:** `app/icon.png` (512), `app/apple-icon.png` (180), `app/manifest.ts`
+- **Social banners** (`public/brand/`, naming `bda-{platform}-{w}x{h}.png`):
+  avatar 400 + 1080, x-header 1500×500, linkedin-company 1128×191,
+  linkedin-personal 1584×396, youtube-banner 2560×1440, facebook-cover 1640×924,
+  share-square 1200×1200
+- Source AI backgrounds generated via higgsfield (`nano_banana_pro`); composited with the
+  real Geist wordmark via headless Chrome. Regenerate from `/tmp/brand/brand.html` if needed.
 
 ---
 
@@ -460,8 +470,10 @@ https://aixdesign.dev/?utm_source=linkedin&utm_medium=post&utm_campaign=snapshot
 - [ ] Create LinkedIn **Company Page** + tag Terry as employee
 - [ ] Set Resend FROM to `AI by Design <hello@aixdesign.dev>` (already
       in README §3) and verify domain in Resend
-- [ ] Add `og.png` + favicon to `public/` (specs in §6)
-- [ ] Drop logo SVGs in `public/brand/`
+- [x] Add OG image + favicon (`app/opengraph-image.png`, `app/icon.png`, `app/apple-icon.png`)
+- [x] Drop logo SVGs + PNGs in `public/brand/`
+- [x] Generate per-platform banners + avatar (§6) in `public/brand/`
+- [ ] Upload avatar + banners to each platform; paste bios from §5
 - [ ] Add `/links` page to the Next.js app (Phase 04 candidate)
 - [ ] Wire Calendly webhook to tag GHL contact `source:{utm_source}`
 
