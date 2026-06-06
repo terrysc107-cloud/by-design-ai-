@@ -6,6 +6,7 @@
 
 | Date | Rank | Decision / recommendation | Type | Rationale | Outcome (filled later) |
 |---|---|---|---|---|---|
+| 2026-06-06 | L1 | **Metrics fully wired** — Supabase project ref `acouuzccqkcpyrckrgwg` (funnel readable, shared DB → only query `bda_*`) + GA4 `G-NC4HE7FP07` set in Vercel env + deployed; GA4 confirmed loading on aixdesign.dev | Process | Chairman supplied Supabase URL + created/located GA4. Closes OBJ1 KR1.1/KR1.2. Remaining: GA4 read-access MCP for weekly traffic pull | ✅ Done 2026-06-06 |
 | 2026-06-05 | L1 | **Production deploy** — foundation merged to `main`, Vercel production build READY, serving on **aixdesign.dev** (commit `bd9c2c1`) | Process | Chairman: "deploy." Funnel + brand + new header/hero now live. Remaining ask: Supabase ref + GA4 ID to wire metrics | ✅ Live 2026-06-05 (`dpl_377pqki…`) |
 | 2026-06-05 | L1 | **First board meeting run** — `BOARD-MEETINGS/2026-06-05.md`. Flagged metrics-wiring as the #1 blocker (OBJ1); set next-week plan | Strategy | Activated by Chairman: promote brand, monitor leads, refine site for more leads | ✅ Deploy done; awaiting Supabase ref + GA4 ID |
 | 2026-06-05 | L1 | **CMO established** (`cmo/CHARTER.md`) to own brand + marketing + content; reports to CEO | Governance | Chairman directive: "the CMO will own marketing and content creation." SEO-first mandate, L1 guardrails | ✅ Done |

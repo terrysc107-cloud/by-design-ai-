@@ -14,3 +14,4 @@ coverage/
 .swarm/
 ruvector.db
 tsconfig.tsbuildinfo
+.vercel

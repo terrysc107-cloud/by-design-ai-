@@ -39,7 +39,8 @@
 
 ## Known data gaps (closing these = OKR 1)
 - [x] Supabase project ref set (`acouuzccqkcpyrckrgwg`) + funnel readable via MCP (2026-06-05).
-- [ ] GA4 read access (Analytics MCP) not yet wired; no real traffic numbers. **Awaiting GA4 ID.**
+- [x] GA4 live on the site (`G-NC4HE7FP07`, 2026-06-06) — recording sessions + conversion events.
+- [ ] GA4 **read access** (Analytics MCP) for the CEO's weekly traffic pull — not yet connected.
 - [ ] No `bda_engagements` table → closed revenue is manual.
 - [ ] No close-rate baseline (need first cohort of discovery calls).
 

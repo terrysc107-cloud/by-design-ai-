@@ -16,7 +16,7 @@
 - **Current close rate** (discovery call → paid engagement): _____
 - **Typical engagement value** (one-time build £/$ and retainer/mo): _____
 - **Priority audience right now** (which of the §1 segments to lead with): _____
-- **GA4 property ID** (for the CEO's traffic reads): _____
+- **GA4** (for the CEO's traffic reads): Measurement ID `G-NC4HE7FP07` ✅ live on aixdesign.dev (2026-06-06); property `539498425` is SPD's — AI by Design has its own new property under account `104714727`.
 
 ---
 
