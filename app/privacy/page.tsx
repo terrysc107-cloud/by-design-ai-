@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — By Design AI',
+  title: 'Privacy Policy — AI by Design',
+  description:
+    'How AI by Design collects, uses, and protects your information. We do not sell your data.',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function PrivacyPage() {
@@ -13,7 +16,7 @@ export default function PrivacyPage() {
           href="/"
           className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mb-12 inline-block"
         >
-          ← By Design AI
+          ← AI by Design
         </Link>
 
         <h1 className="text-3xl font-semibold text-white mb-2">Privacy Policy</h1>
@@ -23,7 +26,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Overview</h2>
             <p>
-              By Design AI (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website aixdesign.dev and provides AI automation and consulting services. This Privacy Policy explains how we collect, use, and protect your information when you visit our site, request our free guide, or book a discovery call. We do not sell your data. Ever.
+              AI by Design (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website aixdesign.dev and provides AI automation and consulting services. This Privacy Policy explains how we collect, use, and protect your information when you visit our site, request our free guide, or book a discovery call. We do not sell your data. Ever.
             </p>
           </section>
 

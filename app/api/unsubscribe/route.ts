@@ -33,10 +33,10 @@ export async function POST(req: NextRequest) {
 }
 
 function htmlResponse(message: string, ok: boolean): NextResponse {
-  const html = `<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Unsubscribe — By Design AI</title></head>
+  const html = `<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Unsubscribe — AI by Design</title></head>
 <body style="margin:0;background:#1E1B17;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;">
   <div style="max-width:420px;padding:40px 32px;text-align:center;border:1px solid rgba(201,168,76,0.3);background:#23201b;">
-    <p style="margin:0 0 16px;color:#C9A84C;font-size:11px;letter-spacing:3px;text-transform:uppercase;">By Design AI</p>
+    <p style="margin:0 0 16px;color:#C9A84C;font-size:11px;letter-spacing:3px;text-transform:uppercase;">AI by Design</p>
     <p style="margin:0;color:rgba(255,255,255,0.75);font-size:16px;line-height:1.6;">${message}</p>
   </div>
 </body></html>`

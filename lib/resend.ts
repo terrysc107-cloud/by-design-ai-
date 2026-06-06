@@ -14,8 +14,8 @@ export function getResend(): Resend {
   return client
 }
 
-// "By Design AI <hello@aixdesign.dev>" — must be a verified Resend domain/sender.
-export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'By Design AI <onboarding@resend.dev>'
+// "AI by Design <hello@aixdesign.dev>" — must be a verified Resend domain/sender.
+export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'AI by Design <onboarding@resend.dev>'
 
 // Where new-lead notifications are delivered.
 export const LEAD_NOTIFY_EMAIL = process.env.LEAD_NOTIFY_EMAIL || 'terrysc107@gmail.com'

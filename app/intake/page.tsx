@@ -101,7 +101,7 @@ function IntakeForm() {
           href="/"
           className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mt-4"
         >
-          ← By Design AI
+          ← AI by Design
         </Link>
       </div>
     )
@@ -238,7 +238,7 @@ export default function IntakePage() {
           href="/"
           className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mb-12 inline-block"
         >
-          ← By Design AI
+          ← AI by Design
         </Link>
 
         <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium mb-4">

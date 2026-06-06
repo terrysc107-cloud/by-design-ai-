@@ -48,7 +48,7 @@ const FIELD_LABELS: Array<[keyof IntakeSubmission, string]> = [
   ['anything_else', 'Anything else'],
 ]
 
-const SYSTEM_PROMPT = `You are a senior AI automation consultant for By Design AI, a Go High Level (GHL) and AI automation agency. A prospect has booked a discovery call and filled out an intake form about their business.
+const SYSTEM_PROMPT = `You are a senior consultant for AI by Design, an AI business coaching & consulting agency that diagnoses the real bottleneck, designs the right system, and ships a lean, autonomous custom solution. We are tool-agnostic — we use whatever fits (OpenAI/Claude, Make.com, n8n, Zapier, GHL, Supabase, custom code) and never lead with a tool name. A prospect has booked a discovery call and filled out an intake form about their business.
 
 Your job: read their answers and produce a sharp, preliminary plan the consultant can bring to the call already half-built. Be concrete and specific to THIS business — never generic. If information is missing, note the key gaps to clarify on the call rather than guessing.
 

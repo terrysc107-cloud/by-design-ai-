@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — By Design AI',
+  title: 'Terms of Service — AI by Design',
+  description:
+    'The terms that govern use of the AI by Design website, free guide, and discovery call.',
+  alternates: { canonical: '/terms' },
 }
 
 export default function TermsPage() {
@@ -13,7 +16,7 @@ export default function TermsPage() {
           href="/"
           className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mb-12 inline-block"
         >
-          ← By Design AI
+          ← AI by Design
         </Link>
 
         <h1 className="text-3xl font-semibold text-white mb-2">Terms of Service</h1>
@@ -23,14 +26,14 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Agreement to Terms</h2>
             <p>
-              By using the By Design AI website, requesting our free guide, or booking a discovery call, you agree to be bound by these Terms of Service. If you do not agree, do not use our services. By Design AI is a professional services company governed under the laws of the Commonwealth of Pennsylvania.
+              By using the AI by Design website, requesting our free guide, or booking a discovery call, you agree to be bound by these Terms of Service. If you do not agree, do not use our services. AI by Design is a professional services company governed under the laws of the Commonwealth of Pennsylvania.
             </p>
           </section>
 
           <section>
             <h2 className="text-white font-semibold mb-3">Services</h2>
             <p>
-              By Design AI provides AI automation and consulting services. Our entry point is a free discovery call booked through our website. Any paid engagement that follows is governed by a separate agreement made directly between you and By Design AI. The free guide and discovery call are provided at no cost and with no obligation.
+              AI by Design provides AI automation and consulting services. Our entry point is a free discovery call booked through our website. Any paid engagement that follows is governed by a separate agreement made directly between you and AI by Design. The free guide and discovery call are provided at no cost and with no obligation.
             </p>
           </section>
 
@@ -44,7 +47,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">No Guaranteed Results</h2>
             <p>
-              By Design AI does not guarantee any specific business outcomes, revenue growth, operational improvements, or return on investment as a result of our services. All advice and recommendations are based on the information provided by the client and the professional judgment of our advisors. Results will vary based on individual circumstances, implementation effort, and market conditions.
+              AI by Design does not guarantee any specific business outcomes, revenue growth, operational improvements, or return on investment as a result of our services. All advice and recommendations are based on the information provided by the client and the professional judgment of our advisors. Results will vary based on individual circumstances, implementation effort, and market conditions.
             </p>
           </section>
 
@@ -61,21 +64,21 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Intellectual Property</h2>
             <p>
-              All content, frameworks, methodologies, workflows, and materials provided by By Design AI — including Loom recordings, written action documents, workflow maps, and priority stacks — are the proprietary intellectual property of By Design AI. You are granted a non-exclusive, non-transferable license to use these materials for your own internal business purposes only. You may not resell, redistribute, reproduce, or create derivative works from our materials without prior written consent.
+              All content, frameworks, methodologies, workflows, and materials provided by AI by Design — including Loom recordings, written action documents, workflow maps, and priority stacks — are the proprietary intellectual property of AI by Design. You are granted a non-exclusive, non-transferable license to use these materials for your own internal business purposes only. You may not resell, redistribute, reproduce, or create derivative works from our materials without prior written consent.
             </p>
           </section>
 
           <section>
             <h2 className="text-white font-semibold mb-3">Confidentiality</h2>
             <p>
-              By Design AI will treat information about your business as confidential and will not disclose it to third parties except as required by law or as necessary to deliver the service (e.g., scheduling tools, document delivery). You agree to treat any proprietary frameworks, methodologies, or systems shared by By Design AI as confidential.
+              AI by Design will treat information about your business as confidential and will not disclose it to third parties except as required by law or as necessary to deliver the service (e.g., scheduling tools, document delivery). You agree to treat any proprietary frameworks, methodologies, or systems shared by AI by Design as confidential.
             </p>
           </section>
 
           <section>
             <h2 className="text-white font-semibold mb-3">Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by applicable law, By Design AI and its owners, employees, and advisors shall not be liable for any indirect, incidental, consequential, special, or punitive damages arising out of or relating to your use of our services, including but not limited to lost profits, lost revenue, lost data, or business interruption, even if we have been advised of the possibility of such damages.
+              To the maximum extent permitted by applicable law, AI by Design and its owners, employees, and advisors shall not be liable for any indirect, incidental, consequential, special, or punitive damages arising out of or relating to your use of our services, including but not limited to lost profits, lost revenue, lost data, or business interruption, even if we have been advised of the possibility of such damages.
             </p>
             <p className="mt-3">
               Our total liability to you for any claims arising from these Terms or our free services shall not exceed one hundred US dollars ($100).

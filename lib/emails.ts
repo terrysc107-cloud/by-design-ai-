@@ -19,11 +19,11 @@ function wrap(inner: string, footer?: string): string {
       <tr><td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#23201b;border:1px solid rgba(201,168,76,0.3);">
           <tr><td style="padding:36px 32px;">
-            <p style="margin:0 0 24px;color:${GOLD};font-size:11px;letter-spacing:3px;text-transform:uppercase;">By Design AI</p>
+            <p style="margin:0 0 24px;color:${GOLD};font-size:11px;letter-spacing:3px;text-transform:uppercase;">AI by Design</p>
             ${inner}
           </td></tr>
         </table>
-        <p style="margin:20px 0 0;color:rgba(255,255,255,0.25);font-size:11px;line-height:1.5;">By Design AI · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
+        <p style="margin:20px 0 0;color:rgba(255,255,255,0.25);font-size:11px;line-height:1.5;">AI by Design · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
       </td></tr>
     </table>
   </body>
@@ -62,7 +62,7 @@ export function guideEmail(name: string): Email {
     p(`Over the next few days I'll send you a couple of short, practical notes on putting AI to work in a business like yours. No fluff — just the moves.`) +
     p(`And whenever you want a second set of eyes on your setup, grab a free 15-minute call:`) +
     `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
-    p('— The By Design AI team')
+    p('— The AI by Design team')
   return {
     subject: 'Your guide: 10 Things You Should Never Do Manually',
     html: wrap(inner),
@@ -77,7 +77,7 @@ Over the next few days I'll send a couple of short, practical notes on putting A
 
 Book a free 15-minute discovery call: ${CALL_URL}
 
-— The By Design AI team`,
+— The AI by Design team`,
   }
 }
 
@@ -135,14 +135,14 @@ export function dripEmail(stage: number, name: string, unsubscribeUrl: string): 
     p(`Hey ${first(name)},`) +
     def.body.map(p).join('') +
     goldButton(CALL_URL, def.cta) +
-    p('— The By Design AI team')
+    p('— The AI by Design team')
   const text = `Hey ${first(name)},
 
 ${def.body.map(b => b.replace(/<[^>]+>/g, '')).join('\n\n')}
 
 ${def.cta} ${CALL_URL}
 
-— The By Design AI team
+— The AI by Design team
 
 Unsubscribe: ${unsubscribeUrl}`
   return { subject: def.subject, html: wrap(inner, unsubFooter(unsubscribeUrl)), text }
@@ -155,9 +155,9 @@ export function leadNotifyEmail(name: string, email: string): Email {
     <p style="margin:0 0 8px;"><strong>New guide download / lead</strong></p>
     <p style="margin:0;">Name: ${name}</p>
     <p style="margin:0;">Email: <a href="mailto:${email}">${email}</a></p>
-    <p style="margin:16px 0 0;color:#666;">Captured from the By Design AI lead magnet form. They’ve entered the nurture sequence.</p>
+    <p style="margin:16px 0 0;color:#666;">Captured from the AI by Design lead magnet form. They’ve entered the nurture sequence.</p>
   </div>`
-  const text = `New lead\nName: ${name}\nEmail: ${email}\n\nCaptured from the By Design AI lead magnet form.`
+  const text = `New lead\nName: ${name}\nEmail: ${email}\n\nCaptured from the AI by Design lead magnet form.`
   return { subject, html, text }
 }
 
@@ -192,7 +192,7 @@ export function intakeInviteEmail(name: string, intakeUrl: string): Email {
     p('It takes about 2 minutes. The more you share, the more specific I can be.') +
     goldButton(intakeUrl, 'Complete the Intake →') +
     p('You can fill it out now or any time before our call — but the sooner I have it, the more prepared I’ll be.') +
-    p('— Terry, By Design AI')
+    p('— Terry, AI by Design')
   const text = `Hey ${first(name)},
 
 You're booked — thank you. To make our call count, please complete this short intake so I can review your setup and arrive with a plan already half-built.
@@ -201,7 +201,7 @@ It takes about 2 minutes: ${intakeUrl}
 
 Fill it out any time before our call — the sooner, the better.
 
-— Terry, By Design AI`
+— Terry, AI by Design`
   return {
     subject: 'Before our call — a quick 2-minute intake',
     html: wrap(inner),
@@ -245,14 +245,14 @@ export function intakeReminderEmail(name: string, intakeUrl: string, stage: numb
     p(`Hey ${first(name)},`) +
     def.body.map(p).join('') +
     goldButton(intakeUrl, 'Complete the Intake →') +
-    p('— Terry, By Design AI')
+    p('— Terry, AI by Design')
   const text = `Hey ${first(name)},
 
 ${def.body.join('\n\n')}
 
 ${intakeUrl}
 
-— Terry, By Design AI`
+— Terry, AI by Design`
   return { subject: def.subject, html: wrap(inner), text }
 }
 

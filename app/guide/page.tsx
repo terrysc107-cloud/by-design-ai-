@@ -100,7 +100,7 @@ export default function GuidePage() {
       {/* Header */}
       <div className="bg-zinc-950 text-white px-6 py-4 flex items-center justify-between">
         <span className="text-[11px] tracking-[0.3em] uppercase text-zinc-400 font-medium">
-          By Design AI — Free Guide
+          AI by Design — Free Guide
         </span>
         <Link
           href="/"
@@ -113,7 +113,7 @@ export default function GuidePage() {
       {/* Cover */}
       <div className="bg-zinc-950 text-white px-6 py-20 md:py-32 text-center">
         <p className="text-amber-500 text-[10px] tracking-[0.4em] uppercase font-medium mb-6">
-          By Design AI · Automation Guide
+          AI by Design · Automation Guide
         </p>
         <h1 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl mx-auto mb-6">
           10 Things In Your Business You Should Never Do Manually
@@ -236,7 +236,7 @@ export default function GuidePage() {
 
       {/* Footer */}
       <div className="bg-zinc-950 border-t border-white/5 px-6 py-6 text-center">
-        <p className="text-zinc-600 text-xs">© 2026 By Design AI. All rights reserved.</p>
+        <p className="text-zinc-600 text-xs">© 2026 AI by Design. All rights reserved.</p>
       </div>
     </div>
   )
