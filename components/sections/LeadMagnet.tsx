@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import TextReveal from '@/components/ui/TextReveal'
 import { ASSETS } from '@/lib/cta'
+import { trackConversion } from '@/lib/analytics'
 
 export default function LeadMagnet() {
   const shouldReduce = useReducedMotion()
@@ -26,6 +27,7 @@ export default function LeadMagnet() {
       })
       if (res.ok) {
         setStatus('done')
+        trackConversion('lead', { location: 'section' })
       } else {
         throw new Error('Request failed')
       }

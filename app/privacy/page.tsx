@@ -56,7 +56,7 @@ export default function PrivacyPage() {
               <li>To respond to inquiries or support requests</li>
               <li>To improve our services and website</li>
             </ul>
-            <p className="mt-3">We do not use your information for advertising or sell it to third parties.</p>
+            <p className="mt-3">We may use aggregated, cookie-based analytics and advertising pixels to measure how the site performs and to reach similar audiences with our own ads. We never sell your information to third parties.</p>
           </section>
 
           <section>
@@ -76,7 +76,13 @@ export default function PrivacyPage() {
                 <strong className="text-white/80">OpenAI:</strong> We use OpenAI&apos;s API to help us review intake questionnaire responses and prepare for your call. Review OpenAI&apos;s privacy policy at openai.com/policies/privacy-policy.
               </li>
               <li>
-                <strong className="text-white/80">Vercel:</strong> Website hosting. Vercel may log standard server request data. Review Vercel&apos;s privacy policy at vercel.com/legal/privacy-policy.
+                <strong className="text-white/80">Vercel:</strong> Website hosting and privacy-friendly traffic analytics. Vercel may log standard server request data. Review Vercel&apos;s privacy policy at vercel.com/legal/privacy-policy.
+              </li>
+              <li>
+                <strong className="text-white/80">Google Analytics:</strong> Aggregated, cookie-based website analytics (pages visited, traffic sources, on-site behavior) used to improve the site. Review Google&apos;s privacy policy at policies.google.com/privacy.
+              </li>
+              <li>
+                <strong className="text-white/80">Meta (Facebook) Pixel:</strong> Measures the performance of our ads and helps us show relevant ads on Meta platforms. Review Meta&apos;s privacy policy at facebook.com/privacy/policy.
               </li>
             </ul>
           </section>
@@ -102,7 +108,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-white font-semibold mb-3">Cookies</h2>
             <p>
-              Our website uses minimal, technically necessary cookies. We do not use tracking cookies or advertising cookies. No third-party advertising networks have access to your data through our site.
+              Our website uses technically necessary cookies plus analytics and advertising cookies from Google Analytics and the Meta Pixel, which help us understand site performance and measure our advertising. You can block cookies in your browser settings or opt out of personalized ads via your Google and Meta ad-settings pages. Blocking these cookies will not affect your ability to request the guide or book a call.
             </p>
           </section>
 

@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
 import OrganizationJsonLd from '@/components/seo/JsonLd'
+import MetaPixel from '@/components/analytics/MetaPixel'
 
 const SITE_URL = 'https://aixdesign.dev'
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -68,6 +73,10 @@ export default function RootLayout({
       <body className="font-sans bg-background text-white antialiased">
         <OrganizationJsonLd />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <MetaPixel />
+        <Analytics />
+        <SpeedInsights />
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   )

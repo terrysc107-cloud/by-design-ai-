@@ -1,6 +1,9 @@
+import { trackConversion } from '@/lib/analytics'
+
 export const DISCOVERY_CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
 
 export function bookDiscoveryCall() {
+  trackConversion('book_call')
   window.open(DISCOVERY_CALL_URL, '_blank', 'noopener,noreferrer')
 }
 

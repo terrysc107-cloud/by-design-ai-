@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { ASSETS } from '@/lib/cta'
+import { trackConversion } from '@/lib/analytics'
 
 const STORAGE_KEY = 'bda_lm_modal_dismissed_v1'
 const DELAY_MS = 8000
@@ -57,6 +58,7 @@ export default function LeadMagnetModal() {
       })
       if (res.ok) {
         setStatus('done')
+        trackConversion('lead', { location: 'modal' })
         if (typeof window !== 'undefined') {
           window.localStorage.setItem(STORAGE_KEY, '1')
         }

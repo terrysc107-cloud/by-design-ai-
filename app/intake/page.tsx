@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { trackConversion } from '@/lib/analytics'
 
 type Status = 'idle' | 'loading' | 'done' | 'error'
 
@@ -78,6 +79,7 @@ function IntakeForm() {
       })
       if (res.ok) {
         setStatus('done')
+        trackConversion('intake')
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
         const data = await res.json().catch(() => ({}))
