@@ -11,9 +11,9 @@
 
 ## Objective 1 — Instrument the funnel so decisions run on facts
 *So the CEO reasons on real numbers, not guesses.*
-- KR1.1 ⚪ Supabase project ref set + MCP wired **read-only**; `metrics-queries.sql` runs clean.
-- KR1.2 ⚪ GA4 read access wired; traffic + `book_call`/`generate_lead` events in the snapshot weekly.
-- KR1.3 ⚪ Baseline captured: leads, lead→booking %, intake-completion % in `METRICS-SNAPSHOT.md`.
+- KR1.1 🟢 Supabase project ref set (`acouuzccqkcpyrckrgwg`) + funnel readable via MCP. *(Done 2026-06-05.)*
+- KR1.2 🟡 GA4 read access wired; traffic + `book_call`/`generate_lead` events in the snapshot weekly. *Awaiting GA4 Measurement ID.*
+- KR1.3 🟡 Baseline captured (all 0 — pre-traffic) in `METRICS-SNAPSHOT.md`; real numbers once traffic flows.
 - KR1.4 ⚪ Close-rate + avg engagement value supplied by Chairman (or `bda_engagements` table added).
 
 ## Objective 2 — Book the first qualified discovery calls

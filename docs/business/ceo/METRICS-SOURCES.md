@@ -8,9 +8,10 @@
 
 ## ✅ Supabase: the funnel (read-only)
 
-- **Project:** the AI by Design app DB — **project ref `[SET PROJECT REF]`** (read it from
-  `SUPABASE_URL` in the Vercel env; fill it in here once confirmed). The org has other Supabase
-  projects that are **different apps — never query them.**
+- **Project:** **project ref `acouuzccqkcpyrckrgwg`** (from `SUPABASE_URL`). ⚠️ **This project is
+  SHARED across several of Terry's apps** (it also holds `transactions`, `resume_orders`,
+  `course_purchases`, `water_*`, `cards`, `habit_logs`, etc.). The CEO must **only ever query the
+  `bda_*` tables** (`bda_leads`, `bda_bookings`, `bda_intake`) — never read or touch the other apps' data.
 - **How the CEO pulls metrics:** run the validated queries in **`metrics-queries.sql`** via the
   Supabase MCP (`execute_sql`, this project ref), **SELECT-only**.
 - **Tables:** `bda_leads`, `bda_bookings`, `bda_intake` (see schema map below).
@@ -18,7 +19,7 @@
 ### 🔒 Enforcing read-only (do this to harden it)
 The Charter forbids writes, and the query pack is all SELECTs — that's process control. For hard
 enforcement, run the Supabase MCP server with the **`--read-only`** flag and pin
-**`--project-ref [SET PROJECT REF]`**. Optional defense-in-depth: a dedicated read-only Postgres role.
+**`--project-ref acouuzccqkcpyrckrgwg`**. Optional defense-in-depth: a dedicated read-only Postgres role.
 
 ---
 
@@ -92,6 +93,6 @@ Report as **Conservative / Base / Upside**, tied to `../BUSINESS-PLAN.md`, with 
 
 ## Status / wiring checklist
 - [ ] **Set the Supabase project ref** above (from `SUPABASE_URL`).
-- [ ] Wire Supabase MCP read-only (`--read-only --project-ref [SET PROJECT REF]`).
+- [ ] Wire Supabase MCP read-only (`--read-only --project-ref acouuzccqkcpyrckrgwg`).
 - [ ] Wire **GA4** read access (Analytics/Supermetrics MCP) for traffic + conversion events.
 - [ ] Add a `bda_engagements` table (or CRM link) so closed revenue stops being manual.

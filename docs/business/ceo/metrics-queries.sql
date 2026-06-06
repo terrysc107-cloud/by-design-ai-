@@ -1,6 +1,6 @@
 -- AI by Design — CEO read-only metrics query pack
 -- ============================================================================
--- Supabase project: [SET PROJECT REF] (the AI by Design app DB; read from SUPABASE_URL)
+-- Supabase project: acouuzccqkcpyrckrgwg (the AI by Design app DB; read from SUPABASE_URL)
 -- (Other Supabase projects in this org are DIFFERENT apps — never query them.)
 --
 -- 🔒 READ-ONLY. These are all SELECTs. The CEO must NEVER run INSERT/UPDATE/DELETE/DDL

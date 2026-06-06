@@ -12,7 +12,7 @@
   Meta test", "I want a case-study page once we close the first client")_
 
 ### Useful facts to seed (Chairman: fill when known)
-- **Supabase project ref:** _____ (so the CEO can wire read-only metrics)
+- **Supabase project ref:** `acouuzccqkcpyrckrgwg` ✅ (wired 2026-06-05)
 - **Current close rate** (discovery call → paid engagement): _____
 - **Typical engagement value** (one-time build £/$ and retainer/mo): _____
 - **Priority audience right now** (which of the §1 segments to lead with): _____

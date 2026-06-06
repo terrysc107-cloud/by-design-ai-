@@ -4,21 +4,21 @@
 > funnel) + GA4 (traffic). Closed-engagement $ is Chairman-supplied until a table exists.
 > **Aggregates only — never paste individual lead/client PII here.**
 
-**Last updated:** _not yet captured_ · **By:** _—_
+**Last updated:** 2026-06-05 (live read via Supabase MCP) · **By:** CEO
 
 ---
 
 ## Funnel (Supabase `bda_*`)
 | Metric | Value | Source | Notes |
 |---|---|---|---|
-| Total leads | _—_ | `bda_leads` | |
-| New leads (7d / 30d) | _—_ / _—_ | `bda_leads` | |
-| Unsubscribe rate | _—_ | `bda_leads` | |
-| Discovery calls booked (total / active / 7d) | _—_ | `bda_bookings` | the north-star input |
-| Intake completion rate | _—_ | `bda_bookings` | serious-buyer filter |
-| Intakes (total / 30d) | _—_ | `bda_intake` | |
-| Budget mix of intakes | _—_ | `bda_intake` | qualifies pipeline |
-| Lead → booking conversion | _—_ | derived | |
+| Total leads | **0** | `bda_leads` | funnel just went live — pre-traffic |
+| New leads (7d / 30d) | 0 / 0 | `bda_leads` | |
+| Unsubscribe rate | n/a | `bda_leads` | |
+| Discovery calls booked (total / active / 7d) | **0** | `bda_bookings` | the north-star input |
+| Intake completion rate | n/a | `bda_bookings` | serious-buyer filter |
+| Intakes (total / 30d) | **0** | `bda_intake` | |
+| Budget mix of intakes | n/a | `bda_intake` | qualifies pipeline |
+| Lead → booking conversion | n/a | derived | needs first leads |
 
 ## Traffic (GA4)
 | Metric | Value | Source | Notes |
@@ -38,9 +38,8 @@
 ---
 
 ## Known data gaps (closing these = OKR 1)
-- [ ] Supabase project ref not set in `METRICS-SOURCES.md` / `metrics-queries.sql`.
-- [ ] Supabase MCP not yet wired read-only.
-- [ ] GA4 read access (Analytics MCP) not yet wired; no real traffic numbers.
+- [x] Supabase project ref set (`acouuzccqkcpyrckrgwg`) + funnel readable via MCP (2026-06-05).
+- [ ] GA4 read access (Analytics MCP) not yet wired; no real traffic numbers. **Awaiting GA4 ID.**
 - [ ] No `bda_engagements` table → closed revenue is manual.
 - [ ] No close-rate baseline (need first cohort of discovery calls).
 
