@@ -81,6 +81,47 @@ Book a free 15-minute discovery call: ${CALL_URL}
   }
 }
 
+// ── Newsletter welcome (sent immediately on subscribe) ──────────────────────
+export function newsletterWelcomeEmail(name: string | undefined, unsubscribeUrl: string): Email {
+  const greeting = name && name.trim() ? `Hey ${first(name)},` : 'Hey there,'
+  const inner =
+    h1('You’re on the list.') +
+    p(greeting) +
+    p("Thanks for subscribing. Roughly once a week I'll send one short, practical note on putting AI and automation to work in a business like yours — real moves, no hype, no filler.") +
+    p('Want a head start? Grab the free guide — the 10 things in your business you should never do manually:') +
+    goldButton(`${SITE_URL}/guide`, 'Read the Guide →') +
+    p('And whenever you want a second set of eyes on your setup, book a free 15-minute call:') +
+    `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
+    p('— The AI by Design team')
+  const text = `${greeting}
+
+Thanks for subscribing. About once a week I'll send one short, practical note on putting AI and automation to work in a business like yours — real moves, no hype.
+
+Read the free guide: ${SITE_URL}/guide
+Book a free 15-minute call: ${CALL_URL}
+
+— The AI by Design team
+
+Unsubscribe: ${unsubscribeUrl}`
+  return {
+    subject: 'You’re on the list — AI by Design',
+    html: wrap(inner, unsubFooter(unsubscribeUrl)),
+    text,
+  }
+}
+
+// ── Internal: new subscriber notification ───────────────────────────────────
+export function subscriberNotifyEmail(email: string, source: string): Email {
+  const subject = `New newsletter subscriber: ${email}`
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1E1B17;">
+    <p style="margin:0 0 8px;"><strong>New newsletter subscriber</strong></p>
+    <p style="margin:0;">Email: <a href="mailto:${email}">${email}</a></p>
+    <p style="margin:0;">Source: ${source}</p>
+  </div>`
+  const text = `New newsletter subscriber\nEmail: ${email}\nSource: ${source}`
+  return { subject, html, text }
+}
+
 // ── Drip sequence (stages 1..4) ─────────────────────────────────────────────
 type DripDef = { subject: string; heading: string; body: string[]; cta: string }
 

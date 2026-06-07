@@ -6,13 +6,30 @@ export const dynamic = 'force-dynamic'
 // One-click unsubscribe. Linked from every drip email via ?token=<unsubscribe_token>.
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token')
+  const list = req.nextUrl.searchParams.get('list')
 
   if (!token || !hasSupabase()) {
     return htmlResponse('Invalid unsubscribe link.', false)
   }
 
   try {
-    const { data, error } = await getSupabase()
+    const supabase = getSupabase()
+
+    // Newsletter subscribers (List-Unsubscribe links carry ?list=subscribers).
+    if (list === 'subscribers') {
+      const { data, error } = await supabase
+        .from('bda_subscribers')
+        .update({ status: 'unsubscribed', updated_at: new Date().toISOString() })
+        .eq('unsubscribe_token', token)
+        .select('email')
+      if (error || !data || data.length === 0) {
+        return htmlResponse('We couldn’t find that subscription — it may already be removed.', false)
+      }
+      return htmlResponse('You’re unsubscribed from the newsletter. No more emails from us.', true)
+    }
+
+    // Default: drip/nurture leads.
+    const { data, error } = await supabase
       .from('bda_leads')
       .update({ unsubscribed: true, drip_next_at: null, updated_at: new Date().toISOString() })
       .eq('unsubscribe_token', token)

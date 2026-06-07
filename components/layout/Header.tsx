@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { bookDiscoveryCall } from '@/lib/cta'
 
@@ -46,6 +47,12 @@ export default function Header() {
 
         {/* Right side */}
         <div className="flex items-center gap-5">
+          <Link
+            href="/blog"
+            className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+          >
+            Blog
+          </Link>
           <button
             onClick={scrollToGuide}
             className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"

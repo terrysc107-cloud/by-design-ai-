@@ -5,18 +5,20 @@
  * site runs cleanly before the GA/Pixel env vars are set.
  */
 
-export type ConversionEvent = 'lead' | 'intake' | 'book_call'
+export type ConversionEvent = 'lead' | 'intake' | 'book_call' | 'subscribe'
 
 const GA_EVENT: Record<ConversionEvent, string> = {
   lead: 'generate_lead',
   intake: 'submit_application',
   book_call: 'book_call',
+  subscribe: 'newsletter_signup',
 }
 
 const META_EVENT: Record<ConversionEvent, string> = {
   lead: 'Lead',
   intake: 'SubmitApplication',
   book_call: 'Schedule',
+  subscribe: 'Subscribe',
 }
 
 declare global {
