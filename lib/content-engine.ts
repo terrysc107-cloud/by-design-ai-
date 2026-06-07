@@ -175,3 +175,51 @@ export async function generatePosts(opts: GenerateOptions = {}): Promise<Generat
 export function getLane(lane?: string): Lane {
   return resolveLane(lane)
 }
+
+const NEWSLETTER_URL = 'aixdesign.dev/newsletter'
+
+/**
+ * Write a short social post that promotes a specific newsletter issue and drives
+ * sign-ups. Used when a new issue is generated — drafted into the content queue
+ * so it flows through the same human-approval + Postiz publish path.
+ *
+ * Returns the post text (bare ${NEWSLETTER_URL}, no http/UTM — added at publish).
+ */
+export async function generateNewsletterPromo(
+  issue: { subject: string; topic: string },
+  platform: 'linkedin' | 'instagram' = 'linkedin'
+): Promise<string> {
+  const lane = resolveLane('medical')
+  const isIG = platform === 'instagram'
+  const system =
+    buildSystemPrompt(lane) +
+    `\n\nFor THIS task you are NOT writing a teaching post — you are writing a short ${isIG ? 'Instagram caption' : 'LinkedIn post'} that promotes this week's free newsletter and gets people to subscribe. Tease the value of the issue, make them feel they'd miss something useful, and point them to the newsletter. Keep it ${isIG ? '60–120' : '70–150'} words.`
+  const user = `This week's newsletter issue:
+SUBJECT: ${issue.subject}
+WHAT IT COVERS: ${issue.topic}
+
+Write one ${isIG ? 'Instagram caption' : 'LinkedIn post'} that gets the reader to subscribe to the free weekly newsletter. End with a clear CTA to subscribe using the bare URL exactly "${NEWSLETTER_URL}" (no http://, no query string). Add 3–5 relevant hashtags on the final line.
+
+Return JSON: { "content": "<the full post text, \\n for line breaks>" }`
+
+  const completion = await getOpenAI().chat.completions.create({
+    model: OPENAI_MODEL,
+    temperature: 0.8,
+    response_format: { type: 'json_object' },
+    messages: [
+      { role: 'system', content: system },
+      { role: 'user', content: user },
+    ],
+  })
+  const raw = completion.choices[0]?.message?.content?.trim()
+  if (!raw) throw new Error('Promo generator returned an empty response.')
+  let parsed: { content?: unknown }
+  try {
+    parsed = JSON.parse(raw)
+  } catch {
+    throw new Error('Promo generator returned invalid JSON.')
+  }
+  const content = typeof parsed.content === 'string' ? parsed.content.trim() : ''
+  if (!content) throw new Error('Promo generator produced no usable content.')
+  return content
+}

@@ -10,11 +10,16 @@ export const GUIDE_PDF_URL = process.env.GUIDE_PDF_URL || `${SITE_URL}/guide.pdf
 
 type Email = { subject: string; html: string; text: string }
 
-// Shared dark-luxury email shell. `footer` lets drip emails append an unsubscribe line.
-function wrap(inner: string, footer?: string): string {
+// Shared dark-luxury email shell. `footer` lets drip emails append an unsubscribe
+// line; `preheader` sets the hidden inbox preview text.
+function wrap(inner: string, footer?: string, preheader?: string): string {
+  const preheaderHtml = preheader
+    ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;width:0;">${preheader}</div>`
+    : ''
   return `<!doctype html>
 <html>
   <body style="margin:0;padding:0;background:${BG};font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+    ${preheaderHtml}
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px;">
       <tr><td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#23201b;border:1px solid rgba(201,168,76,0.3);">
@@ -120,6 +125,97 @@ export function subscriberNotifyEmail(email: string, source: string): Email {
   </div>`
   const text = `New newsletter subscriber\nEmail: ${email}\nSource: ${source}`
   return { subject, html, text }
+}
+
+// ── Weekly newsletter issue (sent to all active subscribers) ────────────────
+function emailImage(url: string): string {
+  return `<img src="${url}" width="456" alt="" style="display:block;width:100%;max-width:456px;height:auto;margin:0 0 24px;border:0;outline:none;" />`
+}
+
+export function newsletterIssueEmail(
+  issue: {
+    subject: string
+    preheader?: string | null
+    intro: string
+    body: { heading: string; body: string }[]
+    cta_label?: string | null
+    cta_url?: string | null
+    featured_post_title?: string | null
+    featured_post_url?: string | null
+    hero_image_url?: string | null
+    inline_image_url?: string | null
+  },
+  name: string | undefined,
+  unsubscribeUrl: string
+): Email {
+  const greeting = name && name.trim() ? `Hey ${first(name)},` : 'Hey there,'
+  const sections = issue.body
+    .map(s => h1(s.heading) + s.body.split('\n').filter(Boolean).map(p).join(''))
+    .join('')
+  const featured =
+    issue.featured_post_url && issue.featured_post_title
+      ? p(`📄 New on the blog: <a href="${issue.featured_post_url}" style="color:${GOLD};text-decoration:underline;">${issue.featured_post_title}</a>`)
+      : ''
+  const cta = issue.cta_url ? goldButton(issue.cta_url, issue.cta_label || 'Read more →') : ''
+
+  const inner =
+    (issue.hero_image_url ? emailImage(issue.hero_image_url) : '') +
+    h1(issue.subject) +
+    p(greeting) +
+    issue.intro.split('\n').filter(Boolean).map(p).join('') +
+    (issue.inline_image_url ? emailImage(issue.inline_image_url) : '') +
+    sections +
+    featured +
+    cta +
+    p('See you next week,<br/>— Terry, AI by Design')
+
+  const textSections = issue.body.map(s => `${s.heading}\n${s.body}`).join('\n\n')
+  const text = `${greeting}
+
+${issue.intro}
+
+${textSections}
+${issue.featured_post_url ? `\nNew on the blog: ${issue.featured_post_title} — ${issue.featured_post_url}` : ''}
+${issue.cta_url ? `\n${issue.cta_label || 'Read more'}: ${issue.cta_url}` : ''}
+
+See you next week,
+— Terry, AI by Design
+
+Unsubscribe: ${unsubscribeUrl}`
+
+  return {
+    subject: issue.subject,
+    html: wrap(inner, unsubFooter(unsubscribeUrl), issue.preheader || undefined),
+    text,
+  }
+}
+
+// ── Internal: newsletter issue ready to approve & send ──────────────────────
+export function newsletterApprovalEmail(issue: { id: string; subject: string; approval_token: string }): Email {
+  const approveUrl = `${SITE_URL}/api/newsletter/approve?token=${issue.approval_token}`
+  const reviewCmd = `npx tsx --env-file=.env.local scripts/newsletter-review.ts --show ${issue.id.slice(0, 8)}`
+  const subject = `📬 Newsletter ready to send: "${issue.subject}"`
+  const inner =
+    h1('This week’s newsletter is ready') +
+    p(`The newsletter engine drafted this week’s issue:`) +
+    p(`<strong>${issue.subject}</strong>`) +
+    p('Preview the full issue and send a test to yourself before approving:') +
+    `<pre style="margin:0 0 18px;padding:14px;background:#1E1B17;color:#C9A84C;font-size:13px;white-space:pre-wrap;border:1px solid rgba(201,168,76,0.3);">${reviewCmd}</pre>` +
+    p('When it looks good, approve it and it sends to all active subscribers on the next run:') +
+    goldButton(approveUrl, 'Approve & Send →') +
+    p('Nothing goes out until you approve.')
+  const text = `This week's newsletter is ready: "${issue.subject}"
+
+Preview + send yourself a test:
+${reviewCmd}
+
+Approve & send to all subscribers:
+${approveUrl}
+
+Nothing goes out until you approve.
+
+— AI by Design newsletter engine`
+  return { subject, html: wrap(inner), text }
 }
 
 // ── Drip sequence (stages 1..4) ─────────────────────────────────────────────

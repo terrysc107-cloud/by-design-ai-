@@ -44,6 +44,35 @@ export async function insertDrafts(
   return (data ?? []) as ContentRow[]
 }
 
+/**
+ * Insert a single content draft with explicit pillar/platform/asset. Used for
+ * one-off posts (e.g. newsletter promos) that don't come from the pillar mix.
+ * `asset` is a repo-relative path (e.g. 'public/brand/x.png') for platforms
+ * that require media; the publisher uploads it to Postiz when present.
+ */
+export async function insertDraft(opts: {
+  lane: string
+  pillar: string
+  platform: string
+  content: string
+  asset?: string | null
+}): Promise<ContentRow> {
+  const { data, error } = await getSupabase()
+    .from(CONTENT_TABLE)
+    .insert({
+      lane: opts.lane,
+      pillar: opts.pillar,
+      platform: opts.platform,
+      content: opts.content,
+      asset: opts.asset ?? null,
+      status: 'draft' as const,
+    })
+    .select()
+    .single()
+  if (error) throw new Error(`Failed to insert draft: ${error.message}`)
+  return data as ContentRow
+}
+
 /** Count rows in a given status, optionally scoped to a lane. */
 export async function countByStatus(status: ContentStatus, lane?: string): Promise<number> {
   let q = getSupabase().from(CONTENT_TABLE).select('id', { count: 'exact', head: true }).eq('status', status)
