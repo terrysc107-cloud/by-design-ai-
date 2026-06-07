@@ -4,7 +4,7 @@
 > funnel) + GA4 (traffic). Closed-engagement $ is Chairman-supplied until a table exists.
 > **Aggregates only — never paste individual lead/client PII here.**
 
-**Last updated:** 2026-06-05 (live read via Supabase MCP) · **By:** CEO
+**Last updated:** 2026-06-07 (no read possible — pre-traffic; GA4 read access not yet connected) · **By:** CEO
 
 ---
 
@@ -51,3 +51,10 @@ Foundation shipped + **deployed to production on aixdesign.dev** 2026-06-05 (bra
 funnel, header/hero). This is **pre-traffic** — the first job is to instrument the numbers above
 (Supabase ref + GA4 ID from the Chairman), then drive the first discovery calls. Reason
 qualitatively until the snapshot has real values.
+
+**2026-06-07 update — clean prod deploy confirmed.** The site is live and clean in production at
+`https://aixdesign.dev`: typecheck + prod build green, **21 routes**, full SEO surface, hero subhead
+sharpened, 17 stale branches deleted (repo clean on `main`). **Still pre-traffic** — all funnel
+values remain 0 by design and traffic has not started. GA4 is *recording* on-site but the CEO has
+**no read access** yet (Analytics MCP not connected), so no traffic numbers can be pulled this week.
+Close-rate + typical engagement value remain Chairman-supplied blanks. No numbers fabricated.

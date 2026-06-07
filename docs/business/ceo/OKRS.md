@@ -30,11 +30,20 @@
 - KR3.3 ⚪ Each piece repurposed to ≥ 2 social posts (drafted to queue / scheduled via Postiz).
 - KR3.4 ⚪ First page indexed + ranking for a long-tail term (Search Console verified).
 
-## Objective 4 — Build proof and keep the brand credible
-*Trust is the conversion lever for a custom-build service.*
+## Objective 4 — Build proof and keep the brand credible **(priority objective as of 2026-06-07)**
+*Trust is the conversion lever for a custom-build service. With the site now live and pre-traffic,
+the #1 leak is zero social proof on page — close it before driving demand.*
 - KR4.1 ⚪ First **case study / testimonial** published (with written client permission) after first close.
-- KR4.2 🟡 Add **social proof + pricing band + FAQ + About** to the homepage (the deferred conversion pass). *2026-06-05: header + hero realignment shipped; social proof / pricing / FAQ / About still owed.*
-- KR4.3 ⚪ Zero brand-guardrail incidents (no unprovable claims, no tool-led pitches, no client data leaks).
+- KR4.2 🟡 Add **social proof + pricing band + FAQ + About** to the homepage (the deferred conversion pass). *2026-06-05: header + hero realignment shipped. 2026-06-07: confirmed homepage has NO proof/testimonial/case-study section anywhere — set as the priority build. Proof Strategy: ship an honest build-in-public "what we build" / `/work` section as the interim until a real testimonial exists; never fabricate proof (CHARTER §5). Pricing band / FAQ / About still owed.*
+- KR4.3 🟢 Zero brand-guardrail incidents to date (no unprovable claims, no tool-led pitches, no client data leaks). *Maintained through 2026-06-07.*
+
+### Proof Strategy (OBJ4 spine — drafted 2026-06-07)
+A credibility ladder we can climb **without** waiting on the first client:
+1. **Now (no testimonials):** founder-led, build-in-public proof — show the operating system we built
+   for *our own* business, the audit method, and what a lean system looks like. Process is the proof.
+2. **First client:** capture a permissioned, blurred-name outcome → first case study (KR4.1).
+3. **Roster:** rotate 2–3 permissioned outcomes on the homepage proof section + a `/work` index.
+Gated on Chairman: which proof (if any past work) I may reference, and approval to ship the section.
 
 ---
 
@@ -48,3 +57,14 @@ push the brand-launch social batch (OBJ3) → that drives the first discovery ca
 need from the Chairman:** (a) the Supabase project ref + GA4 property ID to instrument metrics;
 (b) confirm the priority audience to lead with; (c) decide whether to merge/deploy the foundation
 branch so the funnel is live before content goes out.
+
+**2026-06-07 — Live, clean, pre-traffic; proof is now the priority.** Site deployed clean to prod
+(aixdesign.dev — 21 routes, build green, hero sharpened, repo clean on `main`). The build phase is
+behind us; the conversion ceiling is now **trust**: the homepage carries zero social proof. I've set
+**OBJ4 as the priority objective** and written a Proof Strategy that lets us climb the credibility
+ladder *before* the first close (honest build-in-public proof, never fabricated). OBJ3 content plan
+is drafted + queued. OBJ1 is half-closed (recording yes, read access no). **What I need from the
+Chairman:** (a) close-rate + engagement value + priority audience (fill the `CHAIRMAN-NOTES.md`
+blanks); (b) connect GA4 read access; (c) decide which proof I may use + approve the homepage proof
+section PR; (d) approve the queued SEO PRs + social batch. I recommend **no ad spend yet** — hold
+until proof ships and GA4 read is live, then a small capped test becomes worth proposing.

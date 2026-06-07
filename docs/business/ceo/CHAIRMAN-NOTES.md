@@ -22,4 +22,8 @@
 
 ## Processed (CEO moves items here with a one-line note + date)
 
+- 2026-06-07 — Ran weekly board meeting (`BOARD-MEETINGS/2026-06-07.md`). Open directives list was
+  empty; only the seed-fact blanks remain (close rate, engagement value, priority audience, GA4 read
+  access). Restated each as an Ask in the board report. Logged prod-deploy milestone; set OBJ4 (proof)
+  as priority; drafted SEO content plan + social batch to the queue; recommended HOLD on ad spend.
 - 2026-06-05 — Operating system stood up; awaiting first weekly run trigger.
