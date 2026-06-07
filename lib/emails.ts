@@ -161,6 +161,27 @@ export function leadNotifyEmail(name: string, email: string): Email {
   return { subject, html, text }
 }
 
+// ── Internal: content drafts ready to review ────────────────────────────────
+export function contentDraftsReadyEmail(count: number, lane: string): Email {
+  const subject = `✍️ ${count} new ${lane} post draft${count === 1 ? '' : 's'} ready to review`
+  const cmd = `npx tsx --env-file=.env.local scripts/content-review.ts --list`
+  const inner =
+    h1(`${count} new draft${count === 1 ? '' : 's'} in the queue`) +
+    p(`The content engine topped up the <strong>${lane}</strong> lane with ${count} fresh LinkedIn draft${count === 1 ? '' : 's'}.`) +
+    p('Review, edit, and approve them — nothing publishes until you approve:') +
+    `<pre style="margin:0 0 18px;padding:14px;background:#1E1B17;color:#C9A84C;font-size:13px;white-space:pre-wrap;border:1px solid rgba(201,168,76,0.3);">${cmd}</pre>` +
+    p('Approved posts get scheduled to LinkedIn automatically on the next publish run.')
+  const text = `${count} new ${lane} post draft(s) are ready to review.
+
+Review and approve (nothing publishes until you approve):
+${cmd}
+
+Approved posts schedule to LinkedIn automatically.
+
+— AI by Design content engine`
+  return { subject, html: wrap(inner), text }
+}
+
 // ── Internal: new booking notification ──────────────────────────────────────
 export function bookingNotifyEmail(opts: {
   name?: string

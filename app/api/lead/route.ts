@@ -4,13 +4,20 @@ import { guideEmail, leadNotifyEmail } from '@/lib/emails'
 import { getSupabase, hasSupabase } from '@/lib/supabase'
 import { nextDripDate } from '@/lib/drip'
 
+// Known lead sources (lane front doors). Anything else falls back to the
+// default so a bad/spoofed value can't pollute the column.
+const ALLOWED_SOURCES = new Set(['lead_magnet', 'medical'])
+
 export async function POST(req: NextRequest) {
   try {
-    const { name, email } = await req.json()
+    const { name, email, source } = await req.json()
 
     if (!name || !email || typeof name !== 'string' || typeof email !== 'string') {
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
     }
+
+    const leadSource =
+      typeof source === 'string' && ALLOWED_SOURCES.has(source) ? source : 'lead_magnet'
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
@@ -37,7 +44,7 @@ export async function POST(req: NextRequest) {
             {
               name: cleanName,
               email: cleanEmail,
-              source: 'lead_magnet',
+              source: leadSource,
               drip_stage: 0,
               drip_next_at: dripNext?.toISOString() ?? null,
               unsubscribed: false,
