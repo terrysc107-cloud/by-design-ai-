@@ -55,6 +55,26 @@ export async function POST(req: NextRequest) {
       } catch (dbErr) {
         console.error('Supabase lead upsert failed (non-fatal):', dbErr)
       }
+
+      // Also add them to the weekly newsletter list. ignoreDuplicates so we
+      // never resurrect someone who previously unsubscribed, and never flip an
+      // existing subscriber's row. Best-effort.
+      try {
+        await getSupabase()
+          .from('bda_subscribers')
+          .upsert(
+            {
+              email: cleanEmail,
+              name: cleanName,
+              source: leadSource,
+              status: 'active',
+              updated_at: new Date().toISOString(),
+            },
+            { onConflict: 'email', ignoreDuplicates: true }
+          )
+      } catch (subErr) {
+        console.error('Subscriber enroll from lead failed (non-fatal):', subErr)
+      }
     }
 
     const resend = getResend()

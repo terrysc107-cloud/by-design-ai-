@@ -41,7 +41,7 @@ export default function Header() {
           <img
             src="/brand/aixdesign-lockup.svg"
             alt="AI by Design"
-            className="h-[22px] w-auto"
+            className="h-8 md:h-10 w-auto"
           />
         </a>
 
@@ -52,6 +52,12 @@ export default function Header() {
             className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
           >
             Blog
+          </Link>
+          <Link
+            href="/newsletter"
+            className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+          >
+            Newsletter
           </Link>
           <button
             onClick={scrollToGuide}
