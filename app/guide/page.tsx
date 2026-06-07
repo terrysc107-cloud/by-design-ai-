@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+
+export const metadata: Metadata = {
+  title: '10 Automations Every Solo Operator Needs | AI by Design',
+  description:
+    'A free guide to the ten highest-leverage AI automations for solo operators — lead follow-up, appointment reminders, client onboarding, reviews, and more. See what each gap is costing you and how to fix it.',
+  alternates: { canonical: '/guide' },
+  openGraph: {
+    type: 'article',
+    url: 'https://aixdesign.dev/guide',
+    title: '10 Automations Every Solo Operator Needs',
+    description:
+      'The ten highest-leverage AI automations for solo operators — what each gap costs you, and the fix.',
+  },
+}
 
 const items = [
   {

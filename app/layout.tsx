@@ -61,6 +61,11 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  // Set GOOGLE_SITE_VERIFICATION in Vercel env to the token from Search Console
+  // (Add property → HTML tag method). Omitted automatically when unset.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 }
 
 export default function RootLayout({
