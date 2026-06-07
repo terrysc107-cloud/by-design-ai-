@@ -70,9 +70,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
           >
-            We diagnose the bottleneck in your business, design the right system, and ship a lean,
-            autonomous solution — custom to you. Coaching, consulting, or done-for-you builds.
-            We figure out which on a free 15-minute call.
+            We find the one bottleneck costing you the most time, design the system that removes it,
+            and build it — coaching you through it or doing it for you. It starts with a free
+            15-minute call.
           </motion.p>
 
           <motion.p
