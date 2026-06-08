@@ -234,6 +234,12 @@ on white. Never use gold text smaller than 14px (it loses legibility).
 
 ## 5. Bios (copy-paste ready, character limits respected)
 
+> **Per-platform playbooks** live in `docs/social/` and go deeper than
+> these one-liners (full About copy, post templates, DM scripts, setup
+> order). Currently shipped:
+> - `docs/social/LINKEDIN.md` — LinkedIn personal + company page,
+>   pillar post templates, connection/DM scripts.
+
 ### Twitter/X — 160 chars
 > AI business coaching & consulting. We diagnose the bottleneck and ship
 > the lean, autonomous system. Custom to your business. Free call ↓
