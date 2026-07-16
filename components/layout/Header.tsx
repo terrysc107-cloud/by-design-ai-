@@ -59,6 +59,13 @@ export default function Header() {
           >
             Newsletter
           </Link>
+          {/* md+ only: at the sm breakpoint the row is already at its width budget. */}
+          <Link
+            href="/education"
+            className="hidden md:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+          >
+            Education
+          </Link>
           <button
             onClick={scrollToGuide}
             className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"

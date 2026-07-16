@@ -28,6 +28,9 @@ export default function Footer() {
             <Link href="/blog" className="hover:text-gold transition-colors duration-200">
               Blog
             </Link>
+            <Link href="/education" className="hover:text-gold transition-colors duration-200">
+              Education
+            </Link>
             <Link href="/privacy" className="hover:text-gold transition-colors duration-200">
               Privacy Policy
             </Link>
