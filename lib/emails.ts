@@ -116,6 +116,60 @@ Unsubscribe: ${unsubscribeUrl}`
 }
 
 // ── Internal: new subscriber notification ───────────────────────────────────
+/**
+ * Build Lab waitlist confirmation.
+ *
+ * Sent instead of the generic newsletter welcome when someone joins from
+ * claudecodeclass.com/build-lab. They asked about one specific thing; opening
+ * with "thanks for subscribing" would read as a bait-and-switch even though
+ * they are, in fact, now subscribed. So it confirms the Lab first and mentions
+ * the weekly note second — which is the honest ordering of what just happened.
+ *
+ * NO DATE, NO SEAT COUNT, NO COUNTDOWN. There is no scheduled run yet, and an
+ * email is exactly where invented urgency would be easiest to slip in and
+ * hardest to take back.
+ */
+export function buildLabWaitlistEmail(name: string | undefined, unsubscribeUrl: string): Email {
+  const greeting = name && name.trim() ? `Hey ${first(name)},` : 'Hey there,'
+  const inner =
+    h1('You’re on the Build Lab list.') +
+    p(greeting) +
+    p(
+      'The Build Lab is a live, small-group session where we build one real feature end to end — and you watch every decision, including the ones that go wrong.'
+    ) +
+    p(
+      'There’s no date yet. That’s the honest answer: when there is one, you’ll hear before it goes anywhere else. Nothing has been charged and nothing is reserved — it’s a list, not a ticket.'
+    ) +
+    p(
+      'In the meantime, the self-paced course covers the same workflow and is complete on its own. You don’t need the Lab to finish it:'
+    ) +
+    goldButton('https://claudecodeclass.com', 'See Claude Code Class →') +
+    p(
+      'You’ll also get the weekly AI by Design note — one short, practical read on putting AI to work in a business. Unsubscribe any time; it won’t affect your spot on the list.'
+    ) +
+    p('— The AI by Design team')
+  const text = `${greeting}
+
+You're on the Build Lab list.
+
+The Build Lab is a live, small-group session where we build one real feature end to end — and you watch every decision, including the ones that go wrong.
+
+There's no date yet. When there is one, you'll hear before it goes anywhere else. Nothing has been charged and nothing is reserved — it's a list, not a ticket.
+
+In the meantime, the self-paced course covers the same workflow and is complete on its own: https://claudecodeclass.com
+
+You'll also get the weekly AI by Design note. Unsubscribe any time; it won't affect your spot on the list.
+
+— The AI by Design team
+
+Unsubscribe: ${unsubscribeUrl}`
+  return {
+    subject: 'You’re on the Build Lab list — AI by Design',
+    html: wrap(inner, unsubFooter(unsubscribeUrl), 'No date yet — you’ll hear first when there is one.'),
+    text,
+  }
+}
+
 export function subscriberNotifyEmail(email: string, source: string): Email {
   const subject = `New newsletter subscriber: ${email}`
   const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1E1B17;">
