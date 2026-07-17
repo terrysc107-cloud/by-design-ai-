@@ -20,9 +20,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const scrollToGuide = () =>
-    document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })
-
   return (
     <motion.header
       initial={{ y: -64, opacity: 0 }}
@@ -59,19 +56,33 @@ export default function Header() {
           >
             Newsletter
           </Link>
-          {/* md+ only: at the sm breakpoint the row is already at its width budget. */}
+          {/* Coaching outranks Education for the sm slot: it sells, Education refers. */}
+          <Link
+            href="/coaching"
+            className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+          >
+            Coaching
+          </Link>
+          {/* md+ only: at sm the row is already at its width budget. */}
           <Link
             href="/education"
             className="hidden md:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
           >
             Education
           </Link>
-          <button
-            onClick={scrollToGuide}
-            className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+          {/* Was a <button> calling
+              getElementById('lead-magnet')?.scrollIntoView(). #lead-magnet only
+              exists in components/sections/LeadMagnet.tsx, which renders only on
+              the homepage — but this Header renders on 8 pages. So on /blog,
+              /newsletter, /coaching, /education, /education/claude-code and
+              /medical the optional chain swallowed the miss and the button
+              silently did nothing. /guide is a real page (200); link to it. */}
+          <Link
+            href="/guide"
+            className="hidden md:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
           >
             Free Guide
-          </button>
+          </Link>
           <button
             onClick={bookDiscoveryCall}
             className="px-5 py-2.5 text-[11px] tracking-widest uppercase border border-gold/45 text-gold hover:bg-gold hover:text-[#1E1B17] transition-colors duration-200"
