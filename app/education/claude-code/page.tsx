@@ -10,6 +10,7 @@ import {
   COURSE_PRICE,
   LIVE_LAB_NAME,
   courseUrl,
+  labWaitlistUrl,
 } from '@/lib/education'
 
 export const metadata: Metadata = {
@@ -237,25 +238,29 @@ export default function ClaudeCodeCoursePage() {
         </div>
       </section>
 
-      {/* Live lab — planned */}
+      {/* Live lab — waitlist open, still no date.
+          Was "not scheduled and cannot be bought yet — no date, no price, no
+          waitlist deposit". A price and a waitlist now exist, so only two of
+          those four claims survive: there is still no date, and the waitlist
+          still takes no deposit. Both are kept because both are true. */}
       <section className="section pt-0">
         <div className="max-w-3xl mx-auto border-t border-white/10 pt-12">
           <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
-            A live version is being designed
+            There is a live version
           </h2>
           <p className="text-white/50 text-sm md:text-base leading-relaxed mt-4">
-            <span className="text-white/70">{LIVE_LAB_NAME}</span> will run the same loop as a
-            live working session instead of a self-paced course. It is not scheduled and cannot
-            be bought yet — no date, no price, no waitlist deposit. When it is real, newsletter
-            subscribers hear first.
+            <span className="text-white/70">{LIVE_LAB_NAME}</span> runs the same loop as a live
+            working session instead of a self-paced course — and you can stop it and ask why,
+            which is the whole reason to be in the room. It is not scheduled yet. The waitlist is
+            open, takes no deposit, and the people on it hear before anyone else.
           </p>
           <div className="mt-6">
-            <Link
-              href="/newsletter"
+            <a
+              href={labWaitlistUrl('claude-code-page-lab')}
               className="text-[11px] tracking-widest uppercase text-gold/80 hover:text-gold transition-colors border-b border-gold/30 hover:border-gold pb-1"
             >
-              Hear about it in the newsletter →
-            </Link>
+              Join the waitlist →
+            </a>
           </div>
         </div>
       </section>

@@ -10,6 +10,7 @@ import {
   COURSE_PRICE,
   LIVE_LAB_NAME,
   courseUrl,
+  labWaitlistUrl,
 } from '@/lib/education'
 
 export const metadata: Metadata = {
@@ -127,14 +128,19 @@ export default function EducationPage() {
             </div>
           </article>
 
-          {/* Live lab — planned, not for sale */}
+          {/* Live lab — waitlist open, still no date.
+              "no date, no price, and no way to buy it" was true when the Lab was
+              only an idea. A price and a waitlist now exist, so two thirds of
+              that sentence became false. What is still true — and the only
+              scarcity claim allowed anywhere — is that there is no date. The
+              number lives in the course repo; see LIVE_LAB_NAME. */}
           <article className="mt-6 border border-white/10 bg-white/[0.02] p-8">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-[10px] tracking-[0.25em] uppercase text-white/50 border border-white/20 px-2.5 py-1">
                 Live
               </span>
               <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">
-                Planned — not yet scheduled
+                Waitlist open — no date yet
               </span>
             </div>
             <h3 className="text-xl md:text-2xl font-semibold text-white/85 tracking-tight">
@@ -142,16 +148,17 @@ export default function EducationPage() {
             </h3>
             <p className="text-white/50 text-sm md:text-base leading-relaxed mt-3">
               A live, hands-on version of the same method, run as a working session rather than a
-              lecture. It is still being designed. There is no date, no price, and no way to buy
-              it yet — when that changes, it will be announced in the newsletter first.
+              lecture — one real feature built end to end, small enough that you can interrupt and
+              ask why. No date is set yet. The waitlist costs nothing and holds nothing, and the
+              people on it hear before anyone else.
             </p>
             <div className="mt-6">
-              <Link
-                href="/newsletter"
+              <a
+                href={labWaitlistUrl('education-hub-lab')}
                 className="text-[11px] tracking-widest uppercase text-gold/80 hover:text-gold transition-colors border-b border-gold/30 hover:border-gold pb-1"
               >
-                Hear about it in the newsletter →
-              </Link>
+                Join the waitlist →
+              </a>
             </div>
           </article>
 
