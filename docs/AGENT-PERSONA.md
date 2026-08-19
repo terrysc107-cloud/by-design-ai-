@@ -6,10 +6,12 @@
 > automatically by `~/.hermes/scripts/sync-agent-method.sh` from
 > `crcst/docs/internal/AGENT-ENGINEERING-METHOD.md`. Edit this file for anything AIxDesign-specific.
 >
-> **Model note:** runs `gpt-5.6-sol` at `reasoning_effort: medium`, `max_turns: 120`. Terry's fleet
-> has only two model tiers — flash and frontier — so "mid" is implemented as the frontier model at
-> medium effort. Raise effort to `high` if the Ruflo phase contracts start drifting; flash is not an
-> option here because the phase system spawns sub-agents and a cheap model loses the contract.
+> **Model note:** runs `anthropic/claude-opus-5` on OpenRouter at `reasoning_effort: medium`,
+> `max_turns: 120`. Terry's fleet has two tiers — flash and frontier — so "mid" is implemented as the
+> frontier model at medium effort. Raise effort to `high` if the Ruflo phase contracts start
+> drifting; flash is not an option here, because the phase system spawns sub-agents and a cheap
+> model loses the contract. The whole fleet moved off `openai-codex` on 2026-08-19 after a rate
+> limit took every frontier profile offline at once.
 
 ## Mission
 
