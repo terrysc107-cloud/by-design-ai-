@@ -5,6 +5,13 @@ const GOLD = '#C9A84C'
 const BG = '#1E1B17'
 const CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
 
+/**
+ * The course. Primary destination for the guide funnel, tagged so the course
+ * side can attribute signups back to this list rather than guessing.
+ */
+const COURSE_URL =
+  'https://claudecodeclass.com/?utm_source=aixdesign.dev&utm_medium=email&utm_campaign=board-method-drip'
+
 // Downloadable PDF guide. Override with GUIDE_PDF_URL if hosted elsewhere.
 export const GUIDE_PDF_URL = process.env.GUIDE_PDF_URL || `${SITE_URL}/guide.pdf`
 
@@ -59,21 +66,21 @@ function unsubFooter(unsubscribeUrl: string): string {
 export function guideEmail(name: string): Email {
   const guideUrl = `${SITE_URL}/guide`
   const inner =
-    h1('10 Things In Your Business You Should Never Do Manually') +
+    h1('The Board Method') +
     p(`Hey ${first(name)},`) +
-    p("Thanks for grabbing the guide. It's the straight-to-the-point checklist of the tasks draining your time every week — and exactly what to automate first.") +
+    p("Thanks for grabbing it. Five steps to a small board of AI employees that read your real numbers on a schedule and hand you a decision: Charter, Floor, Run, Review, Promote.") +
     goldButton(GUIDE_PDF_URL, 'Download the PDF →') +
     p(`Prefer to read it in your browser? <a href="${guideUrl}" style="color:${GOLD};text-decoration:underline;">Open the guide here</a>.`) +
-    p(`Over the next few days I'll send you a couple of short, practical notes on putting AI to work in a business like yours. No fluff — just the moves.`) +
+    p("Over the next few days I'll send four short notes, one per idea, each ending on the most common way that idea fails. No fluff.") +
     p(`And whenever you want a second set of eyes on your setup, grab a free 15-minute call:`) +
     `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
     p('— The AI by Design team')
   return {
-    subject: 'Your guide: 10 Things You Should Never Do Manually',
+    subject: 'Your guide: The Board Method',
     html: wrap(inner),
     text: `Hey ${first(name)},
 
-Thanks for grabbing the guide — "10 Things In Your Business You Should Never Do Manually."
+Thanks for grabbing The Board Method: five steps to AI employees that start work without you.
 
 Download the PDF: ${GUIDE_PDF_URL}
 Read it online: ${guideUrl}
@@ -273,48 +280,67 @@ Nothing goes out until you approve.
 }
 
 // ── Drip sequence (stages 1..4) ─────────────────────────────────────────────
-type DripDef = { subject: string; heading: string; body: string[]; cta: string }
+type DripDef = { subject: string; heading: string; body: string[]; cta: string; ctaUrl?: string }
 
+/**
+ * THE DRIP — four emails at days 2, 4, 7, 10 after the guide.
+ *
+ * REWRITTEN. The previous sequence sold speed-to-lead automation and pointed
+ * every CTA at a discovery call. Two problems: it taught a different product to
+ * the one we now sell, and it leaned on borrowed statistics ("21x more likely")
+ * that we cannot source.
+ *
+ * These four teach one idea each, drawn from the guide, and each ends on the
+ * single most common way that idea fails. The call stays available as the
+ * secondary path for anyone who would rather talk, but the primary CTA is now
+ * the course, because that is what the guide is the front of.
+ *
+ * `ctaUrl` is per-stage so a sequence can point somewhere other than the call.
+ */
 const DRIP_CONTENT: Record<number, DripDef> = {
   1: {
-    subject: 'What AI actually does for a business like yours',
-    heading: 'Forget the hype. Here’s what AI really does.',
+    subject: 'The line that decides whether your AI is useful',
+    heading: 'Write the disposition line first.',
     body: [
-      'Most "AI for business" talk is noise. Strip it back and AI does one useful thing: it takes the repetitive decisions and tasks you make every day and handles them for you — instantly, consistently, 24/7.',
-      'For a business like yours, that lands in three buckets: <strong>capture</strong> (never miss a lead), <strong>follow-up</strong> (reply in seconds, not hours), and <strong>admin</strong> (the copy-paste work eating your evenings).',
-      'You don’t need to "learn AI." You need a few of these handled so you can get back to the work only you can do.',
+      'You read the guide, so you know a charter is who a seat <em>is</em> rather than what you asked it this time. Five sections. The one that does almost all the work is disposition.',
+      'Responsibilities tell a seat what to work on. Disposition tells it how to decide when two reasonable options conflict, which is most of the job. Weak disposition is a list of adjectives: thoughtful, strategic, detail-oriented. Those describe nobody and change nothing.',
+      'Here is a real one: <strong>"Kills formats and campaigns that do not perform, including her own favourites."</strong> That last clause is the whole thing. It tells the seat that consistency with its own past recommendations is worth less than evidence, and that is a genuinely hard instruction that changes what it does.',
+      'Test yours: does it name something the seat will refuse, even when it would rather not? If not, write it again.',
     ],
-    cta: 'See how I’d map yours →',
+    cta: 'See the full method →',
   },
   2: {
-    subject: 'The first thing you should automate (it’s not what you think)',
-    heading: 'Start here: speed-to-lead.',
+    subject: 'Why your AI says everything looks fine',
+    heading: 'It has nothing to measure against.',
     body: [
-      'When someone fills out your form or messages you, the clock starts. Reply within 5 minutes and you’re up to <strong>21x</strong> more likely to win them. Wait an hour and most have moved on.',
-      'Almost nobody can do that manually — but it’s the easiest thing to automate. An instant text + email the second a lead comes in, then a short reminder sequence if they go quiet.',
-      'It’s the single highest-ROI automation for most businesses, and it runs whether you’re asleep, busy, or on a job.',
+      'If your assistant has never flagged a problem, the usual explanation is not that it is agreeable or that the model is weak. It is that you gave it targets instead of floors.',
+      'A target is a thing to reach, so it functions as a ceiling: the number where attention stops. A floor is the minimum you would accept, the number below which the month went badly. Clearing a floor is silence. Being under it is the headline.',
+      'Without floors, no number can be off track, because there is no line to be under. Everything is fine because nothing is capable of being not fine.',
+      'This is a ten-minute fix and it changes every report you get afterwards. Pick your one number, and write down the lowest value you would honestly accept.',
     ],
-    cta: 'Want this built for you? →',
+    cta: 'See the full method →',
   },
   3: {
-    subject: 'A workflow that books calls while you sleep',
-    heading: 'Here’s one of mine, end to end.',
+    subject: 'The failure nobody warns you about',
+    heading: 'Scheduled work dies silently.',
     body: [
-      'A lead fills out a form at 11pm. Instantly: a text + email go out introducing you. If they don’t reply, a friendly nudge lands the next morning, then again two days later.',
-      'The moment they reply "interested," they get a booking link, pick a time, and the call lands on your calendar — with reminders so they actually show up. You wake up to a booked call you did nothing for.',
-      'That’s not the future. It’s a weekend to set up, and it’s exactly the kind of system I build for clients.',
+      'Getting a run onto a schedule is the moment this stops being a chat window and starts being a system. It is also where the quiet failure lives.',
+      'A scheduled job that stops does not error. It simply produces nothing, and nothing is indistinguishable from a quiet week. I have watched a daily run die and go unnoticed for forty days, in a system that was otherwise working perfectly.',
+      'So the schedule is only half of it. The other half is a liveness check: something that notices the absence. The cheapest version is a line in your weekly review that reads "when did the last run actually happen?"',
+      'Set up one run this week. Then diary a reminder to confirm it fired. The second part is the part people skip.',
     ],
-    cta: 'Build one for me →',
+    cta: 'See the full method →',
   },
   4: {
-    subject: 'Want me to build one of these for you?',
-    heading: 'Let’s map your first automation.',
+    subject: 'Four checks, under a minute',
+    heading: 'How to tell a useful run from a plausible one.',
     body: [
-      'Over the last few emails you’ve seen what AI and automation can actually do for a business like yours — capture leads, follow up instantly, and book calls on autopilot.',
-      'If any of it made you think "I want that running for me," the next step is a quick, no-pressure conversation. I’ll look at your setup and show you the one or two automations that’ll move the needle fastest.',
-      'It’s free, it’s 15 minutes, and you’ll leave with a clear plan whether we work together or not.',
+      'Your board will produce something articulate every time. Articulate is free. The failure mode is not gibberish, it is a confident paragraph that could be about any business and quietly is not about yours.',
+      'Four checks. Does every claim trace to a number in your files? Did it name what it did not have, instead of filling the gap? Is it consistent with what you already decided? Could you act on it today?',
+      'The one that usually fails is the second. Left alone, an assistant asked to analyse a business with a hole in the data will produce something reasonable-sounding to fill it. It is not lying, it is completing a pattern, and a plausible number looks exactly like a real one on the page.',
+      'The fix is one line in your brief: <strong>if a number you need is missing, say it is missing, do not estimate it.</strong> Three of those four failures are fixed by a sentence.',
     ],
-    cta: 'Book your free call →',
+    cta: 'Build the whole thing →',
   },
 }
 
@@ -325,13 +351,13 @@ export function dripEmail(stage: number, name: string, unsubscribeUrl: string): 
     h1(def.heading) +
     p(`Hey ${first(name)},`) +
     def.body.map(p).join('') +
-    goldButton(CALL_URL, def.cta) +
+    goldButton(def.ctaUrl ?? COURSE_URL, def.cta) +
     p('— The AI by Design team')
   const text = `Hey ${first(name)},
 
 ${def.body.map(b => b.replace(/<[^>]+>/g, '')).join('\n\n')}
 
-${def.cta} ${CALL_URL}
+${def.cta} ${def.ctaUrl ?? COURSE_URL}
 
 — The AI by Design team
 
