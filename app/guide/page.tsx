@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const COURSE_URL = 'https://claudecodeclass.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=board-method-guide'
+const COURSE_URL = 'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=board-method-guide'
 
 export const metadata: Metadata = {
   title: 'The Board Method: Build AI Employees That Run Without You | AI by Design',
@@ -34,7 +34,7 @@ const items = [
   {
     num: '01',
     title: 'Charter',
-    image: '',
+    image: '/guide/01-charter.png',
     problem:
       'Most people write a prompt. A prompt is what you ask this time, so every session starts from zero: you re-explain your business, it produces something generic, and nothing accumulates. A charter is who the seat is, in a file it reads before every single run.',
     symptom: 'You find yourself re-explaining your business at the start of every conversation.',
@@ -46,7 +46,7 @@ const items = [
   {
     num: '02',
     title: 'Floor',
-    image: '',
+    image: '/guide/02-floor.png',
     problem:
       'A target is a thing to reach, so it quietly becomes a ceiling: the number where attention stops. It also gives your seat nothing useful to say, because "you are at 68% of target" describes arithmetic rather than a situation.',
     symptom: 'Your AI tells you things look broadly fine. Every week. Regardless of the week.',
@@ -58,7 +58,7 @@ const items = [
   {
     num: '03',
     title: 'Run',
-    image: '',
+    image: '/guide/03-run.png',
     problem:
       'Everything most people do with AI is initiated by them. You decide there is work, you open a chat, you supply context. The ceiling is your attention, and nothing happens on a day you do not sit down.',
     symptom: 'Last week nothing happened, because you were busy doing the work.',
@@ -70,7 +70,7 @@ const items = [
   {
     num: '04',
     title: 'Review',
-    image: '',
+    image: '/guide/04-review.png',
     problem:
       'Your board will produce something articulate every time. Articulate is free. The failure mode is not gibberish, it is a confident, well-written paragraph that could be about any business and quietly is not about yours.',
     symptom: 'You cannot tell which parts of the answer came from your actual numbers.',
@@ -82,7 +82,7 @@ const items = [
   {
     num: '05',
     title: 'Promote',
-    image: '',
+    image: '/guide/05-promote.png',
     problem:
       'Autonomy gets treated as a switch. Either you approve everything, which means the work only happens while you watch, or you turn approvals off and hope. The real question is never whether you trust it. It is which specific actions it has earned.',
     symptom: 'You are either approving every single action, or you stopped looking a while ago.',
@@ -152,7 +152,7 @@ export default function GuidePage() {
               <div className="w-full relative mb-8 rounded-sm overflow-hidden border border-zinc-200">
                 <Image
                   src={item.image}
-                  alt={`${item.title} step diagram`}
+                  alt={`A real ${item.title} file from a working board`}
                   width={1376}
                   height={768}
                   className="w-full h-auto block"

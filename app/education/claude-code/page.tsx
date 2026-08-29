@@ -14,20 +14,20 @@ import {
 } from '@/lib/education'
 
 export const metadata: Metadata = {
-  title: 'Claude Code Class — Self-Paced Course | AI by Design',
+  title: 'My AI Board — Self-Paced Course | AI by Design',
   description:
     'A self-paced course teaching one disciplined build loop — inspect, plan, build, review, test, ship — with Claude Code. $97 one-time. Independent educational product by AI by Design.',
   alternates: { canonical: '/education/claude-code' },
   openGraph: {
     type: 'website',
     url: 'https://aixdesign.dev/education/claude-code',
-    title: 'Claude Code Class — AI by Design',
+    title: 'My AI Board — AI by Design',
     description:
       'Learn one disciplined build loop and ship a real internal tool. $97 one-time, self-paced.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Claude Code Class — AI by Design',
+    title: 'My AI Board — AI by Design',
     description:
       'Learn one disciplined build loop and ship a real internal tool. $97 one-time, self-paced.',
   },
@@ -121,7 +121,7 @@ export default function ClaudeCodeCoursePage() {
             </span>
           </div>
           <p className="text-white/30 text-xs mt-4">
-            Hosted on claudecodeclass.com — the AI by Design course platform.
+            Hosted on runyouraiboard.com — the AI by Design course platform.
           </p>
         </div>
       </section>

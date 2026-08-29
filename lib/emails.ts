@@ -10,7 +10,7 @@ const CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
  * side can attribute signups back to this list rather than guessing.
  */
 const COURSE_URL =
-  'https://claudecodeclass.com/?utm_source=aixdesign.dev&utm_medium=email&utm_campaign=board-method-drip'
+  'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=email&utm_campaign=board-method-drip'
 
 // Downloadable PDF guide. Override with GUIDE_PDF_URL if hosted elsewhere.
 export const GUIDE_PDF_URL = process.env.GUIDE_PDF_URL || `${SITE_URL}/guide.pdf`
@@ -127,7 +127,7 @@ Unsubscribe: ${unsubscribeUrl}`
  * Build Lab waitlist confirmation.
  *
  * Sent instead of the generic newsletter welcome when someone joins from
- * claudecodeclass.com/build-lab. They asked about one specific thing; opening
+ * runyouraiboard.com/build-lab. They asked about one specific thing; opening
  * with "thanks for subscribing" would read as a bait-and-switch even though
  * they are, in fact, now subscribed. So it confirms the Lab first and mentions
  * the weekly note second — which is the honest ordering of what just happened.
@@ -150,7 +150,7 @@ export function buildLabWaitlistEmail(name: string | undefined, unsubscribeUrl: 
     p(
       'In the meantime, the self-paced course covers the same workflow and is complete on its own. You don’t need the Lab to finish it:'
     ) +
-    goldButton('https://claudecodeclass.com', 'See Claude Code Class →') +
+    goldButton('https://runyouraiboard.com', 'See My AI Board →') +
     p(
       'You’ll also get the weekly AI by Design note — one short, practical read on putting AI to work in a business. Unsubscribe any time; it won’t affect your spot on the list.'
     ) +
@@ -163,7 +163,7 @@ The Build Lab is a live, small-group session where we build one real feature end
 
 There's no date yet. When there is one, you'll hear before it goes anywhere else. Nothing has been charged and nothing is reserved — it's a list, not a ticket.
 
-In the meantime, the self-paced course covers the same workflow and is complete on its own: https://claudecodeclass.com
+In the meantime, the self-paced course covers the same workflow and is complete on its own: https://runyouraiboard.com
 
 You'll also get the weekly AI by Design note. Unsubscribe any time; it won't affect your spot on the list.
 

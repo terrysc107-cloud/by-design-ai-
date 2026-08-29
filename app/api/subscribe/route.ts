@@ -6,7 +6,7 @@ import { getSupabase, hasSupabase } from '@/lib/supabase'
 // Where the subscribe form can be embedded. Falls back to 'newsletter' so a
 // bad/spoofed value can't pollute the column.
 //
-// 'build-lab' is posted server-to-server by claudecodeclass.com when someone
+// 'build-lab' is posted server-to-server by runyouraiboard.com when someone
 // joins the Build Lab waitlist. 'education' is for the /education surface.
 // Both were previously blocked on an unverified worry that
 // bda_subscribers.source carried a CHECK constraint rejecting new values —

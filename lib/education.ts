@@ -2,7 +2,7 @@
  * Education product config — the single source of truth for the AI by Design
  * education surface (`/education`, `/education/claude-code`).
  *
- * The self-paced course lives on a separate platform (claudecodeclass.com).
+ * The self-paced course lives on a separate platform (runyouraiboard.com).
  * Every outbound link is tagged so the course platform can attribute traffic
  * back to a specific placement on aixdesign.dev.
  *
@@ -13,19 +13,19 @@
  *   utm_content = placement slug, e.g. 'education-hub-primary'
  */
 
-export const COURSE_URL = 'https://claudecodeclass.com'
+export const COURSE_URL = 'https://runyouraiboard.com'
 
 /** Self-paced course price. One-time, no subscription. */
-export const COURSE_PRICE = '$97'
+export const COURSE_PRICE = '$57'
 
-export const COURSE_NAME = 'Claude Code Class'
+export const COURSE_NAME = 'My AI Board'
 
 /**
  * The live offer. Waitlist open, no date set.
  *
  * 'The Build Lab', not 'AI by Design Claude Code Build Lab': this page IS
  * AI by Design, so the prefix is redundant, and the product's own name is
- * whatever claudecodeclass.com calls it. Must match BUILD_LAB.name in the
+ * whatever runyouraiboard.com calls it. Must match BUILD_LAB.name in the
  * course repo's lib/course-config.ts — two spellings of one product is two
  * products. Qualify it with an eyebrow ("A live session") in the markup rather
  * than baking context into the name.
