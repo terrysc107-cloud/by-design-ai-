@@ -489,9 +489,9 @@ schedules, then puts the link in his bio and drives traffic.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 13:15:13 EDT
+- Updated: 2026-09-04 13:18:07 EDT
 - Branch: main
-- Last commit: 08d43f8 feat(seo): a real 1200x630 social card for /guide
+- Last commit: 24d54f7 docs: handoff before traffic
 - Working tree: clean
 
 <!-- END AUTO-STATE -->
