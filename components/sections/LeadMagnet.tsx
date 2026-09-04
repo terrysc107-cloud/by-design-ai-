@@ -74,11 +74,11 @@ export default function LeadMagnet() {
                   PNG that carries its own spine and shadow, so a frame around it
                   would put a rectangle back around the object we just built. */}
               <Image
-                src={ASSETS.guideMockup}
+                src={ASSETS.guideMockupLight}
                 alt="The Board Method, a seven-page guide"
                 width={400}
                 height={524}
-                className="relative block w-full h-auto"
+                className="relative block w-full h-auto border border-gold/20"
                 priority
               />
             </div>

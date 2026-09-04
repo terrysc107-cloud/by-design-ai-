@@ -21,8 +21,28 @@ import { chromium } from "playwright";
 const DIR = path.dirname(new URL(import.meta.url).pathname);
 const cover = fs.readFileSync(path.resolve(DIR, "../../public/guide-cover.png")).toString("base64");
 
-const doc = `<!doctype html><html><head><meta charset="utf-8"><style>
-  html,body{margin:0;padding:0;background:transparent;}
+/**
+ * Two variants from one composite.
+ *
+ * `transparent` drops onto any surface. `light` bakes in a warm studio
+ * backdrop, which is what the site actually uses: the booklet is a dark object
+ * and the site is a dark page, so on transparency it sat quietly instead of
+ * reading as a product. A contained warm panel behind it is a photography
+ * backdrop rather than a theme flip, so the page stays dark while the object
+ * pops off it. It is also the version that works dropped straight into a social
+ * post, where there is no dark page to sit on.
+ */
+const VARIANTS = [
+  { name: 'guide-mockup.png', bg: 'transparent', omitBackground: true },
+  {
+    name: 'guide-mockup-light.png',
+    bg: 'radial-gradient(ellipse 85% 70% at 50% 42%, #f2ede2 0%, #e4dccc 55%, #d5cbb7 100%)',
+    omitBackground: false,
+  },
+]
+
+const docFor = (bg) => `<!doctype html><html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;background:${bg};}
   .stage{width:900px;height:1180px;display:flex;align-items:center;justify-content:center;
          perspective:2200px;perspective-origin:60% 50%;}
   .book{position:relative;transform:rotateY(-21deg) rotateX(3deg) rotateZ(-1deg);
@@ -41,9 +61,9 @@ const doc = `<!doctype html><html><head><meta charset="utf-8"><style>
               background:rgba(201,168,76,.35);}
   .sheen{position:absolute;inset:0;pointer-events:none;
          background:linear-gradient(105deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 34%);}
-  .shadow{position:absolute;left:34px;top:706px;width:500px;height:46px;
-          background:radial-gradient(ellipse at center,rgba(0,0,0,.55),transparent 70%);
-          filter:blur(16px);transform:translateZ(-30px);}
+  .shadow{position:absolute;left:22px;top:700px;width:530px;height:64px;
+          background:radial-gradient(ellipse at center,rgba(40,34,24,.5),transparent 72%);
+          filter:blur(22px);transform:translateZ(-30px);}
 </style></head><body>
   <div class="stage">
     <div class="book">
@@ -62,9 +82,11 @@ const page = await browser.newPage({
   viewport: { width: 900, height: 1180 },
   deviceScaleFactor: 2,
 });
-await page.setContent(doc, { waitUntil: "networkidle" });
-await page.waitForTimeout(600);
-const out = path.resolve(DIR, "../../public/guide-mockup.png");
-await page.screenshot({ path: out, omitBackground: true });
+for (const v of VARIANTS) {
+  await page.setContent(docFor(v.bg), { waitUntil: "networkidle" });
+  await page.waitForTimeout(500);
+  const out = path.resolve(DIR, `../../public/${v.name}`);
+  await page.screenshot({ path: out, omitBackground: v.omitBackground });
+  console.log("wrote", out, fs.statSync(out).size, "bytes");
+}
 await browser.close();
-console.log("wrote", out, fs.statSync(out).size, "bytes");

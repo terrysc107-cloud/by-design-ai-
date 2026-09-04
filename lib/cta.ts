@@ -36,6 +36,19 @@ export const ASSETS = {
    * the mockup and the PDF cannot drift.
    */
   guideMockup: '/guide-mockup.png',
+  /**
+   * The same booklet on a warm studio backdrop, and what the SITE uses.
+   *
+   * The cutout above is a dark object, and the site is a dark page, so on
+   * transparency it sat quietly rather than reading as a product. A contained
+   * warm panel behind it is a photography backdrop, not a theme flip: the page
+   * stays dark and the object comes off it. It is also the version that drops
+   * straight into a social post, where there is no dark page to sit on.
+   *
+   * JPEG, not PNG: a full-bleed photographic gradient costs 1.3 MB as a PNG and
+   * 47 KB as a JPEG, and there is no transparency left to preserve.
+   */
+  guideMockupLight: '/guide-mockup-light.jpg',
   sectionBg: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_013703_ebcd8b7d-97de-45cb-ab37-0c26d1dec776.png',
   // Set to '/hero-photo.jpg' once you upload your actual photo to public/hero-photo.jpg
   heroPhoto: '',

@@ -127,11 +127,11 @@ export default function LeadMagnetModal() {
                   />
                   {/* Transparent PNG with its own spine and shadow, so no frame. */}
                   <Image
-                    src={ASSETS.guideMockup}
+                    src={ASSETS.guideMockupLight}
                     alt="The Board Method, a seven-page guide"
                     width={200}
                     height={262}
-                    className="relative block w-full h-auto"
+                    className="relative block w-full h-auto border border-gold/20"
                   />
                 </div>
               </div>
