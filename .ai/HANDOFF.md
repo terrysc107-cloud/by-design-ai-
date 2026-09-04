@@ -416,9 +416,9 @@ Cris finishes the channels. Everything else is built and live.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 10:59:22 EDT
+- Updated: 2026-09-04 11:04:47 EDT
 - Branch: main
-- Last commit: 75de054 feat(funnel): a real post-conversion page, and fix hydration on /guide
+- Last commit: 9349265 feat(emails): a real type system, and the graphics the guide already had
 - Working tree: clean
 
 <!-- END AUTO-STATE -->

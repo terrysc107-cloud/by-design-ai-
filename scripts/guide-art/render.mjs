@@ -96,14 +96,33 @@ const CARDS = [
   },
 ];
 
+/**
+ * DARK, since 2026-09-04.
+ *
+ * The card used to be cream (#fdfbf7) with the dark window floating on it. That
+ * was built for the light /guide page, and it was fine there. Then the same
+ * five renders went into the drip emails, which are dark, and a bright cream
+ * slab in the middle of a dark email reads as a foreign object.
+ *
+ * The card is now #23201b, which is EXACTLY the email card's background, so in
+ * email the illustration blends into the message with only the figure's gold
+ * hairline defining it. On the light /guide page and the white PDF pages the
+ * same image reads as a dark code screenshot, which is the normal treatment for
+ * one. So all three surfaces get the right thing from a single render, rather
+ * than a light set and a dark set to keep in sync.
+ *
+ * The window drops to #191712 so it still reads as inset against the card now
+ * that the card is dark too.
+ */
 const TPL = (card) => `<!doctype html><meta charset="utf-8"><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1376px;height:768px;background:#fdfbf7;
+body{width:1376px;height:768px;background:#23201b;
  font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  display:flex;align-items:center;justify-content:center;padding:64px}
-.win{width:100%;background:#23201b;border-radius:14px;overflow:hidden;
- box-shadow:0 30px 80px rgba(35,32,27,.18)}
-.bar{display:flex;align-items:center;gap:10px;padding:16px 22px;background:#2e2a24}
+.win{width:100%;background:#191712;border-radius:14px;overflow:hidden;
+ border:1px solid rgba(201,168,76,.16);
+ box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.bar{display:flex;align-items:center;gap:10px;padding:16px 22px;background:#221f19}
 .dot{width:12px;height:12px;border-radius:50%}
 .name{margin-left:12px;color:#a8a29e;font-size:17px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 pre{padding:34px 40px 40px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -111,7 +130,7 @@ pre{padding:34px 40px 40px;font-family:ui-monospace,SFMono-Regular,Menlo,monospa
 .c{color:#c9a84c;font-weight:600}
 .k{color:#a8a29e}
 .hl{background:rgba(201,168,76,.20);color:#e7d9a8;border-radius:4px;padding:1px 5px}
-.cap{margin-top:26px;text-align:center;color:#6b6055;font-size:22px}
+.cap{margin-top:26px;text-align:center;color:#a8a29e;font-size:22px}
 </style><body><div style="width:100%">
 <div class="win">
  <div class="bar">
