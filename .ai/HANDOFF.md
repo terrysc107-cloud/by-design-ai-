@@ -248,9 +248,9 @@ funnel on. Nothing here is pushed, so review the branch first if you want.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-03 21:16:18 EDT
-- Branch: feat/coaching-and-intel
-- Last commit: 1873cf1 feat(funnel): repoint to runyouraiboard.com, sync brand, illustrate the guide
-- Working tree: 1 uncommitted file(s)
+- Updated: 2026-09-03 21:39:45 EDT
+- Branch: feat/board-funnel-and-content
+- Last commit: 08c0411 docs: handoff checkpoint for the board funnel work
+- Working tree: clean
 
 <!-- END AUTO-STATE -->

@@ -37,6 +37,31 @@ export const COURSE_NAME = 'My AI Board'
 export const LIVE_LAB_NAME = 'The Build Lab'
 
 /**
+ * The founding cohort's date and price.
+ *
+ * ⚠️ MIRRORS `BUILD_LAB.dateDisplay` and `BUILD_LAB.priceDisplay` in the course
+ * repo's lib/course-config.ts. If you change one, change the other.
+ *
+ * The comment above LIVE_LAB_NAME says there is deliberately NO price here,
+ * which was right for as long as the Lab had nothing to sell: a duplicated
+ * price is two repos to update and a stale quote you have to honour. That
+ * changed on 2026-09-03 when Terry scheduled the run. A live cohort with a date
+ * and eight seats is news, and news is the entire reason these pages exist. A
+ * marketing page that says "no date yet" about a run that opens in ten weeks is
+ * worse than a duplicated number, because it actively talks the reader out of
+ * the thing we want them to do.
+ *
+ * SET BOTH TO null THE MOMENT THE RUN CLOSES OR MOVES. While these are
+ * non-null, `/education` and `/education/claude-code` assert a date to the
+ * public that only the course repo and the `ccc_lab_sessions` row can actually
+ * honour. Seat counts are deliberately NOT mirrored: those are computed from
+ * real registrations, server-side, on the course platform, and a seat count
+ * copied into this repo would be a number nothing can back.
+ */
+export const LIVE_LAB_DATE: string | null = 'Wednesdays from November 18, 2026'
+export const LIVE_LAB_PRICE: string | null = '$997'
+
+/**
  * Required on every page in the education surface. The course teaches a
  * third-party tool; we are not affiliated with its maker and must not imply it.
  */
@@ -172,10 +197,13 @@ export const LADDER: readonly LadderRung[] = [
     rung: 3,
     name: LIVE_LAB_NAME,
     promise:
-      'A live, small-group run where you stand up your own AI operating company and watch every decision, including the ones that go wrong.',
+      'A four-week live cohort, in a small group, where you stand up your own AI board on your own numbers and watch every decision, including the ones that go wrong.',
     forWho: 'You want it built with you, in your business, not adapted from a template alone.',
-    priceDisplay: null,
-    available: false,
+    // Scheduled 2026-09-03, so this rung stops being "next" and starts being a
+    // thing someone can buy. It is the one exception to the no-prices rule
+    // above, for the reason given on LIVE_LAB_PRICE.
+    priceDisplay: LIVE_LAB_PRICE,
+    available: true,
   },
   {
     id: 'board-room',

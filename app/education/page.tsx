@@ -7,6 +7,8 @@ import FinalCTA from '@/components/sections/FinalCTA'
 import {
   AFFILIATION_DISCLAIMER,
   LADDER,
+  LIVE_LAB_DATE,
+  LIVE_LAB_PRICE,
   COURSE_NAME,
   COURSE_PRICE,
   LIVE_LAB_NAME,
@@ -135,30 +137,38 @@ export default function EducationPage() {
               that sentence became false. What is still true — and the only
               scarcity claim allowed anywhere — is that there is no date. The
               number lives in the course repo; see LIVE_LAB_NAME. */}
-          <article className="mt-6 border border-white/10 bg-white/[0.02] p-8">
+          <article className="mt-6 border border-gold/25 bg-[#23201b]/40 p-8">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="text-[10px] tracking-[0.25em] uppercase text-white/50 border border-white/20 px-2.5 py-1">
-                Live
+              <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-1">
+                Live cohort
               </span>
               <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">
-                Waitlist open — no date yet
+                {LIVE_LAB_DATE ?? 'Waitlist open, no date yet'}
               </span>
             </div>
-            <h3 className="text-xl md:text-2xl font-semibold text-white/85 tracking-tight">
+            <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight">
               {LIVE_LAB_NAME}
             </h3>
-            <p className="text-white/50 text-sm md:text-base leading-relaxed mt-3">
-              A live, small-group run where you stand up your own board with us in the room,
-              working on your business rather than a worked example. Small enough that you can
-              interrupt and ask why, including when a decision goes wrong. No date is set yet.
-              The waitlist costs nothing and holds nothing, and the people on it hear first.
+            <p className="text-white/55 text-sm md:text-base leading-relaxed mt-3">
+              Four Wednesdays. You stand up your own board with us in the room, working on your
+              business rather than a worked example, and small enough that you can interrupt and
+              ask why. Thanksgiving week is skipped on purpose: your board runs unattended
+              through it, and session two opens with what that turned up.
             </p>
+            {LIVE_LAB_PRICE && (
+              <p className="text-white/70 text-sm mt-4">
+                <span className="text-gold font-semibold">{LIVE_LAB_PRICE}</span> one-time · eight
+                seats · the Kit included
+              </p>
+            )}
             <div className="mt-6">
               <a
                 href={labWaitlistUrl('education-hub-lab')}
-                className="text-[11px] tracking-widest uppercase text-gold/80 hover:text-gold transition-colors border-b border-gold/30 hover:border-gold pb-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-btn inline-block px-8 py-4 text-xs tracking-widest"
               >
-                Join the waitlist →
+                {LIVE_LAB_DATE ? 'Take a seat' : 'Join the waitlist'} →
               </a>
             </div>
           </article>
