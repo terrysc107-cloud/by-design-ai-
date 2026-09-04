@@ -248,9 +248,9 @@ funnel on. Nothing here is pushed, so review the branch first if you want.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-03 21:39:45 EDT
+- Updated: 2026-09-03 22:24:28 EDT
 - Branch: feat/board-funnel-and-content
-- Last commit: 08c0411 docs: handoff checkpoint for the board funnel work
+- Last commit: e21ed84 feat(education): the Build Lab has a date, so stop saying it does not
 - Working tree: clean
 
 <!-- END AUTO-STATE -->

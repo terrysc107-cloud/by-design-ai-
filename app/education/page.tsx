@@ -158,7 +158,7 @@ export default function EducationPage() {
             {LIVE_LAB_PRICE && (
               <p className="text-white/70 text-sm mt-4">
                 <span className="text-gold font-semibold">{LIVE_LAB_PRICE}</span> one-time · eight
-                seats · the Kit included
+                seats · the course and the Kit included
               </p>
             )}
             <div className="mt-6">
