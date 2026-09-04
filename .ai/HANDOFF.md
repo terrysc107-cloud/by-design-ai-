@@ -416,9 +416,9 @@ Cris finishes the channels. Everything else is built and live.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 11:04:47 EDT
+- Updated: 2026-09-04 11:14:42 EDT
 - Branch: main
-- Last commit: 9349265 feat(emails): a real type system, and the graphics the guide already had
+- Last commit: 15c3ce6 feat(guide-art): render the step illustrations dark
 - Working tree: clean
 
 <!-- END AUTO-STATE -->

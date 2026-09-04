@@ -62,31 +62,25 @@ export default function LeadMagnet() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative max-w-[280px] w-full">
+            <div className="relative max-w-[400px] w-full mx-auto">
               <div
-                className="absolute -inset-6 pointer-events-none"
+                className="absolute -inset-8 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%)',
-                  filter: 'blur(30px)',
+                  background: 'radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 70%)',
+                  filter: 'blur(34px)',
                 }}
               />
-              <div className="relative border border-gold/20 p-[2px]">
-                {ASSETS.guideCover ? (
-                  <Image
-                    src={ASSETS.guideCover}
-                    alt="Free Automation Guide"
-                    width={280}
-                    height={373}
-                    className="object-cover block"
-                  />
-                ) : (
-                  <div className="w-full aspect-[3/4] bg-zinc-900 flex items-center justify-center">
-                    <span className="text-white/20 text-xs tracking-widest">Guide Cover</span>
-                  </div>
-                )}
-              </div>
-              <div className="absolute -top-[2px] -left-[2px] w-5 h-5 border-t-2 border-l-2 border-gold/50" />
-              <div className="absolute -bottom-[2px] -right-[2px] w-5 h-5 border-b-2 border-r-2 border-gold/50" />
+              {/* No border and no corner brackets: the mockup is a transparent
+                  PNG that carries its own spine and shadow, so a frame around it
+                  would put a rectangle back around the object we just built. */}
+              <Image
+                src={ASSETS.guideMockup}
+                alt="The Board Method, a seven-page guide"
+                width={400}
+                height={524}
+                className="relative block w-full h-auto"
+                priority
+              />
             </div>
           </motion.div>
 

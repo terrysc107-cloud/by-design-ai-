@@ -22,6 +22,20 @@ export const ASSETS = {
    * so it cannot rot when a generation history gets cleaned up.
    */
   guideCover: '/guide-cover.png',
+  /**
+   * The same cover composited as a booklet: perspective, a page block, a spine
+   * and a shadow (design/guide-pdf/render-mockup.mjs).
+   *
+   * The site showed the flat cover in a hairline border, which read as words on
+   * a black rectangle rather than something you receive. A lead magnet has to
+   * look like an object before anyone spends an email address on it.
+   *
+   * CSS perspective over a generated image on purpose: an image model turns the
+   * cover's type to mush, and the title, the four filenames and the five step
+   * names all have to stay legible. This composites the REAL cover render, so
+   * the mockup and the PDF cannot drift.
+   */
+  guideMockup: '/guide-mockup.png',
   sectionBg: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_013703_ebcd8b7d-97de-45cb-ab37-0c26d1dec776.png',
   // Set to '/hero-photo.jpg' once you upload your actual photo to public/hero-photo.jpg
   heroPhoto: '',

@@ -117,30 +117,23 @@ export default function LeadMagnetModal() {
             <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-8 p-6 md:p-10">
               {/* Cover */}
               <div className="hidden md:flex items-center justify-center">
-                {ASSETS.guideCover ? (
-                  <div className="relative w-[180px]">
-                    <div
-                      className="absolute -inset-4 pointer-events-none"
-                      style={{
-                        background: 'radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 70%)',
-                        filter: 'blur(20px)',
-                      }}
-                    />
-                    <div className="relative border border-gold/30 p-[2px]">
-                      <Image
-                        src={ASSETS.guideCover}
-                        alt="Free guide cover"
-                        width={180}
-                        height={240}
-                        className="block w-full object-cover"
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="w-[180px] aspect-[3/4] bg-zinc-900 border border-gold/20 flex items-center justify-center">
-                    <span className="text-white/20 text-[10px] tracking-widest">Guide</span>
-                  </div>
-                )}
+                <div className="relative w-[200px]">
+                  <div
+                    className="absolute -inset-5 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%)',
+                      filter: 'blur(22px)',
+                    }}
+                  />
+                  {/* Transparent PNG with its own spine and shadow, so no frame. */}
+                  <Image
+                    src={ASSETS.guideMockup}
+                    alt="The Board Method, a seven-page guide"
+                    width={200}
+                    height={262}
+                    className="relative block w-full h-auto"
+                  />
+                </div>
               </div>
 
               {/* Content */}
