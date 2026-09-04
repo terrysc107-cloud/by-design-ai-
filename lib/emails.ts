@@ -1,5 +1,6 @@
 import { SITE_URL } from './resend'
 import type { IntakeSubmission } from './ai-review'
+import { DRIP_TOTAL } from './drip'
 
 const GOLD = '#C9A84C'
 const BG = '#1E1B17'
@@ -37,6 +38,54 @@ export const GUIDE_PDF_URL = process.env.GUIDE_PDF_URL || `${SITE_URL}/guide.pdf
 
 type Email = { subject: string; html: string; text: string }
 
+/**
+ * ── The email design system ─────────────────────────────────────────────────
+ *
+ * TYPEFACE. The old stack was `-apple-system, Segoe UI, Roboto, Helvetica,
+ * Arial, sans-serif`, which is the default-looking stack every automated email
+ * on earth uses, and it reads as one.
+ *
+ * The fix is NOT a webfont. Gmail strips @font-face and Outlook on Windows
+ * renders through Word, so a loaded font reaches a minority of opens and
+ * everyone else lands on the fallback anyway. The fix is a distinctive stack
+ * that is ALREADY INSTALLED.
+ *
+ * So: a warm transitional serif for everything that is read. Iowan Old Style
+ * and Charter ship on Apple devices, Georgia is on essentially every Windows
+ * machine, and all three are the same kind of face, so it degrades WITHIN a
+ * look instead of falling off a cliff into Arial. Sans is kept for the eyebrow,
+ * the buttons and the captions, where letterspaced uppercase reads as interface
+ * rather than prose.
+ *
+ * SCALE. One size for everything is the other half of why the old emails looked
+ * generated. Five deliberate steps below, and headlines carry negative tracking
+ * the way the site's display type does.
+ */
+const SERIF = `'Iowan Old Style', Charter, Georgia, 'Times New Roman', serif`
+const SANS = `Geist, 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif`
+
+const TYPE = {
+  eyebrow: `font-family:${SANS};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;`,
+  h1: `font-family:${SERIF};font-size:30px;line-height:1.22;letter-spacing:-0.4px;font-weight:600;`,
+  lede: `font-family:${SERIF};font-size:19px;line-height:1.5;`,
+  body: `font-family:${SERIF};font-size:16px;line-height:1.65;`,
+  small: `font-family:${SANS};font-size:13px;line-height:1.5;`,
+} as const
+
+/**
+ * The masthead is TEXT, not an image, and deliberately so: most clients block
+ * remote images until the reader allows them, and a brand whose first
+ * impression is a grey broken-image box has spent its one impression. The
+ * lockup is the one from BRAND-KIT: lowercase `aixdesign` with the x in gold.
+ */
+function masthead(): string {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid rgba(201,168,76,0.22);">
+    <tr><td style="padding:0 0 20px;">
+      <span style="font-family:${SANS};font-size:17px;font-weight:600;color:#ffffff;letter-spacing:-0.2px;">ai<span style="color:${GOLD};">x</span>design</span>
+    </td></tr>
+  </table>`
+}
+
 // Shared dark-luxury email shell. `footer` lets drip emails append an unsubscribe
 // line; `preheader` sets the hidden inbox preview text.
 function wrap(inner: string, footer?: string, preheader?: string): string {
@@ -45,17 +94,18 @@ function wrap(inner: string, footer?: string, preheader?: string): string {
     : ''
   return `<!doctype html>
 <html>
-  <body style="margin:0;padding:0;background:${BG};font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+  <body style="margin:0;padding:0;background:${BG};font-family:${SERIF};">
     ${preheaderHtml}
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px;">
       <tr><td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#23201b;border:1px solid rgba(201,168,76,0.3);">
-          <tr><td style="padding:36px 32px;">
-            <p style="margin:0 0 24px;color:${GOLD};font-size:11px;letter-spacing:3px;text-transform:uppercase;">AI by Design</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#23201b;border:1px solid rgba(201,168,76,0.3);">
+          <tr><td style="padding:32px 34px 38px;">
+            ${masthead()}
+            <div style="height:26px;line-height:26px;">&nbsp;</div>
             ${inner}
           </td></tr>
         </table>
-        <p style="margin:20px 0 0;color:rgba(255,255,255,0.25);font-size:11px;line-height:1.5;">AI by Design · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
+        <p style="margin:20px 0 0;color:rgba(255,255,255,0.25);${TYPE.small}">AI by Design · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
       </td></tr>
     </table>
   </body>
@@ -63,15 +113,40 @@ function wrap(inner: string, footer?: string, preheader?: string): string {
 }
 
 function goldButton(href: string, label: string): string {
-  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px;"><tr><td style="background:${GOLD};"><a href="${href}" style="display:inline-block;padding:14px 28px;color:${BG};font-size:13px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">${label}</a></td></tr></table>`
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px;"><tr><td style="background:${GOLD};"><a href="${href}" style="display:inline-block;padding:14px 28px;color:${BG};font-family:${SANS};font-size:13px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">${label}</a></td></tr></table>`
+}
+
+function eyebrow(text: string): string {
+  return `<p style="margin:0 0 12px;color:${GOLD};${TYPE.eyebrow}">${text}</p>`
 }
 
 function h1(text: string): string {
-  return `<h1 style="margin:0 0 16px;color:#ffffff;font-size:22px;line-height:1.3;font-weight:600;">${text}</h1>`
+  return `<h1 style="margin:0 0 18px;color:#ffffff;${TYPE.h1}">${text}</h1>`
+}
+
+function lede(text: string): string {
+  return `<p style="margin:0 0 22px;color:rgba(255,255,255,0.78);${TYPE.lede}">${text}</p>`
 }
 
 function p(text: string): string {
-  return `<p style="margin:0 0 18px;color:rgba(255,255,255,0.65);font-size:15px;line-height:1.6;">${text}</p>`
+  return `<p style="margin:0 0 18px;color:rgba(255,255,255,0.66);${TYPE.body}">${text}</p>`
+}
+
+/**
+ * An image with a caption.
+ *
+ * `alt` is load-bearing rather than an accessibility afterthought: with images
+ * blocked, which is the default in a lot of clients, the alt text IS what the
+ * reader gets, so it says what the picture shows instead of naming the file.
+ * Nothing in any of these emails depends on an image rendering.
+ */
+function figure(src: string, alt: string, caption?: string): string {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+    <tr><td>
+      <img src="${src}" alt="${alt}" width="472" style="display:block;width:100%;max-width:472px;border:1px solid rgba(201,168,76,0.18);" />
+    </td></tr>
+    ${caption ? `<tr><td style="padding-top:8px;"><p style="margin:0;color:rgba(255,255,255,0.38);${TYPE.small}">${caption}</p></td></tr>` : ''}
+  </table>`
 }
 
 function first(name: string): string {
@@ -86,12 +161,19 @@ function unsubFooter(unsubscribeUrl: string): string {
 export function guideEmail(name: string): Email {
   const guideUrl = `${SITE_URL}/guide`
   const inner =
+    eyebrow('Your free guide') +
     h1('The Board Method') +
-    p(`Hey ${first(name)},`) +
-    p("Thanks for grabbing it. Five steps to a small board of AI employees that read your real numbers on a schedule and hand you a decision: Charter, Floor, Run, Review, Promote.") +
+    lede(`Hey ${first(name)}, it's all yours. Seven pages, five steps.`) +
+    // The actual cover of the PDF below the button, so the thing they are about
+    // to download is the thing they can see.
+    figure(
+      `${SITE_URL}/guide-cover.png`,
+      'The Board Method: the cover of the seven-page guide',
+    ) +
+    p("Five steps to a small board of AI employees that read your real numbers on a schedule and hand you a decision: Charter, Floor, Run, Review, Promote.") +
     goldButton(GUIDE_PDF_URL, 'Download the PDF →') +
     p(`Prefer to read it in your browser? <a href="${guideUrl}" style="color:${GOLD};text-decoration:underline;">Open the guide here</a>.`) +
-    p("Over the next few days I'll send four short notes, one per idea, each ending on the most common way that idea fails. No fluff.") +
+    p(`Over the next few weeks I'll send ${DRIP_TOTAL} short notes, each ending on the most common way that idea fails. No fluff.`) +
     p(`And whenever you want a second set of eyes on your setup, grab a free 15-minute call:`) +
     `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
     p('— The AI by Design team')
@@ -300,6 +382,25 @@ Nothing goes out until you approve.
 }
 
 // ── Drip sequence (stages 1..4) ─────────────────────────────────────────────
+/**
+ * The illustration each stage carries.
+ *
+ * Stages 1 to 4 are the four ideas the guide illustrates, so each shows the
+ * real board file it is about: the same rendered artifact the web guide and the
+ * PDF use, because the guide's whole claim is that this is plain markdown you
+ * can read. Stages 5 and 6 are the asks rather than the teaching and have no
+ * honest picture, so they carry none rather than a decorative one.
+ */
+const DRIP_FIGURE: Record<number, { src: string; alt: string }> = {
+  // NO CAPTION FIELD. These renders already have their caption baked into the
+  // image, so adding one below printed it twice. The same mistake shipped in
+  // the PDF and was caught on a visual pass; it is invisible in the source.
+  1: { src: '/guide/01-charter.png', alt: 'A CHARTER.md file with the disposition line highlighted. Disposition is the line that decides close calls.' },
+  2: { src: '/guide/02-floor.png', alt: 'A GOALS.md file showing a floor rather than a target. A floor is a number the month can fall below.' },
+  3: { src: '/guide/03-run.png', alt: 'A scheduled run, and the check that notices when it stops. A run that nobody verifies is a run that can stop.' },
+  4: { src: '/guide/04-review.png', alt: 'A board meeting with each claim traced to its source.' },
+}
+
 type DripDef = { subject: string; heading: string; body: string[]; cta: string; ctaUrl?: string }
 
 /**
@@ -391,10 +492,14 @@ const DRIP_CONTENT: Record<number, DripDef> = {
 export function dripEmail(stage: number, name: string, unsubscribeUrl: string): Email {
   const def = DRIP_CONTENT[stage]
   if (!def) throw new Error(`No drip content for stage ${stage}`)
+  const fig = DRIP_FIGURE[stage]
   const inner =
+    eyebrow(`The Board Method · ${stage} of ${DRIP_TOTAL}`) +
     h1(def.heading) +
-    p(`Hey ${first(name)},`) +
-    def.body.map(p).join('') +
+    lede(`Hey ${first(name)},`) +
+    def.body.slice(0, 1).map(p).join('') +
+    (fig ? figure(`${SITE_URL}${fig.src}`, fig.alt) : '') +
+    def.body.slice(1).map(p).join('') +
     goldButton(def.ctaUrl ?? COURSE_URL, def.cta) +
     p('— The AI by Design team')
   const text = `Hey ${first(name)},
