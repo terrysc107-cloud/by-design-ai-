@@ -1,0 +1,80 @@
+---
+title: "Scheduled AI Work Dies Without Telling You"
+description: "A job that stops does not error. It produces nothing, and nothing looks exactly like a quiet week. Mine went forty days before I noticed. Here is the check that catches it."
+date: "2026-09-03"
+author: "Terry — AI by Design"
+tags: ["automation", "reliability", "ai-for-business"]
+draft: false
+---
+
+Getting a job onto a schedule is the moment AI stops being a chat window and starts
+being a system. It is also where the quietest failure in the whole setup lives.
+
+I had a daily run that stopped. It did not error, nobody got an alert, and no dashboard
+turned red. It simply produced nothing. I found out **forty days later**, and only
+because I went looking for an old report and could not find it.
+
+## Why this failure is invisible
+
+Most failures announce themselves. A page 500s, a payment declines, a form throws a
+validation error. Someone notices because something visibly went wrong.
+
+A scheduled job that stops produces silence. And silence is indistinguishable from a
+week where there was nothing much to report.
+
+That is the whole trap. Your system is designed to be quiet when things are calm, so
+when it goes quiet because it is dead, it looks exactly like it working. The better
+your automation is at not bothering you, the longer this takes to catch.
+
+## The absence is the thing you have to monitor
+
+The instinct is to add error handling. It does not help here, because there is no error.
+The job is not failing, it is not running. There is nothing to catch.
+
+What you need is something that notices an **absence**. That is a different check, and
+it is the one almost nobody builds.
+
+The cheapest version costs you a line:
+
+> When did the last run actually happen?
+
+Put it in whatever you already look at weekly. If the answer is "I am not sure", you
+have found the gap. If the answer is a date more than one cycle old, you have found a
+dead job.
+
+## Three versions, cheapest first
+
+**The line in your review.** One question in your weekly check. Free, works immediately,
+depends on you remembering to do the review. Start here.
+
+**The timestamp in the output.** Have every run write the date it ran at the top of what
+it produces. Then a stale report is obvious the moment you open it, instead of being
+plausible. This is almost free and it removes the remembering.
+
+**The heartbeat.** Something separate from the job that expects to see a run and tells
+you when it does not. This is the real fix, and it is also the only version that catches
+the failure while you are not looking. Its own weakness is worth stating: a heartbeat
+can die too, so it needs to be something you would notice the loss of.
+
+## The part people skip
+
+Setting up the schedule feels like finishing. It is not. Scheduling is half of it, and
+the other half is verifying the schedule fired at least once, on purpose, after you set
+it up.
+
+So: schedule exactly one run this week. Then put a reminder in your calendar for a few
+days later that says *confirm it actually ran.* Almost nobody does that second part, and
+it is the part that would have saved me thirty-nine days.
+
+A schedule nobody verifies is a schedule that stops without telling you.
+
+## Where this fits
+
+A run on a schedule is the third of five steps in the method I use to get AI doing
+standing work. It sits after writing [a charter rather than a
+prompt](/blog/prompt-vs-charter-ai-forgets-your-business) and after [setting floors
+instead of targets](/blog/why-your-ai-says-everything-is-fine), because a job that runs
+reliably and reports against nothing is just a scheduled way to feel fine.
+
+[The Board Method is a free seven-page guide](/guide) that covers all five steps, with
+the real files from a board that is running.

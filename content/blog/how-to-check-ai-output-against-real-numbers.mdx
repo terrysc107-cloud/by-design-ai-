@@ -1,0 +1,82 @@
+---
+title: "How to Tell a Useful AI Report From a Plausible One"
+description: "Your assistant will produce something articulate every time. Articulate is free. Four checks, under a minute, that separate a report about your business from a report about any business."
+date: "2026-09-01"
+author: "Terry — AI by Design"
+tags: ["ai-for-business", "verification", "reporting"]
+draft: false
+---
+
+The failure mode people expect from AI is gibberish. That is not what you get.
+
+What you get is a confident, well-written paragraph that could be about any business and
+quietly is not about yours. It reads well. It sounds like analysis. And somewhere in the
+middle of it is a number that nothing produced.
+
+Articulate is free. Correct is the thing you have to check for.
+
+## Why a plausible number looks exactly like a real one
+
+If you ask any assistant to analyse a business and there is a hole in the data, it will
+produce something reasonable-sounding to fill the hole. It is not lying. It is completing
+a pattern, which is what it does, and a completed pattern reads identically to a
+retrieved fact.
+
+On the page, "revenue was around $8,400 this month" looks the same whether it came from
+your books or from the shape of the sentence. There is no visual difference. That is why
+you need a check rather than a feeling.
+
+## The four checks
+
+Run these on your most recent output. It takes under a minute.
+
+**1. Does every claim trace to a number in your files?**
+Pick one specific figure in the report and try to find where it came from. If you cannot
+locate it in something you maintain, it was generated.
+
+**2. Did it name what it did not have?**
+This is the one that usually fails. A good report says "I do not have last month's
+close rate, so I have not calculated trend." A bad one quietly calculates trend anyway.
+Absence of any such statement is a warning sign, not a clean bill of health, because
+there is always something missing.
+
+**3. Is it consistent with decisions you already made?**
+If you killed a channel in March, a report recommending you double down on it in
+September has not read your history. It is analysing a snapshot, not your business.
+
+**4. Could you act on it today?**
+Not "is it interesting." Could you do something. A report that produces no possible
+action is a summary of things you already knew, phrased well.
+
+## Three of the four are fixed by one sentence
+
+Add this to whatever instructions your assistant reads:
+
+> If a number you need is missing, say it is missing. Do not estimate it.
+
+That single line fixes check two directly, and it fixes checks one and four as a side
+effect, because a report that flags its own gaps stops producing confident conclusions
+built on invented inputs.
+
+It is a small instruction that does an unreasonable amount of work, and almost nobody
+writes it, because it does not occur to you to forbid something you did not know was
+happening.
+
+## Record the query next to the number
+
+The deeper version of check one: whenever a number comes from somewhere real, write down
+*how it was retrieved*, right beside the value.
+
+It looks redundant when you do it. It is the difference between a number a future reader
+can verify and a number they have to trust. Six weeks later, you are that future reader,
+and you will not remember.
+
+## Where this fits
+
+Reviewing output is the fourth of five steps in the method I use to get AI doing standing
+work. It only matters once something is [running on a
+schedule](/blog/scheduled-ai-tasks-fail-silently) and measuring against [floors rather
+than targets](/blog/why-your-ai-says-everything-is-fine), because those are what give a
+report something real to be right or wrong about.
+
+[The Board Method is a free seven-page guide](/guide) that covers all five steps.
