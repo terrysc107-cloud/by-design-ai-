@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title: 'The Board Method',
     description:
       'Five steps that take AI from something you operate to a board that runs on a schedule and hands you a meeting you can act on.',
-    images: ['https://aixdesign.dev/guide-mockup-light.jpg'],
+    images: ['https://aixdesign.dev/guide-og.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'The Board Method',
     description: 'Five steps to an AI board that runs your standing work on a schedule.',
-    images: ['https://aixdesign.dev/guide-mockup-light.jpg'],
+    images: ['https://aixdesign.dev/guide-og.png'],
   },
 }
 

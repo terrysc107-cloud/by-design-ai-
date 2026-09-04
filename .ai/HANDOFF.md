@@ -416,9 +416,9 @@ Cris finishes the channels. Everything else is built and live.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 12:38:54 EDT
+- Updated: 2026-09-04 12:54:52 EDT
 - Branch: main
-- Last commit: 0c5525d feat(guide): make /guide the gated landing page
+- Last commit: cc5dcc1 feat(seo): a five-article cluster, and the sitemap gap that hid /coaching
 - Working tree: clean
 
 <!-- END AUTO-STATE -->
