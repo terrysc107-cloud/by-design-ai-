@@ -416,9 +416,9 @@ Cris finishes the channels. Everything else is built and live.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 11:34:02 EDT
+- Updated: 2026-09-04 12:32:29 EDT
 - Branch: main
-- Last commit: e218ee3 feat(guide): give the cover a subject, and present it as an object
-- Working tree: clean
+- Last commit: 8c859a9 feat(guide): put the booklet on a warm backdrop so it reads as a product
+- Working tree: 1 uncommitted file(s)
 
 <!-- END AUTO-STATE -->

@@ -28,10 +28,10 @@ export const metadata: Metadata = {
  * page a paid click would land on. It is the one page where a full client
  * re-render costs the most.
  *
- * The light theme it was really there for now rides on a wrapper div, which
- * overrides the root layout's dark body for this branch without fighting the
- * document structure.
+ * It also no longer forces a light theme on the branch. /guide is now a dark
+ * landing page and only /guide/read is light, so the light background moved
+ * onto that page's own root where it belongs.
  */
 export default function GuideLayout({ children }: { children: React.ReactNode }) {
-  return <div className="bg-white text-zinc-900">{children}</div>
+  return <>{children}</>
 }

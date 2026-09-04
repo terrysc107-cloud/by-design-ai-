@@ -154,7 +154,7 @@ export default function LeadMagnetModal() {
                     <p className="text-white/55 text-sm leading-relaxed">
                       Check your inbox — the guide is on its way. While you wait,{' '}
                       <a
-                        href="/guide"
+                        href="/guide/read"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gold underline underline-offset-2 hover:text-white transition-colors"

@@ -159,7 +159,7 @@ function unsubFooter(unsubscribeUrl: string): string {
 
 // ── Guide delivery (sent immediately on signup) ─────────────────────────────
 export function guideEmail(name: string): Email {
-  const guideUrl = `${SITE_URL}/guide`
+  const guideUrl = `${SITE_URL}/guide/read`
   const inner =
     eyebrow('Your free guide') +
     h1('The Board Method') +

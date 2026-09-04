@@ -57,7 +57,7 @@ export default function GuideThanksPage() {
               Download the PDF
             </a>
             <Link
-              href="/guide"
+              href="/guide/read"
               className="inline-block border border-zinc-700 text-zinc-300 px-8 py-4 text-xs tracking-widest uppercase hover:border-zinc-500 hover:text-white transition-colors"
             >
               Read it here
