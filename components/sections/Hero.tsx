@@ -70,9 +70,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
           >
-            We find the one bottleneck costing you the most time, design the system that removes it,
-            and build it — coaching you through it or doing it for you. It starts with a free
-            15-minute call.
+            We find the one bottleneck costing you the most time, design the system that removes
+            it, and build it, coaching you through it or doing it for you. Start with the free
+            guide, or book a call.
           </motion.p>
 
           <motion.p
@@ -90,14 +90,25 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 1.2 }}
           >
-            <CTAButton onClick={bookDiscoveryCall} size="large">
-              Book a Discovery Call →
+            {/* SWAPPED 2026-09-04. The call used to be primary here.
+                Asking a visitor who has known you for eight seconds to book a
+                fifteen-minute call is a far larger ask than an email for a PDF,
+                and the numbers said so: zero leads had ever been captured. The
+                guide is now the first ask, and it is also the only one that
+                starts the six-part sequence that sells the course, the Lab and
+                the call in turn.
+
+                Nothing is lost by demoting the call: it is still the header
+                button on every page, one of the two columns in TwoPaths below,
+                and the whole of FinalCTA. */}
+            <CTAButton onClick={scrollToGuide} size="large">
+              Get the Free Guide →
             </CTAButton>
             <button
-              onClick={scrollToGuide}
+              onClick={bookDiscoveryCall}
               className="px-8 py-4 text-[11px] tracking-widest uppercase border border-gold/35 text-gold/70 hover:border-gold/60 hover:text-gold transition-colors duration-200"
             >
-              Get the Free Guide
+              Book a Discovery Call
             </button>
           </motion.div>
         </div>

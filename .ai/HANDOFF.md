@@ -416,9 +416,9 @@ Cris finishes the channels. Everything else is built and live.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 08:51:37 EDT
-- Branch: feat/board-funnel-and-content
-- Last commit: 03f0010 docs: recording plan for the board demo, and the clips it produces
+- Updated: 2026-09-04 10:48:32 EDT
+- Branch: main
+- Last commit: 15f109a docs: handoff after the merge and deploy
 - Working tree: 1 uncommitted file(s)
 
 <!-- END AUTO-STATE -->

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getResend, FROM_EMAIL, LEAD_NOTIFY_EMAIL, SITE_URL } from '@/lib/resend'
 import { newsletterWelcomeEmail, buildLabWaitlistEmail, subscriberNotifyEmail } from '@/lib/emails'
 import { getSupabase, hasSupabase } from '@/lib/supabase'
+import { nextDripDate } from '@/lib/drip'
 
 // Where the subscribe form can be embedded. Falls back to 'newsletter' so a
 // bad/spoofed value can't pollute the column.
@@ -57,6 +58,53 @@ export async function POST(req: NextRequest) {
     } catch (dbErr) {
       console.error('Subscriber upsert failed:', dbErr)
       return NextResponse.json({ error: 'Could not subscribe. Please try again.' }, { status: 500 })
+    }
+
+    /**
+     * Put them in the drip too.
+     *
+     * Until 2026-09-04 this route wrote ONLY to bda_subscribers, and the drip
+     * cron reads bda_leads exclusively. So a newsletter signup got one welcome
+     * email and then silence forever, while the identical person who typed
+     * their email into the guide form got the PDF plus a six-part sequence that
+     * runs course -> Build Lab -> consulting. Three entry points (the footer,
+     * /newsletter and the header link) collected an email and dropped it.
+     *
+     * The Board Method sequence is the best writing on this site and a
+     * newsletter subscriber is exactly who it is for.
+     *
+     * `ignoreDuplicates: true` matters: someone who took the guide first
+     * already has a bda_leads row with a drip_stage partway through the
+     * sequence, and a plain upsert would reset them to 0 and re-send emails
+     * they have already read. A re-subscribe must never restart the drip.
+     *
+     * Best-effort on purpose. If this fails they are still subscribed, which is
+     * what they actually asked for, so it must not fail the request.
+     */
+    try {
+      const now = new Date()
+      await getSupabase()
+        .from('bda_leads')
+        .upsert(
+          {
+            email: cleanEmail,
+            // NOT NULL with no default on this table, and a subscriber may not
+            // have given one.
+            name: cleanName ?? '',
+            source: subSource,
+            drip_stage: 0,
+            // REQUIRED, not optional. The cron filters on
+            // `.not('drip_next_at','is',null).lte('drip_next_at', now)`, so a
+            // row inserted without it is never selected and the subscriber
+            // silently receives nothing. Leaving this out is a fix that looks
+            // finished and enrols nobody.
+            drip_next_at: nextDripDate(now, 0)?.toISOString() ?? null,
+            unsubscribed: false,
+          },
+          { onConflict: 'email', ignoreDuplicates: true }
+        )
+    } catch (dripErr) {
+      console.error('Drip enrolment failed (non-fatal):', dripErr)
     }
 
     // Best-effort welcome + owner notification. Never fail the subscribe on email.
