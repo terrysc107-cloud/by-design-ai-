@@ -81,6 +81,65 @@ export interface PublishOptions {
   log?: (msg: string) => void
 }
 
+/**
+ * Other brands' channels living in the same Postiz account. Matched against the
+ * channel NAME, case-insensitively.
+ *
+ * Terry runs SPD Cert Prep and Aseptic Technical Solutions out of this same
+ * Postiz login, and as of 2026-09-03 those are the only ten connected channels.
+ * Publishing AI by Design copy to one of them is not a cosmetic mistake: it puts
+ * course marketing in front of an audience that came for sterile-processing
+ * certification, on a channel that is somebody's actual business.
+ */
+const FOREIGN_CHANNEL = /spd\s*cert\s*prep|spdcertprep|aseptic|ats[-_\s]|sterile\s*processing/i
+
+/**
+ * Resolve the Postiz channel to publish to.
+ *
+ * PINNED BY ID, NOT BY SEARCH, and that is the whole point of this function.
+ * It used to be:
+ *
+ *   channels.find(c => c.identifier?.toLowerCase() === 'linkedin' && !c.disabled)
+ *
+ * which takes the FIRST LinkedIn channel in the account. That is fine in an
+ * account with one brand in it and wrong in this one. Postiz reports several
+ * LinkedIn-family identifiers ('linkedin', 'linkedin-page'), so which channel
+ * "the first LinkedIn one" refers to depends on connection order and on a
+ * provider string we do not control. The failure mode is silent and public:
+ * a week of AI by Design posts appearing on the SPD Cert Prep page.
+ *
+ * So the channel id is configuration. If POSTIZ_LINKEDIN_ID is unset, this
+ * throws rather than guessing, and the cron reports "not configured" instead of
+ * posting somewhere plausible.
+ */
+async function resolveChannel(client: PostizClient) {
+  const pinned = process.env.POSTIZ_LINKEDIN_ID
+  if (!pinned) {
+    throw new Error(
+      'POSTIZ_LINKEDIN_ID is not set. Connect the AI by Design LinkedIn channel in Postiz and pin its id; this publisher will not guess which channel to post to.'
+    )
+  }
+
+  const channels = await client.listIntegrations()
+  const channel = channels.find(c => c.id === pinned)
+  if (!channel) {
+    throw new Error(
+      `POSTIZ_LINKEDIN_ID "${pinned}" matches no channel in this Postiz account.`
+    )
+  }
+  if (channel.disabled) {
+    throw new Error(`Postiz channel "${channel.name}" is disabled.`)
+  }
+  // Belt and braces: a pasted id from the wrong row is the likeliest way this
+  // still goes wrong, and the name is the one field a human would recognise.
+  if (FOREIGN_CHANNEL.test(channel.name ?? '')) {
+    throw new Error(
+      `Refusing to publish: Postiz channel "${channel.name}" belongs to another one of Terry's businesses. AI by Design content must never post there.`
+    )
+  }
+  return channel
+}
+
 export async function publishApproved(opts: PublishOptions = {}): Promise<PublishResult> {
   const lane = opts.lane ?? 'medical'
   const now = opts.now ?? new Date()
@@ -115,9 +174,7 @@ export async function publishApproved(opts: PublishOptions = {}): Promise<Publis
     throw new Error('Postiz not configured — set POSTIZ_API_URL and POSTIZ_API_KEY.')
   }
   const client = new PostizClient()
-  const channels = await client.listIntegrations()
-  const channel = channels.find(c => c.identifier?.toLowerCase() === 'linkedin' && !c.disabled)
-  if (!channel) throw new Error('No connected LinkedIn channel found in Postiz.')
+  const channel = await resolveChannel(client)
 
   let scheduled = 0
   const skipped: string[] = []

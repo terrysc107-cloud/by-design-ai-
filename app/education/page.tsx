@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer'
 import FinalCTA from '@/components/sections/FinalCTA'
 import {
   AFFILIATION_DISCLAIMER,
+  LADDER,
   COURSE_NAME,
   COURSE_PRICE,
   LIVE_LAB_NAME,
@@ -36,15 +37,15 @@ export const metadata: Metadata = {
 const PRINCIPLES = [
   {
     title: 'Method over tools',
-    body: 'Tools change every few months. A repeatable way of working — inspect, plan, build, review, test, ship — outlives all of them.',
+    body: 'Tools change every few months. A repeatable way of working, written down in files you own, outlives all of them.',
   },
   {
-    title: 'You finish with something real',
-    body: 'Every course ends in a working build you made yourself, not a folder of notes and a certificate.',
+    title: 'You finish with something running',
+    body: 'Every course ends in a working system you built yourself, on a schedule, not a folder of notes and a certificate.',
   },
   {
     title: 'Written for operators',
-    body: 'For people who run a business and want leverage. Not a computer science course, and not a hype reel.',
+    body: 'For people who run a business and want leverage. No coding, no computer science, and no hype reel.',
   },
 ]
 
@@ -63,9 +64,9 @@ export default function EducationPage() {
             Learn to build the systems.
           </h1>
           <p className="text-white/55 text-base md:text-lg leading-relaxed mt-5">
-            Most of what AI by Design does is build custom systems for business owners. Some
-            people would rather learn to build it themselves — so we teach the same method we
-            use to organize our own builds. Independent, practical, and priced honestly.
+            AI by Design builds custom systems for business owners, and teaches the same method
+            to the owners who would rather build it themselves. Two ways in, one system.
+            Independent, practical, and priced honestly.
           </p>
 
           <div className="mt-12 grid gap-px sm:grid-cols-3 bg-white/5 border border-white/10">
@@ -102,9 +103,9 @@ export default function EducationPage() {
               {COURSE_NAME}
             </h3>
             <p className="text-white/55 text-sm md:text-base leading-relaxed mt-3">
-              A self-paced course on using Claude Code as an operator&apos;s build tool. You
-              learn one disciplined loop — inspect, plan, build, review, test, ship — and use it
-              to take a real internal tool from an empty folder to something you actually run.
+              Build your own AI board: a few narrow assistants that read your real numbers on a
+              schedule and hand you a meeting you can act on. You start from an empty folder and
+              you do not write any code.
             </p>
             <p className="text-white/70 text-sm mt-4">
               <span className="text-gold font-semibold">{COURSE_PRICE}</span> one-time · lifetime
@@ -147,10 +148,10 @@ export default function EducationPage() {
               {LIVE_LAB_NAME}
             </h3>
             <p className="text-white/50 text-sm md:text-base leading-relaxed mt-3">
-              A live, hands-on version of the same method, run as a working session rather than a
-              lecture — one real feature built end to end, small enough that you can interrupt and
-              ask why. No date is set yet. The waitlist costs nothing and holds nothing, and the
-              people on it hear before anyone else.
+              A live, small-group run where you stand up your own board with us in the room,
+              working on your business rather than a worked example. Small enough that you can
+              interrupt and ask why, including when a decision goes wrong. No date is set yet.
+              The waitlist costs nothing and holds nothing, and the people on it hear first.
             </p>
             <div className="mt-6">
               <a
@@ -166,6 +167,56 @@ export default function EducationPage() {
         </div>
       </section>
 
+      {/* The ladder.
+
+          Rungs above the course are shown WITHOUT prices and WITHOUT CTAs, and
+          that is deliberate rather than an omission. Only the course can be
+          bought today; a price printed beside something nobody can buy is a
+          quote we would have to honour, aging in a repo nobody edits when the
+          real number moves in the course platform. See the note on LADDER in
+          lib/education.ts. Nothing here invents a date, a seat count, or a
+          countdown. */}
+      <section className="section pt-0">
+        <div className="max-w-3xl mx-auto border-t border-white/10 pt-12">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
+            Where it goes after that
+          </h2>
+          <p className="text-white/50 text-sm md:text-base leading-relaxed mt-4 max-w-xl">
+            Each step is the same idea with more of the work done for you. Most people never
+            leave the first one, and that is a fine outcome.
+          </p>
+
+          <ol className="mt-8 border border-white/10">
+            {LADDER.map((rung, i) => (
+              <li
+                key={rung.id}
+                className={`flex gap-5 p-6 ${i > 0 ? 'border-t border-white/10' : ''} ${
+                  rung.available ? '' : 'opacity-70'
+                }`}
+              >
+                <span className="text-gold/50 text-xs font-mono pt-1 shrink-0 w-6">
+                  {String(rung.rung).padStart(2, '0')}
+                </span>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+                    <h3 className="text-gold text-sm font-semibold tracking-wide">{rung.name}</h3>
+                    {rung.available && rung.priceDisplay ? (
+                      <span className="text-white/70 text-xs">{rung.priceDisplay}</span>
+                    ) : (
+                      <span className="text-[10px] tracking-[0.25em] uppercase text-white/35">
+                        Next
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-white/55 text-sm leading-relaxed">{rung.promise}</p>
+                  <p className="text-white/35 text-xs leading-relaxed mt-2">{rung.forWho}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* Education → custom builds */}
       <section className="section pt-0">
         <div className="max-w-3xl mx-auto border-t border-white/10 pt-12">
@@ -173,10 +224,10 @@ export default function EducationPage() {
             Learning it and hiring it are both fine.
           </h2>
           <p className="text-white/55 text-sm md:text-base leading-relaxed mt-4">
-            The courses and the consulting are the same craft pointed at two different problems.
-            If you have time and want the skill, learn it — the method is the whole point, and
-            you keep it. If what you actually need is the system running by next quarter, that is
-            what AI by Design builds for clients, and a discovery call is the faster path.
+            The courses and the consulting are the same system at two levels of done-for-you. If
+            you have the time and want the skill, learn it. The method is the whole point and you
+            keep it. If what you actually need is the system running by next quarter, that is what
+            AI by Design builds for clients, and a discovery call is the faster path.
           </p>
           <p className="text-white/55 text-sm md:text-base leading-relaxed mt-4">
             Plenty of people do both: take the course, build the first version themselves, then

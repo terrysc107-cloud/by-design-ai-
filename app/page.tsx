@@ -3,6 +3,7 @@ import GoldRule from '@/components/ui/GoldRule'
 import Hero from '@/components/sections/Hero'
 import PatternInterrupt from '@/components/sections/PatternInterrupt'
 import TheAudit from '@/components/sections/TheAudit'
+import TwoPaths from '@/components/sections/TwoPaths'
 import TheOperator from '@/components/sections/TheOperator'
 import WhatHappensNext from '@/components/sections/WhatHappensNext'
 import OfferLadder from '@/components/sections/OfferLadder'
@@ -24,6 +25,8 @@ export default function Home() {
       <PatternInterrupt />
       <GoldRule />
       <TheAudit />
+      <GoldRule />
+      <TwoPaths />
       <GoldRule />
       <OfferLadder />
       <GoldRule />

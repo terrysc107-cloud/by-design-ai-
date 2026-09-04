@@ -57,6 +57,19 @@ interface Lane {
   persona: string
   /** bare landing URL the CTA should point to (publisher adds UTM params) */
   url: string
+  /**
+   * What a post in this lane is ultimately selling, and therefore what the CTA
+   * is asking for.
+   *
+   * This used to be hardcoded into the system prompt as "Done-For-You ... the
+   * goal of every post is a booked free discovery call", which was correct
+   * while `medical` was the only lane. It is wrong for the board lane, where
+   * the ask is a $57 course and a discovery-call CTA would send a
+   * course-shaped reader to a sales call they did not want.
+   */
+  offer: string
+  /** Lane-appropriate hashtag examples. Also previously hardcoded to medical. */
+  hashtagHint: string
 }
 
 const LANES: Record<string, Lane> = {
@@ -69,6 +82,40 @@ const LANES: Record<string, Lane> = {
 - Is great at the medical work, not at tech. Time-poor, skeptical of hype, allergic to jargon.
 - Does NOT think of themselves as someone who "needs AI." They think "I'm drowning in busywork."
 Speak to that specific person and their specific medical-world tasks. Reference real medical-solo scenarios (post-op accounts, OR schedules, in-service training, device demos, hospital procurement contacts) — never generic "business owner" filler.`,
+    offer:
+      "Done-For-You. We diagnose the bottleneck, design the system, and BUILD it for them, so they do not have to learn anything or touch a tool. The goal of every post is a booked free discovery call.",
+    hashtagHint:
+      '#aiforbusiness #aiautomation #healthcare #medicaldevicesales #solopreneur',
+  },
+
+  /**
+   * THE BOARD LANE. Sells the course, not the consulting.
+   *
+   * Added 2026-09-03 when aixdesign.dev moved to co-equal paths (learn it or
+   * hire it). The `medical` lane drives at a discovery call; this one drives at
+   * runyouraiboard.com, and the two must not be blurred: a reader who wants to
+   * build it themselves is not a warm lead for a done-for-you engagement, and
+   * asking them onto a sales call is how you lose both sales.
+   *
+   * The claim rules in guardrail.ts are strictest on this lane, because the
+   * course platform's own build fails on income promises, speed multipliers,
+   * invented student counts and implied Anthropic affiliation. Marketing that
+   * makes a claim the product refuses to make is the same defect, one repo
+   * upstream.
+   */
+  board: {
+    label: 'solopreneurs building an AI board',
+    url: 'runyouraiboard.com',
+    persona: `The reader RUNS SOMETHING SMALL and is tired of AI that only works when they are sitting in front of it. Profile:
+- A solopreneur, consultant, agency owner, or small-team operator. One to twenty people.
+- Has NEVER WRITTEN CODE and does not intend to start. Never imply otherwise, never use a developer example, never mention a test suite, a diff, or a terminal command.
+- Already uses ChatGPT or Claude daily, in a chat window, one question at a time. Nothing persists. Nothing runs on a Tuesday when they are busy.
+- The pain is not "I need AI". The pain is "I keep re-explaining my business to a chat window" and "nothing happens unless I make it happen".
+- They think in terms of their business, not their tools: the numbers they never check, the follow-ups nobody sent, the week that got away.
+The promise is a BOARD: a few narrow assistants with written charters, reading their real numbers on a schedule, producing a meeting they can act on. Speak to the standing-work problem, never to coding.`,
+    offer:
+      'The self-paced course at runyouraiboard.com. The reader builds their own AI board, no coding. The goal of every post is a course sale, NOT a discovery call. Never ask a board-lane reader to book a call.',
+    hashtagHint: '#aiagents #solopreneur #smallbusiness #aiautomation #buildinpublic',
   },
 }
 
@@ -85,7 +132,7 @@ function pillarPlan(count: number, fixed?: Pillar): Pillar[] {
 function buildSystemPrompt(lane: Lane): string {
   return `You are the content engine for AI by Design (aixdesign.dev), an AI business coaching & consulting agency. You write LinkedIn posts that make ONE specific person stop scrolling and recognize themselves.
 
-THE OFFER (what every post is ultimately selling): Done-For-You. We diagnose the bottleneck, design the system, and BUILD it for them — they don't have to learn anything or touch a tool. The goal of every post is a booked free discovery call.
+THE OFFER (what every post in THIS lane is ultimately selling): ${lane.offer}
 
 WHO YOU ARE WRITING TO:
 ${lane.persona}
@@ -101,8 +148,12 @@ HARD RULES:
 - NEVER claim a specific client result, percentage, or testimonial we cannot prove. Speak from the operator's own lived experience instead ("I used to...").
 - No emoji spam. At most one tasteful emoji, usually none.
 - LinkedIn format: a strong one-line hook, short punchy paragraphs / line breaks, easy to skim on a phone.
-- End EVERY post with a call to action — either soft ("Free guide → ${lane.url}") or hard ("Book a free discovery call → ${lane.url}"). When you include a link, use the bare URL exactly "${lane.url}" with NO http:// and NO query string (tracking is added later).
-- Add 3–5 relevant hashtags on the final line (e.g. #aiforbusiness #aiautomation #healthcare #medicaldevicesales #solopreneur). Tailor a couple to the medical world.
+- End EVERY post with a call to action that matches THE OFFER above, pointing at "${lane.url}". When you include a link, use the bare URL exactly "${lane.url}" with NO http:// and NO query string (tracking is added later).
+- Add 3-5 relevant hashtags on the final line (e.g. ${lane.hashtagHint}). Tailor a couple to this lane.
+- NEVER promise an income, a specific outcome, a timeline, or a speed multiplier ("10x faster", "in a weekend", "$10k months"). Describe the workflow and the work, never a result.
+- NEVER invent a student count, a testimonial, a case-study number, or a seat count. We have none we can substantiate.
+- NEVER imply a relationship with, endorsement by, or affiliation with Anthropic, OpenAI, or any tool vendor.
+- NEVER invent a date, a deadline, a countdown, or "only N spots left".
 - Each post: roughly 90–200 words. Self-contained.
 
 Return ONLY valid JSON, no prose around it.`

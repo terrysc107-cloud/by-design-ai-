@@ -56,19 +56,26 @@ export default function Header() {
           >
             Newsletter
           </Link>
-          {/* Coaching outranks Education for the sm slot: it sells, Education refers. */}
+          {/* SWAPPED 2026-09-03. The old note here read "Coaching outranks
+              Education for the sm slot: it sells, Education refers." That was
+              true when the course was a $97 page on another domain we were not
+              sure of. It now has a live $57 checkout and is one of the two
+              co-equal paths on the homepage, so Education takes the earlier
+              breakpoint and Coaching moves back a tier. The row cannot hold
+              both at sm without going to two lines, which is why this is a
+              swap and not an addition. */}
           <Link
-            href="/coaching"
+            href="/education"
             className="hidden sm:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
           >
-            Coaching
+            Education
           </Link>
           {/* md+ only: at sm the row is already at its width budget. */}
           <Link
-            href="/education"
+            href="/coaching"
             className="hidden md:inline text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
           >
-            Education
+            Coaching
           </Link>
           {/* Was a <button> calling
               getElementById('lead-magnet')?.scrollIntoView(). #lead-magnet only

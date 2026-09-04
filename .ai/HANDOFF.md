@@ -174,9 +174,9 @@ cron `d63180209c04`, convert approve to POST + confirm page, and verify the two 
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-08-28 17:47:54 EDT
+- Updated: 2026-09-03 21:16:18 EDT
 - Branch: feat/coaching-and-intel
-- Last commit: 98aa1c3 feat(funnel): The Board Method guide, and a drip that leads to the course
-- Working tree: 2 uncommitted file(s)
+- Last commit: 1873cf1 feat(funnel): repoint to runyouraiboard.com, sync brand, illustrate the guide
+- Working tree: 1 uncommitted file(s)
 
 <!-- END AUTO-STATE -->
