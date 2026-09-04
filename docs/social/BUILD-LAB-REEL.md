@@ -52,7 +52,8 @@ cohort session this artifact goes to strangers by design.
 
 ## Narration
 
-~152 words. At 160 wpm that is ~57s, inside the 45–60s Shorts brief.
+146 words. At 160 wpm that is 55s, inside the 45–60s Shorts brief. Counted, not
+estimated.
 
 > Your AI only works on the days you sit down.
 >
@@ -62,7 +63,7 @@ cohort session this artifact goes to strangers by design.
 > A board is different. A few narrow assistants with written jobs, reading your
 > real numbers, running on a schedule.
 >
-> This is one that's been running since June. Its charter. Its floors. Fifteen
+> This is one that's been running since June. Its charter. Its floors. Fourteen
 > meetings it produced without anyone asking it to.
 >
 > The Build Lab is four Wednesdays where you build yours. Not a worked example.
