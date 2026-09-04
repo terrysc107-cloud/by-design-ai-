@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend, FROM_EMAIL, LEAD_NOTIFY_EMAIL, SITE_URL } from '@/lib/resend'
-import { newsletterWelcomeEmail, subscriberNotifyEmail } from '@/lib/emails'
+import { newsletterWelcomeEmail, buildLabWaitlistEmail, subscriberNotifyEmail } from '@/lib/emails'
 import { getSupabase, hasSupabase } from '@/lib/supabase'
 
 // Where the subscribe form can be embedded. Falls back to 'newsletter' so a
 // bad/spoofed value can't pollute the column.
-const ALLOWED_SOURCES = new Set(['newsletter', 'footer', 'blog'])
+//
+// 'build-lab' is posted server-to-server by runyouraiboard.com when someone
+// joins the Build Lab waitlist. 'education' is for the /education surface.
+// Both were previously blocked on an unverified worry that
+// bda_subscribers.source carried a CHECK constraint rejecting new values —
+// checked 2026-07-17: it does not. The column has only UNIQUE(email) and the
+// PK, and defaults to 'newsletter'. Adding a source is safe.
+const ALLOWED_SOURCES = new Set(['newsletter', 'footer', 'blog', 'education', 'build-lab'])
 
 export async function POST(req: NextRequest) {
   try {
@@ -57,7 +64,14 @@ export async function POST(req: NextRequest) {
       const resend = getResend()
       const unsubscribeUrl = `${SITE_URL}/api/unsubscribe?list=subscribers&token=${unsubscribeToken}`
       try {
-        const welcome = newsletterWelcomeEmail(cleanName ?? undefined, unsubscribeUrl)
+        // Confirm what they actually asked for. Someone joining the Build Lab
+        // waitlist gets the Lab confirmation, not "thanks for subscribing" —
+        // they are subscribed, but leading with that would read as a
+        // bait-and-switch on the thing they clicked.
+        const welcome =
+          subSource === 'build-lab'
+            ? buildLabWaitlistEmail(cleanName ?? undefined, unsubscribeUrl)
+            : newsletterWelcomeEmail(cleanName ?? undefined, unsubscribeUrl)
         await resend.emails.send({
           from: FROM_EMAIL,
           to: cleanEmail,

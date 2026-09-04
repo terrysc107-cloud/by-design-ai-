@@ -7,9 +7,14 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 // Daily cron: schedule any APPROVED posts to LinkedIn via Postiz, spread across
-// the upcoming cadence slots. Only approved posts are ever published — drafts
-// and rejected posts are untouched, so the human approval gate always holds.
-const LANE = 'medical'
+// the upcoming cadence slots. Only approved posts are ever published; drafts and
+// rejected posts are untouched, so the human approval gate always holds.
+//
+// Multi-lane since 2026-09-03, matching content-generate. Slot collision is
+// computed per lane inside publishApproved, so running the lanes in sequence
+// (not in parallel) is deliberate: the second lane must see the slots the first
+// one just claimed, or both would schedule into the same Tuesday.
+const LANES = ['medical', 'board'] as const
 
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET
@@ -26,16 +31,25 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Postiz not configured' }, { status: 503 })
   }
 
-  try {
-    const result = await publishApproved({ lane: LANE, live: true })
-    return NextResponse.json({
-      ok: true,
-      scheduled: result.scheduled,
-      skipped: result.skipped.length,
-      approved: result.planned.length,
-    })
-  } catch (err) {
-    console.error('content-publish cron failed:', err)
-    return NextResponse.json({ error: 'Publish failed' }, { status: 500 })
+  const lanes: Record<string, unknown> = {}
+  let scheduledTotal = 0
+
+  for (const lane of LANES) {
+    try {
+      const result = await publishApproved({ lane, live: true })
+      scheduledTotal += result.scheduled
+      lanes[lane] = {
+        scheduled: result.scheduled,
+        skipped: result.skipped.length,
+        approved: result.planned.length,
+      }
+    } catch (err) {
+      // A misconfigured channel or an API blip in one lane must not strand the
+      // other lane's approved posts, which a human has already signed off on.
+      console.error(`content-publish failed for lane "${lane}":`, err)
+      lanes[lane] = { error: (err as Error).message }
+    }
   }
+
+  return NextResponse.json({ ok: true, scheduled: scheduledTotal, lanes })
 }

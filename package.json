@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:claims": "npx --yes tsx scripts/check-claims.ts",
+    "check": "npm run check:claims && npm run build"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.7",
@@ -32,6 +34,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.29",
+    "playwright": "^1.62.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"

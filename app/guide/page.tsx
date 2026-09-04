@@ -2,143 +2,114 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
+const COURSE_URL = 'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=board-method-guide'
+
 export const metadata: Metadata = {
-  title: '10 Automations Every Solo Operator Needs | AI by Design',
+  title: 'The Board Method: Build AI Employees That Run Without You | AI by Design',
   description:
-    'A free guide to the ten highest-leverage AI automations for solo operators — lead follow-up, appointment reminders, client onboarding, reviews, and more. See what each gap is costing you and how to fix it.',
+    'A free guide to running your business on a board of AI employees. Charter, Floor, Run, Review, Promote — the five steps, the four files they read, and the honest limits of what this does.',
   alternates: { canonical: '/guide' },
   openGraph: {
     type: 'article',
     url: 'https://aixdesign.dev/guide',
-    title: '10 Automations Every Solo Operator Needs',
+    title: 'The Board Method',
     description:
-      'The ten highest-leverage AI automations for solo operators — what each gap costs you, and the fix.',
+      'Five steps to AI employees that start work without you: Charter, Floor, Run, Review, Promote.',
   },
 }
 
+/**
+ * THE BOARD METHOD — the free guide.
+ *
+ * Replaces "10 Automations Every Solo Operator Needs", which was a generic
+ * listicle carrying invented figures ("3-8 leads lost per month"). Those numbers
+ * came from nowhere, and this whole business is being built on the claim that we
+ * only publish what we can support. The guide was contradicting the product.
+ *
+ * The `symptom` field is where those invented costs used to live. It now names
+ * something the reader can check in their own week, which is more persuasive
+ * than a fabricated dollar figure and happens to be true.
+ */
 const items = [
   {
     num: '01',
-    title: 'Lead Follow-Up',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031725_2b70d297-ef81-4b48-a2fc-f1f5ec17ddb7.png',
-    problem: 'Every lead that doesn\'t hear from you within 5 minutes is 80% less likely to convert. Yet most operators respond hours later — or not at all.',
-    cost: 'Estimated cost: 3–8 leads lost per month per delayed response.',
-    fix: 'Build an instant automated response that fires the moment a lead submits a form, sends a DM, or calls after hours. Follow up with a 5-touch sequence over 14 days.',
-    takeaway: 'Your next step: Map every entry point where a lead can contact you. Build one automated response for each.',
+    title: 'Charter',
+    image: '/guide/01-charter.png',
+    problem:
+      'Most people write a prompt. A prompt is what you ask this time, so every session starts from zero: you re-explain your business, it produces something generic, and nothing accumulates. A charter is who the seat is, in a file it reads before every single run.',
+    symptom: 'You find yourself re-explaining your business at the start of every conversation.',
+    fix:
+      'One file, five sections: identity (what this seat owns), disposition (how it decides when two reasonable options conflict), mandate (three to five things it is for), guardrails (what it must never claim and never do), and cadence (when it runs). The disposition line does the most work and is the one people skip.',
+    takeaway:
+      'Write the disposition line first, and make it name something the seat will refuse or kill, including things it would otherwise prefer. "Thoughtful and strategic" describes nobody. "Kills campaigns that do not perform, including her own favourites" changes what it does.',
   },
   {
     num: '02',
-    title: 'Appointment Reminders',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031728_108eff20-8f44-4356-b8b0-00c0c19f0d3f.png',
-    problem: 'No-shows cost service businesses thousands per month. Most happen because nobody reminded the client — or the reminder came too late.',
-    cost: 'Estimated cost: 2–5 no-shows per month at your average appointment value.',
-    fix: 'Set up a 3-touch reminder sequence: 24 hours before, 1 hour before, and 15 minutes before the appointment. Add a 1-tap confirm/reschedule link.',
-    takeaway: 'Your next step: Count your no-shows last month. Multiply by your session rate. That\'s what automation saves you.',
+    title: 'Floor',
+    image: '/guide/02-floor.png',
+    problem:
+      'A target is a thing to reach, so it quietly becomes a ceiling: the number where attention stops. It also gives your seat nothing useful to say, because "you are at 68% of target" describes arithmetic rather than a situation.',
+    symptom: 'Your AI tells you things look broadly fine. Every week. Regardless of the week.',
+    fix:
+      'Rewrite every goal as a minimum acceptable outcome. Not the aspiration, the number below which the month went badly. Then instruct the seat to report distance to the floor and whether it will clear it, never percent to target.',
+    takeaway:
+      'If your assistant has never flagged anything, it almost certainly has no floors to measure against. Nothing can be off track when there is no line to be under. That is a ten-minute fix.',
   },
   {
     num: '03',
-    title: 'Client Onboarding',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031731_73e2fed2-ed3e-4e73-bec1-111cefc5cfb5.png',
-    problem: 'Sending the same welcome email, intake form, contract, and next-steps message manually for every new client is pure waste — and inconsistent.',
-    cost: 'Estimated cost: 45–90 minutes per new client on tasks that don\'t require a human.',
-    fix: 'Trigger a complete onboarding workflow the moment a client signs or pays. Welcome email, intake form, contract, calendar link, and expectations — all automatic.',
-    takeaway: 'Your next step: Write out every step of your current onboarding. Anything that\'s the same every time gets automated.',
+    title: 'Run',
+    image: '/guide/03-run.png',
+    problem:
+      'Everything most people do with AI is initiated by them. You decide there is work, you open a chat, you supply context. The ceiling is your attention, and nothing happens on a day you do not sit down.',
+    symptom: 'Last week nothing happened, because you were busy doing the work.',
+    fix:
+      'One standing run against durable files, on a schedule. Start with a single daily or weekly job that reads your goals and numbers and tells you what changed and what is off its floor. Add a liveness check, because scheduled work dies silently and the failure is invisible.',
+    takeaway:
+      'Schedule exactly one run this week, then diary a reminder to confirm it actually fired. A schedule nobody verifies is a schedule that stops without telling you.',
   },
   {
     num: '04',
-    title: 'Review & Reputation Requests',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031733_b59b3bbe-5bc5-4d37-ad64-22469d50157d.png',
-    problem: '72% of customers will leave a review if asked — but only 6% are ever asked. Manual review requests never happen consistently.',
-    cost: 'Estimated cost: 10–20 lost reviews per month, directly impacting search ranking and trust.',
-    fix: 'Trigger a review request 24–48 hours after service completion. Personalize it with their name and what they purchased. Make it one tap.',
-    takeaway: 'Your next step: Set a trigger for every closed job or completed service. One message. Automated every time.',
+    title: 'Review',
+    image: '/guide/04-review.png',
+    problem:
+      'Your board will produce something articulate every time. Articulate is free. The failure mode is not gibberish, it is a confident, well-written paragraph that could be about any business and quietly is not about yours.',
+    symptom: 'You cannot tell which parts of the answer came from your actual numbers.',
+    fix:
+      'Four checks, under a minute. Does every claim trace to a number in your files? Did it name what it did not have, rather than filling the gap? Is it consistent with decisions you already made? Could you act on it today? Three of the four failures are fixed by one line in the brief.',
+    takeaway:
+      'Grade your most recent AI output against those four. The one that usually fails is the second, and the fix is telling it explicitly to report missing numbers instead of estimating them.',
   },
   {
     num: '05',
-    title: 'Invoice & Payment Follow-Up',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031736_3d12ce63-9081-4d88-ba72-0c2bfc238c43.png',
-    problem: 'Chasing unpaid invoices manually is uncomfortable, inconsistent, and time-consuming. Most operators let them sit too long.',
-    cost: 'Estimated cost: 15–30 days added to payment cycles. Cash flow problems that shouldn\'t exist.',
-    fix: 'Build a 3-touch payment sequence: a reminder the day before due, a follow-up 3 days after, and a final notice at 7 days. Automate it with a payment link in every message.',
-    takeaway: 'Your next step: Look at your last 10 late invoices. Every one of them could have been followed up automatically.',
-  },
-  {
-    num: '06',
-    title: 'Social Media Scheduling',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031739_0d9e88d5-0401-44ac-b6ff-cdb6f01148da.png',
-    problem: 'Posting manually means feast or famine — you post when you remember, go dark when life gets busy, and lose momentum every time.',
-    cost: 'Estimated cost: Inconsistent presence = lower reach, fewer inbound leads, weaker authority.',
-    fix: 'Batch-create 2 weeks of content in one session and schedule all of it. Use a tool that posts across platforms automatically so you never have to think about it again mid-week.',
-    takeaway: 'Your next step: Block 90 minutes this week to batch content. Schedule it all before you leave that session.',
-  },
-  {
-    num: '07',
-    title: 'Lead Qualification',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031742_4d9d1e17-8869-4899-8662-03688198206c.png',
-    problem: 'Answering the same 5 pre-sale questions over DM, email, or phone consumes hours every week — for leads that often aren\'t even a fit.',
-    cost: 'Estimated cost: 5–10 hours per week on conversations that don\'t convert.',
-    fix: 'Build a qualification form or AI chat sequence that asks your standard questions upfront. Only book calls with people who pass the criteria.',
-    takeaway: 'Your next step: Write down the 5 questions you ask every potential client. Turn those into a form that runs automatically.',
-  },
-  {
-    num: '08',
-    title: 'Reporting & Analytics',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031745_902e7936-2b00-4cdf-b041-9bbe94af6837.png',
-    problem: 'Manually pulling numbers from multiple platforms into a spreadsheet every week is a half-day task that kills momentum.',
-    cost: 'Estimated cost: 3–6 hours per week on data gathering that adds zero value.',
-    fix: 'Connect your platforms to a single dashboard that aggregates and updates automatically. Revenue, leads, bookings, and KPIs — all in one place, updated daily.',
-    takeaway: 'Your next step: List every place you pull data from. That list is your integration map.',
-  },
-  {
-    num: '09',
-    title: 'Re-Engagement Campaigns',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031747_43ebdda7-43dd-44fa-86ee-16bf88ca5c10.png',
-    problem: 'Your old leads and inactive clients are your warmest potential business. But manually reaching out to them almost never happens.',
-    cost: 'Estimated cost: Hundreds of warm contacts sitting untouched while you chase cold traffic.',
-    fix: 'Build a 90-day re-engagement sequence that runs automatically for all contacts who haven\'t interacted in 60+ days. Keep it personal — name, context, simple ask.',
-    takeaway: 'Your next step: Export your contact list. Filter by last interaction date. Everyone over 60 days goes into your re-engagement flow.',
-  },
-  {
-    num: '10',
-    title: 'Calendar & Scheduling',
-    image: 'https://d8j0ntlcm91z4.cloudfront.net/user_3DrmYRucVZ9jcLrx9L0KtAHJdQY/hf_20260526_031750_05470fe2-fae1-4f99-8000-8f6c7902c5fd.png',
-    problem: 'Back-and-forth scheduling emails are one of the most consistent time wasters in any service business. Every round trip is 10–15 minutes gone.',
-    cost: 'Estimated cost: 1–3 hours per week on emails that a link could eliminate entirely.',
-    fix: 'Replace all scheduling conversations with a single calendar link. Set your availability once. Let contacts book themselves. No more back and forth.',
-    takeaway: 'Your next step: Set up your booking link today. Put it in your email signature, your bio, and everywhere you communicate.',
+    title: 'Promote',
+    image: '/guide/05-promote.png',
+    problem:
+      'Autonomy gets treated as a switch. Either you approve everything, which means the work only happens while you watch, or you turn approvals off and hope. The real question is never whether you trust it. It is which specific actions it has earned.',
+    symptom: 'You are either approving every single action, or you stopped looking a while ago.',
+    fix:
+      'Four ranks, each naming what it unlocks and what stays gated. The seat requests a promotion citing its own decision log; you grant or hold; promotions are revocable. Some decisions never move at any rank, and writing that down is what makes the rest safe to climb.',
+    takeaway:
+      'Write down what your assistant may do today without asking, and one thing it must earn the right to do. That single sentence is the beginning of a ladder.',
   },
 ]
 
 export default function GuidePage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="bg-white">
       {/* Header */}
-      <div className="bg-zinc-950 text-white px-6 py-4 flex items-center justify-between">
-        <span className="text-[11px] tracking-[0.3em] uppercase text-zinc-400 font-medium">
-          AI by Design — Free Guide
-        </span>
-        <Link
-          href="/"
-          className="text-[11px] tracking-widest uppercase text-amber-500 hover:text-amber-400 transition-colors"
-        >
-          Back to Site →
-        </Link>
-      </div>
-
-      {/* Cover */}
-      <div className="bg-zinc-950 text-white px-6 py-20 md:py-32 text-center">
-        <p className="text-amber-500 text-[10px] tracking-[0.4em] uppercase font-medium mb-6">
-          AI by Design · Automation Guide
-        </p>
-        <h1 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl mx-auto mb-6">
-          10 Things In Your Business You Should Never Do Manually
-        </h1>
-        <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-          A straight-to-the-point breakdown of the tasks draining your time every week — and
-          exactly what to automate first.
-        </p>
-        <div className="mt-10 inline-block border border-amber-500/30 px-6 py-3">
-          <p className="text-zinc-400 text-xs tracking-widest uppercase">
+      <div className="bg-zinc-950 text-white px-6 pt-20 pb-16">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-amber-500 text-[10px] tracking-[0.4em] uppercase font-medium mb-6">
+            Free Guide
+          </p>
+          <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] mb-6">
+            The Board Method
+          </h1>
+          <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl">
+            How to build a small board of AI employees that read your real numbers on a
+            schedule and hand you a decision, instead of waiting for you to open a chat window.
+          </p>
+          <p className="text-zinc-600 text-xs tracking-widest uppercase mt-8">
             Read time: approx. 12 minutes
           </p>
         </div>
@@ -146,17 +117,24 @@ export default function GuidePage() {
 
       {/* Intro */}
       <div className="max-w-3xl mx-auto px-6 py-16">
-        <div className="border-l-4 border-amber-500/40 pl-8 space-y-4 text-zinc-600 leading-relaxed">
+        <div className="space-y-5 text-zinc-600 text-base leading-relaxed">
           <p>
-            Most business owners know they should be automating more. The problem isn&apos;t
-            awareness — it&apos;s knowing where to start.
+            You already know AI can help. The problem is that it only helps on days you
+            remember to ask, and every session starts from nothing.
           </p>
           <p>
-            This guide cuts straight to the 10 processes that drain the most time from operators at
-            every level — and shows you exactly what to build first.
+            A board fixes the remembering. It is a handful of narrow assistants, each with a
+            defined job, running on a schedule against a folder of plain files that describe
+            your business. Four files do most of the work: what you are trying to move, where
+            your numbers stand, what you have already decided, and who is in your pipeline.
+          </p>
+          <p>
+            None of this requires code, and none of it is tied to one AI tool. It is markdown
+            files and a schedule, so it runs on whatever you already use.
           </p>
           <p className="text-zinc-900 font-medium">
-            You don&apos;t need to automate everything. You need to automate the right things. Start here.
+            Five steps. Charter, Floor, Run, Review, Promote. Each one is a file you end up
+            holding.
           </p>
         </div>
       </div>
@@ -165,33 +143,24 @@ export default function GuidePage() {
       <div className="max-w-3xl mx-auto px-6 pb-20 space-y-16">
         {items.map((item) => (
           <div key={item.num} className="border-t border-zinc-200 pt-12">
-            {/* Number + title */}
             <div className="flex items-baseline gap-4 mb-6">
               <span className="text-amber-500 text-sm font-medium tracking-widest">{item.num}</span>
               <h2 className="text-xl md:text-2xl font-semibold text-zinc-900">{item.title}</h2>
             </div>
 
-            {/* Diagram image */}
             {item.image ? (
               <div className="w-full relative mb-8 rounded-sm overflow-hidden border border-zinc-200">
                 <Image
                   src={item.image}
-                  alt={`${item.title} automation flow diagram`}
+                  alt={`A real ${item.title} file from a working board`}
                   width={1376}
                   height={768}
                   className="w-full h-auto block"
                 />
               </div>
-            ) : (
-              <div className="w-full h-48 bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-8 rounded-sm">
-                <p className="text-zinc-400 text-xs tracking-widest text-center">
-                  [ Diagram: {item.title} automation flow ]
-                </p>
-              </div>
-            )}
+            ) : null}
 
             <div className="space-y-5 text-zinc-600 text-sm md:text-base leading-relaxed">
-              {/* Problem */}
               <div>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-zinc-400 font-medium mb-2">
                   The Problem
@@ -199,12 +168,12 @@ export default function GuidePage() {
                 <p>{item.problem}</p>
               </div>
 
-              {/* Cost */}
               <div className="bg-amber-50 border border-amber-200/60 px-5 py-4 rounded-sm">
-                <p className="text-amber-700 text-sm font-medium">{item.cost}</p>
+                <p className="text-amber-700 text-sm font-medium">
+                  How you know it is missing: {item.symptom}
+                </p>
               </div>
 
-              {/* Fix */}
               <div>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-zinc-400 font-medium mb-2">
                   The Fix
@@ -212,7 +181,6 @@ export default function GuidePage() {
                 <p>{item.fix}</p>
               </div>
 
-              {/* Takeaway */}
               <div className="border-l-2 border-zinc-900 pl-5">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-zinc-400 font-medium mb-2">
                   Your Next Step
@@ -224,34 +192,77 @@ export default function GuidePage() {
         ))}
       </div>
 
+      {/* What it will not do — the honesty section */}
+      <div className="max-w-3xl mx-auto px-6 pb-20">
+        <div className="border-t border-zinc-200 pt-12">
+          <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 mb-6">
+            What this will not do
+          </h2>
+          <div className="space-y-5 text-zinc-600 text-sm md:text-base leading-relaxed">
+            <p>
+              Worth saying plainly, because the failure is predictable. A board produces
+              analysis, drafts, and reminders on a schedule. It does not make the decisions. It
+              does not send the email. It cannot generate demand, and it will not notice that
+              the one thing blocking you is a conversation you have been avoiding for a month.
+            </p>
+            <p>
+              Run a board with nobody acting on it and you get very well organised reports about
+              a business that is not moving.
+            </p>
+            <p className="text-zinc-900 font-medium">
+              The honest promise is narrower and still worth it: it removes the excuse that you
+              did not have the analysis. The work stays yours.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Final CTA */}
       <div className="bg-zinc-950 text-white px-6 py-20 text-center">
         <p className="text-amber-500 text-[10px] tracking-[0.4em] uppercase font-medium mb-6">
-          Ready to Build?
+          Build It
         </p>
         <h2 className="text-2xl md:text-4xl font-semibold tracking-tight mb-4 max-w-xl mx-auto">
-          You Know What to Fix. Let&apos;s Build It Together.
+          You have the method. The course builds it with you.
         </h2>
         <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mx-auto mb-10">
-          Book a free 15-minute call. Tell me which of these is costing you the most. I&apos;ll tell
-          you exactly what to build and what it takes.
+          Everything above is the shape. The course is the build: the files, the schedule, the
+          permissions that keep it contained, and how to tell a useful run from a plausible one.
+          Written for people who have never coded.
         </p>
         <a
-          href="https://calendly.com/terrysc107/15-min-ai-discovery-call"
+          href={COURSE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block border border-amber-500 text-amber-500 px-10 py-4 text-xs tracking-widest uppercase hover:bg-amber-500 hover:text-black transition-colors duration-200"
         >
-          Let&apos;s Talk →
+          See the course →
         </a>
         <p className="text-zinc-600 text-[10px] tracking-widest uppercase mt-6">
-          Free · No commitment · 15 minutes
+          One-time · Lifetime access
+        </p>
+        <p className="text-zinc-500 text-xs mt-10">
+          Rather talk it through first?{' '}
+          <a
+            href="https://calendly.com/terrysc107/15-min-ai-discovery-call"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-300 underline underline-offset-4 hover:text-white"
+          >
+            Book a free 15-minute call
+          </a>
+          .
         </p>
       </div>
 
       {/* Footer */}
       <div className="bg-zinc-950 border-t border-white/5 px-6 py-6 text-center">
-        <p className="text-zinc-600 text-xs">© 2026 AI by Design. All rights reserved.</p>
+        <p className="text-zinc-600 text-xs">
+          © 2026 AI by Design.{' '}
+          <Link href="/" className="hover:text-zinc-400">
+            aixdesign.dev
+          </Link>
+        </p>
       </div>
     </div>
   )

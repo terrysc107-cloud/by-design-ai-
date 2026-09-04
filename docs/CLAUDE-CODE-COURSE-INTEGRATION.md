@@ -1,10 +1,16 @@
-# Claude Code Course Integration
+# Course Integration
 
 How the AI by Design education surface on `aixdesign.dev` relates to the
-separate course platform at `claudecodeclass.com`.
+separate course platform at `runyouraiboard.com`.
 
-**Status:** built, not launched. See [Launch blockers](#launch-blockers).
-**Last updated:** 2026-07-16
+**Status:** live copy synced to the current product. Publishing blocked on the
+items in [Launch blockers](#launch-blockers).
+**Last updated:** 2026-09-03
+
+> **Renamed twice.** The product was `Claude Code Class` at $97 on
+> `claudecodeclass.com`, then `My AI Board` at $57 on `runyouraiboard.com`
+> (2026-08-28). The old domain still resolves, so no existing link is broken.
+> If you find "Claude Code Class" anywhere in this repo, it is stale.
 
 ---
 
@@ -15,12 +21,25 @@ claims honest.
 
 | | Self-paced course | Live lab |
 |---|---|---|
-| Name | **Claude Code Class** | **AI by Design Claude Code Build Lab** |
-| Status | Live, purchasable | **Planned.** Not scheduled, not for sale |
-| Price | **$97 one-time**, lifetime access | None set |
-| Lives at | `claudecodeclass.com` | Nowhere yet |
-| Checkout | On the course platform | **Does not exist** |
-| Role of aixdesign.dev | Marketing surface + referral only | Announcement only |
+| Name | **My AI Board** | **The Build Lab** |
+| Status | Live, purchasable | **Waitlist only.** No date, not for sale |
+| Price | **$57 one-time**, lifetime access | Set in the course repo, not shown here |
+| Lives at | `runyouraiboard.com` | `runyouraiboard.com/build-lab` |
+| Checkout | On the course platform | Built, gated behind `BUILD_LAB.status` |
+| Role of aixdesign.dev | Marketing surface + referral only | Waitlist referral only |
+
+**The course is now a board course, not a coding course.** An audit of the
+original 49 lessons found only 6 that a non-coder could complete unmodified, so
+the developer curriculum moved to a **Dev Pack** add-on and the board path
+became the product. The buyer is a solopreneur who has never written code.
+Anything on this site that promises the six-step developer loop (inspect, plan,
+build, review, test, ship) is selling the add-on to the wrong person, and that
+is a refund. The board path's spine is `BOARD_LOOP` in `lib/education.ts`.
+
+**There is a five-rung ladder** above the course: the Kit, the Build Lab, the
+Board Room, and the Install. It is mirrored into `LADDER` in `lib/education.ts`
+and rendered on `/education`, with prices shown only for rungs someone can
+actually buy today. See the note on that constant for why.
 
 ### What aixdesign.dev does and does not do
 
@@ -30,24 +49,38 @@ claims honest.
   anything. There is no course auth, no Supabase table, and no webhook in this
   repo. Every education page is a static server component.
 
-### Positioning guardrail
+### Positioning: co-equal paths
 
-`memory/DECISIONS.md` and `docs/BRAND-KIT.md` both position AI by Design as a
-coaching and consulting agency that ships custom systems — explicitly *not* a
-course-seller ("unlike course-sellers … who hand you a Notion doc and walk
-away"). The education surface is deliberately built as a **secondary** path
-that does not contest that:
+**CHANGED 2026-09-03 by Terry.** This section used to say the opposite, and the
+history matters because the old rule was deliberate rather than accidental.
 
-- The primary CTA everywhere is still **Book a Discovery Call**. Both education
-  pages end with the shared `FinalCTA` component — the same one the homepage
-  uses, unmodified.
-- `Education` is a plain nav link at the same visual weight as `Blog` and
-  `Newsletter`. It is not a button, not gold, not above the CTA.
-- Both pages state that hiring the build is a legitimate alternative to
-  learning it, and route that reader to the discovery call.
+The retired rule read: education is a **secondary** path, the primary CTA
+everywhere stays Book a Discovery Call, and the `Education` nav link is "not a
+button, not gold, not above the CTA". It existed because `memory/DECISIONS.md`
+positions AI by Design as a coaching and consulting agency and explicitly *not*
+a course-seller. It also named its own trigger for revisiting: *"If education
+ever starts pulling traffic away from discovery calls, this is the tension to
+revisit."*
 
-If education ever starts pulling traffic away from discovery calls, this is the
-tension to revisit — the ordering above is the lever.
+Terry revisited it. The course now has a live $57 checkout and its own funnel,
+and the two offers are **co-equal**:
+
+- `components/sections/TwoPaths.tsx` on the homepage is the fork: learn it, or
+  hire it. One grid, two columns of equal width, the same heading scale and the
+  same button treatment on both sides. **If one column ever gets the gold fill
+  and the other gets a text link, the page has quietly picked a winner again.**
+  Co-equal is a layout claim, so the layout has to honour it.
+- `Education` moved to the `sm` breakpoint in the header and `Coaching` moved
+  back to `md`. The nav row cannot hold both at `sm` without wrapping to two
+  lines, so this was a swap, not an addition.
+- Both education pages still route to the discovery call at the end, and both
+  still say plainly that hiring the build is a legitimate alternative to
+  learning it. That was always honest and it stays.
+
+The two buyers are different people. Someone who wants to learn the system is
+not a warmed-up lead for a done-for-you engagement, which is why the content
+engine keeps them in separate lanes (see below) and why a board-lane post must
+never ask for a discovery call.
 
 ### Claim rules (non-negotiable)
 
@@ -77,12 +110,15 @@ Source: `AFFILIATION_DISCLAIMER` in `lib/education.ts`.
 | `lib/education.ts` | Single source of truth: course URL, price, names, disclaimer, `courseUrl()` UTM builder |
 | `app/education/page.tsx` | Education hub — principles, catalog, education↔consulting relationship |
 | `app/education/claude-code/page.tsx` | Course detail — method, capstone, fit, live-lab notice |
-| `components/layout/Header.tsx` | Added `Education` nav link (`hidden md:inline`) |
+| `lib/education.ts` | Also holds `BOARD_LOOP` and the `LADDER` mirror. Both carry cross-repo sync warnings |
+| `components/sections/TwoPaths.tsx` | Homepage fork: learn it or hire it. The co-equal claim, in layout |
+| `components/layout/Header.tsx` | `Education` nav link at `sm`, `Coaching` at `md` |
 | `components/layout/Footer.tsx` | Added `Education` link to the legal-row nav |
 | `app/sitemap.ts` | Added both education routes |
 
-Nothing else was touched. No API routes, no Supabase, no env vars, no
-dependencies.
+The content engine is separate but related, and its board lane sells this
+course: `lib/content-engine.ts` (`LANES.board`), `lib/content-guardrail.ts` (the
+claim gate), `scripts/check-claims.ts` (its test), and the two content crons.
 
 ---
 
@@ -106,9 +142,13 @@ utm_content  = <placement slug>
 
 | Placement | `utm_content` | Resulting URL |
 |---|---|---|
-| `/education` course card | `education-hub-primary` | `https://claudecodeclass.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=claude-code-for-operators&utm_content=education-hub-primary` |
+| `/education` course card | `education-hub-primary` | `https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=claude-code-for-operators&utm_content=education-hub-primary` |
 | `/education/claude-code` hero | `course-page-hero` | …`&utm_content=course-page-hero` |
 | `/education/claude-code` footer | `course-page-footer` | …`&utm_content=course-page-footer` |
+| Homepage `TwoPaths` learn column | `home-two-paths-learn` | …`&utm_content=home-two-paths-learn` |
+
+`ladderUrl(content)` builds the same shape against `/ladder` on the course
+platform.
 
 **Internal / non-course CTAs:**
 
@@ -123,27 +163,35 @@ utm_content  = <placement slug>
 
 Do not link to `/education` from anywhere public until these clear.
 
-1. **The course platform must actually say "Claude Code Class" at
-   $97.** These pages assert the name and price; `claudecodeclass.com` is
-   mid-refresh. If the destination still shows the old branding or a different
-   price, the pages are lying. **Verify before launch.**
-2. **The course platform must accept UTM query params on `/`** without
+1. ~~The course platform must say the right name at the right price.~~ **DONE
+   2026-09-03.** `lib/education.ts` reads `My AI Board` / `$57` /
+   `runyouraiboard.com`, matching `BRAND` and `PRODUCT` in the course repo's
+   `lib/course-config.ts`. The live $57 Stripe price exists
+   (`price_1U9Res…`, created 2026-08-29).
+2. **Confirm `NEXT_PUBLIC_STRIPE_PRICE_ID` in Vercel points at that $57 price.**
+   Cannot be checked from a local session. The checkout route asserts the live
+   Stripe amount against config and returns **503 rather than charging the wrong
+   amount**, so a stale env var means every buy button on both sites fails
+   safely and silently. Terry only.
+3. **The course platform must accept UTM query params on `/`** without
    redirecting them away. Load one of the URLs in §3 and confirm the params
    survive to the landing page and into its analytics.
-3. **The capstone description must match the real curriculum.** The page
-   promises a build-your-own-internal-tool capstone and a six-step
-   inspect→plan→build→review→test→ship loop. Someone who knows the course
-   contents must confirm both are accurate.
-4. **Terry to review the education↔consulting framing.** It intentionally tells
-   readers that hiring the build is a fine alternative to buying the course.
-   That is honest, and it costs course conversions. Confirm that trade is wanted.
-5. **No OG image for the education routes.** They inherit the site-wide
-   `app/opengraph-image.png`, which is consulting-branded. Acceptable to launch;
-   worth fixing if the pages get shared.
+4. ~~The capstone description must match the real curriculum.~~ **DONE
+   2026-09-03.** The developer loop and the Lead Follow-Up Command Center
+   capstone were removed from `/education/claude-code`; the page now describes
+   the board path and `BOARD_LOOP`.
+5. ~~Terry to review the education↔consulting framing.~~ **DONE 2026-09-03.**
+   He chose co-equal paths. See [Positioning](#positioning-co-equal-paths).
+6. **No OG image for the education routes.** They inherit the site-wide
+   `app/opengraph-image.png`, which is consulting-branded. This matters more now
+   than it did: the content engine's board lane exists specifically to get these
+   links shared. Worth fixing before the first board-lane post ships.
 
-Not a blocker, but track it: the live lab section is the only thing on the site
-promising a future product. If it sits unscheduled for months it reads as
-vaporware. Either ship it or delete the section.
+The live-lab section is no longer the vaporware risk it was flagged as, because
+the waitlist is real and takes no deposit. It becomes one again if it sits
+undated for months. `BUILD_LAB.status` in the course repo is the switch, and a
+CHECK constraint on `ccc_lab_sessions` refuses `scheduled` without a real date
+and a real price.
 
 ---
 

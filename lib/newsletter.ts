@@ -4,6 +4,7 @@ import { getResend, FROM_EMAIL, SITE_URL } from './resend'
 import { newsletterIssueEmail } from './emails'
 import { getAllPosts } from './blog'
 import { ASSETS } from './cta'
+import { collectWeeklyIntel, formatWeeklyIntelForPrompt, type WeeklyIntel } from './weekly-intel'
 
 /**
  * Newsletter engine — generates a weekly email issue in the AI by Design voice
@@ -65,6 +66,8 @@ export interface GenerateIssueOptions {
   lane?: string
   /** feature + link the latest published blog post as the issue's main CTA. Default true. */
   featureLatestPost?: boolean
+  /** current AI/news/market snapshot collected before the model writes. */
+  intel?: WeeklyIntel
 }
 
 interface LatestPost {
@@ -90,6 +93,14 @@ THE READER: a busy solo operator or small-business owner — often in or around 
 
 THE GOAL: be genuinely useful in 2 minutes of reading. Teach one workflow or pattern they could set up themselves. The soft business goal is that they trust us and eventually book a free discovery call — but the issue earns that by being useful, not by pitching.
 
+EDITORIAL SHAPE:
+- This is a weekly operator intelligence note, not a breaking-news roundup.
+- Use the scraped AI/news and market snapshot as raw context. Do not summarize every item.
+- Pick ONE practical angle from the week: a tool shift, architecture pattern, business use case, or warning that a busy owner can act on.
+- You may mention a stock or market move only if it helps explain what operators should pay attention to. Do not give investment advice.
+- Include one small "try this" or "steal this" move.
+- Make it engaging: one sharp observation, one useful implementation detail, and one bonus idea are better than generic coverage.
+
 VOICE (non-negotiable):
 - Direct, not corporate. Short sentences. No fluff.
 - Builder, not guru. Show the work, not motivation.
@@ -108,11 +119,16 @@ HARD RULES:
 Return ONLY valid JSON, no prose around it.`
 }
 
-function buildUserPrompt(feature: LatestPost | null): string {
+function buildUserPrompt(feature: LatestPost | null, intel: WeeklyIntel): string {
   const featureBlock = feature
     ? `\nThis week, the issue should naturally lead toward this new blog post (the system will add the "read the full post" button after your content, so reference the idea but DO NOT paste a link): "${feature.title}" — ${feature.description}\nMake the intro + sections set up the topic of that post so the reader wants to read it.\n`
     : `\nThere is no featured post this week — make the issue a standalone practical lesson. The system will add a button inviting them to grab the free guide.\n`
   return `Write this week's AI by Design newsletter issue.${featureBlock}
+
+${formatWeeklyIntelForPrompt(intel)}
+
+Use the snapshot above to make the issue feel current, but do not turn the email into a list of headlines. Choose the most useful thread for a business operator and translate it into a practical workflow, architecture idea, use case, or decision rule.
+
 Return JSON in exactly this shape:
 {
   "subject": "<inbox subject line, under ~60 chars, specific and curiosity-driven, no clickbait>",
@@ -133,6 +149,7 @@ The "body" array must have 2 to 4 sections.`
  */
 export async function generateIssue(opts: GenerateIssueOptions = {}): Promise<GeneratedIssue> {
   const feature = (opts.featureLatestPost ?? true) ? latestPost() : null
+  const intel = opts.intel ?? (await collectWeeklyIntel())
 
   const completion = await getOpenAI().chat.completions.create({
     model: OPENAI_MODEL,
@@ -140,7 +157,7 @@ export async function generateIssue(opts: GenerateIssueOptions = {}): Promise<Ge
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: buildSystemPrompt() },
-      { role: 'user', content: buildUserPrompt(feature) },
+      { role: 'user', content: buildUserPrompt(feature, intel) },
     ],
   })
 
