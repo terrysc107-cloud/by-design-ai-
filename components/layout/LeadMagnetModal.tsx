@@ -58,6 +58,10 @@ export default function LeadMagnetModal() {
       })
       if (res.ok) {
         setStatus('done')
+        // Hand them to the post-conversion page. Navigating rather than
+        // rendering upsells inline keeps both capture points on one surface
+        // and makes the conversion a real, measurable URL.
+        window.location.href = '/guide/thanks'
         trackConversion('lead', { location: 'modal' })
         if (typeof window !== 'undefined') {
           window.localStorage.setItem(STORAGE_KEY, '1')

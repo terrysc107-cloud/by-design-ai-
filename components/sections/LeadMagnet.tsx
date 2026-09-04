@@ -27,6 +27,10 @@ export default function LeadMagnet() {
       })
       if (res.ok) {
         setStatus('done')
+        // Hand them to the post-conversion page. Navigating rather than
+        // rendering upsells inline keeps both capture points on one surface
+        // and makes the conversion a real, measurable URL.
+        window.location.href = '/guide/thanks'
         trackConversion('lead', { location: 'section' })
       } else {
         throw new Error('Request failed')
@@ -118,20 +122,17 @@ export default function LeadMagnet() {
               ))}
             </ul>
 
+            {/* The success state is now a page, not a sentence.
+                This used to swap the form for one line offering the web version
+                of the thing they had just been emailed, which asked for nothing
+                at the highest-intent moment in the funnel. /guide/thanks
+                carries the download plus the three next steps. This branch
+                stays as the brief flash before navigation. */}
             {status === 'done' ? (
               <div className="border border-gold/30 p-6 flex flex-col gap-2">
                 <p className="text-gold text-sm font-medium tracking-wide">You&apos;re in.</p>
                 <p className="text-white/55 text-sm leading-relaxed">
-                  Check your inbox — the guide is on its way. While you wait,{' '}
-                  <a
-                    href="/guide"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold underline underline-offset-2 hover:text-white transition-colors"
-                  >
-                    read it right here
-                  </a>
-                  .
+                  Taking you to your guide&hellip;
                 </p>
               </div>
             ) : (

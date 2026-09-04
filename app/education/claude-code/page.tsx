@@ -241,7 +241,7 @@ export default function ClaudeCodeCoursePage() {
             four-week cohort instead of a self-paced course, and you can stop it and ask why,
             which is the whole reason to be in the room.{' '}
             {LIVE_LAB_DATE
-              ? `The founding run opens ${LIVE_LAB_DATE.toLowerCase()}, in a small group, with the Kit included.`
+              ? `The founding run opens ${LIVE_LAB_DATE}, in a small group, with the Kit included.`
               : 'It is not scheduled yet. The waitlist is open, takes no deposit, and the people on it hear before anyone else.'}
           </p>
           <div className="mt-6">

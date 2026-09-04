@@ -15,12 +15,23 @@ export const metadata: Metadata = {
   },
 }
 
+/**
+ * NO <html> OR <body> HERE.
+ *
+ * This layout used to render its own `<html><body>` nested inside the root
+ * layout's, which is invalid in the App Router: only the root layout may emit
+ * them. React found markup on the client that did not match the server, so
+ * EVERY page under /guide failed hydration and fell back to client rendering
+ * on every visit. /education, which has no nested layout, hydrates clean.
+ *
+ * That was quiet until /guide became the destination for social traffic and the
+ * page a paid click would land on. It is the one page where a full client
+ * re-render costs the most.
+ *
+ * The light theme it was really there for now rides on a wrapper div, which
+ * overrides the root layout's dark body for this branch without fighting the
+ * document structure.
+ */
 export default function GuideLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className="bg-white text-zinc-900 antialiased">
-        {children}
-      </body>
-    </html>
-  )
+  return <div className="bg-white text-zinc-900">{children}</div>
 }
