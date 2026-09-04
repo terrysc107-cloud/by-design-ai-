@@ -145,7 +145,7 @@ export default function LeadMagnetModal() {
                   Free Guide
                 </p>
                 <h2 className="text-xl md:text-2xl font-semibold text-white tracking-tight leading-tight">
-                  10 Things In Your Business You Should Never Do Manually
+                  The Board Method
                 </h2>
                 <p className="text-white/55 text-sm leading-relaxed">
                   The processes draining your time every week — and exactly what to automate first.

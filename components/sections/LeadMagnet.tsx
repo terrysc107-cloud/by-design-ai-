@@ -98,18 +98,18 @@ export default function LeadMagnet() {
               Free Guide
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight leading-tight">
-              <TextReveal text="10 Things In Your Business You Should Never Do Manually" />
+              <TextReveal text="The Board Method" />
             </h2>
             <p className="text-white/55 text-sm md:text-base leading-relaxed">
-              A straight-to-the-point checklist of the tasks that drain your time every week — and
-              exactly what to automate first. No fluff. Just the moves.
+              Five steps that take AI from something you operate to a board that runs on a
+              schedule and hands you a meeting you can act on. Seven pages, no fluff.
             </p>
 
             <ul className="space-y-2">
               {[
-                'The exact 10 processes costing you the most time',
-                'What each one costs you in hours per month',
-                'The fix for each — and how hard it is to build',
+                'The charter line that decides how a seat behaves when options conflict',
+                'Why floors surface problems that targets hide',
+                'Four checks that tell a useful run from a plausible one',
               ].map((pt, i) => (
                 <li key={i} className="flex items-start gap-3 text-white/60 text-sm">
                   <span className="text-gold mt-0.5 flex-shrink-0">→</span>

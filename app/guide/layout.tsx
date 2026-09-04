@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: '10 Things You Should Never Do Manually — AI by Design',
-  description: 'A free automation audit guide for operators who are ready to get their time back.',
+  title: 'The Board Method: Build AI Employees That Run Without You | AI by Design',
+  description:
+    'Five steps that take AI from something you operate to a board that runs on a schedule and hands you a meeting you can act on. Free, seven pages.',
   alternates: { canonical: '/guide' },
   openGraph: {
     type: 'article',
     url: 'https://aixdesign.dev/guide',
     siteName: 'AI by Design',
-    title: '10 Things In Your Business You Should Never Do Manually',
-    description: 'A free automation audit guide for operators who are ready to get their time back.',
+    title: 'The Board Method',
+    description:
+      'Five steps that take AI from something you operate to a board that runs on a schedule and hands you a meeting you can act on.',
   },
 }
 

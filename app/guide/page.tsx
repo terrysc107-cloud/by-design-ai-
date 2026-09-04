@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { labWaitlistUrl } from '@/lib/education'
 import Image from 'next/image'
 
 const COURSE_URL = 'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=board-method-guide'
@@ -241,6 +242,36 @@ export default function GuidePage() {
         <p className="text-zinc-600 text-[10px] tracking-widest uppercase mt-6">
           One-time · Lifetime access
         </p>
+
+        {/* The two hops this page used to be missing.
+            Everything above routes to the course or to a call, so a reader who
+            wanted the PDF, or who wanted it built with them, had nowhere to go:
+            /guide is the lead magnet and it could not capture a lead, which
+            left the whole drip sequence reachable only from the homepage. */}
+        <div className="mt-12 pt-10 border-t border-zinc-800 max-w-lg mx-auto flex flex-col gap-3">
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            Want this as a PDF?{' '}
+            <Link
+              href="/#lead-magnet"
+              className="text-amber-500 underline underline-offset-4 hover:text-amber-400"
+            >
+              Get the seven-page version
+            </Link>{' '}
+            and a short series on the parts people get stuck on.
+          </p>
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            Would rather build it with people in the room?{' '}
+            <a
+              href={labWaitlistUrl('guide-page-lab')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-500 underline underline-offset-4 hover:text-amber-400"
+            >
+              The Build Lab
+            </a>{' '}
+            is a live cohort working on your own board.
+          </p>
+        </div>
         <p className="text-zinc-500 text-xs mt-10">
           Rather talk it through first?{' '}
           <a
