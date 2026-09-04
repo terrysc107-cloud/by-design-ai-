@@ -334,9 +334,9 @@ distribution, which is Cris.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-03 23:05:44 EDT
+- Updated: 2026-09-04 08:36:45 EDT
 - Branch: feat/board-funnel-and-content
-- Last commit: eb1ec6a fix(education): the Lab bundles the course too, not just the Kit
+- Last commit: acf3b22 docs: handoff checkpoint for the Build Lab founding cohort
 - Working tree: clean
 
 <!-- END AUTO-STATE -->
