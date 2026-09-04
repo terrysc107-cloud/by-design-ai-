@@ -12,6 +12,26 @@ const CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
 const COURSE_URL =
   'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=email&utm_campaign=board-method-drip'
 
+/**
+ * The Build Lab, and the discovery call. The two rungs the drip used to have no
+ * path to.
+ *
+ * Stages 1 to 4 all ended at COURSE_URL, so the funnel ran guide -> course and
+ * then simply stopped. Someone who read five emails, bought nothing, and was
+ * plainly interested got no further ask, and someone who wanted it built for
+ * them was never told that was an option.
+ *
+ * NO DATE IS WRITTEN INTO THE EMAIL. `/build-lab` renders the real date from
+ * `ccc_lab_sessions`, so the link stays correct after this run sells out or
+ * moves. An email that hardcodes "November 18" is wrong forever the moment the
+ * cohort changes, and it would be a date this repo cannot verify.
+ */
+const BUILD_LAB_URL =
+  'https://runyouraiboard.com/build-lab?utm_source=aixdesign.dev&utm_medium=email&utm_campaign=board-method-drip'
+
+const DISCOVERY_CALL_URL =
+  'https://calendly.com/terrysc107/15-min-ai-discovery-call'
+
 // Downloadable PDF guide. Override with GUIDE_PDF_URL if hosted elsewhere.
 export const GUIDE_PDF_URL = process.env.GUIDE_PDF_URL || `${SITE_URL}/guide.pdf`
 
@@ -341,6 +361,30 @@ const DRIP_CONTENT: Record<number, DripDef> = {
       'The fix is one line in your brief: <strong>if a number you need is missing, say it is missing, do not estimate it.</strong> Three of those four failures are fixed by a sentence.',
     ],
     cta: 'Build the whole thing →',
+  },
+  5: {
+    subject: 'The part that is hard to do alone',
+    heading: 'Everyone gets stuck in the same week.',
+    body: [
+      'You have the five steps now. Most people who build a board get the first run working and then lose it somewhere in the second or third week, and it is almost always the same failure: the run stopped and nothing said so.',
+      'That is why the live version exists. It is a four-week cohort, in a small group, and we deliberately leave a two-week gap in the middle where your board runs without you. Then we open the next session with what died. You cannot teach that in an afternoon, because the lesson takes two weeks of real time to happen to you.',
+      'You work on your own business the whole way through, not a worked example. Eight seats, so there is room to stop and ask about your situation specifically.',
+      'If you would rather do it yourself from the written lessons, that is a completely legitimate answer and the course is enough on its own. This is for the people who want it built with them.',
+    ],
+    cta: 'See how the Lab runs →',
+    ctaUrl: BUILD_LAB_URL,
+  },
+  6: {
+    subject: 'Learn it, or have it built',
+    heading: 'Both are fine. They are the same system.',
+    body: [
+      'This is the last of these, so here is the honest summary.',
+      'If you have the time and want the skill, build it yourself. The method is the whole point and you keep it. Everything in these emails is in the course, and the course is complete on its own.',
+      'If what you actually need is the system running by next quarter, that is the other half of what we do. We find the one bottleneck costing you the most time, design the system that removes it, and build it with you. You get a working board wired to your real data and documentation your team can maintain.',
+      'Deciding the build is not the best use of your time is not a failed attempt at learning it. It is a reasonable read of what your weeks look like. The call is free either way and there is nothing to prepare.',
+    ],
+    cta: 'Book a discovery call →',
+    ctaUrl: DISCOVERY_CALL_URL,
   },
 }
 
