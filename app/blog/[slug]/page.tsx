@@ -6,6 +6,7 @@ import NoiseBg from '@/components/effects/NoiseBg'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import NewsletterSignup from '@/components/sections/NewsletterSignup'
+import FiveThingsVideo from '@/components/ui/FiveThingsVideo'
 import { getPost, getPostSlugs, formatDate } from '@/lib/blog'
 
 const SITE_URL = 'https://aixdesign.dev'
@@ -67,6 +68,12 @@ const mdxComponents = {
   ),
   blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote className="border-l-2 border-gold/50 pl-5 italic text-white/55 my-6" {...props} />
+  ),
+  /* Components a post can use by name. Everything here is a real component
+     rather than raw markup in the MDX, so a post cannot go stale against the
+     asset it embeds. */
+  FiveThingsVideo: (props: React.ComponentProps<typeof FiveThingsVideo>) => (
+    <FiveThingsVideo className="my-8" {...props} />
   ),
 }
 

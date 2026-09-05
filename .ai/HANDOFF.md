@@ -1,3 +1,94 @@
+---
+## Handoff — 2026-09-05 (Claude) — the Five Things reel, shipped to four surfaces
+
+### Active task
+Terry: "ai x design prices for the build lab still says not available and we just made a
+video can we add it to the site somewhere thats good content." He picked all four
+placements offered.
+
+### Where the price bug actually was
+NOT in this repo. `lib/education.ts` already had `LIVE_LAB_PRICE = '$997'` and
+`LIVE_LAB_DATE` set, and aixdesign.dev/education renders both correctly in production. The
+stale flag was `available: false` on the `build-lab` LADDER rung in the COURSE repo
+(~/code/micro-course-saas-template/lib/course-config.ts), which made
+runyouraiboard.com/ladder print "Not open yet" next to $997. Fixed there; see that repo's
+handoff.
+
+### What changed here
+1. **`components/ui/FiveThingsVideo.tsx`** (new) — click-to-play 9:16 player,
+   `preload="none"`, poster frame, sharp corners, gold Watch button. No icon library and no
+   hand-rolled SVG: this site has zero SVGs and draws arrows with `→`, so the play glyph is
+   a CSS clip-path triangle.
+2. **`components/sections/TheBoardReel.tsx`** (new) + `app/page.tsx` — new home-page
+   section between TheAudit and TwoPaths. Asymmetric split, no CTA of its own: TwoPaths is
+   the fork and its docblock forbids emphasising either path, so a button here would pick a
+   winner one scroll early. The reel's own closing frame carries the Lab's ask.
+3. **`app/education/page.tsx`** — the Build Lab card is now a two-column grid with the reel
+   beside the copy, and gained `id="lab"` + `scroll-mt-28` so the new post can deep-link it.
+4. **`content/blog/five-things-a-real-ai-board-has.mdx`** (new, ~640 words) + 
+   **`app/blog/[slug]/page.tsx`** — registered `FiveThingsVideo` in `mdxComponents` so a
+   post embeds the component by name rather than raw markup.
+5. **`public/video/five-things.mp4`** (3.1MB, CRF 25 + faststart) and
+   **`five-things-poster.jpg`** (56KB) — web encode of the 24MB master.
+6. **`video/build-lab-five-things/`** — the HyperFrames source, previously untracked, plus
+   the fix below and a new render.
+
+### 🔴 Blocker found and fixed in the video itself
+The reel's opening chat mock read: *"Here's my business again — we sell CRCST exam prep,
+roughly 500 users, and I need this week's priorities…"* Two problems, on what was about to
+be four public AI by Design surfaces: a cross-brand leak (this repo's own
+`lib/content-guardrail.ts` CROSS_BRAND rule refuses `CRCST` by name, "these belong to
+Terry's SPD and ATS channels, never to AI by Design"), and a user-count claim about a real
+business, which the video's own BRIEF.md said would never appear in the render.
+
+Fixed at source in `index.html` and `build.mjs` (one `PROMPT` string, typing is
+length-independent at 46 fixed steps so timing is unchanged). It now reads *"same context
+as last week, same numbers"*, which keeps the beat and drops the brand and the number. The
+narration never said the line, so no VO regeneration was needed.
+
+### Checks run — exact results
+- `npx hyperframes check` — passed. Lint 0 errors / 2 warnings (file length, track density,
+  both structural and pre-existing). Runtime, Layout, Motion, Contrast: 0 errors.
+  Contrast 62/62 WCAG AA.
+- `npm run render -- --video-bitrate 14M` — 2010 frames in 55.4s, 23.9MB, 1m 7.0s.
+- Audio re-measured on the new render: **-13.8 LUFS** integrated, unchanged.
+- 24-frame sweep of the re-rendered master, eyeballed: no brand names anywhere, GOALS and
+  meeting metric VALUES still covered by gold redaction bars, CTA card still Nov 18 / Dec 2 /
+  Dec 9 / Dec 16 + "Eight people" + runyouraiboard.com/build-lab.
+- `npx tsc --noEmit` — clean.
+- Playwright (headless chromium, dev server :3010):
+  - `/education`, `/education#lab`, `/blog/five-things-a-real-ai-board-has`, `/` at 1280 and 390.
+  - Anchor `#lab` lands the article at y=112 at both 390 and 1280, clear of the fixed header.
+  - Player: **0** mp4 requests before the click, 1 after; then
+    `paused:false, currentTime 2.7, duration 67, controls:true`.
+  - Served frame screenshotted at t=2.4s: shows the corrected line, so the deployed encode
+    is the fixed one and not a cache.
+  - Every internal link in the new post resolves: /blog 200, 
+    /blog/scheduled-ai-tasks-fail-silently 200, /education 200, /education#lab 200.
+  - No console errors on any page.
+- `npm run build` NOT run in either repo: the sandbox classifier denied it.
+
+### Decisions
+- The video file is duplicated into both repos rather than cross-linked, so neither
+  marketing page depends on the other domain.
+- Click-to-play with `preload="none"`, not muted autoplay: the reel is narrated, and
+  autoplay would show the argument with the argument switched off at 3.1MB per visitor.
+- The new home-page section deliberately ships without a CTA. See its docblock.
+- The blog post makes no claim I could not verify. It says the board "has run every week
+  since June" and does not restate the meeting count, which ages.
+
+### Blockers / open
+1. **Nothing is committed or pushed** in either repo. Terry's call.
+2. `video/` is still untracked and its master render is 24MB. Decide whether the HyperFrames
+   source belongs in this repo or its own before committing (carried over from 2026-09-04).
+3. The reel bakes in "14 meetings", true as of 2026-09-04. It understates as the archive
+   grows, so not urgent, but it is a future re-render trigger.
+4. Still no music bed on the master (carried over from 2026-09-04).
+
+### Exact next step
+Terry watches the reel on /education, then decides whether to `git push` both repos. If any
+placement should go, it is one `<FiveThingsVideo />` line per page.
+
 
 ---
 ## Handoff — 2026-07-16 18:29:02 EDT
@@ -484,14 +575,85 @@ Terry does one real signup at /guide, confirms the email lands and the drip
 schedules, then puts the link in his bio and drives traffic.
 
 
+---
+## Handoff — 2026-09-04 23:55 EDT — Build Lab "Five Things" short (TEST RENDER)
+
+- Repo: /Users/terry/code/by-design-ai-  ·  Branch: main
+- Project: `video/build-lab-five-things/` (UNTRACKED, uncommitted, not in git)
+
+### Active task
+Terry asked for a test render to judge the quality of the newly installed
+`heygen-com/hyperframes` skill package, combined with the `aixdesign-five-things-shorts`
+skill Hermes wrote. Deliverable: a Build Lab promo.
+
+### What changed
+Nothing in the site. One new untracked directory, `video/build-lab-five-things/`:
+- `BRIEF.md` — route (product-launch-video), angle, redaction rule, verified-claims list
+- `SCRIPT.md` — locked 198-word narration
+- `build.mjs` — generates `index.html` from the VO timeline (edit this, not index.html)
+- `scripts-build-captions.mjs` — groups whisper word timings into caption cues
+- `assets/vo/*.mp3` — 8 ElevenLabs segments, Terry's clone
+- `assets/fonts/` — Geist woff2 copied from the repo's own node_modules
+- `renders/build-lab-five-things_2026-09-04_23-53-05.mp4` — the deliverable
+
+### Angle
+*Five things a real AI board has that a chat window doesn't* — charter, floors, schedule,
+archive, meeting. The Build Lab is the last eight seconds; the board is the video. This
+follows `docs/social/BUILD-LAB-REEL.md`'s reasoning: the Lab has no app, so filming the
+sales page would just be an ad.
+
+### 🔴 Redaction — how it was handled
+`crcst-beta/docs/business/ceo/` was NOT filmed. Every file frame is a brand-styled
+recreation. Where the narration says "real numbers," the frame shows the metric LABELS
+with the VALUES covered by gold redaction bars — truthful, and no real figure, customer
+or dollar amount is in the file.
+
+### Verified claims (all re-checked 2026-09-04, sources in BRIEF.md)
+4 sessions Nov 18 / Dec 2 / Dec 9 / Dec 16 · capacity 8 · 14 meetings since June ·
+weekly cadence · Thanksgiving week skipped · runyouraiboard.com/build-lab returns 200.
+No price, no seat-scarcity count, no outcome promise — per the five-things quality gate.
+
+### Checks run — exact results
+- `npx hyperframes check` — **passed**. Lint 0 errors / 2 warnings (file length, track
+  density — both structural, accepted). Runtime, Layout, Motion, Contrast: 0 errors.
+- Final MP4 probed: 1080x1920, 30fps, H.264 High, 67.0s, AAC 48kHz stereo.
+- Audio: **-13.8 LUFS** integrated (spec ~-14), true peak **-1.0 dBFS** (spec says
+  *below* -1.0 — it is AT the ceiling, not under it).
+- Six frames extracted from the rendered file (not the composition) and eyeballed.
+
+### Decisions
+- Rendered at `--video-bitrate 14M`; the default pass came out at 705 kbps, which would
+  band on the espresso gradient.
+- VO segmented per beat so caption timing comes from real word timestamps.
+- Motion follows `motion-doctrine`: LEFT current on the five list seams, an UP seam into
+  the recap (chapter boundary), an inverse-zoom arrival into the CTA. Seams hand-authored
+  to the vector law; the `seam-gate.mjs` verifier was NOT run.
+
+### Blockers / open
+1. **No music bed.** The five-things spec wants a minimal electronic pulse 10-16 dB under
+   the voice. Skipped rather than ship an unlicensed or AI-slop track. `/media-use` can
+   source one.
+2. **True peak is -1.0, not below it.** Platforms accept this as the ceiling; a limiter
+   pass would fix it properly.
+3. **A few caption phrase breaks are awkward** ("run dated on disk.") — an artifact of the
+   5-word cap on whisper groupings, not of the narration.
+4. Nothing is committed. Decide whether `video/` belongs in this repo or in its own.
+
+### Exact next step
+Terry watches the MP4 (Taildropped to iphone172, exit 0, delivery confirmed against
+`tailscale status`) and says whether the quality clears the bar. If yes: add a music bed,
+then decide if this replaces or supplements the crcst feature-reel pipeline for AI by
+Design content.
+
+
 <!-- AUTO-STATE (regenerated by claude_handoff.sh — safe to ignore, safe to delete) -->
 
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-04 13:18:07 EDT
+- Updated: 2026-09-05 12:26:55 EDT
 - Branch: main
-- Last commit: 24d54f7 docs: handoff before traffic
-- Working tree: clean
+- Last commit: 9122c17 docs(social): fix the meeting count in the narration itself
+- Working tree: 19 uncommitted file(s)
 
 <!-- END AUTO-STATE -->

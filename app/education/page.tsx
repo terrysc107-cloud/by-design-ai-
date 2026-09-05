@@ -4,6 +4,7 @@ import NoiseBg from '@/components/effects/NoiseBg'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FinalCTA from '@/components/sections/FinalCTA'
+import FiveThingsVideo from '@/components/ui/FiveThingsVideo'
 import {
   AFFILIATION_DISCLAIMER,
   LADDER,
@@ -137,7 +138,17 @@ export default function EducationPage() {
               that sentence became false. What is still true — and the only
               scarcity claim allowed anywhere — is that there is no date. The
               number lives in the course repo; see LIVE_LAB_NAME. */}
-          <article className="mt-6 border border-gold/25 bg-[#23201b]/40 p-8">
+          {/* The Lab card carries the reel because this is the page that hands
+              someone off to the course platform, and the reel's own closing
+              frame is runyouraiboard.com/build-lab. The video makes the
+              argument the CTA beside it is asking them to act on. Text first in
+              the DOM so the badge, headline, price and CTA keep their reading
+              order; the reel drops underneath them on mobile. */}
+          <article
+            id="lab"
+            className="mt-6 scroll-mt-28 border border-gold/25 bg-[#23201b]/40 p-8 grid gap-8 md:grid-cols-[1fr_280px] md:items-start"
+          >
+            <div>
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-1">
                 Live cohort
@@ -171,6 +182,9 @@ export default function EducationPage() {
                 {LIVE_LAB_DATE ? 'Take a seat' : 'Join the waitlist'} →
               </a>
             </div>
+            </div>
+
+            <FiveThingsVideo placement="education-hub-lab" />
           </article>
 
           <p className="text-white/35 text-xs leading-relaxed mt-8">{AFFILIATION_DISCLAIMER}</p>
