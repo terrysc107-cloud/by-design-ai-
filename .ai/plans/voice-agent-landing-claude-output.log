@@ -1,0 +1,25 @@
+Ignoring 4 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/terry/code/by-design-ai-"].hasTrustDialogAccepted: true in /Users/terry/.claude.json.
+All 12 spec'd files exist exactly (plus `scripts/test-voice-agent-page.mjs`, confirmed separately). Build complete.
+
+## Summary
+
+Implemented the isolated `/voice-agent` pre-launch waitlist page per spec, as 12 new files only — nothing tracked or previously-untracked was touched (verified via git diff-stat/hash comparison before and after).
+
+**Files created:** `app/voice-agent/page.tsx`, `app/voice-agent/_components/{VoiceAgentWaitlistForm,VoiceAgentFooter}.tsx`, `app/api/voice-agent-waitlist/route.ts`, `lib/voice-agent-waitlist{,-handler,-rate-limit}.ts`, `docs/migrations/voice-agent-waitlist.sql`, `docs/features/voice-agent-waitlist.md`, `tests/voice-agent-waitlist{,-rate-limit}.test.ts`, `scripts/test-voice-agent-page.mjs`.
+
+**Checks run, actual results:**
+- `npx tsx --test tests/voice-agent-waitlist{,-rate-limit}.test.ts` → **43/43 pass**
+- `npx tsc --noEmit --incremental false` → clean, no errors
+- `npm run check:claims` → ALL OK (pre-existing guardrail; doesn't validate this page's copy specifically)
+- `npm run build` → succeeds; `/voice-agent` prerenders static, `/api/voice-agent-waitlist` is a dynamic Node function
+- `next start` on port 3100 + `node scripts/test-voice-agent-page.mjs` → **30/30 browser checks pass** (mocked API throughout, never hit a real backend)
+
+**Key decisions:**
+- CTA exception (waitlist-only, no discovery-call CTA) documented in `docs/features/voice-agent-waitlist.md` and inline in `page.tsx`, per your instruction to flag it rather than silently deviate from `docs/BRAND-KIT.md`.
+- Reused the existing `getSupabase()`/`hasSupabase()` — no new secret, no new client.
+- SQL migration is review-only (fails loudly if the table already exists, wrapped in a transaction, RLS + revoked grants, no auto-apply anywhere) — **not applied**.
+- Skipped `next/image` for the SVG lockup (would need `dangerouslyAllowSVG` in `next.config.js`, out of scope) — used a plain `<img>` instead.
+
+**Pending your approval:** live persistence. Page and API are fully verified with mocks; real waitlist writes need you to review and apply `docs/migrations/voice-agent-waitlist.sql` yourself — I did not touch Supabase.
+
+**Flagged for you:** `app/privacy/page.tsx` doesn't yet mention this waitlist specifically; noted in the feature doc as a future follow-up, not edited here.
