@@ -1,0 +1,22 @@
+Ignoring 4 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/terry/code/by-design-ai-"].hasTrustDialogAccepted: true in /Users/terry/.claude.json.
+Everything checks out — `git status --short` is identical to the session's starting snapshot (the whole `app/voice-agent/` tree was already untracked; nothing outside it was touched, and `VoiceAgentFooter.tsx`/`VoiceAgentWaitlistForm.tsx` are unmodified).
+
+## Summary
+
+**New files**
+- `app/voice-agent/_components/VoiceAgentUseCaseCard.tsx` — motion.div card: `useReducedMotion`-gated stagger fade-up (`variants` hidden→visible, `whileInView`, `once: true`, delay = `index * 0.12`, matching `TextReveal.tsx`'s exact pattern), `whileHover` lift + uniform tilt (`y: -8, scale: 1.02, rotateX: 4, rotateY: -4`, spring), CSS `hover:shadow-[...]` gold glow (paint-only, not gated by reduced motion since it isn't a transform).
+- `app/voice-agent/_components/icons/UseCaseIcons.tsx` — 4 inline monochrome SVGs (`PhoneIcon`, `VoicemailIcon`, `ClockIcon`, `ReceiptIcon`), single stroke width, `currentColor`, no new dependency.
+
+**Modified**
+- `app/voice-agent/page.tsx` — `USE_CASES` entries gained an `icon` field (JSX, no copy changed); the plain `<div>` card markup was replaced with `<VoiceAgentUseCaseCard heading body icon index />`. No other section touched.
+
+**Hover-tilt tradeoff:** uniform fixed tilt on `whileHover`, not pointer-tracked. Documented inline in the component — a per-card mousemove/spring listener (à la `CTAButton`'s magnetic pull) is the right call for a button people aim at; across a whole card grid it's a listener+spring per card for an effect nobody consciously registers. Uniform tilt is the cheaper, equally "immersive" win.
+
+**Verification (exact results)**
+- `npx tsc --noEmit --incremental false` → clean, no output.
+- `npm run build` → `✓ Compiled successfully`, `/voice-agent` at 2.48 kB / 136 kB First Load JS, all 35 routes generated.
+- `npx tsx --test tests/voice-agent-waitlist.test.ts tests/voice-agent-waitlist-rate-limit.test.ts` → **43/43 pass**, unmodified (no changes needed).
+- `node scripts/test-voice-agent-page.mjs` against a local dev server on :3100 → **30/30 pass**, unmodified — it only asserts on heading text/page content, not the card's DOM structure, so nothing needed updating.
+- `git status --short` → identical to the pre-task snapshot; only `app/voice-agent/**` changed, nothing outside declared scope.
+
+**Skipped:** a second wrapper/container component for the grid — each card runs its own `whileInView` observer with an index-based delay instead, which gets the identical staggered look with one less file. Add a shared stagger container only if cards need to resync (e.g. re-trigger together on route change).
