@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="site-footer__bottom">
           <span>© 2026 AI by Design. All rights reserved.</span>
           <nav className="site-footer__links" aria-label="Footer navigation">
-            <Link href="/voice-agent">Agents</Link><Link href="/education">Education</Link><Link href="/newsletter">Newsletter</Link><Link href="/blog">Blog</Link><Link href="/guide">Free guide</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link>
+            <Link href="/about">About</Link><Link href="/voice-agent">Agents</Link><Link href="/education">Education</Link><Link href="/newsletter">Newsletter</Link><Link href="/blog">Blog</Link><Link href="/guide">Free guide</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link>
           </nav>
         </div>
       </div>
