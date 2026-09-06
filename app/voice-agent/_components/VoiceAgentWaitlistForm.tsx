@@ -124,7 +124,7 @@ export default function VoiceAgentWaitlistForm() {
       <div
         role="status"
         aria-live="polite"
-        className="rounded-sm border border-gold-border bg-gold-dim px-6 py-5 text-base text-white"
+        className="voice-form-success"
       >
         You&apos;re on the list. We&apos;ll email you with updates about this offering.
       </div>
@@ -132,9 +132,9 @@ export default function VoiceAgentWaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex w-full max-w-[560px] flex-col gap-5">
-      <div className="flex flex-col gap-2">
-        <label htmlFor={emailId} className="text-sm font-medium text-white">
+    <form onSubmit={handleSubmit} noValidate className="voice-waitlist-form">
+      <div className="voice-form-field">
+        <label htmlFor={emailId}>
           Email address
         </label>
         <input
@@ -149,18 +149,18 @@ export default function VoiceAgentWaitlistForm() {
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? `${emailId}-error` : undefined}
-          className="min-h-[44px] rounded-sm border border-white/20 bg-transparent px-4 py-2.5 text-base text-white outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold"
+          className="voice-form-input"
         />
         {errors.email && (
-          <p id={`${emailId}-error`} className="text-sm text-red-400">
+          <p id={`${emailId}-error`} className="voice-form-error">
             {errors.email}
           </p>
         )}
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={businessId} className="text-sm font-medium text-white">
-          Business type or use case (optional)
+      <div className="voice-form-field">
+        <label htmlFor={businessId}>
+          What should your agent handle? <span>(optional)</span>
         </label>
         <input
           ref={businessRef}
@@ -168,22 +168,22 @@ export default function VoiceAgentWaitlistForm() {
           name="business_type"
           type="text"
           maxLength={200}
-          placeholder="Restaurant orders, after-hours service calls, customer questions…"
+          placeholder="After-hours calls, lead intake, customer questions…"
           value={businessType}
           onChange={(e) => setBusinessType(e.target.value)}
           aria-invalid={Boolean(errors.business_type)}
           aria-describedby={errors.business_type ? `${businessId}-error` : undefined}
-          className="min-h-[44px] rounded-sm border border-white/20 bg-transparent px-4 py-2.5 text-base text-white outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold"
+          className="voice-form-input"
         />
         {errors.business_type && (
-          <p id={`${businessId}-error`} className="text-sm text-red-400">
+          <p id={`${businessId}-error`} className="voice-form-error">
             {errors.business_type}
           </p>
         )}
       </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start gap-3">
+      <div className="voice-form-field">
+        <div className="voice-consent-row">
           <input
             ref={consentRef}
             id={consentId}
@@ -193,21 +193,21 @@ export default function VoiceAgentWaitlistForm() {
             onChange={(e) => setConsent(e.target.checked)}
             aria-invalid={Boolean(errors.consent)}
             aria-describedby={errors.consent ? `${consentId}-error` : undefined}
-            className="mt-0.5 h-5 w-5 shrink-0 accent-gold"
+            className="voice-form-checkbox"
           />
-          <label htmlFor={consentId} className="text-sm text-stone-400">
-            Email me about this voice-agent offering.
+          <label htmlFor={consentId}>
+            Email me about the AIxDesign Voice preview.
           </label>
         </div>
         {errors.consent && (
-          <p id={`${consentId}-error`} className="text-sm text-red-400">
+          <p id={`${consentId}-error`} className="voice-form-error">
             {errors.consent}
           </p>
         )}
       </div>
 
       {/* Honeypot: invisible to sighted users and assistive tech, never keyboard-reachable. */}
-      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+      <div aria-hidden="true" hidden>
         <label htmlFor={honeypotId}>Leave this field blank</label>
         <input ref={honeypotRef} id={honeypotId} name="company_url" type="text" tabIndex={-1} autoComplete="off" />
       </div>
@@ -215,14 +215,14 @@ export default function VoiceAgentWaitlistForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="cta-btn min-h-[44px] px-8 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+        className="voice-form-submit"
       >
-        {status === 'submitting' ? 'Joining…' : 'Join the Waitlist'}
+        {status === 'submitting' ? 'Joining…' : 'Join the Preview'}
       </button>
 
-      <div role="status" aria-live="polite" className="min-h-[1.25rem] text-sm">
-        {status === 'submitting' && <span className="text-stone-400">Joining…</span>}
-        {status === 'error' && <span className="text-red-400">{statusMessage}</span>}
+      <div role="status" aria-live="polite" className="voice-form-status">
+        {status === 'submitting' && <span>Joining…</span>}
+        {status === 'error' && <span className="voice-form-error">{statusMessage}</span>}
       </div>
     </form>
   )
