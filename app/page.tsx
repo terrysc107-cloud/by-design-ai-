@@ -1,50 +1,34 @@
-import NoiseBg from '@/components/effects/NoiseBg'
-import GoldRule from '@/components/ui/GoldRule'
-import Hero from '@/components/sections/Hero'
-import PatternInterrupt from '@/components/sections/PatternInterrupt'
-import TheAudit from '@/components/sections/TheAudit'
-import TheBoardReel from '@/components/sections/TheBoardReel'
-import TwoPaths from '@/components/sections/TwoPaths'
-import TheOperator from '@/components/sections/TheOperator'
-import WhatHappensNext from '@/components/sections/WhatHappensNext'
-import OfferLadder from '@/components/sections/OfferLadder'
-import LeadMagnet from '@/components/sections/LeadMagnet'
-import FinalCTA from '@/components/sections/FinalCTA'
-import Footer from '@/components/layout/Footer'
-import StickyMobileCTA from '@/components/layout/StickyMobileCTA'
-import LeadMagnetModal from '@/components/layout/LeadMagnetModal'
-import Header from '@/components/layout/Header'
+import type { Metadata } from 'next'
+import HomePreviewExperience from './home-preview/HomePreviewExperience'
+import './home-preview/home-preview.css'
+
+export const metadata: Metadata = {
+  title: 'AIxDesign — From AI Ideas to Operating Systems',
+  description:
+    'AI coaching, consulting, and custom systems for operators who want AI to create leverage, not more complexity.',
+  alternates: {
+    canonical: 'https://aixdesign.dev',
+  },
+  openGraph: {
+    title: 'AIxDesign — From AI Ideas to Operating Systems',
+    description:
+      'Turn business bottlenecks into lean AI systems that create real operating leverage.',
+    url: 'https://aixdesign.dev',
+    siteName: 'AIxDesign',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AIxDesign — From AI Ideas to Operating Systems',
+    description:
+      'Turn business bottlenecks into lean AI systems that create real operating leverage.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
 export default function Home() {
-  return (
-    <main id="top" className="relative min-h-screen bg-background overflow-x-hidden">
-      <NoiseBg />
-      <Header />
-
-      <Hero />
-      <GoldRule />
-      <PatternInterrupt />
-      <GoldRule />
-      <TheAudit />
-      <GoldRule />
-      <TheBoardReel />
-      <GoldRule />
-      <TwoPaths />
-      <GoldRule />
-      <OfferLadder />
-      <GoldRule />
-      <WhatHappensNext />
-      <GoldRule />
-      <TheOperator />
-      <GoldRule />
-      <LeadMagnet />
-      <GoldRule />
-      <FinalCTA />
-      <GoldRule />
-      <Footer />
-
-      <StickyMobileCTA />
-      <LeadMagnetModal />
-    </main>
-  )
+  return <HomePreviewExperience />
 }
