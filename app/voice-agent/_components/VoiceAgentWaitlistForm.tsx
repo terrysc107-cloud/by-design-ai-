@@ -208,7 +208,6 @@ export default function VoiceAgentWaitlistForm() {
 
       {/* Honeypot: invisible to sighted users and assistive tech, never keyboard-reachable. */}
       <div aria-hidden="true" hidden>
-        <label htmlFor={honeypotId}>Leave this field blank</label>
         <input ref={honeypotRef} id={honeypotId} name="company_url" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
