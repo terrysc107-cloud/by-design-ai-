@@ -2,22 +2,24 @@
 
 import Link from 'next/link'
 import NewsletterSignup from '@/components/sections/NewsletterSignup'
+import './site-shell.css'
 
 export default function Footer() {
   return (
-    <footer className="w-full px-6 py-14 border-t border-[#19273a] bg-[#09111F] text-white">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-11">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-7">
-          <div className="max-w-md">
-            <div className="flex items-center gap-2.5 mb-4"><img src="/voice-agent/aix-mark.svg" alt="" className="w-9 h-9 rounded-xl"/><strong className="tracking-[-.04em]">aixdesign</strong></div>
-            <p className="text-white text-lg font-medium">One useful AI move a week.</p>
-            <p className="text-[#AAB6C6] text-sm mt-1">Persistent agents and workflows for businesses ready to run on AI.</p>
+    <footer className="site-footer">
+      <div className="site-footer__inner">
+        <div className="site-footer__top">
+          <div>
+            <Link href="/" className="site-brand"><img src="/brand/aixdesign-mark.svg" alt="" /><span style={{color:'#fff'}}>aixdesign</span></Link>
+            <p className="site-footer__statement">Persistent agents and workflows for businesses ready to <em>run on AI.</em></p>
           </div>
-          <NewsletterSignup variant="inline" source="footer" className="w-full md:max-w-sm" />
+          <div className="site-footer__signup"><p>One useful AI move a week.</p><NewsletterSignup variant="inline" source="footer" /></div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#8996A7] border-t border-white/10 pt-8">
+        <div className="site-footer__bottom">
           <span>© 2026 AI by Design. All rights reserved.</span>
-          <nav className="flex flex-wrap justify-center gap-6"><Link href="/voice-agent" className="hover:text-[#73D7F3]">Voice Agent</Link><Link href="/education" className="hover:text-[#73D7F3]">Education</Link><Link href="/blog" className="hover:text-[#73D7F3]">Insights</Link><Link href="/privacy" className="hover:text-[#73D7F3]">Privacy</Link><Link href="/terms" className="hover:text-[#73D7F3]">Terms</Link></nav>
+          <nav className="site-footer__links" aria-label="Footer navigation">
+            <Link href="/voice-agent">Agents</Link><Link href="/education">Education</Link><Link href="/newsletter">Newsletter</Link><Link href="/blog">Blog</Link><Link href="/guide">Free guide</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link>
+          </nav>
         </div>
       </div>
     </footer>

@@ -18,10 +18,12 @@ import { trackConversion } from '@/lib/analytics'
 export default function GuideForm({
   location,
   className = '',
+  showLabels = false,
 }: {
   /** Where this instance lives, for the conversion event. */
   location: string
   className?: string
+  showLabels?: boolean
 }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -54,7 +56,7 @@ export default function GuideForm({
 
   return (
     <form onSubmit={handleSubmit} className={`flex flex-col gap-3 ${className}`}>
-      <label className="sr-only" htmlFor={`gf-name-${location}`}>
+      <label className={showLabels ? 'guide-form-label' : 'sr-only'} htmlFor={`gf-name-${location}`}>
         Your first name
       </label>
       <input
@@ -67,7 +69,7 @@ export default function GuideForm({
         placeholder="Your first name"
         className={field}
       />
-      <label className="sr-only" htmlFor={`gf-email-${location}`}>
+      <label className={showLabels ? 'guide-form-label' : 'sr-only'} htmlFor={`gf-email-${location}`}>
         Your email address
       </label>
       <input
@@ -93,7 +95,8 @@ export default function GuideForm({
         </p>
       )}
       <p className="text-white/30 text-xs leading-relaxed">
-        The guide, then a short series on the parts people get stuck on. Unsubscribe any time.
+        The guide, then a short series on the parts people get stuck on. Unsubscribe any time.{' '}
+        <a href="/privacy">Privacy policy</a>.
       </p>
     </form>
   )

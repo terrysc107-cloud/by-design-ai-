@@ -40,7 +40,7 @@ export default function FiveThingsVideo({
 
   return (
     <figure className={`m-0 ${className}`}>
-      <div className="relative w-full max-w-[280px] border border-gold/25 bg-[#1E1B17]">
+      <div className="relative w-full max-w-[280px] overflow-hidden rounded-[22px] border border-[#E3EAF3] bg-[#09111F] shadow-[0_24px_60px_rgba(20,42,71,.18)]">
         <video
           ref={videoRef}
           data-placement={placement}
@@ -60,12 +60,12 @@ export default function FiveThingsVideo({
             type="button"
             onClick={start}
             aria-label="Play the Build Lab reel, 67 seconds"
-            className="group absolute inset-0 flex items-end justify-center pb-8 bg-[#1E1B17]/25 hover:bg-[#1E1B17]/10 transition-colors"
+            className="group absolute inset-0 flex items-end justify-center pb-8 bg-[#09111F]/25 hover:bg-[#09111F]/10 transition-colors"
           >
-            <span className="flex items-center gap-3 bg-gold px-5 py-3 text-[#1E1B17] text-[11px] font-semibold tracking-widest uppercase motion-safe:transition-transform motion-safe:group-hover:-translate-y-px motion-safe:group-active:translate-y-0">
+            <span className="flex items-center gap-3 rounded-xl bg-[#2878FF] px-5 py-3 text-white text-[11px] font-semibold tracking-widest uppercase motion-safe:transition-transform motion-safe:group-hover:-translate-y-px motion-safe:group-active:translate-y-0">
               <span
                 aria-hidden
-                className="block w-0 h-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-[#1E1B17]"
+                className="block w-0 h-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-white"
               />
               Watch
             </span>
@@ -73,7 +73,7 @@ export default function FiveThingsVideo({
         )}
       </div>
 
-      <figcaption className="text-white/35 text-xs leading-relaxed mt-3 max-w-[280px]">
+      <figcaption className="text-[#526071] text-xs leading-relaxed mt-3 max-w-[280px]">
         67 seconds. Captions are on screen, so sound is optional.
       </figcaption>
     </figure>

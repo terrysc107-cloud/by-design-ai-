@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { COURSE_NAME, COURSE_PRICE, LIVE_LAB_DATE, LIVE_LAB_PRICE, courseUrl, labWaitlistUrl } from '@/lib/education'
 import { DISCOVERY_CALL_URL } from '@/lib/cta'
+import '../guide.css'
 
 export const metadata: Metadata = {
   title: 'Your guide is on its way | AI by Design',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
  */
 export default function GuideThanksPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="guide-page guide-thanks min-h-screen bg-white">
       <div className="bg-zinc-950 text-white px-6 pt-20 pb-16">
         <div className="max-w-2xl mx-auto">
           <p className="text-amber-500 text-[10px] tracking-[0.4em] uppercase font-medium mb-6">
