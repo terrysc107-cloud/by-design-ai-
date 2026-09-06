@@ -4,6 +4,8 @@ Record important product, technical, and execution decisions here.
 
 ## Product Brief
 
+**Positioning update — 2026-09-06:** AIxDesign is an AI agent systems company. It builds persistent agents and workflows that take on real responsibilities inside a business. Consulting remains part of the delivery model, but sits inside the stronger agent-systems category. The homepage leads with the buyer's bottleneck, uses “Give AI standing work, not one-off prompts” as the operating thesis, and organizes the ecosystem as Learn it / Build it / Run it / Scale it. Voice remains a preview; My AI Board is available education; Build Lab is waitlist-only until a date is published; custom systems remain discovery-led. Voice and SPD Cert Prep are the current public proof points.
+
 **What are we building?**
 **AI by Design** (stylized: *aixdesign*, domain: `aixdesign.dev`) — an AI business coaching & consulting agency. *(Legacy name "By Design AI" was taken on LinkedIn — retired.)* We diagnose the bottleneck in an owner's business, design the right system, and ship a lean, autonomous custom solution. The primary conversion goal is booking a free discovery call.
 

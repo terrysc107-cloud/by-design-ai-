@@ -13,15 +13,17 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'AI by Design — AI Business Coaching & Consulting',
+  title: 'AI by Design — Persistent AI Agents and Business Systems',
   description:
-    'AI by Design is an AI business coaching & consulting agency. We diagnose the bottleneck, design the system, and ship a lean, autonomous custom solution — tool-agnostic, outcome-led. Book a free discovery call.',
+    'AI by Design builds persistent agents and workflows that take on real responsibilities inside your business.',
   applicationName: 'AI by Design',
   keywords: [
     'AI business coaching',
     'AI consulting',
     'business automation',
-    'AI automation agency',
+    'AI agent systems company',
+    'persistent AI agents',
+    'business AI agents',
     'workflow automation',
     'custom AI solutions',
     'agentic workflows',
@@ -40,14 +42,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: 'AI by Design',
-    title: 'AI by Design — AI Business Coaching & Consulting',
+    title: 'AI by Design — Persistent AI Agents and Business Systems',
     description:
-      'Stop learning about AI. Start running on it. We diagnose the bottleneck, design the system, and ship the lean, autonomous custom solution. Book a free discovery call.',
+      'Give AI standing work, not one-off prompts. Build persistent agents and workflows around the way your business actually operates.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI by Design — AI Business Coaching & Consulting',
-    description: 'Stop learning about AI. Start running on it. Book a free discovery call.',
+    title: 'AI by Design — Persistent AI Agents and Business Systems',
+    description: 'Persistent agents and workflows for businesses ready to run on AI.',
     creator: '@aixdesign',
   },
   robots: {

@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="max-w-md">
             <div className="flex items-center gap-2.5 mb-4"><img src="/voice-agent/aix-mark.svg" alt="" className="w-9 h-9 rounded-xl"/><strong className="tracking-[-.04em]">aixdesign</strong></div>
             <p className="text-white text-lg font-medium">One useful AI move a week.</p>
-            <p className="text-[#AAB6C6] text-sm mt-1">A practical operating idea, why it matters, and where to use it.</p>
+            <p className="text-[#AAB6C6] text-sm mt-1">Persistent agents and workflows for businesses ready to run on AI.</p>
           </div>
           <NewsletterSignup variant="inline" source="footer" className="w-full md:max-w-sm" />
         </div>

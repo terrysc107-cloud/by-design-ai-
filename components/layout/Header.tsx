@@ -20,7 +20,7 @@ export default function Header() {
           <span>aixdesign</span>
         </Link>
         <nav className="flex items-center gap-5 text-[11px] font-semibold text-[#526071]">
-          <Link href="/voice-agent" className="hidden lg:inline hover:text-[#2878FF]">Products</Link>
+          <Link href="/voice-agent" className="hidden lg:inline hover:text-[#2878FF]">Agents</Link>
           <Link href="/education" className="hidden sm:inline hover:text-[#2878FF]">Education</Link>
           <Link href="/newsletter" className="hidden md:inline hover:text-[#2878FF]">Insights</Link>
           <Link href="/blog" className="hidden lg:inline hover:text-[#2878FF]">Blog</Link>

@@ -41,7 +41,8 @@ export default function HomePreviewExperience() {
           <span>aixdesign</span>
         </a>
         <nav aria-label="Preview navigation">
-          <a href="#work">What we do</a>
+          <a href="#work">What we build</a>
+          <a href="#ecosystem">How to start</a>
           <a href="#proof">Proof</a>
           <Link href="/newsletter">Insights</Link>
           <button onClick={bookDiscoveryCall}><span className="hp-nav-cta-label">Book a discovery call</span> <Arrow /></button>
@@ -52,12 +53,12 @@ export default function HomePreviewExperience() {
 
       <section id="top" className="hp-hero">
         <div className="hp-hero-copy">
-          <p className="hp-kicker">AI coaching · consulting · custom systems</p>
-          <h1>Turn your<br />bottleneck into<br /><em>a system that runs.</em></h1>
-          <p className="hp-lede">We diagnose where work gets stuck, design the right intervention, and build the leanest AI system that creates measurable operating leverage.</p>
+          <p className="hp-kicker">Persistent agents · workflows · operating systems</p>
+          <h1><span className="hp-title-desktop">Turn your<br />bottleneck into<br /><em>a system that runs.</em></span><span className="hp-title-mobile">Turn your<br />bottleneck into<br /><em>a system<br />that runs.</em></span></h1>
+          <p className="hp-lede">AIxDesign builds persistent agents and workflows that take on real responsibilities inside your business.</p>
           <div className="hp-hero-actions">
             <button className="hp-primary" onClick={bookDiscoveryCall}><span>Book a discovery call</span><Arrow /></button>
-            <a className="hp-secondary" href="#work">See how we work <span>↓</span></a>
+            <a className="hp-secondary" href="#work">See what we build <span>↓</span></a>
           </div>
         </div>
 
@@ -70,29 +71,29 @@ export default function HomePreviewExperience() {
       </section>
 
       <section className="hp-proofbar">
-        <span>Outcome-led</span><i /><span>Tool-agnostic</span><i /><span>Built with you</span><i /><span>Designed to run</span>
+        <span>Persistent context</span><i /><span>Clear permissions</span><i /><span>Standing work</span><i /><span>Measurable outcomes</span>
       </section>
 
       <section id="work" className="hp-section hp-reframe">
-        <p className="hp-index">01 / The problem</p>
+        <p className="hp-index">01 / The operating thesis</p>
         <div className="hp-split">
-          <h2>You do not need<br />more AI tools.</h2>
-          <div><p>You need fewer repeated decisions, fewer manual handoffs, and a system that keeps moving when your attention shifts.</p><strong>We start with the constraint, not the software.</strong></div>
+          <h2><span className="hp-title-desktop">Give AI standing work,<br /><em>not one-off prompts.</em></span><span className="hp-title-mobile">Give AI<br />standing work,<br /><em className="hp-mobile-line">not one-off prompts.</em></span></h2>
+          <div><p>Most businesses still use AI one conversation at a time. We build agents with enough structure to monitor, prepare, surface, and execute recurring responsibilities.</p><strong>The value is not another model. It is the operating system around it.</strong></div>
         </div>
-        <div className="hp-before-after">
-          <article><small>Most AI projects</small><h3>Tool → Demo → Another tab</h3><p>Interesting technology with no operating owner and no measurable change.</p></article>
-          <div className="hp-transform"><span>We redesign the system</span><Arrow /></div>
-          <article className="hp-after"><small>AI by Design</small><h3>Bottleneck → System → Result</h3><p>A focused intervention built around your real workflow, people, and constraints.</p></article>
+        <div className="hp-thesis-grid">
+          <article><small>ROLE</small><h3>A defined responsibility</h3><p>The agent knows what it owns, what good work looks like, and when to escalate.</p></article>
+          <article><small>CONTEXT</small><h3>Memory and business knowledge</h3><p>Persistent context replaces starting from zero every time someone opens a chat.</p></article>
+          <article><small>CONTROL</small><h3>Permissions and review</h3><p>Tools, approvals, schedules, and evidence keep execution useful and accountable.</p></article>
         </div>
       </section>
 
       <section className="hp-section hp-services">
-        <p className="hp-index hp-index--light">02 / Three ways forward</p>
-        <div className="hp-services-head"><h2>Clarity first.<br /><em>Then execution.</em></h2><p>Choose the level of support that matches the bottleneck. We will tell you when a smaller intervention is enough.</p></div>
+        <p className="hp-index hp-index--light">02 / What we build</p>
+        <div className="hp-services-head"><h2>Agents that work.<br /><em>Systems that hold.</em></h2><p>We start with the responsibility the business needs handled, then build only the workflow and infrastructure required to support it.</p></div>
         <div className="hp-service-list">
-          <article><span>01</span><div><small>Learn</small><h3>Build practical AI capability</h3><p>Operator-focused education and coaching that turns concepts into repeatable working habits.</p></div><Link href="/education"><Arrow /></Link></article>
-          <article><span>02</span><div><small>Decide</small><h3>Find the highest-leverage system</h3><p>Diagnostic consulting that clarifies the constraint, tradeoffs, architecture, and next move.</p></div><button onClick={bookDiscoveryCall}><Arrow /></button></article>
-          <article><span>03</span><div><small>Build</small><h3>Ship the solution</h3><p>Lean automations, agent workflows, integrations, and internal products designed around how the business operates.</p></div><button onClick={bookDiscoveryCall}><Arrow /></button></article>
+          <article><span>01</span><div><small>Agents</small><h3>Perform defined responsibilities</h3><p>Voice, executive, customer, and role-based agents designed to prepare, decide, delegate, and escalate—not merely chat.</p></div><Link href="/voice-agent"><Arrow /></Link></article>
+          <article><span>02</span><div><small>Workflows</small><h3>Turn conversations into repeatable work</h3><p>Intake, follow-up, reporting, approvals, onboarding, and recurring operations with clear human handoffs.</p></div><button onClick={bookDiscoveryCall}><Arrow /></button></article>
+          <article><span>03</span><div><small>Infrastructure</small><h3>Give agents a reliable foundation</h3><p>Business knowledge, memory, permissions, integrations, task persistence, model routing, and review systems.</p></div><button onClick={bookDiscoveryCall}><Arrow /></button></article>
         </div>
       </section>
 
@@ -115,15 +116,15 @@ export default function HomePreviewExperience() {
         <p className="hp-proof-close">Different industries. Same approach: understand the constraint, design the system, and ship something people can actually use.</p>
       </section>
 
-      <section className="hp-section hp-process">
-        <p className="hp-index">04 / How we work</p>
-        <h2>From friction<br />to a system.</h2>
+      <section id="ecosystem" className="hp-section hp-process">
+        <p className="hp-index">04 / The AIxDesign ecosystem</p>
+        <h2>Learn it. Build it.<br /><em>Run it. Scale it.</em></h2>
         <div className="hp-process-line">
           {[
-            ['Diagnose', 'Find the repeated constraint that is actually costing time, attention, or revenue.'],
-            ['Design', 'Choose the smallest system that changes the operating reality.'],
-            ['Build', 'Connect the workflow, data, tools, approvals, and human handoffs.'],
-            ['Run', 'Measure the result, refine what matters, and remove what does not.'],
+            ['Learn', 'My AI Board teaches the operating model behind roles, memory, permissions, scheduled work, and review.'],
+            ['Build', 'Build Lab applies the method to your own business and real workflows. Waitlist access is available.'],
+            ['Run', 'Put voice-accessible and specialized agents into real operating environments.'],
+            ['Scale', 'Expand proven responsibilities through custom systems, integrations, and ongoing optimization.'],
           ].map(([title, body], index) => <article key={title}><span>0{index + 1}</span><i /><h3>{title}</h3><p>{body}</p></article>)}
         </div>
         <Signal compact />
@@ -131,20 +132,20 @@ export default function HomePreviewExperience() {
 
       <section className="hp-section hp-operator">
         <p className="hp-index hp-index--light">05 / Built for operators</p>
-        <div className="hp-split"><h2>Less software theater.<br /><em>More operating leverage.</em></h2><div><p>For founders, operators, and small teams carrying too much of the business in their heads.</p><ul><li>Repeated work depends on one person</li><li>Tools exist, but the workflow still breaks</li><li>Follow-up disappears between systems</li><li>AI experiments never become normal operations</li></ul></div></div>
+        <div className="hp-split"><h2><span className="hp-title-desktop">Built around your business.<br /><em>Not a generic script.</em></span><span className="hp-title-mobile">Built around<br />your business.<br /><em className="hp-mobile-line">Not a generic script.</em></span></h2><div><p>For founders, operators, and small teams ready to move AI from occasional use into normal operations.</p><ul><li>Standing work still depends on one person</li><li>Business context lives across disconnected tools</li><li>AI experiments never earn real responsibility</li><li>Execution needs permissions, review, and measurable outcomes</li></ul></div></div>
       </section>
 
       <section className="hp-section hp-final">
         <div className="hp-final-signal"><Signal compact /></div>
-        <p className="hp-index">Start with the bottleneck</p>
-        <h2>One conversation.<br /><em>A clearer next move.</em></h2>
-        <p>We will identify what deserves attention, what should wait, and whether AI is actually the right intervention.</p>
+        <p className="hp-index">Start with the responsibility</p>
+        <h2><span className="hp-title-desktop">What should AI take<br /><em>off your plate permanently?</em></span><span className="hp-title-mobile">What should AI<br /><em>take off your<br /><span className="hp-mobile-line">plate permanently?</span></em></span></h2>
+        <p>We will identify the standing work worth systemizing, what should remain human, and the leanest reliable way to begin.</p>
         <button className="hp-final-cta" onClick={bookDiscoveryCall}><span>Book a free discovery call</span><Arrow /></button>
       </section>
 
       <footer className="hp-footer">
         <a className="hp-brand" href="#top"><img src="/voice-agent/aix-mark.svg" alt="" /><span>aixdesign</span></a>
-        <p>Stop learning about AI. Start running on it.</p>
+        <p>Persistent agents and workflows for businesses ready to run on AI.</p>
         <nav><Link href="/newsletter">Newsletter</Link><Link href="/blog">Insights</Link><Link href="/privacy">Privacy</Link></nav>
       </footer>
     </main>

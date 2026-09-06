@@ -3,25 +3,25 @@ import HomePreviewExperience from './home-preview/HomePreviewExperience'
 import './home-preview/home-preview.css'
 
 export const metadata: Metadata = {
-  title: 'AIxDesign — From AI Ideas to Operating Systems',
+  title: 'AIxDesign — Persistent AI Agents and Business Systems',
   description:
-    'AI coaching, consulting, and custom systems for operators who want AI to create leverage, not more complexity.',
+    'AIxDesign builds persistent agents and workflows that take on real responsibilities inside your business.',
   alternates: {
     canonical: 'https://aixdesign.dev',
   },
   openGraph: {
-    title: 'AIxDesign — From AI Ideas to Operating Systems',
+    title: 'AIxDesign — Persistent AI Agents and Business Systems',
     description:
-      'Turn business bottlenecks into lean AI systems that create real operating leverage.',
+      'Give AI standing work, not one-off prompts. Build persistent agents and workflows around the way your business actually operates.',
     url: 'https://aixdesign.dev',
     siteName: 'AIxDesign',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AIxDesign — From AI Ideas to Operating Systems',
+    title: 'AIxDesign — Persistent AI Agents and Business Systems',
     description:
-      'Turn business bottlenecks into lean AI systems that create real operating leverage.',
+      'Persistent agents and workflows for businesses ready to run on AI.',
   },
   robots: {
     index: true,
