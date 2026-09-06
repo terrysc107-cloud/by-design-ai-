@@ -74,6 +74,24 @@ Key decisions captured:
 - All social links must use the UTM convention defined in §10 so the
   Supabase `leads` table can attribute source.
 
+### Visual identity refresh
+
+**Approved:** 2026-09-06
+
+The current visual source of truth is `brand/AIxDesign-Brand-Kit/`. It uses a
+bright white/architectural-silver foundation, Midnight Ink, Electric Blue, and
+Signal Cyan with a restrained “signal into action” motif. The legacy gold-on-
+dark palette in `docs/BRAND-KIT.md` is historical only and must not be used for
+new content.
+
+The package includes logo masters, platform-specific social exports, safe-area
+references, post templates, transparent video overlays, end cards, watermark
+bugs, an asset manifest, and a deterministic Python regeneration script.
+
+Brand architecture decision: the company identity uses the broader signal-line
+system; the frequency waveform remains the distinctive expression of the Voice
+Agent product.
+
 Open follow-ups (also tracked in BRAND-KIT §13):
 - Build `/links` page on aixdesign.dev as the link-in-bio hub.
 - Drop logo SVGs + OG image into `public/brand/` (lockup, mark, wordmark).

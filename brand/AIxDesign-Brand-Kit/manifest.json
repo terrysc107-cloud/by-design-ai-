@@ -1,0 +1,44 @@
+{
+  "palette": {
+    "ink": "#09111F",
+    "electric_blue": "#2878FF",
+    "signal_cyan": "#73D7F3",
+    "paper": "#F7F9FC",
+    "silver": "#E3EAF3",
+    "slate": "#526071",
+    "white": "#FFFFFF"
+  },
+  "social_exports": [
+    "instagram-portrait-1080x1350.png",
+    "youtube-thumbnail-1280x720.png",
+    "linkedin-company-1128x191.png",
+    "instagram-square-light-1080x1080.png",
+    "youtube-banner-2560x1440.png",
+    "story-reel-cover-1080x1920.png",
+    "instagram-square-dark-1080x1080.png",
+    "facebook-cover-1640x624.png",
+    "x-header-1500x500.png",
+    "linkedin-personal-1584x396.png"
+  ],
+  "video_exports": [
+    "frame-lower-third-square-1080x1080.png",
+    "watermark-bug-512.png",
+    "end-card-square-1080x1080.png",
+    "end-card-vertical-1080x1920.png",
+    "frame-lower-third-vertical-1080x1920.png",
+    "frame-lower-third-horizontal-1920x1080.png",
+    "end-card-horizontal-1920x1080.png",
+    "watermark-bug-256.png"
+  ],
+  "logo_exports": [
+    "aixdesign-mark-transparent-400.png",
+    "aixdesign-wordmark-transparent.png",
+    "aixdesign-profile-256.png",
+    "aixdesign-mark-transparent-512.png",
+    "aixdesign-profile-1024.png",
+    "aixdesign-mark-transparent-1024.png",
+    "aixdesign-mark-transparent-256.png",
+    "aixdesign-profile-512.png",
+    "aixdesign-profile-400.png"
+  ]
+}

@@ -1,5 +1,13 @@
 # AI by Design — Brand Kit
 
+> **Current visual system (approved September 2026):** The production-ready
+> blue/silver/ink identity, social templates, video overlays, logo exports,
+> safe-area previews, and regeneration script live in
+> [`brand/AIxDesign-Brand-Kit/`](../brand/AIxDesign-Brand-Kit/BRAND-GUIDE.md).
+> That package supersedes the legacy gold visual direction in §3 below.
+> The positioning, voice, audience, CTA, content pillars, and attribution rules
+> in this document remain authoritative unless explicitly revised.
+
 > **Brand name note:** the wordmark is **AI by Design**. The stylized
 > lockup / handle is **aixdesign** (matches the domain `aixdesign.dev` —
 > read as "AI × Design"). Use the variant table in §1 to pick the right
@@ -135,7 +143,11 @@ synergy • cutting-edge • revolutionary • disruptive • leverage •
 
 ---
 
-## 3. Visual Identity
+## 3. Visual Identity — Legacy Reference
+
+The gold-on-dark system below is retained for historical context only. Do not
+use it for new web, social, or video content. New production should use the
+current repository kit at `brand/AIxDesign-Brand-Kit/`.
 
 ### Colors (from `tailwind.config.ts`)
 | Token | Hex | RGB | Use |
