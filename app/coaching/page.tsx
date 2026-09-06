@@ -1,141 +1,126 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import NoiseBg from '@/components/effects/NoiseBg'
-import GoldRule from '@/components/ui/GoldRule'
 import { DISCOVERY_CALL_URL } from '@/lib/cta'
+import './coaching.css'
 
-const packages = [
+export const metadata: Metadata = {
+  title: 'Work With AIxDesign — Persistent AI Agent Systems',
+  description: 'Diagnose the constraint, design the system, build it into the business, and keep it running.',
+  alternates: { canonical: '/coaching' },
+}
+
+const phases = [
+  ['01', 'Diagnose', 'Find the constraint worth solving—not the loudest tool request.'],
+  ['02', 'Design', 'Define the agent’s role, context, permissions, tools, and review points.'],
+  ['03', 'Build', 'Connect the workflow to the systems your team already uses.'],
+  ['04', 'Run', 'Monitor real work, improve the operating loop, and expand what earns trust.'],
+] as const
+
+const engagements = [
   {
-    name: 'AI Strategy Call',
-    price: '$149',
-    detail: '60 minutes',
-    bestFor: 'Owner with a messy idea, tool stack, or bottleneck',
-    bullets: [
-      'Clarify the real constraint in your business',
-      'Map where AI or automation can create leverage',
-      'Leave with a simple next-action plan',
-    ],
+    index: 'A',
+    name: 'Diagnostic & strategy',
+    signal: 'You need the right system before you invest in building one.',
+    result: 'A clear constraint map, system direction, and prioritized path forward.',
   },
   {
-    name: '30-Day AI Operating System Sprint',
-    price: '$499',
-    detail: '3 sessions + async support',
-    bestFor: 'Founder who wants coaching plus implementation direction',
-    bullets: [
-      'Workflow audit and priority map',
-      'AI-assisted operating rhythm for leads, clients, or delivery',
-      'Implementation checklist you or your team can execute',
-    ],
-    featured: true,
+    index: 'B',
+    name: 'Build sprint & custom implementation',
+    signal: 'A recurring responsibility is ready to move from people and prompts into a working system.',
+    result: 'A focused agent or workflow designed, integrated, tested, and handed into operations.',
   },
   {
-    name: 'Operating Partner Retainer',
-    price: '$1,500+/mo',
-    detail: 'Monthly advisory + system tuning',
-    bestFor: 'Team that needs an AI systems partner, not another app',
-    bullets: [
-      'Ongoing coaching for decision-making and execution',
-      'Automation roadmap and workflow improvements',
-      'Review, refine, and scale the system over time',
-    ],
+    index: 'C',
+    name: 'Operating partner',
+    signal: 'You need a systems partner to run, tune, and extend what has been built.',
+    result: 'Ongoing oversight, iteration, and a measured expansion of the system’s responsibilities.',
   },
-]
+] as const
 
 export default function CoachingPage() {
   return (
-    <main id="top" className="relative min-h-screen bg-background overflow-x-hidden text-white">
-      <NoiseBg />
+    <main id="top" className="work-page">
       <Header />
 
-      <section className="section-wide pt-32 md:pt-40">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.35em] text-gold/70">
-            AI Coaching by Design
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-            Stop collecting AI tools. Start building an operating system.
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
-            Coaching for owners and operators who know AI matters, but need help turning it into better decisions,
-            cleaner workflows, and real business leverage.
-          </p>
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={DISCOVERY_CALL_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-gold bg-gold px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#1E1B17] transition-colors hover:bg-transparent hover:text-gold"
-            >
-              Book a Discovery Call
-            </a>
-            <Link
-              href="/guide"
-              className="border border-white/15 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70 transition-colors hover:border-gold/50 hover:text-gold"
-            >
-              Read the Free Guide
-            </Link>
+      <section className="work-hero">
+        <div className="work-wrap work-hero__grid">
+          <div className="work-hero__copy">
+            <p className="work-kicker">Work with AIxDesign</p>
+            <h1>Turn the work that keeps coming back into a system that keeps running.</h1>
+            <p className="work-lede">
+              We diagnose operational bottlenecks and build persistent agents and workflows that take on real responsibilities inside your business.
+            </p>
+            <div className="work-actions">
+              <a className="work-button work-button--primary" href={DISCOVERY_CALL_URL} target="_blank" rel="noreferrer">Book a discovery call <span>↗</span></a>
+              <Link className="work-button work-button--quiet" href="/guide">Read the free guide <span>→</span></Link>
+            </div>
+            <p className="work-note">Custom engagements are scoped through discovery. No preset package is forced onto the problem.</p>
+          </div>
+
+          <div className="system-map" aria-label="A persistent agent system connects context, tools, actions, and review">
+            <div className="system-map__rail" aria-hidden="true" />
+            <div className="system-node system-node--input"><span>Standing work</span><strong>Recurring responsibility</strong></div>
+            <div className="system-node system-node--context"><span>Context</span><strong>Memory + rules</strong></div>
+            <div className="system-node system-node--agent"><span>Agent</span><strong>Reason + act</strong></div>
+            <div className="system-node system-node--action"><span>Tools</span><strong>Systems + people</strong></div>
+            <div className="system-node system-node--result"><span>Review loop</span><strong>Measure + improve</strong></div>
+            <p className="system-map__caption">Persistent system / monitored in operation</p>
           </div>
         </div>
       </section>
 
-      <GoldRule />
-
-      <section className="section-wide">
-        <div className="grid gap-5 md:grid-cols-3">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.name}
-              className={`flex flex-col border p-6 ${pkg.featured ? 'border-gold/60 bg-gold/[0.06]' : 'border-gold/15 bg-white/[0.02]'}`}
-            >
-              {pkg.featured && (
-                <span className="mb-4 w-fit border border-gold/35 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold">
-                  Best beta offer
-                </span>
-              )}
-              <h2 className="text-xl font-semibold text-white">{pkg.name}</h2>
-              <p className="mt-3 text-3xl font-semibold text-gold">{pkg.price}</p>
-              <p className="mt-1 text-sm text-white/40">{pkg.detail}</p>
-              <p className="mt-5 text-sm leading-relaxed text-white/55">{pkg.bestFor}</p>
-              <ul className="mt-6 space-y-3 text-sm leading-relaxed text-white/65">
-                {pkg.bullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      <section className="work-process" aria-labelledby="process-title">
+        <div className="work-wrap">
+          <div className="work-section-head">
+            <p className="work-kicker">The operating method</p>
+            <h2 id="process-title" className="process-title"><span>Diagnose</span><i>→</i><span>Design</span><i>→</i><span>Build</span><i>→</i><span>Run</span></h2>
+            <p>A system is only useful when it survives contact with the business.</p>
+          </div>
+          <ol className="process-line">
+            {phases.map(([number, title, body]) => (
+              <li key={title}><span className="process-line__number">{number}</span><h3>{title}</h3><p>{body}</p></li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <GoldRule />
-
-      <section className="section-wide">
-        <div className="mx-auto max-w-3xl border border-gold/20 bg-white/[0.02] p-8 text-center md:p-10">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold/70">How it works</p>
-          <h2 className="mt-4 text-2xl font-semibold md:text-3xl">A coaching call should create decisions, not homework piles.</h2>
-          <div className="mt-8 grid gap-4 text-left md:grid-cols-3">
-            {['Diagnose the bottleneck', 'Design the operating rhythm', 'Ship the next useful system'].map((step, i) => (
-              <div key={step} className="border border-white/10 p-4">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-gold/60">Step {i + 1}</p>
-                <p className="mt-3 text-sm text-white/70">{step}</p>
-              </div>
+      <section className="work-engagements" aria-labelledby="engagement-title">
+        <div className="work-wrap">
+          <div className="work-section-head work-section-head--split">
+            <div><p className="work-kicker">Ways to engage</p><h2 id="engagement-title">Start where the constraint is.</h2></div>
+            <p>Discovery determines scope, sequence, and whether AI is the right intervention at all.</p>
+          </div>
+          <div className="engagement-list">
+            {engagements.map((item) => (
+              <article key={item.name} className="engagement-row">
+                <span className="engagement-row__index">{item.index}</span>
+                <h3>{item.name}</h3>
+                <div><span>Right signal</span><p>{item.signal}</p></div>
+                <div><span>What it creates</span><p>{item.result}</p></div>
+              </article>
             ))}
           </div>
-          <a
-            href={DISCOVERY_CALL_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-8 inline-flex border border-gold px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-gold transition-colors hover:bg-gold hover:text-[#1E1B17]"
-          >
-            Start with a free discovery call
-          </a>
         </div>
       </section>
 
-      <GoldRule />
+      <section className="work-fit" aria-labelledby="fit-title">
+        <div className="work-wrap work-fit__grid">
+          <div><p className="work-kicker">Fit check</p><h2 id="fit-title">Built for operators who want AI to own work—not add another tab.</h2></div>
+          <div className="fit-column fit-column--yes"><span>Strong fit</span><ul><li>A repeatable responsibility is consuming attention.</li><li>Your team can explain the work and review its output.</li><li>You want a system integrated with real operations.</li><li>You are prepared to improve the process, not automate chaos.</li></ul></div>
+          <div className="fit-column"><span>Probably not a fit</span><ul><li>You only want a list of tools or prompts.</li><li>You need a guaranteed shortcut without process access.</li><li>There is no owner for decisions, data, or review.</li><li>The goal is replacing judgment before earning trust.</li></ul></div>
+        </div>
+      </section>
+
+      <section className="work-final">
+        <div className="work-wrap work-final__inner">
+          <p className="work-kicker">Start with the bottleneck</p>
+          <h2>Bring the work that should not depend on you.</h2>
+          <p>We’ll use a short discovery call to understand the constraint, test fit, and identify the most useful next move.</p>
+          <div className="work-actions"><a className="work-button work-button--light" href={DISCOVERY_CALL_URL} target="_blank" rel="noreferrer">Book a discovery call <span>↗</span></a><Link className="work-text-link" href="/guide">Not ready? Start with the free guide →</Link></div>
+        </div>
+      </section>
       <Footer />
     </main>
   )
