@@ -6,6 +6,7 @@ import { bookDiscoveryCall } from '@/lib/cta'
 import './site-shell.css'
 
 const nav = [
+  ['About', '/about'],
   ['Agents', '/voice-agent'],
   ['Education', '/education'],
   ['Insights', '/newsletter'],
