@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import NoiseBg from '@/components/effects/NoiseBg'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FinalCTA from '@/components/sections/FinalCTA'
@@ -14,6 +13,7 @@ import {
   courseUrl,
   labWaitlistUrl,
 } from '@/lib/education'
+import '../education.css'
 
 export const metadata: Metadata = {
   title: 'My AI Board — Self-Paced Course | AI by Design',
@@ -65,8 +65,7 @@ const NOT_FOR_YOU = [
 
 export default function ClaudeCodeCoursePage() {
   return (
-    <main className="relative min-h-screen bg-background overflow-x-hidden">
-      <NoiseBg />
+    <main className="education-page relative min-h-screen overflow-x-hidden">
       <Header />
 
       {/* Hero */}

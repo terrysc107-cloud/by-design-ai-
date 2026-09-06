@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { labWaitlistUrl } from '@/lib/education'
+import { courseUrl, labWaitlistUrl } from '@/lib/education'
+import { DISCOVERY_CALL_URL } from '@/lib/cta'
 import Image from 'next/image'
-
-const COURSE_URL = 'https://runyouraiboard.com/?utm_source=aixdesign.dev&utm_medium=referral&utm_campaign=board-method-guide'
+import '../guide.css'
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -102,7 +102,7 @@ const items = [
 
 export default function GuidePage() {
   return (
-    <div className="bg-white text-zinc-900 min-h-screen">
+    <div className="guide-page guide-reader bg-white text-zinc-900 min-h-screen">
       {/* Header */}
       <div className="bg-zinc-950 text-white px-6 pt-20 pb-16">
         <div className="max-w-3xl mx-auto">
@@ -238,7 +238,7 @@ export default function GuidePage() {
           Written for people who have never coded.
         </p>
         <a
-          href={COURSE_URL}
+          href={courseUrl('guide-read-course')}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block border border-amber-500 text-amber-500 px-10 py-4 text-xs tracking-widest uppercase hover:bg-amber-500 hover:text-black transition-colors duration-200"
@@ -281,12 +281,12 @@ export default function GuidePage() {
         <p className="text-zinc-500 text-xs mt-10">
           Rather talk it through first?{' '}
           <a
-            href="https://calendly.com/terrysc107/15-min-ai-discovery-call"
+            href={DISCOVERY_CALL_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-300 underline underline-offset-4 hover:text-white"
           >
-            Book a free 15-minute call
+            Book a discovery call
           </a>
           .
         </p>

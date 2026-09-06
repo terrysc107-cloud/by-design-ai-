@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
+
 import GuideForm from '@/components/sections/GuideForm'
-import { ASSETS, DISCOVERY_CALL_URL } from '@/lib/cta'
+import { DISCOVERY_CALL_URL } from '@/lib/cta'
 import { AFFILIATION_DISCLAIMER, COURSE_NAME, COURSE_PRICE, courseUrl } from '@/lib/education'
+import './guide.css'
 
 export const metadata: Metadata = {
   title: 'The Board Method — a free guide | AI by Design',
@@ -48,28 +49,24 @@ export const metadata: Metadata = {
  */
 export default function GuideLandingPage() {
   return (
-    <main className="min-h-screen bg-background text-white">
+    <main className="guide-page guide-landing min-h-screen">
       <div className="max-w-5xl mx-auto px-6">
-        <header className="pt-10 pb-2">
-          <span className="text-lg font-semibold tracking-tight">
-            ai<span className="text-gold">x</span>design
-          </span>
+        <header className="guide-masthead">
+          <img src="/brand/aixdesign-mark.svg" alt="" />
+          <span>aixdesign</span>
         </header>
 
         {/* The offer and the form, side by side, above the fold. */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center pt-10 md:pt-16 pb-16">
-          <div className="order-2 md:order-1">
-            <Image
-              src={ASSETS.guideMockupLight}
-              alt="The Board Method, a seven-page guide"
-              width={520}
-              height={681}
-              className="block w-full h-auto border border-gold/20"
-              priority
-            />
+        <section className="guide-hero grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+          <div className="guide-proof order-2 md:order-1" aria-label="Preview pages from The Board Method">
+            <div className="guide-proof__signal" aria-hidden="true"><span /><span /><span /><span /><span /></div>
+            <img src="/guide-cover.png" alt="The Board Method cover" className="guide-proof__cover" />
+            <img src="/guide/01-charter.png" alt="Preview of the charter page" className="guide-proof__page guide-proof__page--one" />
+            <img src="/guide/04-review.png" alt="Preview of the review page" className="guide-proof__page guide-proof__page--two" />
+            <p><strong>7 pages</strong><span>5 operating moves · actual guide pages</span></p>
           </div>
 
-          <div className="order-1 md:order-2 flex flex-col gap-6">
+          <div className="order-1 md:order-2 flex flex-col gap-4">
             <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium">
               Free guide
             </p>
@@ -82,7 +79,7 @@ export default function GuideLandingPage() {
               Seven pages. No coding.
             </p>
 
-            <ul className="flex flex-col gap-3 border-t border-white/10 pt-6">
+            <ul className="flex flex-col gap-2 border-t border-white/10 pt-4">
               {[
                 'The charter line that decides how a seat behaves when two options conflict',
                 'Why floors surface problems that targets hide',
@@ -99,7 +96,11 @@ export default function GuideLandingPage() {
               ))}
             </ul>
 
-            <GuideForm location="guide-landing" className="pt-2" />
+            <div className="guide-capture">
+              <p className="guide-capture__title">Get The Board Method</p>
+              <p className="guide-capture__note">Delivered by email. Read it in under 15 minutes.</p>
+              <GuideForm location="guide-landing" showLabels />
+            </div>
           </div>
         </section>
 

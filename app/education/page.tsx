@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import NoiseBg from '@/components/effects/NoiseBg'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import FinalCTA from '@/components/sections/FinalCTA'
+
 import FiveThingsVideo from '@/components/ui/FiveThingsVideo'
+import { DISCOVERY_CALL_URL } from '@/lib/cta'
 import {
   AFFILIATION_DISCLAIMER,
   LADDER,
@@ -16,6 +16,7 @@ import {
   courseUrl,
   labWaitlistUrl,
 } from '@/lib/education'
+import './education.css'
 
 export const metadata: Metadata = {
   title: 'Education — Learn to Build the Systems | AI by Design',
@@ -54,12 +55,11 @@ const PRINCIPLES = [
 
 export default function EducationPage() {
   return (
-    <main className="relative min-h-screen bg-background overflow-x-hidden">
-      <NoiseBg />
+    <main className="education-page relative min-h-screen overflow-x-hidden">
       <Header />
 
       <section className="section pt-32 md:pt-40">
-        <div className="max-w-3xl mx-auto">
+        <div className="education-hero max-w-3xl mx-auto">
           <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium mb-4">
             Education
           </p>
@@ -71,6 +71,23 @@ export default function EducationPage() {
             to the owners who would rather build it themselves. Two ways in, one system.
             Independent, practical, and priced honestly.
           </p>
+          <div className="education-hero__actions">
+            <a href="#available" className="cta-btn">Explore what&apos;s available ↓</a>
+            <Link href="/education/claude-code" className="education-text-link">Preview the first course <span>→</span></Link>
+          </div>
+          <div className="education-system" aria-label="The AI by Design learning loop: business signals become scheduled agent work, review, and action">
+            <div className="education-system__rail" aria-hidden="true"><i /><i /><i /><i /></div>
+            {[
+              ['01', 'Your signals', 'Numbers + context'],
+              ['02', 'Agent seats', 'Narrow responsibilities'],
+              ['03', 'Scheduled run', 'Work without prompting'],
+              ['04', 'Decision brief', 'A meeting you can act on'],
+            ].map(([number, title, note]) => (
+              <div className="education-system__node" key={number}>
+                <span>{number}</span><strong>{title}</strong><small>{note}</small>
+              </div>
+            ))}
+          </div>
 
           <div className="mt-12 grid gap-px sm:grid-cols-3 bg-white/5 border border-white/10">
             {PRINCIPLES.map(item => (
@@ -86,14 +103,14 @@ export default function EducationPage() {
       </section>
 
       {/* Course catalog */}
-      <section className="section pt-0">
+      <section id="available" className="section education-catalog pt-0">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
             What&apos;s available
           </h2>
 
           {/* Self-paced course — live and purchasable */}
-          <article className="mt-8 border border-gold/25 bg-[#23201b]/40 p-8">
+          <article className="education-offer education-offer--course mt-8 border border-gold/25 bg-[#23201b]/40 p-8">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-1">
                 Self-paced
@@ -125,7 +142,7 @@ export default function EducationPage() {
               </a>
               <Link
                 href="/education/claude-code"
-                className="text-[11px] tracking-widest uppercase text-white/55 hover:text-gold transition-colors"
+                className="education-text-link"
               >
                 See what&apos;s inside
               </Link>
@@ -146,7 +163,7 @@ export default function EducationPage() {
               order; the reel drops underneath them on mobile. */}
           <article
             id="lab"
-            className="mt-6 scroll-mt-28 border border-gold/25 bg-[#23201b]/40 p-8 grid gap-8 md:grid-cols-[1fr_280px] md:items-start"
+            className="education-offer education-offer--lab mt-6 scroll-mt-28 border border-gold/25 bg-[#23201b]/40 p-8 grid gap-8 md:grid-cols-[1fr_280px] md:items-center"
           >
             <div>
             <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -210,7 +227,7 @@ export default function EducationPage() {
             leave the first one, and that is a fine outcome.
           </p>
 
-          <ol className="mt-8 border border-white/10">
+          <ol className="education-ladder mt-8 border border-white/10">
             {LADDER.map((rung, i) => (
               <li
                 key={rung.id}
@@ -228,7 +245,7 @@ export default function EducationPage() {
                       <span className="text-white/70 text-xs">{rung.priceDisplay}</span>
                     ) : (
                       <span className="text-[10px] tracking-[0.25em] uppercase text-white/35">
-                        Next
+                        Planned next step
                       </span>
                     )}
                   </div>
@@ -242,8 +259,8 @@ export default function EducationPage() {
       </section>
 
       {/* Education → custom builds */}
-      <section className="section pt-0">
-        <div className="max-w-3xl mx-auto border-t border-white/10 pt-12">
+      <section className="section education-choice pt-0">
+        <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
             Learning it and hiring it are both fine.
           </h2>
@@ -257,10 +274,12 @@ export default function EducationPage() {
             Plenty of people do both: take the course, build the first version themselves, then
             bring us in for the parts that need to be bulletproof.
           </p>
+          <div className="education-choice__actions">
+            <div><span>Build it yourself</span><strong>{COURSE_NAME}</strong><a href={courseUrl('education-closing-course')} target="_blank" rel="noopener noreferrer">Get the course — {COURSE_PRICE} →</a></div>
+            <div><span>Have it built with you</span><strong>Start with the bottleneck</strong><a href={DISCOVERY_CALL_URL} target="_blank" rel="noopener noreferrer">Book a discovery call ↗</a></div>
+          </div>
         </div>
       </section>
-
-      <FinalCTA />
       <Footer />
     </main>
   )
