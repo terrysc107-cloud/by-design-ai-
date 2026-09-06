@@ -44,7 +44,7 @@ export default function HomePreviewExperience() {
           <a href="#work">What we do</a>
           <a href="#proof">Proof</a>
           <Link href="/newsletter">Insights</Link>
-          <button onClick={bookDiscoveryCall}>Book a discovery call <Arrow /></button>
+          <button onClick={bookDiscoveryCall}><span className="hp-nav-cta-label">Book a discovery call</span> <Arrow /></button>
         </nav>
       </header>
 
@@ -53,23 +53,18 @@ export default function HomePreviewExperience() {
       <section id="top" className="hp-hero">
         <div className="hp-hero-copy">
           <p className="hp-kicker">AI coaching · consulting · custom systems</p>
-          <h1>Stop learning<br />about AI.<br /><em>Start running on it.</em></h1>
-          <p className="hp-lede">We find the bottleneck, design the right system, and ship the leanest solution that creates real operating leverage.</p>
+          <h1>Turn your<br />bottleneck into<br /><em>a system that runs.</em></h1>
+          <p className="hp-lede">We diagnose where work gets stuck, design the right intervention, and build the leanest AI system that creates measurable operating leverage.</p>
           <div className="hp-hero-actions">
             <button className="hp-primary" onClick={bookDiscoveryCall}><span>Book a discovery call</span><Arrow /></button>
             <a className="hp-secondary" href="#work">See how we work <span>↓</span></a>
           </div>
         </div>
 
-        <div className="hp-system" aria-label="Ideas becoming operating systems">
-          <div className="hp-orbit hp-orbit--one" />
-          <div className="hp-orbit hp-orbit--two" />
-          <div className="hp-core"><img src="/voice-agent/aix-mark.svg" alt="" /><b>AI × Design</b><small>Operating system</small></div>
-          <span className="hp-node hp-node--one">Your bottleneck</span>
-          <span className="hp-node hp-node--two">Context</span>
-          <span className="hp-node hp-node--three">Workflow</span>
-          <span className="hp-node hp-node--four">Execution</span>
-          <span className="hp-node hp-node--five">Measured result</span>
+        <div className="hp-hero-proof" aria-label="AIxDesign systems in operation">
+          <div className="hp-hero-proof__voice"><video src="/voice-agent/scene-01-mobile.mp4" poster="/voice-agent/scene-01-mobile-poster.png" muted autoPlay loop playsInline preload="metadata" /><span>Voice Agent · Task accepted</span></div>
+          <div className="hp-hero-proof__app"><img src="/homeproof/spd-cert-prep-dashboard.jpg" alt="SPD Cert Prep learner dashboard" /><span>SPD Cert Prep · Live learning system</span></div>
+          <div className="hp-hero-proof__result"><small>FROM FRICTION TO EXECUTION</small><b>Diagnose → Design → Build → Run</b></div>
         </div>
         <div className="hp-hero-signal"><Signal /></div>
       </section>

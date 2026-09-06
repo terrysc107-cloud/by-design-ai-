@@ -11,6 +11,7 @@ type Props = {
   heading?: string
   blurb?: string
   className?: string
+  theme?: 'dark' | 'light'
 }
 
 export default function NewsletterSignup({
@@ -19,6 +20,7 @@ export default function NewsletterSignup({
   heading = 'One useful AI move a week.',
   blurb = 'Short, practical notes on putting AI and automation to work in a business like yours. No hype, no filler. Unsubscribe any time.',
   className = '',
+  theme = 'dark',
 }: Props) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
@@ -50,7 +52,7 @@ export default function NewsletterSignup({
 
   const form =
     status === 'done' ? (
-      <p className="text-gold text-sm font-medium tracking-wide">
+      <p className={`${theme === 'light' ? 'text-[#2878FF]' : 'text-gold'} text-sm font-medium tracking-wide`}>
         You&apos;re on the list — check your inbox. ✓
       </p>
     ) : (
@@ -65,12 +67,12 @@ export default function NewsletterSignup({
           onChange={e => setEmail(e.target.value)}
           required
           aria-label="Email address"
-          className="flex-1 bg-transparent border border-white/15 focus:border-gold/50 outline-none px-4 py-3 text-white text-sm placeholder:text-white/30 transition-colors duration-200"
+          className={`flex-1 outline-none px-4 py-3 text-sm transition-colors duration-200 ${theme === 'light' ? 'bg-white border border-[#D7E0EB] focus:border-[#2878FF] text-[#09111F] placeholder:text-[#7B8796]' : 'bg-transparent border border-white/15 focus:border-gold/50 text-white placeholder:text-white/30'}`}
         />
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="cta-btn px-6 py-3 text-xs tracking-widest disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          className={`${theme === 'light' ? 'bg-[#09111F] text-white hover:bg-[#2878FF]' : 'cta-btn'} px-6 py-3 text-xs tracking-widest disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transition-colors`}
         >
           {status === 'loading' ? 'Subscribing…' : 'Subscribe →'}
         </button>
@@ -87,12 +89,12 @@ export default function NewsletterSignup({
   }
 
   return (
-    <div className={`border border-gold/20 bg-[#23201b]/40 p-8 ${className}`}>
-      <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium mb-3">Newsletter</p>
-      <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight leading-tight mb-3">
+    <div className={`${theme === 'light' ? 'border border-[#D7E0EB] bg-white' : 'border border-gold/20 bg-[#23201b]/40'} p-8 ${className}`}>
+      <p className={`${theme === 'light' ? 'text-[#2878FF]' : 'text-gold'} text-[10px] tracking-[0.35em] uppercase font-medium mb-3`}>Newsletter</p>
+      <h3 className={`${theme === 'light' ? 'text-[#09111F]' : 'text-white'} text-xl md:text-2xl font-semibold tracking-tight leading-tight mb-3`}>
         {heading}
       </h3>
-      <p className="text-white/55 text-sm leading-relaxed mb-5">{blurb}</p>
+      <p className={`${theme === 'light' ? 'text-[#526071]' : 'text-white/55'} text-sm leading-relaxed mb-5`}>{blurb}</p>
       {form}
       {errorMsg && <p className="text-red-400 text-xs mt-2">{errorMsg}</p>}
     </div>
