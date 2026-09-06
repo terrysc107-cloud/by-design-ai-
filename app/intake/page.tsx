@@ -1,263 +1,183 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { trackConversion } from '@/lib/analytics'
+import './intake.css'
 
 type Status = 'idle' | 'loading' | 'done' | 'error'
+type FieldType = 'text' | 'email' | 'url' | 'textarea' | 'select'
+type FieldSpec = { key: string; label: string; type?: FieldType; placeholder?: string; options?: string[]; optional?: boolean; rows?: number }
+type StepSpec = { eyebrow: string; title: string; intro: string; fields: FieldSpec[] }
 
-const INPUT_CLASS =
-  'bg-transparent border border-white/15 focus:border-gold/50 outline-none px-4 py-3 text-white text-sm placeholder:text-white/30 transition-colors duration-200 w-full'
+const STEPS: StepSpec[] = [
+  { eyebrow: 'Step 1 · Business', title: 'Set the operating context.', intro: 'Start with the business, your role, and the team the system needs to support.', fields: [
+    { key: 'name', label: 'Your name' }, { key: 'email', label: 'Email', type: 'email' },
+    { key: 'company', label: 'Company' }, { key: 'website', label: 'Website', type: 'url', placeholder: 'https:// — or “No website”' },
+    { key: 'industry', label: 'Industry' }, { key: 'years_in_business', label: 'Years in business' },
+    { key: 'team_size', label: 'Team size' }, { key: 'role', label: 'Your role' },
+  ]},
+  { eyebrow: 'Step 2 · Systems', title: 'Map what runs today.', intro: 'The tools matter less than how work currently moves between them.', fields: [
+    { key: 'current_tools', label: 'What tools / CRM do you use today?', placeholder: 'GHL, HubSpot, spreadsheets…' },
+    { key: 'whats_automated', label: 'What’s already automated?', type: 'textarea', rows: 3 },
+    { key: 'whats_manual', label: 'What’s still done manually?', type: 'textarea', rows: 3 },
+    { key: 'tech_stack', label: 'Anything else in your tech stack?', optional: true },
+  ]},
+  { eyebrow: 'Step 3 · Work', title: 'Find where attention leaks.', intro: 'Show us where responsibility sits and which recurring work keeps pulling people back in.', fields: [
+    { key: 'staff_responsibilities', label: 'Who does what on your team?', type: 'textarea', rows: 4 },
+    { key: 'biggest_time_sink', label: 'Where does the most time get wasted?', type: 'textarea', rows: 4 },
+  ]},
+  { eyebrow: 'Step 4 · Readiness', title: 'Define the trust boundary.', intro: 'Persistent systems need clear comfort levels, concerns, and review expectations.', fields: [
+    { key: 'ai_usage', label: 'How are you using AI today (if at all)?', type: 'textarea', rows: 3 },
+    { key: 'ai_comfort', label: 'Comfort level with AI / tech', type: 'select', options: ['Beginner', 'Some experience', 'Comfortable', 'Advanced'] },
+    { key: 'ai_concerns', label: 'Any concerns about AI?' },
+  ]},
+  { eyebrow: 'Step 5 · Outcome', title: 'Name the work worth changing.', intro: 'Give us a clear target for the call and the next 90 days.', fields: [
+    { key: 'goals_90d', label: 'Top outcomes you want in the next 90 days', type: 'textarea', rows: 3 },
+    { key: 'biggest_bottleneck', label: 'Your single biggest bottleneck right now' },
+    { key: 'budget_range', label: 'Budget range', type: 'select', optional: true, options: ['Under $1k/mo', '$1k–$3k/mo', '$3k–$5k/mo', '$5k–$10k/mo', '$10k+/mo', 'One-time project'] },
+    { key: 'anything_else', label: 'Anything else I should know before our call?', type: 'textarea', rows: 3, optional: true },
+  ]},
+]
 
-const LABEL_CLASS = 'text-white/50 text-xs mb-1.5 block'
-
-// Required fields — the questionnaire is a serious-buyer filter, so most of it
-// is mandatory. Only budget and the two genuinely-optional notes are skippable.
-const REQUIRED_FIELDS = [
-  'name', 'email', 'company', 'website', 'industry', 'years_in_business',
-  'team_size', 'role', 'current_tools', 'whats_automated', 'whats_manual',
-  'staff_responsibilities', 'biggest_time_sink', 'ai_usage', 'ai_comfort',
-  'ai_concerns', 'goals_90d', 'biggest_bottleneck',
-] as const
-
-function Field({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <label className="block">
-      <span className={LABEL_CLASS}>{label}</span>
-      {children}
-    </label>
-  )
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium pt-4">
-      {children}
-    </p>
-  )
-}
+const REQUIRED_FIELDS = STEPS.flatMap(step => step.fields.filter(field => !field.optional).map(field => field.key))
 
 function IntakeForm() {
   const params = useSearchParams()
+  const [step, setStep] = useState(0)
+  const [reviewing, setReviewing] = useState(false)
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [form, setForm] = useState<Record<string, string>>({})
-
-  // Honeypot — must stay empty.
   const [companyUrl, setCompanyUrl] = useState('')
+  const current = STEPS[step]
+  const completed = reviewing ? STEPS.length : step
 
   useEffect(() => {
     const email = params.get('email')
-    if (email) setForm((f) => ({ ...f, email }))
+    if (!email) return
+
+    setForm(value => ({ ...value, email }))
+
+    // Preserve the Calendly prefill while keeping personal data out of
+    // browser history, copied URLs, referrers, and subsequent analytics.
+    const cleanUrl = new URL(window.location.href)
+    cleanUrl.searchParams.delete('email')
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`,
+    )
   }, [params])
 
-  const set = (key: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [key]: e.target.value }))
+  const groupedReview = useMemo(() => STEPS.map(section => ({ ...section, fields: section.fields.filter(field => form[field.key]?.trim()) })), [form])
+  const set = (key: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setForm(value => ({ ...value, [key]: event.target.value }))
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const missing = REQUIRED_FIELDS.filter((f) => !form[f]?.trim())
-    if (missing.length > 0) {
-      setErrorMsg('Please complete every field — this helps me come to the call ready to build.')
-      setStatus('error')
+  const validateFields = (fields: FieldSpec[]) => {
+    const missing = fields.find(field => !field.optional && !form[field.key]?.trim())
+    if (missing) {
+      setErrorMsg(`Please complete “${missing.label}” before continuing.`)
+      requestAnimationFrame(() => document.getElementById(`field-${missing.key}`)?.focus())
+      return false
+    }
+    const email = fields.find(field => field.type === 'email')
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form[email.key] || '')) {
+      setErrorMsg('Enter a valid email address before continuing.')
+      requestAnimationFrame(() => document.getElementById(`field-${email.key}`)?.focus())
+      return false
+    }
+    setErrorMsg('')
+    setStatus('idle')
+    return true
+  }
+
+  const next = () => {
+    if (!validateFields(current.fields)) return
+    if (step === STEPS.length - 1) setReviewing(true)
+    else setStep(value => value + 1)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const back = () => {
+    setErrorMsg('')
+    setStatus('idle')
+    if (reviewing) setReviewing(false)
+    else setStep(value => Math.max(0, value - 1))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const submit = async () => {
+    const missing = REQUIRED_FIELDS.find(key => !form[key]?.trim())
+    if (missing) {
+      const target = STEPS.findIndex(section => section.fields.some(field => field.key === missing))
+      setReviewing(false); setStep(target); setStatus('error'); setErrorMsg('A required response is missing. Please complete it before submitting.')
       return
     }
-    setStatus('loading')
-    setErrorMsg('')
+    setStatus('loading'); setErrorMsg('')
     try {
-      const res = await fetch('/api/intake', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, company_url: companyUrl }),
-      })
-      if (res.ok) {
-        setStatus('done')
-        trackConversion('intake')
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      } else {
-        const data = await res.json().catch(() => ({}))
+      const response = await fetch('/api/intake', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, company_url: companyUrl }) })
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
         throw new Error(data.error || 'Request failed')
       }
-    } catch (err) {
-      setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setStatus('done'); trackConversion('intake'); window.scrollTo({ top: 0, behavior: 'smooth' })
+    } catch (error) {
+      setStatus('error'); setErrorMsg(error instanceof Error ? error.message : 'Something went wrong. Please try again.')
     }
   }
 
-  if (status === 'done') {
-    return (
-      <div className="border border-gold/30 p-8 flex flex-col gap-3 text-center">
-        <p className="text-gold text-sm font-medium tracking-wide">Got it.</p>
-        <p className="text-white/60 text-sm leading-relaxed">
-          Thank you — this is exactly what I need. I&apos;ll review it before we talk and come to the
-          call with a plan already half-built. See you then.
-        </p>
-        <Link
-          href="/"
-          className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mt-4"
-        >
-          ← AI by Design
-        </Link>
-      </div>
-    )
-  }
+  if (status === 'done') return (
+    <section className="intake-complete" aria-live="polite">
+      <span className="intake-complete__mark">✓</span><p className="intake-kicker">Intake received</p>
+      <h1>We have the context. Now we can use the call well.</h1>
+      <p>Your responses are in. They’ll be reviewed before we talk so the conversation can start at the constraint—not at introductions.</p>
+      <Link href="/">Return to AIxDesign →</Link>
+    </section>
+  )
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      {/* Honeypot: hidden from real users */}
-      <input
-        type="text"
-        tabIndex={-1}
-        autoComplete="off"
-        value={companyUrl}
-        onChange={(e) => setCompanyUrl(e.target.value)}
-        className="hidden"
-        aria-hidden="true"
-      />
+    <>
+      <p className="intake-progress-label">Step {reviewing ? 6 : step + 1} of 6</p>
+      <nav className="intake-progress" aria-label="Intake progress" role="list">
+        {STEPS.map((item, index) => <div role="listitem" aria-current={index === step && !reviewing ? 'step' : undefined} key={item.title} className={index < completed ? 'is-complete' : index === step && !reviewing ? 'is-current' : ''}><span>{index < completed ? '✓' : index + 1}</span><small>{item.eyebrow.split(' · ')[1]}</small></div>)}
+        <div role="listitem" aria-current={reviewing ? 'step' : undefined} className={reviewing ? 'is-current' : ''}><span>6</span><small>Review</small></div>
+      </nav>
 
-      <SectionLabel>The Basics</SectionLabel>
-      <Field label="Your name *">
-        <input className={INPUT_CLASS} value={form.name || ''} onChange={set('name')} required />
-      </Field>
-      <Field label="Email *">
-        <input type="email" className={INPUT_CLASS} value={form.email || ''} onChange={set('email')} required />
-      </Field>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Company *">
-          <input className={INPUT_CLASS} value={form.company || ''} onChange={set('company')} required />
-        </Field>
-        <Field label="Website *">
-          <input className={INPUT_CLASS} value={form.website || ''} onChange={set('website')} placeholder="https://" required />
-        </Field>
-        <Field label="Industry *">
-          <input className={INPUT_CLASS} value={form.industry || ''} onChange={set('industry')} required />
-        </Field>
-        <Field label="Years in business *">
-          <input className={INPUT_CLASS} value={form.years_in_business || ''} onChange={set('years_in_business')} required />
-        </Field>
-        <Field label="Team size *">
-          <input className={INPUT_CLASS} value={form.team_size || ''} onChange={set('team_size')} required />
-        </Field>
-        <Field label="Your role *">
-          <input className={INPUT_CLASS} value={form.role || ''} onChange={set('role')} required />
-        </Field>
-      </div>
-
-      <SectionLabel>Current Setup</SectionLabel>
-      <Field label="What tools / CRM do you use today? *">
-        <input className={INPUT_CLASS} value={form.current_tools || ''} onChange={set('current_tools')} placeholder="GHL, HubSpot, spreadsheets…" required />
-      </Field>
-      <Field label="What's already automated? *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.whats_automated || ''} onChange={set('whats_automated')} required />
-      </Field>
-      <Field label="What's still done manually? *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.whats_manual || ''} onChange={set('whats_manual')} required />
-      </Field>
-      <Field label="Anything else in your tech stack?">
-        <input className={INPUT_CLASS} value={form.tech_stack || ''} onChange={set('tech_stack')} />
-      </Field>
-
-      <SectionLabel>Team & Time</SectionLabel>
-      <Field label="Who does what on your team? *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.staff_responsibilities || ''} onChange={set('staff_responsibilities')} required />
-      </Field>
-      <Field label="Where does the most time get wasted? *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.biggest_time_sink || ''} onChange={set('biggest_time_sink')} required />
-      </Field>
-
-      <SectionLabel>AI Readiness</SectionLabel>
-      <Field label="How are you using AI today (if at all)? *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.ai_usage || ''} onChange={set('ai_usage')} required />
-      </Field>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Comfort level with AI / tech *">
-          <select className={INPUT_CLASS} value={form.ai_comfort || ''} onChange={set('ai_comfort')} required>
-            <option value="">Select…</option>
-            <option>Beginner</option>
-            <option>Some experience</option>
-            <option>Comfortable</option>
-            <option>Advanced</option>
-          </select>
-        </Field>
-        <Field label="Any concerns about AI? *">
-          <input className={INPUT_CLASS} value={form.ai_concerns || ''} onChange={set('ai_concerns')} required />
-        </Field>
-      </div>
-
-      <SectionLabel>Goals</SectionLabel>
-      <Field label="Top outcomes you want in the next 90 days *">
-        <textarea className={INPUT_CLASS} rows={2} value={form.goals_90d || ''} onChange={set('goals_90d')} required />
-      </Field>
-      <Field label="Your single biggest bottleneck right now *">
-        <input className={INPUT_CLASS} value={form.biggest_bottleneck || ''} onChange={set('biggest_bottleneck')} required />
-      </Field>
-      <Field label="Budget range">
-        <select className={INPUT_CLASS} value={form.budget_range || ''} onChange={set('budget_range')}>
-          <option value="">Prefer not to say</option>
-          <option>Under $1k/mo</option>
-          <option>$1k–$3k/mo</option>
-          <option>$3k–$5k/mo</option>
-          <option>$5k–$10k/mo</option>
-          <option>$10k+/mo</option>
-          <option>One-time project</option>
-        </select>
-      </Field>
-      <Field label="Anything else I should know before our call?">
-        <textarea className={INPUT_CLASS} rows={3} value={form.anything_else || ''} onChange={set('anything_else')} />
-      </Field>
-
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="cta-btn px-8 py-4 text-xs tracking-widest disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-      >
-        {status === 'loading' ? (
-          <span className="flex items-center justify-center gap-2">
-            <span className="w-4 h-4 border-2 border-gold border-t-transparent rounded-full animate-spin" />
-            Sending…
-          </span>
-        ) : (
-          'Send My Details →'
-        )}
-      </button>
-      {errorMsg && <p className="text-red-400 text-xs">{errorMsg}</p>}
-    </form>
+      {!reviewing ? (
+        <form className="intake-form" onSubmit={event => { event.preventDefault(); next() }} noValidate>
+          <input type="text" tabIndex={-1} autoComplete="off" value={companyUrl} onChange={event => setCompanyUrl(event.target.value)} className="intake-honeypot" aria-hidden="true" />
+          <header className="intake-step-head"><p className="intake-kicker">{current.eyebrow}</p><h2>{current.title}</h2><p>{current.intro}</p></header>
+          <div className="intake-fields">
+            {current.fields.map(field => (
+              <label key={field.key} className={field.type === 'textarea' ? 'is-wide' : ''} htmlFor={`field-${field.key}`}>
+                <span>{field.label} {field.optional ? <em>Optional</em> : <b>Required</b>}</span>
+                {field.type === 'textarea' ? <textarea id={`field-${field.key}`} rows={field.rows} value={form[field.key] || ''} onChange={set(field.key)} aria-required={!field.optional} /> : field.type === 'select' ? <select id={`field-${field.key}`} value={form[field.key] || ''} onChange={set(field.key)} aria-required={!field.optional}><option value="">{field.optional ? 'Prefer not to say' : 'Select…'}</option>{field.options?.map(option => <option key={option}>{option}</option>)}</select> : <input id={`field-${field.key}`} type={field.type || 'text'} placeholder={field.placeholder} value={form[field.key] || ''} onChange={set(field.key)} aria-required={!field.optional} />}
+              </label>
+            ))}
+          </div>
+          {errorMsg && <p className="intake-error" role="alert">{errorMsg}</p>}
+          <div className="intake-controls">{step > 0 ? <button type="button" className="intake-back" onClick={back}>← Back</button> : <span />}<button type="submit" className="intake-next">{step === STEPS.length - 1 ? 'Review responses' : 'Continue'} <span>→</span></button></div>
+        </form>
+      ) : (
+        <section className="intake-review">
+          <header className="intake-step-head"><p className="intake-kicker">Final review</p><h2>Check the operating picture.</h2><p>You can go back to edit anything before this is sent.</p></header>
+          {groupedReview.map((section, index) => <div className="review-section" key={section.title}><div><span>0{index + 1}</span><h3>{section.eyebrow.split(' · ')[1]}</h3><button type="button" onClick={() => { setStep(index); setReviewing(false) }}>Edit</button></div><dl>{section.fields.map(field => <div key={field.key}><dt>{field.label}</dt><dd>{form[field.key]}</dd></div>)}</dl></div>)}
+          {errorMsg && <p className="intake-error" role="alert">{errorMsg}</p>}
+          <div className="intake-controls"><button type="button" className="intake-back" onClick={back}>← Back</button><button type="button" className="intake-next" onClick={submit} disabled={status === 'loading'}>{status === 'loading' ? 'Sending…' : 'Send my details'} <span>{status === 'loading' ? '' : '→'}</span></button></div>
+        </section>
+      )}
+    </>
   )
 }
 
 export default function IntakePage() {
   return (
-    <main className="min-h-screen bg-background px-6 py-20">
-      <div className="max-w-2xl mx-auto">
-        <Link
-          href="/"
-          className="text-gold/50 text-xs tracking-widest uppercase hover:text-gold transition-colors mb-12 inline-block"
-        >
-          ← AI by Design
-        </Link>
-
-        <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-medium mb-4">
-          Pre-Call Intake
-        </p>
-        <h1 className="text-3xl md:text-4xl font-semibold text-white tracking-tight leading-tight mb-4">
-          Help me come prepared
-        </h1>
-        <p className="text-white/55 text-sm md:text-base leading-relaxed mb-10">
-          This isn&apos;t for everyone — it&apos;s for operators serious about putting AI to work. Take a few
-          minutes to answer in full, and I&apos;ll review it before we talk and arrive with a plan already
-          half-built for your business. The more complete your answers, the more we get done on the call.
-        </p>
-
-        <Suspense fallback={<p className="text-white/40 text-sm">Loading…</p>}>
-          <IntakeForm />
-        </Suspense>
+    <main className="intake-page">
+      <header className="intake-utility"><Link href="/" aria-label="AI by Design home"><img src="/brand/aixdesign-mark.svg" alt="" /><span>aixdesign</span></Link><div><span>Pre-call intake</span><small>About 8–10 minutes</small></div></header>
+      <div className="intake-shell">
+        <aside className="intake-intro"><p className="intake-kicker">Prepared conversations / better systems</p><h1>Help us see the business before the call.</h1><p>This guided intake maps your context, current systems, recurring work, AI readiness, and desired outcome. Complete answers let us begin with sharper questions.</p><div className="intake-signal" aria-hidden="true"><span>Context</span><i /><span>Constraint</span><i /><span>System</span></div><small>Your information is used to prepare for the conversation. Read our <Link href="/privacy">privacy policy</Link>.</small></aside>
+        <div className="intake-panel"><Suspense fallback={<p className="intake-loading" aria-live="polite">Loading your intake…</p>}><IntakeForm /></Suspense></div>
       </div>
     </main>
   )
