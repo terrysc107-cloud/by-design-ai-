@@ -102,7 +102,7 @@ export default function HomePreviewExperience() {
       </section>
 
       <section id="proof" className="hp-section hp-product">
-        <p className="hp-index">03 / Proof of the approach</p>
+        <p className="hp-index">03 / Selected systems</p>
         <div className="hp-product-grid">
           <div className="hp-product-copy"><span className="hp-pill">AIxDesign Voice · Preview</span><h2>Speak the task.<br /><em>Keep moving.</em></h2><p>A voice-accessible agent that can accept meaningful work, continue after the call ends, and deliver the result later.</p><Link className="hp-product-link" href="/voice-agent">Explore Voice Agent <Arrow /></Link></div>
           <Link className="hp-product-visual" href="/voice-agent" aria-label="Explore AIxDesign Voice Agent">
@@ -110,6 +110,14 @@ export default function HomePreviewExperience() {
             <div className="hp-task"><small>Task accepted</small><b>Proposal risk review</b><span>Working ···</span></div>
           </Link>
         </div>
+        <div className="hp-product-grid hp-product-grid--education">
+          <a className="hp-product-visual hp-product-visual--app" href="https://spdcertprep.com" target="_blank" rel="noreferrer" aria-label="Explore SPD Cert Prep">
+            <img src="/homeproof/spd-cert-prep-dashboard.jpg" alt="SPD Cert Prep learner dashboard with readiness progress and AI study assistant" />
+            <div className="hp-task"><small>Education system</small><b>Readiness becomes a learning path</b><span>Assess · Adapt · Practice · Advance</span></div>
+          </a>
+          <div className="hp-product-copy"><span className="hp-pill">SPD Cert Prep · Live product</span><h2>Domain expertise.<br /><em>Built into a system.</em></h2><p>A career-focused educational web app for sterile-processing professionals, combining readiness assessment, adaptive practice, an AI tutor, learning games, progress tracking, and career tools.</p><a className="hp-product-link" href="https://spdcertprep.com" target="_blank" rel="noreferrer">Explore SPD Cert Prep <Arrow /></a></div>
+        </div>
+        <p className="hp-proof-close">Different industries. Same approach: understand the constraint, design the system, and ship something people can actually use.</p>
       </section>
 
       <section className="hp-section hp-process">
