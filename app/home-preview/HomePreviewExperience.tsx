@@ -55,7 +55,7 @@ export default function HomePreviewExperience() {
         <div className="hp-hero-copy">
           <p className="hp-kicker">Persistent agents · workflows · operating systems</p>
           <h1><span className="hp-title-desktop">Turn your<br />bottleneck into<br /><em>a system that runs.</em></span><span className="hp-title-mobile">Turn your<br />bottleneck into<br /><em>a system<br />that runs.</em></span></h1>
-          <p className="hp-lede">AIxDesign builds persistent agents and workflows that take on real responsibilities inside your business.</p>
+          <p className="hp-lede">AIxDesign builds the agents, systems, and operating models that help businesses move from experimenting with AI to actually running on it.</p>
           <div className="hp-hero-actions">
             <button className="hp-primary" onClick={bookDiscoveryCall}><span>Book a discovery call</span><Arrow /></button>
             <a className="hp-secondary" href="#work">See what we build <span>↓</span></a>
@@ -117,7 +117,7 @@ export default function HomePreviewExperience() {
       </section>
 
       <section id="ecosystem" className="hp-section hp-process">
-        <p className="hp-index">04 / The AIxDesign ecosystem</p>
+        <p className="hp-index">04 / Four ways to move from experimenting to operating</p>
         <h2>Learn it. Build it.<br /><em>Run it. Scale it.</em></h2>
         <div className="hp-process-line">
           {[
