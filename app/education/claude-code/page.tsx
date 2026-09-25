@@ -9,7 +9,6 @@ import {
   COURSE_NAME,
   COURSE_PRICE,
   LIVE_LAB_NAME,
-  LIVE_LAB_DATE,
   courseUrl,
   labWaitlistUrl,
 } from '@/lib/education'
@@ -236,19 +235,17 @@ export default function ClaudeCodeCoursePage() {
             There is a live version
           </h2>
           <p className="text-white/55 text-sm md:text-base leading-relaxed mt-4">
-            <span className="text-white/80">{LIVE_LAB_NAME}</span> runs the same method as a live
-            four-week cohort instead of a self-paced course, and you can stop it and ask why,
-            which is the whole reason to be in the room.{' '}
-            {LIVE_LAB_DATE
-              ? `The founding run opens ${LIVE_LAB_DATE}, in a small group, with the Kit included.`
-              : 'It is not scheduled yet. The waitlist is open, takes no deposit, and the people on it hear before anyone else.'}
+            <span className="text-white/80">{LIVE_LAB_NAME}</span> gives you four-week working
+            sessions with a preparation plan for your business. Start with your AI CEO and board,
+            bring weekly deliverables for review, and add capabilities through future labs.
+            Dates, tuition, and applications are on the Build Lab platform.
           </p>
           <div className="mt-6">
             <a
               href={labWaitlistUrl('claude-code-page-lab')}
               className="text-[11px] tracking-widest uppercase text-gold/80 hover:text-gold transition-colors border-b border-gold/30 hover:border-gold pb-1"
             >
-              {LIVE_LAB_DATE ? 'See the four sessions' : 'Join the waitlist'} →
+              {'Explore the labs'} →
             </a>
           </div>
         </div>
