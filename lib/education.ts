@@ -58,8 +58,11 @@ export const LIVE_LAB_NAME = 'The Build Lab'
  * real registrations, server-side, on the course platform, and a seat count
  * copied into this repo would be a number nothing can back.
  */
-export const LIVE_LAB_DATE: string | null = 'Wednesdays from November 18, 2026'
-export const LIVE_LAB_PRICE: string | null = '$997'
+// null since 2026-09-26: Terry closed the $997 November 18 run (zero seats
+// sold). The Build Lab series replaces it; its date and price come back here
+// only once that cohort is open for enrollment.
+export const LIVE_LAB_DATE: string | null = null
+export const LIVE_LAB_PRICE: string | null = null
 
 /**
  * Required on every page in the education surface. The course teaches a
