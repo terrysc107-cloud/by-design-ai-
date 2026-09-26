@@ -36,7 +36,7 @@ const VARIANTS = [
   { name: 'guide-mockup.png', bg: 'transparent', omitBackground: true },
   {
     name: 'guide-mockup-light.png',
-    bg: 'radial-gradient(ellipse 85% 70% at 50% 42%, #f2ede2 0%, #e4dccc 55%, #d5cbb7 100%)',
+    bg: 'radial-gradient(ellipse 85% 70% at 50% 42%, #f7f9fc 0%, #e3eaf3 55%, #cfd9e6 100%)',
     omitBackground: false,
   },
 ]
@@ -49,7 +49,7 @@ const docFor = (bg) => `<!doctype html><html><head><meta charset="utf-8"><style>
         transform-style:preserve-3d;}
   /* The page block, sitting behind and to the right, is what reads as thickness. */
   .pages{position:absolute;top:6px;left:10px;width:520px;height:736px;
-         background:linear-gradient(90deg,#3a352c 0%,#cfc7b4 6%,#efe9dc 40%,#d8d0be 100%);
+         background:linear-gradient(90deg,#1a2536 0%,#c9d3e0 6%,#eef2f7 40%,#d3dbe6 100%);
          transform:translateZ(-15px);}
   .cover{position:relative;width:520px;height:736px;display:block;
          box-shadow:0 2px 0 rgba(255,255,255,.05) inset;}
@@ -58,11 +58,11 @@ const docFor = (bg) => `<!doctype html><html><head><meta charset="utf-8"><style>
   .spine{position:absolute;top:0;left:0;width:26px;height:736px;
          background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.18) 60%,rgba(0,0,0,0));}
   .spine-rule{position:absolute;top:0;left:26px;width:1px;height:736px;
-              background:rgba(201,168,76,.35);}
+              background:rgba(115,215,243,.35);}
   .sheen{position:absolute;inset:0;pointer-events:none;
          background:linear-gradient(105deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 34%);}
   .shadow{position:absolute;left:22px;top:700px;width:530px;height:64px;
-          background:radial-gradient(ellipse at center,rgba(40,34,24,.5),transparent 72%);
+          background:radial-gradient(ellipse at center,rgba(20,42,71,.45),transparent 72%);
           filter:blur(22px);transform:translateZ(-30px);}
 </style></head><body>
   <div class="stage">

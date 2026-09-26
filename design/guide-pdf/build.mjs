@@ -14,11 +14,11 @@ import path from "path";
  */
 const OUT = path.dirname(new URL(import.meta.url).pathname);
 
-const GOLD = "#C9A84C";
-const INK = "#18181B";
-const MUTED = "#52525B";
-const FAINT = "#71717A";
-const RULE = "#E4E4E7";
+const GOLD = "#2878FF"; // accent: site blue (was #C9A84C before the 2026 rebrand)
+const INK = "#09111F";
+const MUTED = "#526071";
+const FAINT = "#6B7A8C";
+const RULE = "#E3EAF3";
 
 const STEPS = [
   {
@@ -87,7 +87,7 @@ const page = (s, i) => `<!doctype html>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
   <style>
     body { margin: 0; font-family: Geist, system-ui, -apple-system, "Segoe UI", sans-serif; }
-    a { color: #8A6D1F; } a:hover { color: #6B540F; }
+    a { color: #1F5FD1; } a:hover { color: #174AA3; }
   </style>
 </helmet>
 <div style="width: 794px; height: 1123px; background: #FFFFFF; color: ${INK}; display: flex; flex-direction: column; padding: 60px 64px 44px; box-sizing: border-box;">
@@ -107,8 +107,8 @@ const page = (s, i) => `<!doctype html>
 
   <p style="margin: 26px 0 0; font-size: 16px; line-height: 1.62; color: ${INK};">${esc(s.problem)}</p>
 
-  <div style="margin-top: 22px; border-left: 3px solid ${GOLD}; background: rgba(201,168,76,0.09); padding: 16px 20px;">
-    <div style="font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8A6D1F; font-weight: 600; margin-bottom: 6px;">The symptom</div>
+  <div style="margin-top: 22px; border-left: 3px solid ${GOLD}; background: rgba(40,120,255,0.07); padding: 16px 20px;">
+    <div style="font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #1F5FD1; font-weight: 600; margin-bottom: 6px;">The symptom</div>
     <div style="font-size: 16px; line-height: 1.5; color: ${INK};">${esc(s.symptom)}</div>
   </div>
 

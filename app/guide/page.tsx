@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import Header from '@/components/layout/Header'
 import GuideForm from '@/components/sections/GuideForm'
 import { DISCOVERY_CALL_URL } from '@/lib/cta'
 import { AFFILIATION_DISCLAIMER, COURSE_NAME, COURSE_PRICE, courseUrl } from '@/lib/education'
@@ -50,11 +51,8 @@ export const metadata: Metadata = {
 export default function GuideLandingPage() {
   return (
     <main className="guide-page guide-landing min-h-screen">
-      <div className="max-w-5xl mx-auto px-6">
-        <header className="guide-masthead">
-          <img src="/brand/aixdesign-mark.svg" alt="" />
-          <span>aixdesign</span>
-        </header>
+      <Header />
+      <div className="max-w-5xl mx-auto px-6 pt-24 md:pt-28">
 
         {/* The offer and the form, side by side, above the fold. */}
         <section className="guide-hero grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">

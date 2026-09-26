@@ -13,3 +13,17 @@
 @media(max-width:600px){.hp h1{font-size:52px}.hp h2{font-size:43px}.hp-final h2{font-size:47px}.hp-proofbar{justify-content:center;flex-wrap:wrap;white-space:normal;overflow:visible;gap:12px 20px;padding-block:20px}.hp-proofbar i{display:none}}
 .hp-title-mobile{display:none}
 @media(max-width:600px){.hp-title-desktop{display:none}.hp-title-mobile{display:inline}.hp-mobile-line{white-space:nowrap;font-size:.88em}}
+/* Nav: in-page anchors drop first as the bar narrows; under 900px every link
+   moves into the menu toggle so phones can still reach Education and the guide. */
+.hp-menu-toggle{display:none!important}
+.hp-nav .hp-mobile-menu{display:none}
+.hp-nav nav>a{white-space:nowrap}
+@media(max-width:1180px){.hp-nav nav>a.hp-nav-anchor{display:none}}
+@media(max-width:900px){
+  .hp-nav nav{gap:8px}
+  .hp-nav .hp-menu-toggle{display:grid!important;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--silver);border-radius:14px;background:var(--white);color:var(--ink);font-size:20px;line-height:1}
+  .hp-nav .hp-menu-toggle:hover{background:var(--white);color:var(--blue);transform:none}
+  .hp-nav .hp-mobile-menu.is-open{position:absolute;top:calc(100% + 10px);left:0;right:0;display:grid;padding:10px;border:1px solid rgba(255,255,255,.8);border-radius:20px;background:rgba(255,255,255,.94);box-shadow:0 16px 55px rgba(20,42,71,.14);backdrop-filter:blur(22px)}
+  .hp-nav .hp-mobile-menu>a{display:block;padding:14px 12px;border-radius:12px;color:var(--ink);font-size:15px;font-weight:600}
+  .hp-mobile-menu a:hover{background:var(--paper);color:var(--blue)}
+}
