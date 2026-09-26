@@ -3,13 +3,10 @@ import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
-import FiveThingsVideo from '@/components/ui/FiveThingsVideo'
 import { DISCOVERY_CALL_URL } from '@/lib/cta'
 import {
   AFFILIATION_DISCLAIMER,
   LADDER,
-  LIVE_LAB_DATE,
-  LIVE_LAB_PRICE,
   COURSE_NAME,
   COURSE_PRICE,
   LIVE_LAB_NAME,
@@ -149,21 +146,10 @@ export default function EducationPage() {
             </div>
           </article>
 
-          {/* Live lab — waitlist open, still no date.
-              "no date, no price, and no way to buy it" was true when the Lab was
-              only an idea. A price and a waitlist now exist, so two thirds of
-              that sentence became false. What is still true — and the only
-              scarcity claim allowed anywhere — is that there is no date. The
-              number lives in the course repo; see LIVE_LAB_NAME. */}
-          {/* The Lab card carries the reel because this is the page that hands
-              someone off to the course platform, and the reel's own closing
-              frame is runyouraiboard.com/build-lab. The video makes the
-              argument the CTA beside it is asking them to act on. Text first in
-              the DOM so the badge, headline, price and CTA keep their reading
-              order; the reel drops underneath them on mobile. */}
+          {/* Cohort schedules and tuition are owned by the course platform. */}
           <article
             id="lab"
-            className="education-offer education-offer--lab mt-6 scroll-mt-28 border border-gold/25 bg-[#23201b]/40 p-8 grid gap-8 md:grid-cols-[1fr_280px] md:items-center"
+            className="education-offer education-offer--lab mt-6 scroll-mt-28 border border-gold/25 bg-[#23201b]/40 p-8 grid gap-8"
           >
             <div>
             <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -171,24 +157,19 @@ export default function EducationPage() {
                 Live cohort
               </span>
               <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">
-                {LIVE_LAB_DATE ?? 'Waitlist open, no date yet'}
+                Four-week programs · personalized preparation
               </span>
             </div>
             <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight">
               {LIVE_LAB_NAME}
             </h3>
             <p className="text-white/55 text-sm md:text-base leading-relaxed mt-3">
-              Four Wednesdays. You stand up your own board with us in the room, working on your
-              business rather than a worked example, and small enough that you can interrupt and
-              ask why. Thanksgiving week is skipped on purpose: your board runs unattended
-              through it, and session two opens with what that turned up.
+              Start with Your AI Operating Company: define your agent’s identity, teach it your business,
+              and build your CEO and board. Your business questionnaire shapes a reviewed preparation
+              plan, weekly deliverables, and live feedback. Future labs explore content, follow-up,
+              websites, and operations.
             </p>
-            {LIVE_LAB_PRICE && (
-              <p className="text-white/70 text-sm mt-4">
-                <span className="text-gold font-semibold">{LIVE_LAB_PRICE}</span> one-time · eight
-                seats · the course and the Kit included
-              </p>
-            )}
+            <p className="text-white/70 text-sm mt-4">See the current tuition, application details, and scheduled cohorts on the Build Lab platform.</p>
             <div className="mt-6">
               <a
                 href={labWaitlistUrl('education-hub-lab')}
@@ -196,12 +177,10 @@ export default function EducationPage() {
                 rel="noopener noreferrer"
                 className="cta-btn inline-block px-8 py-4 text-xs tracking-widest"
               >
-                {LIVE_LAB_DATE ? 'Take a seat' : 'Join the waitlist'} →
+                Explore the labs →
               </a>
             </div>
             </div>
-
-            <FiveThingsVideo placement="education-hub-lab" />
           </article>
 
           <p className="text-white/35 text-xs leading-relaxed mt-8">{AFFILIATION_DISCLAIMER}</p>

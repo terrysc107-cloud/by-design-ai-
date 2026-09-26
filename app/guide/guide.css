@@ -1,6 +1,4 @@
 .guide-page { --g-paper:#f7f9fc; --g-white:#fff; --g-silver:#dce6f1; --g-ink:#09111f; --g-slate:#526071; --g-blue:#2878ff; --g-cyan:#73d7f3; background:var(--g-paper)!important; color:var(--g-ink); font-family:Arial,Helvetica,sans-serif; }
-.guide-masthead { display:flex; align-items:center; gap:10px; padding-top:24px; color:var(--g-ink); font-weight:750; letter-spacing:-.04em; }
-.guide-masthead img { width:34px; height:34px; border-radius:10px; }
 .guide-landing { position:relative; background:radial-gradient(circle at 14% 27%,rgba(115,215,243,.18),transparent 25%),linear-gradient(145deg,#fff,#f1f5fa)!important; }
 .guide-landing::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.32; background-image:linear-gradient(rgba(40,120,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(40,120,255,.07) 1px,transparent 1px); background-size:68px 68px; mask-image:linear-gradient(to bottom,#0000,#000 16%,#0000 68%); }
 .guide-landing > div { position:relative; z-index:1; }
@@ -41,5 +39,5 @@
 .guide-reader h1,.guide-thanks h1{font-size:clamp(46px,7vw,76px);line-height:.96!important;letter-spacing:-.055em}
 .guide-reader img{border-radius:18px}.guide-reader a,.guide-thanks a{border-radius:12px}
 .guide-page a:focus-visible,.guide-page button:focus-visible,.guide-page input:focus-visible{outline:3px solid var(--g-cyan);outline-offset:3px}
-@media(max-width:767px){.guide-hero{padding-top:26px;padding-bottom:44px}.guide-proof{position:relative;top:auto;min-height:570px}.guide-proof__cover{width:62%}.guide-proof__page{width:53%}.guide-proof__page--two{top:285px}.guide-landing h1,.guide-reader h1,.guide-thanks h1{font-size:44px}.guide-masthead{padding-top:20px}}
+@media(max-width:767px){.guide-hero{padding-top:26px;padding-bottom:44px}.guide-proof{position:relative;top:auto;min-height:570px}.guide-proof__cover{width:62%}.guide-proof__page{width:53%}.guide-proof__page--two{top:285px}.guide-landing h1,.guide-reader h1,.guide-thanks h1{font-size:44px}}
 @media(max-width:420px){.guide-proof{min-height:500px}.guide-proof__cover{top:48px}.guide-proof__page--one{top:100px}.guide-proof__page--two{top:250px}.guide-proof>p{align-items:flex-start;flex-direction:column;gap:3px}}

@@ -1,3 +1,5 @@
+> **2026-09-25 update:** Build Lab now has a new series/application surface at `/build-lab` and an authenticated student/instructor workspace at `/lab-studio`. The historical founding run is at `/build-lab/legacy`. This repo no longer mirrors dates or prices. Historical sections below describe the previous offer; use the course repo `docs/build-lab/CLAUDE-HANDOFF.md` for the new launch contract. Existing paid registrations must be reconciled before moving anyone to a new cohort.
+
 # Course Integration
 
 How the AI by Design education surface on `aixdesign.dev` relates to the

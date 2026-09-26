@@ -17,7 +17,8 @@ export function generateStaticParams() {
   return getPostSlugs().map(slug => ({ slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const post = getPost(params.slug)
   if (!post) return {}
   const url = `${SITE_URL}/blog/${post.slug}`
@@ -77,7 +78,8 @@ const mdxComponents = {
   ),
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const post = getPost(params.slug)
   if (!post) notFound()
 

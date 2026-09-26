@@ -27,14 +27,14 @@ const body = raw
   .trim();
 
 const doc = `<!doctype html><html><head><meta charset="utf-8">${head}
-<style>html,body{margin:0;padding:0;background:#1E1B17;}</style>
+<style>html,body{margin:0;padding:0;background:#09111F;}</style>
 </head><body>${body}</body></html>`;
 
 const browser = await chromium.launch();
-// deviceScaleFactor 2 so it stays crisp in a retina hero card.
+// 1.5x: crisp in the hero card without a 1MB gradient PNG.
 const page = await browser.newPage({
   viewport: { width: 794, height: 1123 },
-  deviceScaleFactor: 2,
+  deviceScaleFactor: 1.5,
 });
 await page.setContent(doc, { waitUntil: "networkidle" });
 await page.waitForTimeout(1200); // webfont settle

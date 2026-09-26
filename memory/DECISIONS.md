@@ -119,3 +119,7 @@ public-facing brand to **AI by Design** with the stylized lockup
   - `lib/emails.ts` "By Design AI" signatures
   - Resend FROM string → `AI by Design <hello@aixdesign.dev>`
 - Variant table (when to use which form): `docs/BRAND-KIT.md` §1.
+
+## Build Lab series — 2026-09-25
+
+Terry directed Build Lab to become a rotating series of four-week implementation cohorts. Foundation: agent identity, business context, CEO/board, and one recurring workflow. Future labs: content, lead follow-up, websites, operations. A structured questionnaire feeds an instructor-reviewed preparation plan and weekly deliverables. Implementation lives in the course repo; this site refers to it without copying dates, capacity or tuition. The legacy founding run is preserved separately until registration/payment records are reconciled. New-course price hypothesis: $1,995 founding tuition; no invented sale, dates or inventory. See the course repo docs/build-lab/CLAUDE-HANDOFF.md for connected launch tasks.

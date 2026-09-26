@@ -20,47 +20,9 @@ export const COURSE_PRICE = '$57'
 
 export const COURSE_NAME = 'My AI Board'
 
-/**
- * The live offer. Waitlist open, no date set.
- *
- * 'The Build Lab', not 'AI by Design Claude Code Build Lab': this page IS
- * AI by Design, so the prefix is redundant, and the product's own name is
- * whatever runyouraiboard.com calls it. Must match BUILD_LAB.name in the
- * course repo's lib/course-config.ts — two spellings of one product is two
- * products. Qualify it with an eyebrow ("A live session") in the markup rather
- * than baking context into the name.
- *
- * NO PRICE HERE, deliberately. The course repo owns that number; duplicating it
- * means two repos to update every time it moves, and a stale price on a
- * marketing page is a quote you have to honour.
- */
-export const LIVE_LAB_NAME = 'The Build Lab'
-
-/**
- * The founding cohort's date and price.
- *
- * ⚠️ MIRRORS `BUILD_LAB.dateDisplay` and `BUILD_LAB.priceDisplay` in the course
- * repo's lib/course-config.ts. If you change one, change the other.
- *
- * The comment above LIVE_LAB_NAME says there is deliberately NO price here,
- * which was right for as long as the Lab had nothing to sell: a duplicated
- * price is two repos to update and a stale quote you have to honour. That
- * changed on 2026-09-03 when Terry scheduled the run. A live cohort with a date
- * and eight seats is news, and news is the entire reason these pages exist. A
- * marketing page that says "no date yet" about a run that opens in ten weeks is
- * worse than a duplicated number, because it actively talks the reader out of
- * the thing we want them to do.
- *
- * SET BOTH TO null THE MOMENT THE RUN CLOSES OR MOVES. While these are
- * non-null, `/education` and `/education/claude-code` assert a date to the
- * public that only the course repo and the `ccc_lab_sessions` row can actually
- * honour. Seat counts are deliberately NOT mirrored: those are computed from
- * real registrations, server-side, on the course platform, and a seat count
- * copied into this repo would be a number nothing can back.
- */
-// null since 2026-09-26: Terry closed the $997 November 18 run (zero seats
-// sold). The Build Lab series replaces it; its date and price come back here
-// only once that cohort is open for enrollment.
+/** Build Lab is a rotating series. The course platform owns cohort dates,
+ * capacity, applications and pricing; do not mirror live inventory here. */
+export const LIVE_LAB_NAME = 'The Build Lab series'
 export const LIVE_LAB_DATE: string | null = null
 export const LIVE_LAB_PRICE: string | null = null
 
@@ -86,14 +48,9 @@ export function courseUrl(content: string): string {
 }
 
 /**
- * Builds a UTM-tagged link to the Build Lab waitlist on the course platform.
- *
- * Points at the course platform rather than /newsletter because the waitlist
- * hands signups straight back here: POST /api/build-lab/waitlist calls this
- * site's /api/subscribe with source:'build-lab', which sends the Lab
- * confirmation and adds them to the newsletter list. So a visitor who joins the
- * waitlist is on the newsletter too — one click, both outcomes, and we learn
- * which placement drove it.
+ * Builds a UTM-tagged link to the Build Lab series on the course platform.
+ * The series uses program-specific interest lists and does not enroll an owner
+ * in the general newsletter. The helper name is retained for existing callers.
  *
  * @param content Placement slug identifying which CTA on which page was clicked.
  */
@@ -200,13 +157,11 @@ export const LADDER: readonly LadderRung[] = [
     rung: 3,
     name: LIVE_LAB_NAME,
     promise:
-      'A four-week live cohort, in a small group, where you stand up your own AI board on your own numbers and watch every decision, including the ones that go wrong.',
+      'Four-week live labs: start with your AI operating company, then add content, follow-up, website, and reporting capabilities.',
     forWho: 'You want it built with you, in your business, not adapted from a template alone.',
-    // Scheduled 2026-09-03, so this rung stops being "next" and starts being a
-    // thing someone can buy. It is the one exception to the no-prices rule
-    // above, for the reason given on LIVE_LAB_PRICE.
+    // The cohort platform owns tuition and availability.
     priceDisplay: LIVE_LAB_PRICE,
-    available: true,
+    available: false,
   },
   {
     id: 'board-room',

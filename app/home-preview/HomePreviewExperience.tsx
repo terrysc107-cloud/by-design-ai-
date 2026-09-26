@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { bookDiscoveryCall } from '@/lib/cta'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
@@ -17,6 +17,7 @@ function Signal({ compact = false }: { compact?: boolean }) {
 
 export default function HomePreviewExperience() {
   const rootRef = useRef<HTMLElement>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const update = () => {
@@ -40,12 +41,20 @@ export default function HomePreviewExperience() {
           <img src="/voice-agent/aix-mark.svg" alt="" />
           <span>aixdesign</span>
         </a>
-        <nav aria-label="Preview navigation">
-          <a href="#work">What we build</a>
-          <a href="#ecosystem">How to start</a>
-          <a href="#proof">Proof</a>
+        <nav aria-label="Main navigation">
+          <a className="hp-nav-anchor" href="#work">What we build</a>
+          <a className="hp-nav-anchor" href="#proof">Proof</a>
+          <Link href="/about">About</Link>
+          <Link href="/education">Education</Link>
+          <Link href="/guide">Free guide</Link>
           <Link href="/newsletter">Insights</Link>
           <button onClick={bookDiscoveryCall}><span className="hp-nav-cta-label">Book a discovery call</span> <Arrow /></button>
+          <button type="button" className="hp-menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="hp-mobile-menu" onClick={() => setMenuOpen(v => !v)}>{menuOpen ? '×' : '≡'}</button>
+        </nav>
+        <nav id="hp-mobile-menu" className={`hp-mobile-menu${menuOpen ? ' is-open' : ''}`} aria-label="Mobile navigation">
+          {[['What we build', '#work'], ['About', '/about'], ['Education', '/education'], ['Free guide', '/guide'], ['Insights', '/newsletter'], ['Blog', '/blog']].map(([label, href]) => (
+            <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>
+          ))}
         </nav>
       </header>
 
@@ -146,7 +155,7 @@ export default function HomePreviewExperience() {
       <footer className="hp-footer">
         <a className="hp-brand" href="#top"><img src="/voice-agent/aix-mark.svg" alt="" /><span>aixdesign</span></a>
         <p>Persistent agents and workflows for businesses ready to run on AI.</p>
-        <nav><Link href="/newsletter">Newsletter</Link><Link href="/blog">Insights</Link><Link href="/privacy">Privacy</Link></nav>
+        <nav><Link href="/education">Education</Link><Link href="/guide">Free guide</Link><Link href="/blog">Blog</Link><Link href="/newsletter">Newsletter</Link><Link href="/privacy">Privacy</Link></nav>
       </footer>
     </main>
   )
