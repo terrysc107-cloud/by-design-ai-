@@ -42,8 +42,9 @@ export const AFFILIATION_DISCLAIMER =
  * for the same reason the ladder never prices an unbuyable rung.
  */
 export const FOUNDATIONS_NAME = 'AI Foundations'
-export const FOUNDATIONS_PRICE: string | null = null
-export const FOUNDATIONS_CHECKOUT_URL: string | null = null
+export const FOUNDATIONS_PRICE: string | null = '$47'
+export const FOUNDATIONS_CHECKOUT_URL: string | null =
+  'https://aixdesign.app.clientclub.net/courses/offers/2702ae3f-66ce-4259-b384-701f51282a1a'
 export const FOUNDATIONS_ON_SALE = Boolean(FOUNDATIONS_PRICE && FOUNDATIONS_CHECKOUT_URL)
 
 /** The course shows ChatGPT, Claude and Gemini, so the disclaimer names all three makers. */
