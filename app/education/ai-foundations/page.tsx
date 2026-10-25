@@ -126,6 +126,7 @@ const FAQ = [
   ['Will this teach me how to make money with AI?', 'You will work through practical business and professional uses. The course does not promise income or employment outcomes.'],
   ['What about private or client information?', 'The course uses made-up names and sample data throughout, and teaches you what should never go into an AI tool. You never need to upload real client or patient details.'],
   ['Do I get feedback on my work?', 'Every project has a self-check rubric and a worked example to compare against. Personal review of your work is part of our coaching, not this course.'],
+  ['What is the refund policy?', 'Email hello@aixdesign.dev within 24 hours of purchase and we will refund you in full. After 24 hours, purchases are final.'],
   ['What do I get when I finish?', 'A working assistant and routine for a task you really do, your Build Journal, and a certificate of completion.'],
 ] as const
 
