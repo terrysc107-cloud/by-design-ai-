@@ -10,6 +10,9 @@ import {
   COURSE_NAME,
   COURSE_PRICE,
   LIVE_LAB_NAME,
+  FOUNDATIONS_NAME,
+  FOUNDATIONS_ON_SALE,
+  FOUNDATIONS_PRICE,
   courseUrl,
   labWaitlistUrl,
 } from '@/lib/education'
@@ -142,6 +145,35 @@ export default function EducationPage() {
                 className="education-text-link"
               >
                 See what&apos;s inside
+              </Link>
+            </div>
+          </article>
+
+          {/* Beginner course. Price shows only once FOUNDATIONS_ON_SALE. */}
+          <article className="education-offer education-offer--course mt-6 border border-gold/25 bg-[#23201b]/40 p-8">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-1">
+                Self-paced · Beginner
+              </span>
+              <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">
+                {FOUNDATIONS_ON_SALE ? 'Available now' : 'Opening soon'}
+              </span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight">
+              {FOUNDATIONS_NAME}
+            </h3>
+            <p className="text-white/55 text-sm md:text-base leading-relaxed mt-3">
+              Pick one real task from your week and turn it into a checked, repeatable routine in
+              ChatGPT, Claude, or Gemini. 12 narrated chapters, no coding.
+            </p>
+            {FOUNDATIONS_ON_SALE && (
+              <p className="text-white/70 text-sm mt-4">
+                <span className="text-gold font-semibold">{FOUNDATIONS_PRICE}</span> one-time
+              </p>
+            )}
+            <div className="flex flex-wrap items-center gap-5 mt-6">
+              <Link href="/education/ai-foundations" className="cta-btn px-8 py-4 text-xs tracking-widest">
+                See the course →
               </Link>
             </div>
           </article>

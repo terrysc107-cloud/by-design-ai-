@@ -34,6 +34,34 @@ export const AFFILIATION_DISCLAIMER =
   'Independent educational product by AI by Design. Not affiliated with or endorsed by Anthropic.'
 
 /**
+ * AI Foundations: the beginner course, sold and delivered through the AI x
+ * Design GoHighLevel memberships account, not runyouraiboard.com.
+ *
+ * Going live is two constants: set the price and the GHL checkout URL. Until
+ * BOTH are set the page shows no price and no buy button, only a waitlist,
+ * for the same reason the ladder never prices an unbuyable rung.
+ */
+export const FOUNDATIONS_NAME = 'AI Foundations'
+export const FOUNDATIONS_PRICE: string | null = null
+export const FOUNDATIONS_CHECKOUT_URL: string | null = null
+export const FOUNDATIONS_ON_SALE = Boolean(FOUNDATIONS_PRICE && FOUNDATIONS_CHECKOUT_URL)
+
+/** The course shows ChatGPT, Claude and Gemini, so the disclaimer names all three makers. */
+export const FOUNDATIONS_DISCLAIMER =
+  'Independent educational product by AI by Design. Not affiliated with or endorsed by OpenAI, Anthropic, or Google.'
+
+/** UTM-tagged GHL checkout link, or null while the course is not on sale. */
+export function foundationsCheckoutUrl(content: string): string | null {
+  if (!FOUNDATIONS_ON_SALE || !FOUNDATIONS_CHECKOUT_URL) return null
+  const url = new URL(FOUNDATIONS_CHECKOUT_URL)
+  url.searchParams.set('utm_source', 'aixdesign.dev')
+  url.searchParams.set('utm_medium', 'referral')
+  url.searchParams.set('utm_campaign', 'ai-foundations')
+  url.searchParams.set('utm_content', content)
+  return url.toString()
+}
+
+/**
  * Builds a UTM-tagged link to the course platform.
  * @param content Placement slug identifying which CTA on which page was clicked.
  */

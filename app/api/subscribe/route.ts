@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend, FROM_EMAIL, LEAD_NOTIFY_EMAIL, SITE_URL } from '@/lib/resend'
-import { newsletterWelcomeEmail, buildLabWaitlistEmail, subscriberNotifyEmail } from '@/lib/emails'
+import {
+  newsletterWelcomeEmail,
+  buildLabWaitlistEmail,
+  aiFoundationsWaitlistEmail,
+  subscriberNotifyEmail,
+} from '@/lib/emails'
 import { getSupabase, hasSupabase } from '@/lib/supabase'
 import { nextDripDate } from '@/lib/drip'
 
@@ -13,7 +18,9 @@ import { nextDripDate } from '@/lib/drip'
 // bda_subscribers.source carried a CHECK constraint rejecting new values —
 // checked 2026-07-17: it does not. The column has only UNIQUE(email) and the
 // PK, and defaults to 'newsletter'. Adding a source is safe.
-const ALLOWED_SOURCES = new Set(['newsletter', 'footer', 'blog', 'education', 'build-lab'])
+// 'ai-foundations' is the AI Foundations waitlist, kept separate so the opening
+// email can go to exactly those people.
+const ALLOWED_SOURCES = new Set(['newsletter', 'footer', 'blog', 'education', 'build-lab', 'ai-foundations'])
 
 export async function POST(req: NextRequest) {
   try {
@@ -119,7 +126,9 @@ export async function POST(req: NextRequest) {
         const welcome =
           subSource === 'build-lab'
             ? buildLabWaitlistEmail(cleanName ?? undefined, unsubscribeUrl)
-            : newsletterWelcomeEmail(cleanName ?? undefined, unsubscribeUrl)
+            : subSource === 'ai-foundations'
+              ? aiFoundationsWaitlistEmail(cleanName ?? undefined, unsubscribeUrl)
+              : newsletterWelcomeEmail(cleanName ?? undefined, unsubscribeUrl)
         await resend.emails.send({
           from: FROM_EMAIL,
           to: cleanEmail,
