@@ -77,8 +77,8 @@ const JOURNEY = [
 const CHAPTERS = [
   ['00', 'Start Here', 'Your first AI win in 15 minutes, plus your Build Journal and the fictional-data rule.', 'Your first AI win'],
   ['01', 'What AI Actually Is', 'How language models work, what they know, and why they get things wrong.', 'Your AI task list'],
-  ['02', 'Choosing Your Tool', 'ChatGPT, Claude, and Gemini side by side, compared fairly, with privacy first.', 'Same task, three tools'],
-  ['03', 'Prompting Fundamentals', 'Goal, context, audience, format, and a finish line. Change one thing at a time.', 'Prompt v1 to v3'],
+  ['02', 'Choosing Your Tool', 'One request, run twice, facts checked first, with privacy first. Compare ChatGPT, Claude, and Gemini if you like.', 'Your home tool'],
+  ['03', 'Prompting Fundamentals', 'Role, context, task, format, and an example. Change one thing at a time.', 'Five prompts, one Prompt v1'],
   ['04', 'Context and Files', 'Facts versus preferences, reference examples, Projects, and what never goes in.', 'Your knowledge pack'],
   ['05', 'Custom Instructions and Memory', 'Instructions that apply to every chat, a voice guide, and when memory hurts.', 'Instructions and voice guide'],
   ['06', 'Checking the Work', 'Trace each claim, critical versus cosmetic errors, and when to reject a draft.', 'A check routine on 3 drafts'],
@@ -99,9 +99,12 @@ const GALLERY = [
 
 const INSIDE = [
   ['12', 'narrated video lectures, about 85 minutes in all, with slides and audio-only versions'],
-  ['12', 'weekly projects, each building on the last, with a worked example to check yours against'],
+  ['12', '"Watch Sam do it" videos, 2 to 3 minutes each, on real ChatGPT screens'],
+  ['12', 'step-by-step projects on the page, with copy-paste prompts and an optional Go further step'],
   ['12', 'practice quizzes that show you the answers and why'],
-  ['1', 'Build Journal, a practice-coach prompt, and a dated tool and access guide'],
+  ['3', 'everyday-life bonus lessons: your phone\'s voice and camera, an everyday prompt pack, and staying safe from AI scams'],
+  ['1', 'downloads pack: every prompt in one file, a routine card, a cheat sheet, and printable checklists'],
+  ['1', 'Build Journal, a where-to-click video and glossary for beginners, and a dated tool and access guide'],
 ] as const
 
 const AUDIENCES = [
@@ -117,7 +120,7 @@ const NOT_FOR_YOU = [
 ]
 
 const FAQ = [
-  ['What if I have never used AI before?', 'Perfect. Your first 15 minutes is a guided win with a ready-made prompt, and Chapter 1 starts from what AI is in plain words. If you can write an email, you can do every project.'],
+  ['What if I have never used AI before?', 'Perfect. A short where-to-click video shows you the buttons, your first 15 minutes is a guided win with a ready-made prompt, and Chapter 1 starts from what AI is in plain words. If you can write an email, you can do every project.'],
   ['Do I need to know how to code?', 'No. No programming background is needed, and you will never open a terminal.'],
   ['I have already used ChatGPT. Is this for me?', 'Yes, if you have experimented but struggle to use it consistently or get results you trust. The course gives you a structured approach you can reuse on any task.'],
   ['Do I need to be good with technology?', 'You should be comfortable browsing the web. No advanced technical knowledge is needed.'],
