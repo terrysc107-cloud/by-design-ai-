@@ -5,13 +5,17 @@ import { trackConversion } from '@/lib/analytics'
 
 type Props = {
   /** Where this instance lives — stored on the subscriber row. */
-  source?: 'newsletter' | 'footer' | 'blog'
+  source?: 'newsletter' | 'footer' | 'blog' | 'education' | 'ai-foundations'
   /** 'card' = bordered block with heading (blog). 'inline' = compact (footer). */
   variant?: 'card' | 'inline'
   heading?: string
   blurb?: string
   className?: string
   theme?: 'dark' | 'light'
+  /** Small label above the heading. */
+  eyebrow?: string
+  /** Submit button text. */
+  cta?: string
 }
 
 export default function NewsletterSignup({
@@ -21,6 +25,8 @@ export default function NewsletterSignup({
   blurb = 'Short, practical notes on putting AI and automation to work in a business like yours. No hype, no filler. Unsubscribe any time.',
   className = '',
   theme = 'dark',
+  eyebrow = 'Newsletter',
+  cta = 'Subscribe →',
 }: Props) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
@@ -74,7 +80,7 @@ export default function NewsletterSignup({
           disabled={status === 'loading'}
           className={`${theme === 'light' ? 'bg-[#09111F] text-white hover:bg-[#2878FF]' : 'cta-btn'} px-6 py-3 text-xs tracking-widest disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap transition-colors`}
         >
-          {status === 'loading' ? 'Subscribing…' : 'Subscribe →'}
+          {status === 'loading' ? 'Subscribing…' : cta}
         </button>
       </form>
     )
@@ -90,7 +96,7 @@ export default function NewsletterSignup({
 
   return (
     <div className={`${theme === 'light' ? 'border border-[#D7E0EB] bg-white' : 'border border-gold/20 bg-[#23201b]/40'} p-8 ${className}`}>
-      <p className={`${theme === 'light' ? 'text-[#2878FF]' : 'text-gold'} text-[10px] tracking-[0.35em] uppercase font-medium mb-3`}>Newsletter</p>
+      <p className={`${theme === 'light' ? 'text-[#2878FF]' : 'text-gold'} text-[10px] tracking-[0.35em] uppercase font-medium mb-3`}>{eyebrow}</p>
       <h3 className={`${theme === 'light' ? 'text-[#09111F]' : 'text-white'} text-xl md:text-2xl font-semibold tracking-tight leading-tight mb-3`}>
         {heading}
       </h3>

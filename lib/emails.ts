@@ -279,6 +279,44 @@ Unsubscribe: ${unsubscribeUrl}`
   }
 }
 
+export function aiFoundationsWaitlistEmail(name: string | undefined, unsubscribeUrl: string): Email {
+  const greeting = name && name.trim() ? `Hey ${first(name)},` : 'Hey there,'
+  const inner =
+    h1('You’re on the AI Foundations list.') +
+    p(greeting) +
+    p(
+      'AI Foundations is a self-paced course: 12 short narrated chapters that take one real task from your week and turn it into a checked, repeatable routine in ChatGPT, Claude, or Gemini.'
+    ) +
+    p(
+      'Enrollment isn’t open yet. When it is, you’ll get one email with the link. Nothing has been charged and nothing is reserved. It’s a list, not a ticket.'
+    ) +
+    goldButton('https://aixdesign.dev/education/ai-foundations', 'See what’s inside →') +
+    p(
+      'You’ll also get the weekly AI by Design note, one short, practical read on putting AI to work. Unsubscribe any time.'
+    ) +
+    p('The AI by Design team')
+  const text = `${greeting}
+
+You're on the AI Foundations list.
+
+AI Foundations is a self-paced course: 12 short narrated chapters that take one real task from your week and turn it into a checked, repeatable routine in ChatGPT, Claude, or Gemini.
+
+Enrollment isn't open yet. When it is, you'll get one email with the link. Nothing has been charged and nothing is reserved. It's a list, not a ticket.
+
+See what's inside: https://aixdesign.dev/education/ai-foundations
+
+You'll also get the weekly AI by Design note. Unsubscribe any time.
+
+The AI by Design team
+
+Unsubscribe: ${unsubscribeUrl}`
+  return {
+    subject: 'You’re on the AI Foundations list',
+    html: wrap(inner, unsubFooter(unsubscribeUrl), 'You’ll hear first when enrollment opens.'),
+    text,
+  }
+}
+
 export function subscriberNotifyEmail(email: string, source: string): Email {
   const subject = `New newsletter subscriber: ${email}`
   const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1E1B17;">
