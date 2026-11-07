@@ -16,10 +16,10 @@ export interface RateLimitDecision {
   retryAfterSeconds?: number
 }
 
-const EMAIL_WINDOW_MS = 10 * 60 * 1000
-const EMAIL_MAX_ATTEMPTS = 3
-const GLOBAL_WINDOW_MS = 60 * 1000
-const GLOBAL_MAX_ATTEMPTS = 60
+const DEFAULT_KEY_WINDOW_MS = 10 * 60 * 1000
+const DEFAULT_KEY_MAX_ATTEMPTS = 3
+const DEFAULT_GLOBAL_WINDOW_MS = 60 * 1000
+const DEFAULT_GLOBAL_MAX_ATTEMPTS = 60
 const MAX_RETAINED_BUCKETS = 2000
 
 interface Bucket {
@@ -35,7 +35,21 @@ function pruneWindow(timestamps: number[], windowMs: number, now: number): numbe
   return timestamps.filter((t) => now - t < windowMs)
 }
 
-export function createVoiceAgentWaitlistRateLimiter(now: () => number = Date.now) {
+export interface RateLimitOptions {
+  keyWindowMs?: number
+  keyMaxAttempts?: number
+  globalWindowMs?: number
+  globalMaxAttempts?: number
+}
+
+/** Keyed + global sliding-window limiter. The key is hashed before storage,
+ * so callers may pass an email or a network address. Defaults are the
+ * waitlist's original limits; the voice-demo proxy passes its own. */
+export function createVoiceAgentWaitlistRateLimiter(now: () => number = Date.now, options: RateLimitOptions = {}) {
+  const EMAIL_WINDOW_MS = options.keyWindowMs ?? DEFAULT_KEY_WINDOW_MS
+  const EMAIL_MAX_ATTEMPTS = options.keyMaxAttempts ?? DEFAULT_KEY_MAX_ATTEMPTS
+  const GLOBAL_WINDOW_MS = options.globalWindowMs ?? DEFAULT_GLOBAL_WINDOW_MS
+  const GLOBAL_MAX_ATTEMPTS = options.globalMaxAttempts ?? DEFAULT_GLOBAL_MAX_ATTEMPTS
   const emailBuckets = new Map<string, Bucket>()
   let globalTimestamps: number[] = []
 

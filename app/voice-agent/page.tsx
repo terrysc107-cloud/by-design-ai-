@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import VoiceAgentExperience from './_components/VoiceAgentExperience'
 import './voice-agent.css'
 
-const TITLE = 'Your Agent, On Call | AIxDesign Voice'
+const TITLE = 'Call Your Future AI Receptionist | AIxDesign Voice'
 const DESCRIPTION =
-  'Speak to your agent from anywhere. Delegate real work, keep moving, and receive the result when it is ready.'
+  'Call a live AI receptionist demo for towing, auto repair, or auto detailing, and see the lead summary the owner would receive. Simulated calls, managed service.'
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -36,7 +36,7 @@ function jsonResponse(body: unknown, status: number, headers: Record<string, str
 /** Reads the body as a byte-bounded stream so an untrustworthy or missing
  * Content-Length header can never bypass the limit. Returns null if the
  * stream exceeds MAX_BODY_BYTES. */
-async function readBodyWithLimit(request: Request): Promise<string | null> {
+export async function readBodyWithLimit(request: Request): Promise<string | null> {
   const reader = request.body?.getReader()
   if (!reader) {
     const text = await request.text()
@@ -67,7 +67,7 @@ async function readBodyWithLimit(request: Request): Promise<string | null> {
   return new TextDecoder().decode(buf)
 }
 
-function isSameOrigin(request: Request): boolean {
+export function isSameOrigin(request: Request): boolean {
   const origin = request.headers.get('origin')
   if (!origin) return false
   try {

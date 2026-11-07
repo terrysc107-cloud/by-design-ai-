@@ -17,6 +17,48 @@
 - No issue was approved and no subscriber email was sent during release QA.
 
 ---
+## Handoff 2026-11-07 (Claude, session 2) - /voice-agent review repairs, UNVERIFIED
+
+- **Active task / goal:** fix 6 independent-review findings on the uncommitted voice demo
+  funnel: hide unapproved pricing, confirm email before scheduling, anonymous analytics,
+  shared-NAT rate limits, Next 15.5.29, regression tests + docs.
+- **What changed:** see `WEBSITE_HANDOFF.md` → "Review repairs". New `lib/voice-demo-offer.ts`,
+  `tests/voice-demo-offer.test.ts`, `tests/voice-demo-rate-limit.test.ts`. Edited
+  `lib/voice-demo{,-server,-client,-content}.ts`, `lib/analytics.ts`,
+  `app/voice-agent/_components/{VoiceAgentExperience,VoiceDemoLauncher,VoiceDemoQualificationForm}.tsx`,
+  `app/privacy/page.tsx`, `scripts/test-voice-agent-page.mjs`, `tests/voice-demo.test.ts`,
+  `docs/features/call-voice-assistant-demo.md`, `memory/DECISIONS.md`, `WEBSITE_HANDOFF.md`.
+- **Checks:** NONE executed. `npx`, `npm`, `node --import tsx`, and network fetches were all
+  blocked pending approval; only `node --version` (v24.14.1) ran.
+- **Not done:** Next.js upgrade to 15.5.29 (needs `npm install`; lockfile not hand-edited).
+- **Branch:** `feat/voice-agent-demo-platform`, nothing committed (per instruction: wait for Hermes).
+- **Decisions:** tier never reaches the browser; offer numbers server-component-only;
+  session/lead limits left per-address (flagged risk).
+- **Next step (Hermes/Terry):** run the command block at the end of `WEBSITE_HANDOFF.md`
+  "Review repairs", fix failures, then review before any commit. No deploy.
+
+---
+## Handoff 2026-11-07 (Claude) - /voice-agent live phone demo funnel (website side)
+
+- **Active task / goal:** plan Task 11 + website half of Task 12: turn `/voice-agent` into the
+  Call Voice Assistant demo funnel (towing, mechanic, auto detailing) with server proxy routes.
+- **What changed / files:** see `WEBSITE_HANDOFF.md` (repo root) and
+  `docs/features/call-voice-assistant-demo.md`. New: `lib/voice-demo*.ts`,
+  `app/api/voice-demo/*`, `app/voice-agent/_components/{VoiceDemoLauncher,VoiceDemoOwnerView,VoiceDemoQualificationForm,BookCallLink}.tsx`,
+  `tests/voice-demo.test.ts`. Modified: voice-agent page/experience/css, waitlist form (retired, kept),
+  waitlist handler/limiter (exports/options, defaults unchanged), `lib/analytics.ts`, privacy, sitemap,
+  Playwright script.
+- **Checks:** `git diff --check` PASS. Everything else NOT RUN: npm/npx/node/tsx were blocked
+  pending approval in that session and `node_modules` is absent.
+- **Branch:** `feat/voice-agent-demo-platform`, NOT committed (`git add` was blocked too);
+  all changes are uncommitted in the worktree (`git status --short`).
+- **Decisions:** token-in-body status polling; site never scores leads; pricing flagged
+  `approved: false`; waitlist retired without deletion.
+- **Risks:** unverified build/tests; service contract, env vars, Twilio number, pricing
+  approval, and privacy-policy promises all pending externally.
+- **Next step:** run the command block in `WEBSITE_HANDOFF.md` "Next step" and fix failures.
+
+---
 ## Handoff — 2026-09-05 (Claude) — the Five Things reel, shipped to four surfaces
 
 ### Active task
@@ -669,9 +711,9 @@ Design content.
 _Current repo state, refreshed automatically. This block is replaced, never appended —
 it is not a handoff. Real checkpoints live above, newest first._
 
-- Updated: 2026-09-05 12:26:55 EDT
-- Branch: main
-- Last commit: 9122c17 docs(social): fix the meeting count in the narration itself
-- Working tree: 19 uncommitted file(s)
+- Updated: 2026-11-07 09:49:36 EST
+- Branch: feat/voice-agent-demo-platform
+- Last commit: f6e7952 AI Foundations sales page: $47 checkout, refund FAQ, affiliate tracking (#29)
+- Working tree: 27 uncommitted file(s)
 
 <!-- END AUTO-STATE -->

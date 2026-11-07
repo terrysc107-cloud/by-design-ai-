@@ -1,5 +1,18 @@
 'use client'
 
+/**
+ * RETIRED 2026-11-07, intentionally not deleted. /voice-agent now runs the
+ * live phone demo funnel (VoiceDemoLauncher + VoiceDemoQualificationForm),
+ * which collects separate recap and sales-follow-up consent instead of the
+ * waitlist's single "updates" consent. This component is no longer rendered.
+ *
+ * Kept unchanged so the historical waitlist stays explainable: the
+ * /api/voice-agent-waitlist route, lib/voice-agent-waitlist*.ts, their tests,
+ * and the bda_voice_agent_waitlist table and rows are all preserved. Do not
+ * re-mount this beside the demo form, and do not treat waitlist consent as
+ * consent for demo follow-up. See docs/features/call-voice-assistant-demo.md.
+ */
+
 import { useId, useRef, useState, type FormEvent } from 'react'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
