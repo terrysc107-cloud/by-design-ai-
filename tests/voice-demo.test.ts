@@ -22,7 +22,8 @@ import {
   formatPhoneNumber,
   telHref,
 } from '../lib/voice-demo'
-import { readVoiceDemoConfig, createVoiceDemoHandlers, type VoiceDemoDependencies } from '../lib/voice-demo-server'
+import { createHmac } from 'node:crypto'
+import { readVoiceDemoConfig, createVoiceDemoHandlers, deriveNetworkKey, type VoiceDemoDependencies } from '../lib/voice-demo-server'
 import { VOICE_DEMO_COPY_STRINGS as PAGE_COPY, VOICE_DEMO_DISCLOSURE, VERTICAL_CARDS } from '../lib/voice-demo-content'
 import { VOICE_DEMO_OFFER_COPY_STRINGS } from '../lib/voice-demo-offer'
 
@@ -248,21 +249,44 @@ test('browser analytics calls in the demo UI pass no tier, utm, or raw query val
 
 // ── Config ────────────────────────────────────────────────────────────────
 
-test('config requires https base url (or localhost) and a real secret', () => {
+test('config requires https base url (or localhost), a real secret, and a separate network-key secret', () => {
   const secret = 's'.repeat(32)
+  const nk = 'n'.repeat(32)
+  const env = { VOICE_DEMO_API_BASE_URL: 'https://demo.example.com/', VOICE_DEMO_API_SECRET: secret, VOICE_DEMO_NETWORK_KEY_SECRET: nk }
   assert.equal(readVoiceDemoConfig({}), null)
-  assert.equal(readVoiceDemoConfig({ VOICE_DEMO_API_BASE_URL: 'http://demo.example.com', VOICE_DEMO_API_SECRET: secret }), null)
-  assert.equal(readVoiceDemoConfig({ VOICE_DEMO_API_BASE_URL: 'https://demo.example.com', VOICE_DEMO_API_SECRET: 'short' }), null)
-  assert.deepEqual(readVoiceDemoConfig({ VOICE_DEMO_API_BASE_URL: 'https://demo.example.com/', VOICE_DEMO_API_SECRET: secret }), {
-    baseUrl: 'https://demo.example.com', secret,
-  })
-  assert.ok(readVoiceDemoConfig({ VOICE_DEMO_API_BASE_URL: 'http://127.0.0.1:8080', VOICE_DEMO_API_SECRET: secret }))
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_API_BASE_URL: 'http://demo.example.com' }), null)
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_API_SECRET: 's'.repeat(31) }), null) // service requires >= 32
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_NETWORK_KEY_SECRET: undefined }), null)
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_NETWORK_KEY_SECRET: 'n'.repeat(31) }), null)
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_NETWORK_KEY_SECRET: secret }), null) // must differ from the service secret
+  assert.deepEqual(readVoiceDemoConfig(env), { baseUrl: 'https://demo.example.com', secret, networkKeySecret: nk })
+  assert.ok(readVoiceDemoConfig({ ...env, VOICE_DEMO_API_BASE_URL: 'http://127.0.0.1:8080' }))
+})
+
+test('config accepts only a bare https site origin for the upstream Origin header', () => {
+  const env = { VOICE_DEMO_API_BASE_URL: 'https://demo.example.com', VOICE_DEMO_API_SECRET: 's'.repeat(32), VOICE_DEMO_NETWORK_KEY_SECRET: 'n'.repeat(32) }
+  assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_SITE_ORIGIN: 'https://aixdesign.dev' })?.origin, 'https://aixdesign.dev')
+  for (const bad of ['http://aixdesign.dev', 'https://aixdesign.dev/', 'https://aixdesign.dev/voice-agent', 'aixdesign.dev', 'null']) {
+    assert.equal(readVoiceDemoConfig({ ...env, VOICE_DEMO_SITE_ORIGIN: bad }), null, bad)
+  }
+})
+
+test('network key is a keyed HMAC of the address: 43-char base64url, stable, secret-dependent, never the raw address', () => {
+  const a = deriveNetworkKey('203.0.113.9', NK_SECRET)
+  assert.match(a, /^[A-Za-z0-9_-]{43}$/)
+  assert.equal(deriveNetworkKey('203.0.113.9', NK_SECRET), a)
+  assert.notEqual(deriveNetworkKey('203.0.113.10', NK_SECRET), a)
+  assert.notEqual(deriveNetworkKey('203.0.113.9', 'other-' + NK_SECRET), a)
+  assert.ok(!a.includes('203.0.113.9'))
+  // Matches an independent HMAC-SHA256 so the service's 43-char check holds.
+  assert.equal(a, createHmac('sha256', NK_SECRET).update('voice-demo-network-key:v1:203.0.113.9').digest('base64url'))
 })
 
 // ── Proxy handlers ────────────────────────────────────────────────────────
 
 const ORIGIN = 'https://aixdesign.dev'
 const SECRET = 'test-secret-' + 'z'.repeat(24)
+const NK_SECRET = 'network-key-secret-' + 'k'.repeat(24)
 
 interface Call { url: string; init: RequestInit }
 
@@ -270,7 +294,7 @@ function harness(respond: (call: Call) => Response | Promise<Response>, override
   const calls: Call[] = []
   const logs: unknown[] = []
   const deps: VoiceDemoDependencies = {
-    config: () => ({ baseUrl: 'https://voice.example.test', secret: SECRET }),
+    config: () => ({ baseUrl: 'https://voice.example.test', secret: SECRET, networkKeySecret: NK_SECRET, origin: ORIGIN }),
     fetch: (async (url: string | URL, init?: RequestInit) => {
       const call = { url: String(url), init: init ?? {} }
       calls.push(call)
@@ -294,6 +318,40 @@ function req(path: string, body: unknown, headers: Record<string, string> = {}) 
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } })
 const UPSTREAM_SESSION = { browser_token: TOKEN, call_code: '482913', phone_number: '+18885550123', expires_at: '2026-11-07T15:00:00Z', profile: 'towing' }
 
+// Verbatim shapes from the voice service (call-voice-assistant-demo app/web_demo.py, pinned by its
+// tests/test_web_demo.py). If either side changes, these tests and that repo's tests must change together.
+const SERVICE_TOKEN = 'Q2xhdWRlLXRlc3QtdG9rZW4tbm90LXJlYWwtMDAwMDA'
+const SERVICE_SESSION = { browser_token: SERVICE_TOKEN, call_code: '048213', phone_number: '+15555550100', expires_at: '2026-11-07T15:15:00Z', profile: 'mechanic' }
+const SERVICE_OWNER_OUTPUT = {
+  vertical: 'mechanic',
+  need: 'Brakes',
+  urgency: 'standard',
+  service_requested: 'Brake pad replacement (per axle)',
+  preferred_timing: 'Tomorrow morning drop-off',
+  missing_information: ['drive status'],
+  summary: 'Simulated mechanic and auto repair call. Captured: vehicle, symptoms. Caller wording is withheld in this public demo.',
+  recommended_action: 'Call back to confirm the details and offer a time. Still needed: drive status.',
+  example_notification: 'New simulated mechanic and auto repair lead (standard): Brakes, Brake pad replacement (per axle), Tomorrow morning drop-off. Call back to confirm the details and offer a time. Still needed: drive status.',
+}
+
+test('the service session shape passes the sanitizer and maps profile to vertical', () => {
+  assert.deepEqual(parseUpstreamSession(SERVICE_SESSION), {
+    browser_token: SERVICE_TOKEN, call_code: '048213', phone_number: '+15555550100',
+    expires_at: '2026-11-07T15:15:00.000Z', vertical: 'mechanic',
+  })
+})
+
+test('the service status shapes pass the sanitizer, and completed owner output survives unchanged', () => {
+  for (const state of ['awaiting_call', 'in_call', 'failed', 'expired'] as const) {
+    assert.deepEqual(parseUpstreamStatus({ state, profile: 'mechanic' }), { state })
+  }
+  assert.deepEqual(parseUpstreamStatus({ state: 'completed', profile: 'mechanic', owner_output: SERVICE_OWNER_OUTPUT }), {
+    state: 'completed', owner_output: SERVICE_OWNER_OUTPUT,
+  })
+  // The old {status: ...} shape is not accepted.
+  assert.equal(parseUpstreamStatus({ status: 'completed', owner_output: SERVICE_OWNER_OUTPUT }), null)
+})
+
 test('not configured returns 503 without calling upstream', async () => {
   const { handlers, calls } = harness(() => json({}), { config: () => null })
   const res = await handlers.session(req('/api/voice-demo/session', { vertical: 'towing' }))
@@ -315,20 +373,37 @@ test('oversized body is rejected', async () => {
   assert.equal(res.status, 413)
 })
 
-test('session proxies with server-side secret and returns sanitized session', async () => {
-  const { handlers, calls } = harness(() => json({ ...UPSTREAM_SESSION, internal: 'secret-ish' }, 201))
+test('session proxies with server-side secret and keyed network key, and returns sanitized session', async () => {
+  const { handlers, calls, logs } = harness(() => json({ ...UPSTREAM_SESSION, internal: 'secret-ish' }, 201))
   const res = await handlers.session(req('/api/voice-demo/session', { vertical: 'towing', attribution: { utm_source: 'linkedin' } }))
   assert.equal(res.status, 200)
   assert.equal(res.headers.get('cache-control'), 'no-store')
   const text = await res.text()
+  const networkKey = deriveNetworkKey('203.0.113.9', NK_SECRET)
   assert.doesNotMatch(text, new RegExp(SECRET))
-  assert.doesNotMatch(text, /internal/)
-  assert.equal(JSON.parse(text).call_code, '482913')
+  assert.doesNotMatch(text, /internal|203\.0\.113\.9/)
+  assert.ok(!text.includes(networkKey), 'network key never reaches the browser')
+  assert.deepEqual(JSON.parse(text), {
+    browser_token: TOKEN, call_code: '482913', phone_number: '+18885550123', expires_at: '2026-11-07T15:00:00.000Z', vertical: 'towing',
+  })
   assert.equal(calls.length, 1)
   assert.equal(calls[0].url, 'https://voice.example.test/v1/web-demo/sessions')
   assert.equal(calls[0].init.method, 'POST')
-  assert.equal((calls[0].init.headers as Record<string, string>).Authorization, `Bearer ${SECRET}`)
-  assert.deepEqual(JSON.parse(String(calls[0].init.body)), { profile: 'towing', attribution: { utm_source: 'linkedin' } })
+  assert.deepEqual(calls[0].init.headers, {
+    Authorization: `Bearer ${SECRET}`, Accept: 'application/json', 'Content-Type': 'application/json', Origin: ORIGIN,
+  })
+  assert.deepEqual(JSON.parse(String(calls[0].init.body)), { profile: 'towing', network_key: networkKey, attribution: { utm_source: 'linkedin' } })
+  assert.doesNotMatch(String(calls[0].init.body), /203\.0\.113\.9/)
+  const logged = JSON.stringify(logs)
+  assert.ok(!logged.includes(networkKey) && !logged.includes('203.0.113.9'), 'network key and address never logged')
+})
+
+test('upstream Origin header is omitted when no site origin is configured', async () => {
+  const { handlers, calls } = harness(() => json(UPSTREAM_SESSION, 201), {
+    config: () => ({ baseUrl: 'https://voice.example.test', secret: SECRET, networkKeySecret: NK_SECRET }),
+  })
+  await handlers.session(req('/api/voice-demo/session', { vertical: 'towing' }))
+  assert.equal('Origin' in (calls[0].init.headers as Record<string, string>), false)
 })
 
 test('upstream failure, malformed body, and network error never leak details', async () => {
@@ -355,13 +430,24 @@ test('upstream 429 and local rate limit both surface as 429', async () => {
   assert.equal(local.calls.length, 0)
 })
 
-test('status keeps the token out of our URL and maps upstream 404 to expired', async () => {
-  const { handlers, calls } = harness(() => json({ error: 'not found' }, 404))
+test('status POSTs the token in the upstream body, never the path or query, and maps 404 to expired', async () => {
+  const { handlers, calls, logs } = harness(() => json({ error: 'not_found' }, 404))
   const res = await handlers.status(req('/api/voice-demo/status', { browser_token: TOKEN }))
   assert.equal(res.status, 200)
   assert.deepEqual(await res.json(), { state: 'expired' })
-  assert.equal(calls[0].url, `https://voice.example.test/v1/web-demo/sessions/${TOKEN}/status`)
-  assert.equal(calls[0].init.method, 'GET')
+  assert.equal(calls[0].url, 'https://voice.example.test/v1/web-demo/sessions/status')
+  assert.ok(!calls[0].url.includes(TOKEN))
+  assert.equal(calls[0].init.method, 'POST')
+  assert.deepEqual(JSON.parse(String(calls[0].init.body)), { browser_token: TOKEN })
+  assert.equal((calls[0].init.headers as Record<string, string>).Authorization, `Bearer ${SECRET}`)
+  assert.equal((calls[0].init.headers as Record<string, string>)['Content-Type'], 'application/json')
+  assert.ok(!JSON.stringify(logs).includes(TOKEN))
+})
+
+test('status proxies the exact service shape through to the browser', async () => {
+  const { handlers } = harness(() => json({ state: 'completed', profile: 'mechanic', owner_output: SERVICE_OWNER_OUTPUT }))
+  const res = await handlers.status(req('/api/voice-demo/status', { browser_token: SERVICE_TOKEN }))
+  assert.deepEqual(await res.json(), { state: 'completed', owner_output: SERVICE_OWNER_OUTPUT })
 })
 
 test('status returns sanitized owner output on completion', async () => {
@@ -403,6 +489,13 @@ test('lead forwards normalized payload with separate consents and returns only t
   assert.equal(sent.browser_token, TOKEN)
   assert.equal('company_url' in sent, false)
   assert.doesNotMatch(JSON.stringify(logs), /@|Dana|Reyes|2155550147/)
+})
+
+test('lead endpoint is not built in the voice service yet (Task 8): a 404 upstream is a handled 502', async () => {
+  const { handlers } = harness(() => json({ detail: 'Not Found' }, 404))
+  const res = await handlers.lead(req('/api/voice-demo/lead', VALID_LEAD))
+  assert.equal(res.status, 502)
+  assert.deepEqual(await res.json(), { error: 'upstream_unavailable' })
 })
 
 // ── Isolation ─────────────────────────────────────────────────────────────

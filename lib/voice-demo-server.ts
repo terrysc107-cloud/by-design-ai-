@@ -1,3 +1,4 @@
+import { createHmac } from 'node:crypto'
 import { isSameOrigin, readBodyWithLimit } from './voice-agent-waitlist-handler'
 import { createVoiceAgentWaitlistRateLimiter, type RateLimitDecision } from './voice-agent-waitlist-rate-limit'
 import {
@@ -19,7 +20,12 @@ import {
 
 export interface VoiceDemoConfig {
   baseUrl: string
+  /** Bearer secret shared with the voice service. */
   secret: string
+  /** Website-only HMAC key for network keys. Never shared with the service, so it cannot reverse them. */
+  networkKeySecret: string
+  /** Sent as the upstream Origin header when set; must be in the service's allowed origins. */
+  origin?: string
 }
 
 /** `status` is keyed by demo token; `status_ip` is the separate per-address abuse ceiling. */
@@ -37,10 +43,15 @@ export interface VoiceDemoDependencies {
 const UPSTREAM_TIMEOUT_MS = 8000
 const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '::1', '[::1]'])
 
+const MIN_SECRET = 32 // the service rejects shorter bearer secrets
+
 export function readVoiceDemoConfig(env: Record<string, string | undefined>): VoiceDemoConfig | null {
   const rawUrl = env.VOICE_DEMO_API_BASE_URL?.trim()
   const secret = env.VOICE_DEMO_API_SECRET?.trim()
-  if (!rawUrl || !secret || secret.length < 24) return null
+  const networkKeySecret = env.VOICE_DEMO_NETWORK_KEY_SECRET?.trim()
+  const origin = env.VOICE_DEMO_SITE_ORIGIN?.trim()
+  if (!rawUrl || !secret || secret.length < MIN_SECRET) return null
+  if (!networkKeySecret || networkKeySecret.length < MIN_SECRET || networkKeySecret === secret) return null
   let url: URL
   try {
     url = new URL(rawUrl)
@@ -49,7 +60,23 @@ export function readVoiceDemoConfig(env: Record<string, string | undefined>): Vo
   }
   const secure = url.protocol === 'https:' || (url.protocol === 'http:' && LOCAL_HOSTS.has(url.hostname))
   if (!secure || url.search || url.hash) return null
-  return { baseUrl: url.toString().replace(/\/+$/, ''), secret }
+  const config: VoiceDemoConfig = { baseUrl: url.toString().replace(/\/+$/, ''), secret, networkKeySecret }
+  if (origin) {
+    // Fail closed on anything but a bare https origin (the service enforces the same rule).
+    try {
+      const parsed = new URL(origin)
+      if (parsed.protocol !== 'https:' || parsed.origin !== origin) return null
+    } catch {
+      return null
+    }
+    config.origin = origin
+  }
+  return config
+}
+
+/** Keyed, versioned HMAC-SHA256 of the visitor address, base64url (43 chars). The raw address never leaves this server. */
+export function deriveNetworkKey(address: string, networkKeySecret: string): string {
+  return createHmac('sha256', networkKeySecret).update(`voice-demo-network-key:v1:${address}`).digest('base64url')
 }
 
 function respond(body: unknown, status = 200, headers: Record<string, string> = {}): Response {
@@ -59,8 +86,8 @@ function respond(body: unknown, status = 200, headers: Record<string, string> = 
   })
 }
 
-/** First hop of x-forwarded-for (set by Vercel), hashed inside the limiter. */
-function networkKey(request: Request): string {
+/** First hop of x-forwarded-for (set by Vercel). Hashed inside the limiter; HMAC'd before it goes upstream. */
+function networkAddress(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
   return forwarded || request.headers.get('x-real-ip')?.trim() || 'unknown'
 }
@@ -105,17 +132,19 @@ async function callUpstream(
   deps: VoiceDemoDependencies,
   config: VoiceDemoConfig,
   path: string,
-  init: { method: 'GET' | 'POST'; body?: unknown },
+  body: unknown,
 ): Promise<{ status: number; data: unknown } | null> {
   try {
+    // Every upstream call is a JSON POST: secrets, tokens, and network keys only ever travel in headers or the body.
     const res = await deps.fetch(`${config.baseUrl}${path}`, {
-      method: init.method,
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${config.secret}`,
         Accept: 'application/json',
-        ...(init.body === undefined ? {} : { 'Content-Type': 'application/json' }),
+        'Content-Type': 'application/json',
+        ...(config.origin ? { Origin: config.origin } : {}),
       },
-      body: init.body === undefined ? undefined : JSON.stringify(init.body),
+      body: JSON.stringify(body),
       cache: 'no-store',
       redirect: 'error',
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
@@ -128,7 +157,7 @@ async function callUpstream(
     }
     return { status: res.status, data }
   } catch {
-    deps.log('voice_demo.upstream_error', { path: path.startsWith('/v1/web-demo/sessions/') ? 'status' : path })
+    deps.log('voice_demo.upstream_error', { path })
     return null
   }
 }
@@ -142,12 +171,14 @@ export function createVoiceDemoHandlers(deps: VoiceDemoDependencies) {
     if (!parsed.ok) return parsed.response
     const input = validateSessionRequest(parsed.body)
     if (!input.ok) return respond({ error: 'invalid_request', fields: input.fields }, 400)
-    const config = gate('session', [['session', networkKey(request)]], deps)
+    const address = networkAddress(request)
+    const config = gate('session', [['session', address]], deps)
     if (config instanceof Response) return config
 
     const upstream = await callUpstream(deps, config, '/v1/web-demo/sessions', {
-      method: 'POST',
-      body: { profile: input.value.vertical, ...(input.value.attribution ? { attribution: input.value.attribution } : {}) },
+      profile: input.value.vertical,
+      network_key: deriveNetworkKey(address, config.networkKeySecret),
+      ...(input.value.attribution ? { attribution: input.value.attribution } : {}),
     })
     if (!upstream) return UNAVAILABLE()
     if (upstream.status === 429) return UPSTREAM_LIMITED()
@@ -165,11 +196,11 @@ export function createVoiceDemoHandlers(deps: VoiceDemoDependencies) {
     const input = validateStatusRequest(parsed.body)
     if (!input.ok) return respond({ error: 'invalid_request' }, 400)
     // Per demo token, so prospects sharing one NAT (office, campus, mobile carrier) never throttle each other.
-    const config = gate('status', [['status', input.value.browser_token], ['status_ip', networkKey(request)]], deps)
+    const config = gate('status', [['status', input.value.browser_token], ['status_ip', networkAddress(request)]], deps)
     if (config instanceof Response) return config
 
-    // Server-to-server only: the token is in the upstream path, never in a URL the browser or our logs see.
-    const upstream = await callUpstream(deps, config, `/v1/web-demo/sessions/${encodeURIComponent(input.value.browser_token)}/status`, { method: 'GET' })
+    // POST-only upstream too: the token is in the JSON body, never in a path, query, or access log.
+    const upstream = await callUpstream(deps, config, '/v1/web-demo/sessions/status', { browser_token: input.value.browser_token })
     if (!upstream) return UNAVAILABLE()
     if (upstream.status === 404 || upstream.status === 410) return respond({ state: 'expired' })
     if (upstream.status === 429) return UPSTREAM_LIMITED()
@@ -193,10 +224,11 @@ export function createVoiceDemoHandlers(deps: VoiceDemoDependencies) {
     }
     const input = validateLeadRequest(body)
     if (!input.ok) return respond({ error: 'invalid_request', fields: input.fields }, 400)
-    const config = gate('lead', [['lead', networkKey(request)]], deps)
+    const config = gate('lead', [['lead', networkAddress(request)]], deps)
     if (config instanceof Response) return config
 
-    const upstream = await callUpstream(deps, config, '/v1/web-demo/leads', { method: 'POST', body: input.value })
+    // Not built in the voice service yet (Task 8): until then this returns a handled 502.
+    const upstream = await callUpstream(deps, config, '/v1/web-demo/leads', input.value)
     if (!upstream) return UNAVAILABLE()
     if (upstream.status === 429) return UPSTREAM_LIMITED()
     const result = upstream.status >= 200 && upstream.status < 300 ? parseUpstreamLead(upstream.data) : null
@@ -214,7 +246,8 @@ export function createVoiceDemoHandlers(deps: VoiceDemoDependencies) {
 // enforces the authoritative limits; move to a shared store if abuse appears.
 export function createVoiceDemoLimiter(now: () => number = Date.now): VoiceDemoDependencies['limit'] {
   const limiters: Record<LimitScope, (key: string) => RateLimitDecision> = {
-    session: createVoiceAgentWaitlistRateLimiter(now, { keyWindowMs: 10 * 60_000, keyMaxAttempts: 6, globalMaxAttempts: 120 }),
+    // Same 5 per 10 min per network as the service (keyed by the same address), so we deny first.
+    session: createVoiceAgentWaitlistRateLimiter(now, { keyWindowMs: 10 * 60_000, keyMaxAttempts: 5, globalMaxAttempts: 120 }),
     // Per token: polling every 3s is ~20/min plus visibility re-checks.
     status: createVoiceAgentWaitlistRateLimiter(now, { keyWindowMs: 60_000, keyMaxAttempts: 40, globalMaxAttempts: 6000 }),
     // Per address: ~60 concurrent demos behind one NAT; only stops token-rotation floods.

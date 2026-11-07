@@ -17,6 +17,26 @@
 - No issue was approved and no subscriber email was sent during release QA.
 
 ---
+## Handoff 2026-11-07 (Claude, session 3) - voice demo proxy reconciled with the voice service (Task 7), UNVERIFIED
+
+- **Active task / goal:** make the proxy match `call-voice-assistant-demo` `app/web_demo.py` exactly. Full detail
+  and the shared contract are in that repo's `.ai/HANDOFF.md` (top entry).
+- **What changed:** `lib/voice-demo-server.ts`:
+  - Status upstream is now `POST /v1/web-demo/sessions/status` with `{browser_token}` in the body. The token is never in a path or query.
+  - New `deriveNetworkKey`: base64url HMAC-SHA256 of the address under `VOICE_DEMO_NETWORK_KEY_SECRET`, sent as
+    `network_key` on session create. It is never logged or returned to the browser.
+  - Config needs a ≥32-char API secret (was 24) plus the separate network-key secret. Optional `VOICE_DEMO_SITE_ORIGIN` becomes the upstream `Origin`.
+  - Every upstream call is a JSON POST with explicit Authorization, Accept, and Content-Type headers.
+  - Session limit is now 5 per 10 min, matching the service.
+  - Tests: `tests/voice-demo.test.ts` adds verbatim service fixtures (session, every status, completed owner output) that must pass the
+    sanitizers unchanged, plus header, body, and log checks and the Task 8 lead-502 behaviour. `tests/voice-demo-rate-limit.test.ts` gets the config shape update.
+  Also edited: `docs/features/call-voice-assistant-demo.md` and `.env.example` (names only).
+- **Checks:** `git diff --check` PASS. Tests, tsc, claims, and build were NOT run ("requires approval").
+- **Not done:** the lead endpoint (`/v1/web-demo/leads`) is service Task 8. Until then the lead form shows the handled "could not reach" state.
+- **Next step (Hermes):** `npx --yes tsx --test tests/voice-demo.test.ts tests/voice-demo-rate-limit.test.ts tests/voice-demo-offer.test.ts && npx tsc --noEmit && npm run check:claims && npm run build`.
+  Then run the backend suite. Do not commit until both pass. No deploy.
+
+---
 ## Handoff 2026-11-07 (Claude, session 2) - /voice-agent review repairs, UNVERIFIED
 
 - **Active task / goal:** fix 6 independent-review findings on the uncommitted voice demo

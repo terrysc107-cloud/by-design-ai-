@@ -48,7 +48,9 @@ defaults unchanged), `app/privacy/page.tsx`, `app/sitemap.ts`, `app/voice-agent/
 | Variable | Meaning |
 |---|---|
 | `VOICE_DEMO_API_BASE_URL` | Demo service origin, `https://` (or `http://localhost` for dev). No query/hash. |
-| `VOICE_DEMO_API_SECRET` | Bearer secret, at least 24 characters. Never `NEXT_PUBLIC_`. |
+| `VOICE_DEMO_API_SECRET` | Bearer secret shared with the service (its `VOICE_DEMO_WEB_SERVICE_SECRET`), at least 32 characters. Never `NEXT_PUBLIC_`. |
+| `VOICE_DEMO_NETWORK_KEY_SECRET` | Website-only HMAC key for `network_key`, at least 32 characters, different from the API secret. Never given to the service. |
+| `VOICE_DEMO_SITE_ORIGIN` | Optional bare `https://` origin sent as the upstream `Origin` header. It must be in the service's `VOICE_DEMO_WEB_ALLOWED_ORIGINS`. An invalid value counts as not configured. |
 
 Either missing or invalid: every proxy route returns `503 {"error":"not_configured"}` and the
 page shows "The live demo line is not open right now" with the Calendly fallback. The page
@@ -56,14 +58,23 @@ and build never depend on these values.
 
 ## Upstream contract the demo service must implement
 
-All requests carry `Authorization: Bearer <secret>`; 8 s timeout; redirects refused.
+All requests are JSON `POST`s with `Authorization: Bearer <secret>`, `Accept` and `Content-Type: application/json`,
+plus `Origin: <VOICE_DEMO_SITE_ORIGIN>` when that is set. 8 s timeout, redirects refused. The service side is
+`call-voice-assistant-demo` `app/web_demo.py`, and tests on both sides pin these shapes.
 
-- `POST /v1/web-demo/sessions` body `{ profile: "towing"|"mechanic"|"auto_detailing", attribution?: {utm_*} }`
-  → 2xx `{ browser_token: [A-Za-z0-9_-]{32,128}, call_code: "\d{6}", phone_number: E.164, expires_at: ISO-8601, profile }`
-- `GET /v1/web-demo/sessions/{browser_token}/status`
-  → 2xx `{ state: "awaiting_call"|"in_call"|"completed"|"expired"|"failed", owner_output? }`; 404/410 is treated as `expired`.
+- `POST /v1/web-demo/sessions` body `{ profile: "towing"|"mechanic"|"auto_detailing", network_key, attribution?: {utm_*} }`
+  → 201 `{ browser_token (43 chars), call_code: "\d{6}", phone_number: E.164, expires_at: ISO-8601 UTC, profile }`.
+  `network_key` = base64url HMAC-SHA256(`VOICE_DEMO_NETWORK_KEY_SECRET`, `voice-demo-network-key:v1:<address>`), 43 chars.
+  The raw address never leaves this server, and the key is never logged or returned to the browser.
+  `expires_at` is when the call code stops working (15 min). The session, and with it status and owner output,
+  lasts 2 h. The browser keeps a session for `expires_at` + 60 min, which always falls inside that window.
+- `POST /v1/web-demo/sessions/status` body `{ browser_token }`. The token is never in a path or query, here or upstream.
+  → 200 `{ state: "awaiting_call"|"in_call"|"completed"|"expired"|"failed", profile, owner_output? }`; 404/410 is treated as `expired`.
   `owner_output` (required when completed): `vertical, need, urgency ("emergency"|"urgent"|"standard"|"flexible"), service_requested, preferred_timing, missing_information[], summary (non-empty), recommended_action, example_notification`.
-- `POST /v1/web-demo/leads` body: validated lead (`name, business_name, email` lowercased, `phone?` E.164,
+  The service builds every value from profile-owned labels: matched intent, tool-validated service and
+  availability window, intake field names, and safety flags. It never copies caller wording, so names,
+  addresses, numbers, and emails cannot appear however they were spoken. The sanitizer here is a second layer.
+- `POST /v1/web-demo/leads`: **not built in the service yet (Task 8).** Until then the lead form gets a handled `502 upstream_unavailable`. Body: validated lead (`name, business_name, email` lowercased, `phone?` E.164,
   `business_type, monthly_calls, missed_calls, timeline, budget`, `recap_consent`, `sales_follow_up_consent`,
   `browser_token?`, `attribution?`) → 2xx `{ tier: "sales_qualified"|"review_qualified"|"nurture"|"resource", email_confirmation_sent: boolean }`.
   The proxy requires a known `tier` (proof the service scored the lead) but returns only
@@ -85,7 +96,7 @@ fields (provider IDs, transcripts, caller PII, scores) are dropped.
 - Process-local burst limits, keys hashed before storage. Status polling is scoped per demo
   token (40/min) with a separate per-address abuse ceiling (1,200/min, about 60 concurrent demos
   behind one NAT), so prospects sharing an office, campus, or mobile-carrier IP never throttle each
-  other. Session (6/10 min) and lead (5/10 min) stay per address. The service is authoritative and
+  other. Session (5/10 min, same as the service) and lead (5/10 min) stay per address. The service is authoritative and
   should limit sessions per profile/number, not per IP alone.
 - Logs carry event names and HTTP status only.
 - Recap and sales-follow-up consent are separate, optional booleans; neither is inferred from calling or from the historical waitlist.

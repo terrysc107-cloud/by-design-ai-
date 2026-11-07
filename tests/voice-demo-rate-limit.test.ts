@@ -16,7 +16,7 @@ const token = (i: number) => 'bt_' + String(i).padStart(40, '0')
 
 function handlers(limit: VoiceDemoDependencies['limit'], onFetch: () => void = () => {}) {
   return createVoiceDemoHandlers({
-    config: () => ({ baseUrl: 'https://voice.example.test', secret: 's'.repeat(32) }),
+    config: () => ({ baseUrl: 'https://voice.example.test', secret: 's'.repeat(32), networkKeySecret: 'n'.repeat(32) }),
     fetch: (async () => {
       onFetch()
       return new Response(JSON.stringify({ state: 'in_call' }), { status: 200, headers: { 'content-type': 'application/json' } })
