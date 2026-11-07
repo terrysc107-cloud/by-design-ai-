@@ -1,5 +1,14 @@
 # WEBSITE_HANDOFF: /voice-agent live demo funnel
 
+## 2026-11-07 — consent evidence contract repair, uncommitted
+
+- `lib/voice-demo-content.ts` now exports explicit `2026-11-web-v1` consent contract literals; the
+  rendered fit-form labels reference those constants. The backend cross-repository test verifies exact
+  copy/version parity. No runtime coupling was added.
+- Only consent contract constants/docs were changed in this repository; no commit or deploy occurred.
+- Verification passed: 58 focused voice-demo tests, TypeScript (`--noEmit`), claims gate, production build,
+  and diff check.
+
 Date: 2026-11-07 · Branch: `feat/voice-agent-demo-platform` · Worktree: `/Users/terry/code/by-design-ai-voice-demo`
 Scope: plan Task 11 + website half of Task 12 (`.hermes/plans/2026-11-07_085200-call-voice-assistant-demo-platform.md`).
 Details and the upstream API contract: `docs/features/call-voice-assistant-demo.md`.

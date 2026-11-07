@@ -1,5 +1,11 @@
 import type { OwnerOutput, Vertical } from './voice-demo'
 
+// Evidence contract shared by value with call-voice-assistant-demo. Keep these
+// literals explicit so the cross-repository contract test can detect drift.
+export const WEB_CONSENT_COPY_VERSION = '2026-11-web-v1'
+export const WEB_RECAP_CONSENT_COPY = 'Email me a recap of my demo call.'
+export const WEB_SALES_CONSENT_COPY = 'You may follow up by email about a managed receptionist for my business. I can opt out any time.'
+
 /**
  * All persuasive copy for /voice-agent lives here so tests can run every
  * string through the claims guardrail and the no-em-dash rule.
@@ -124,8 +130,8 @@ export const VOICE_DEMO_FAQ: { q: string; a: string }[] = [
 export const VOICE_DEMO_FIT = {
   headline: 'See if it fits your shop.',
   body: 'Six quick questions. We review every request and reply by email.',
-  recapConsent: 'Email me a recap of my demo call.',
-  salesConsent: 'You may follow up by email about a managed receptionist for my business. I can opt out any time.',
+  recapConsent: WEB_RECAP_CONSENT_COPY,
+  salesConsent: WEB_SALES_CONSENT_COPY,
   consentNote: 'Both boxes are optional and separate. Without them we only reply to this request.',
   confirmEmail: 'Thanks. Check your inbox and confirm your email address.',
   confirmEmailNext: 'Once you confirm, we send your follow-up. It includes the link to book a 15-minute fit call.',
