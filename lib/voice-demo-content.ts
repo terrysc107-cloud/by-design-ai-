@@ -60,7 +60,8 @@ export const VOICE_DEMO_DISCLOSURE =
 
 export const VOICE_DEMO_DISCLOSURE_ACK = 'I understand this call is with an AI, is transcribed, and is a simulation.'
 
-export const VOICE_DEMO_EXPECTATION = 'Plan on about 90 seconds. Enter your six-digit code when the line asks for it.'
+export const VOICE_DEMO_EXPECTATION =
+  'Enter your six-digit code, then act like a real customer. Ask a question, describe what you need, and interrupt naturally. After the call, return here to see the owner-ready lead.'
 
 export const VOICE_DEMO_STATUS_COPY = {
   awaiting_call: 'Waiting for your call. Keep this page open; your results appear here after you hang up.',
