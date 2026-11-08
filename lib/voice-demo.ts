@@ -120,7 +120,7 @@ function readAttribution(value: unknown): Attribution | undefined {
   return Object.keys(out).length > 0 ? out : undefined
 }
 
-/** North American numbers only for now; returns E.164 or null. */
+/** US numbers only for now; returns +1 E.164 or null. */
 export function normalizePhone(raw: string): string | null {
   const digits = raw.replace(/\D/g, '')
   if (digits.length === 10) return `+1${digits}`
@@ -182,7 +182,7 @@ export function validateLeadRequest(input: unknown): Validation<LeadRequest> {
   if (body.phone !== undefined && body.phone !== null && body.phone !== '') {
     const normalized = typeof body.phone === 'string' && body.phone.length <= 40 ? normalizePhone(body.phone) : null
     if (normalized) phone = normalized
-    else fields.phone = 'Enter a 10-digit US or Canadian number, or leave it blank.'
+    else fields.phone = 'Enter a 10-digit US number, or leave it blank.'
   }
 
   const choice = <T extends readonly string[]>(key: string, list: T, message: string): T[number] => {
