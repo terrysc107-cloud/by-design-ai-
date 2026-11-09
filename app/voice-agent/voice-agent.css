@@ -215,6 +215,7 @@
 
 @media (max-width: 640px) {
   .vd-nav nav a:not(.vd-btn) { display: none; }
+  .vd-nav nav .vd-btn { display: none; }
   .vd-nav { height: 60px; }
   .vd-hero { padding-top: 32px; }
   .vd-hero .vd-actions .vd-btn { width: 100%; }

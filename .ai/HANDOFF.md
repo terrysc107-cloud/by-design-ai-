@@ -1,4 +1,15 @@
 ---
+## Handoff — 2026-11-09 — Automotive voice demo release candidate
+
+- Integrated the five isolated `/voice-agent` automotive demo commits onto current `origin/main` without reverting The Operator Signal release.
+- The page now leads with a live phone demo for towing, auto repair, and auto detailing, plus simulated owner output, disclosure, service scope, and a fit form.
+- Verified the standalone voice service is healthy and that its authenticated `/v1/web-demo/leads` route exists; removed stale Task 8 language from current website code and documentation.
+- Hid the cramped sticky-header CTA at mobile widths; the full hero CTA remains visible and browser checks show no horizontal overflow from 320px through desktop.
+- Verification passed: 101 focused tests, TypeScript, claims guard, production build, and 46 browser acceptance checks.
+- No real call, fit-form lead, or email was created during release QA.
+- Release remained unmerged and undeployed at the time of this handoff entry; independent code/security and visual re-reviews passed with no blockers.
+
+---
 ## Handoff — 2026-11-09 — The Operator Signal newsletter release
 
 - Rebuilt `/newsletter` in the current blue/silver/ink visual system and added

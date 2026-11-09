@@ -74,7 +74,7 @@ plus `Origin: <VOICE_DEMO_SITE_ORIGIN>` when that is set. 8 s timeout, redirects
   The service builds every value from profile-owned labels: matched intent, tool-validated service and
   availability window, intake field names, and safety flags. It never copies caller wording, so names,
   addresses, numbers, and emails cannot appear however they were spoken. The sanitizer here is a second layer.
-- `POST /v1/web-demo/leads`: **not built in the service yet (Task 8).** Until then the lead form gets a handled `502 upstream_unavailable`. Body: validated lead (`name, business_name, email` lowercased, `phone?` E.164,
+- `POST /v1/web-demo/leads`: implemented by the standalone service and verified live to require authenticated access. Body: validated lead (`name, business_name, email` lowercased, `phone?` E.164,
   `business_type, monthly_calls, missed_calls, timeline, budget`, `recap_consent`, `sales_follow_up_consent`,
   `browser_token?`, `attribution?`) → 2xx `{ tier: "sales_qualified"|"review_qualified"|"nurture"|"resource", email_confirmation_sent: boolean }`.
   The proxy requires a known `tier` (proof the service scored the lead) but returns only

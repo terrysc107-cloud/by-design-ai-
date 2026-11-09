@@ -491,7 +491,7 @@ test('lead forwards normalized payload with separate consents and returns only t
   assert.doesNotMatch(JSON.stringify(logs), /@|Dana|Reyes|2155550147/)
 })
 
-test('lead endpoint is not built in the voice service yet (Task 8): a 404 upstream is a handled 502', async () => {
+test('a missing or incompatible upstream lead endpoint fails visibly without claiming capture', async () => {
   const { handlers } = harness(() => json({ detail: 'Not Found' }, 404))
   const res = await handlers.lead(req('/api/voice-demo/lead', VALID_LEAD))
   assert.equal(res.status, 502)

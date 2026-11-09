@@ -227,7 +227,7 @@ export function createVoiceDemoHandlers(deps: VoiceDemoDependencies) {
     const config = gate('lead', [['lead', networkAddress(request)]], deps)
     if (config instanceof Response) return config
 
-    // Not built in the voice service yet (Task 8): until then this returns a handled 502.
+    // The voice service owns durable lead capture, qualification, consent evidence, and delivery.
     const upstream = await callUpstream(deps, config, '/v1/web-demo/leads', input.value)
     if (!upstream) return UNAVAILABLE()
     if (upstream.status === 429) return UPSTREAM_LIMITED()
