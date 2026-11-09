@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         </Link>
 
         <h1 className="text-3xl font-semibold text-white mb-2">Privacy Policy</h1>
-        <p className="text-white/40 text-sm mb-12">Last updated: May 2026</p>
+        <p className="text-white/40 text-sm mb-12">Last updated: November 2026</p>
 
         <div className="space-y-8 text-white/65 text-sm leading-loose">
           <section>
@@ -59,6 +59,33 @@ export default function PrivacyPage() {
             <p className="mt-3">We may use aggregated, cookie-based analytics and advertising pixels to measure how the site performs and to reach similar audiences with our own ads. We never sell your information to third parties.</p>
           </section>
 
+          <section id="voice-demo">
+            <h2 className="text-white font-semibold mb-3">AI Receptionist Phone Demo</h2>
+            <p>
+              Our phone demo at aixdesign.dev/voice-agent connects you to an AI receptionist, not a person. Every demo call is simulated: no real tow, repair, appointment, estimate, dispatch, or payment is created.
+            </p>
+            <ul className="list-disc list-inside space-y-2 mt-3 ml-2">
+              <li>
+                <strong className="text-white/80">What we process:</strong> the phone number you call from, call timing, the demo profile you chose, and a written transcript of the call produced by speech-to-text. We use the transcript to create the owner summary shown on the page. We do not store call audio.
+              </li>
+              <li>
+                <strong className="text-white/80">Demo codes and page links:</strong> the page issues a short-lived six-digit call code and a separate random session token so the summary appears in the right browser. Neither is placed in page URLs or sent to analytics.
+              </li>
+              <li>
+                <strong className="text-white/80">Consent is separate:</strong> calling the demo line does not sign you up for marketing. A demo recap email and sales follow-up emails each require their own permission, and we ask you to confirm your email address first. You can opt out of either at any time.
+              </li>
+              <li>
+                <strong className="text-white/80">Fit requests:</strong> if you submit the fit form, we use your name, business, email, optional phone, and answers to review the request and reply. Your answers are summarized for our own team; they are not sold or shared for others&apos; marketing.
+              </li>
+              <li>
+                <strong className="text-white/80">Retention:</strong> demo records without follow-up permission are deleted after 30 days. Transcripts are kept for a shorter period than the structured lead summary. Records tied to an active sales conversation follow the Data Retention section below.
+              </li>
+              <li>
+                <strong className="text-white/80">Analytics:</strong> we measure anonymous funnel steps (for example, which demo business was chosen and whether a fit request was sent). Each event carries only a random identifier created in your browser tab (kept in session storage and cleared when the tab closes), the demo business type, and a broad traffic-source category such as search or social. These events never include your name, email, phone number, call code, session token, or how your fit request was assessed.
+              </li>
+            </ul>
+          </section>
+
           <section>
             <h2 className="text-white font-semibold mb-3">Third-Party Services</h2>
             <p>We use the following third-party services to operate our business:</p>
@@ -73,7 +100,13 @@ export default function PrivacyPage() {
                 <strong className="text-white/80">Calendly:</strong> Discovery-call scheduling. Calendly collects the details you provide when booking. Review Calendly&apos;s privacy policy at calendly.com/privacy.
               </li>
               <li>
-                <strong className="text-white/80">OpenAI:</strong> We use OpenAI&apos;s API to help us review intake questionnaire responses and prepare for your call. Review OpenAI&apos;s privacy policy at openai.com/policies/privacy-policy.
+                <strong className="text-white/80">OpenAI:</strong> We use OpenAI&apos;s API to help us review intake questionnaire responses and prepare for your call, and to power and transcribe the AI receptionist phone demo. Review OpenAI&apos;s privacy policy at openai.com/policies/privacy-policy.
+              </li>
+              <li>
+                <strong className="text-white/80">Twilio:</strong> Telephone connectivity for the AI receptionist phone demo. Twilio processes call routing data such as the calling number and call timing. Review Twilio&apos;s privacy notice at twilio.com/legal/privacy.
+              </li>
+              <li>
+                <strong className="text-white/80">Telegram:</strong> Internal notifications to our team about new demo fit requests. Review Telegram&apos;s privacy policy at telegram.org/privacy.
               </li>
               <li>
                 <strong className="text-white/80">Vercel:</strong> Website hosting and privacy-friendly traffic analytics. Vercel may log standard server request data. Review Vercel&apos;s privacy policy at vercel.com/legal/privacy-policy.

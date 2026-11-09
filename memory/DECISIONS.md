@@ -120,6 +120,29 @@ public-facing brand to **AI by Design** with the stylized lockup
   - Resend FROM string → `AI by Design <hello@aixdesign.dev>`
 - Variant table (when to use which form): `docs/BRAND-KIT.md` §1.
 
+## /voice-agent becomes the Call Voice Assistant demo funnel — 2026-11-07
+
+Per the 2026-11-07 demo-platform plan (Task 11), `/voice-agent` is now a live phone-demo
+sales funnel for towing, auto repair, and auto detailing, replacing the preview waitlist.
+The site is only the sales surface plus a server-side proxy (`VOICE_DEMO_API_BASE_URL`,
+`VOICE_DEMO_API_SECRET`) to the separate demo service; scoring, consent storage, email,
+and metrics belong to that service. Disclosure (AI, transcription, simulation) is shown and
+acknowledged before the number. The waitlist is retired from the page, not deleted.
+Details: `docs/features/call-voice-assistant-demo.md`.
+
+Revised 2026-11-07 after independent review:
+- Unapproved pricing is NOT shown at all (no price, minutes, overage, or term, and the fit
+  form does not ask prospects to accept them). The page uses neutral managed-service /
+  fit-call copy. `VOICE_DEMO_OFFER.approved` in `lib/voice-demo-offer.ts` is the single
+  deliberate publication gate; the numbers never ship in client JS.
+- No scheduling link right after a lead submits. The prospect confirms their email first;
+  the 15-minute Calendly link is only in the follow-up the service sends after confirmation.
+  The browser never learns the lead tier. Calendly stays as the page's failure fallback.
+- Browser analytics carry only an anonymous random per-tab `session_id`, `profile`, and a
+  fixed coarse `source` bucket. No tier, no raw utm values.
+- Status polling is rate-limited per demo token with a separate generous per-address
+  ceiling, so prospects behind one shared NAT do not throttle each other.
+
 ## Build Lab series — 2026-09-25
 
 Terry directed Build Lab to become a rotating series of four-week implementation cohorts. Foundation: agent identity, business context, CEO/board, and one recurring workflow. Future labs: content, lead follow-up, websites, operations. A structured questionnaire feeds an instructor-reviewed preparation plan and weekly deliverables. Implementation lives in the course repo; this site refers to it without copying dates, capacity or tuition. The legacy founding run is preserved separately until registration/payment records are reconciled. New-course price hypothesis: $1,995 founding tuition; no invented sale, dates or inventory. See the course repo docs/build-lab/CLAUDE-HANDOFF.md for connected launch tasks.
