@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { hasSupabase } from '@/lib/supabase'
 import { hasOpenAI } from '@/lib/openai'
-import { generateIssue, pickIssueImages, insertIssue, setIssueStatus } from '@/lib/newsletter'
+import { generateIssue, pickIssueImages, insertIssue } from '@/lib/newsletter'
 import { generateNewsletterPromo } from '@/lib/content-engine'
 import { insertDraft } from '@/lib/content-queue'
 import { getResend, FROM_EMAIL, LEAD_NOTIFY_EMAIL } from '@/lib/resend'
@@ -10,11 +10,8 @@ import { newsletterApprovalEmail } from '@/lib/emails'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
-// Weekly cron: draft this week's newsletter issue. With NEWSLETTER_AUTONOMOUS
-// unset/false (default), the issue stays 'draft' and the owner gets a one-click
-// "Approve & Send" email — nothing reaches subscribers until approved. With
-// NEWSLETTER_AUTONOMOUS=true, the issue is approved immediately and the send
-// cron picks it up. Also drafts social posts that promote the issue.
+// Weekly cron: draft this week's newsletter issue. It always stays in draft
+// until a human confirms approval. Also drafts social posts that promote it.
 const LANE = 'general'
 // Square brand asset for the Instagram promo (IG requires media). Repo-relative.
 const IG_PROMO_ASSET = 'public/brand/bda-share-square-1200x1200.png'
@@ -22,8 +19,10 @@ const IG_PROMO_ASSET = 'public/brand/bda-share-square-1200x1200.png'
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET
   const auth = req.headers.get('authorization')
-  const qs = req.nextUrl.searchParams.get('secret')
-  if (secret && auth !== `Bearer ${secret}` && qs !== secret) {
+  if (!secret) {
+    return NextResponse.json({ error: 'Cron authentication not configured' }, { status: 503 })
+  }
+  if (auth !== `Bearer ${secret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -43,10 +42,7 @@ export async function GET(req: NextRequest) {
       : null
     const issue = await insertIssue(gen, { lane: LANE, featured, images })
 
-    const autonomous = process.env.NEWSLETTER_AUTONOMOUS === 'true'
-    if (autonomous) {
-      await setIssueStatus(issue.id, 'approved')
-    } else if (process.env.RESEND_API_KEY) {
+    if (process.env.RESEND_API_KEY) {
       // Best-effort owner approval email — never fail the cron on email.
       try {
         const mail = newsletterApprovalEmail({
@@ -89,8 +85,7 @@ export async function GET(req: NextRequest) {
       ok: true,
       issueId: issue.id,
       subject: issue.subject,
-      autonomous,
-      status: autonomous ? 'approved' : 'draft',
+      status: 'draft',
       promos,
     })
   } catch (err) {

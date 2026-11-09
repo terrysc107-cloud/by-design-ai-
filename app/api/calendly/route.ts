@@ -32,23 +32,31 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  let body: any
+  let body: Record<string, unknown>
   try {
-    body = JSON.parse(raw)
+    body = JSON.parse(raw) as Record<string, unknown>
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const eventName: string = body?.event ?? ''
-  const payload = body?.payload ?? {}
-  const scheduled = payload?.scheduled_event ?? {}
+  const eventName = typeof body.event === 'string' ? body.event : ''
+  const payload = body.payload && typeof body.payload === 'object'
+    ? body.payload as Record<string, unknown>
+    : {}
+  const scheduled = payload.scheduled_event && typeof payload.scheduled_event === 'object'
+    ? payload.scheduled_event as Record<string, unknown>
+    : {}
 
   const booking = {
-    name: payload?.name ?? null,
-    email: payload?.email ?? null,
-    eventType: scheduled?.name ?? null,
-    scheduledAt: scheduled?.start_time ?? null,
-    uri: payload?.uri ?? scheduled?.uri ?? null,
+    name: typeof payload.name === 'string' ? payload.name : null,
+    email: typeof payload.email === 'string' ? payload.email : null,
+    eventType: typeof scheduled.name === 'string' ? scheduled.name : null,
+    scheduledAt: typeof scheduled.start_time === 'string' ? scheduled.start_time : null,
+    uri: typeof payload.uri === 'string'
+      ? payload.uri
+      : typeof scheduled.uri === 'string'
+        ? scheduled.uri
+        : null,
     status: eventName === 'invitee.canceled' ? 'canceled' : 'created',
   }
 
@@ -89,7 +97,12 @@ export async function POST(req: NextRequest) {
   // On new bookings: notify the owner and invite the prospect to the intake.
   if (isNew && process.env.RESEND_API_KEY) {
     try {
-      const mail = bookingNotifyEmail(booking)
+      const mail = bookingNotifyEmail({
+        name: booking.name ?? undefined,
+        email: booking.email ?? undefined,
+        eventType: booking.eventType ?? undefined,
+        scheduledAt: booking.scheduledAt ?? undefined,
+      })
       await getResend().emails.send({
         from: FROM_EMAIL,
         to: LEAD_NOTIFY_EMAIL,

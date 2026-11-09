@@ -1,4 +1,22 @@
 ---
+## Handoff — 2026-11-09 — The Operator Signal newsletter release
+
+- Rebuilt `/newsletter` in the current blue/silver/ink visual system and added
+  current Open Graph metadata and social art.
+- Migrated the subscriber-facing email shell to the current visual system.
+- Removed the `NEWSLETTER_AUTONOMOUS` runtime path. Older handoffs below mention
+  that variable as a historical risk; it no longer changes runtime behavior.
+- Changed newsletter approval so GET only renders a confirmation page and POST
+  performs the draft-to-approved transition. Link scanners cannot approve an
+  issue by opening the email link.
+- Changed newsletter generate/send cron authentication to fail closed and accept
+  `CRON_SECRET` only through the Authorization bearer header.
+- Fixed short-ID review commands, requiring an unambiguous 8–36 character prefix.
+- Claims check, lint, TypeScript, production build, desktop/mobile browser QA,
+  local email rendering, and independent visual/security reviews passed.
+- No issue was approved and no subscriber email was sent during release QA.
+
+---
 ## Handoff — 2026-09-05 (Claude) — the Five Things reel, shipped to four surfaces
 
 ### Active task

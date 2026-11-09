@@ -238,19 +238,26 @@ export async function getIssueById(id: string): Promise<IssueRow | null> {
   return (data as IssueRow) ?? null
 }
 
-/** Resolve a full id or short id-prefix (uuid columns reject ilike — match in JS). */
+/** Resolve a full UUID or an unambiguous prefix of at least eight characters. */
 export async function resolveIssueId(idOrPrefix: string): Promise<IssueRow> {
-  const exact = await getIssueById(idOrPrefix)
-  if (exact) return exact
+  const normalized = idOrPrefix.trim().toLowerCase()
+  if (normalized.length < 8 || normalized.length > 36) {
+    throw new Error('Newsletter issue IDs must be a full UUID or a prefix of 8–36 characters.')
+  }
+  const fullUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(normalized)
+  if (fullUuid) {
+    const exact = await getIssueById(normalized)
+    if (exact) return exact
+  }
   const { data, error } = await getSupabase()
     .from(ISSUE_TABLE)
     .select('*')
     .order('created_at', { ascending: false })
     .limit(500)
-  if (error) throw new Error(`Failed to resolve ${idOrPrefix}: ${error.message}`)
-  const matches = ((data ?? []) as IssueRow[]).filter(r => r.id.startsWith(idOrPrefix))
-  if (matches.length === 0) throw new Error(`No newsletter issue matches "${idOrPrefix}".`)
-  if (matches.length > 1) throw new Error(`"${idOrPrefix}" is ambiguous (${matches.length} matches) — use more characters.`)
+  if (error) throw new Error(`Failed to resolve ${normalized}: ${error.message}`)
+  const matches = ((data ?? []) as IssueRow[]).filter(r => r.id.toLowerCase().startsWith(normalized))
+  if (matches.length === 0) throw new Error(`No newsletter issue matches "${normalized}" among the 500 newest issues.`)
+  if (matches.length > 1) throw new Error(`"${normalized}" is ambiguous (${matches.length} matches) — use more characters.`)
   return matches[0]
 }
 

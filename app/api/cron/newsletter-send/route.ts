@@ -8,16 +8,18 @@ export const maxDuration = 60
 // Daily cron: drain any approved newsletter issue to all active subscribers.
 // Resumable + idempotent (per-recipient ledger). No-op when nothing is approved.
 // Loops batches up to a wall-clock budget so one invocation drains as much as it
-// can within maxDuration; the next daily tick (or a manual ?secret= call)
-// resumes safely. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`.
+// can within maxDuration; the next daily tick resumes safely. Vercel Cron sends
+// `Authorization: Bearer <CRON_SECRET>`.
 const BUDGET_MS = 50_000 // stop ~10s before maxDuration (60s) to finish cleanly
 const MAX_LOOPS = 100
 
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET
   const auth = req.headers.get('authorization')
-  const qs = req.nextUrl.searchParams.get('secret')
-  if (secret && auth !== `Bearer ${secret}` && qs !== secret) {
+  if (!secret) {
+    return NextResponse.json({ error: 'Cron authentication not configured' }, { status: 503 })
+  }
+  if (auth !== `Bearer ${secret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
