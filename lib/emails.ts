@@ -2,8 +2,15 @@ import { SITE_URL } from './resend'
 import type { IntakeSubmission } from './ai-review'
 import { DRIP_TOTAL } from './drip'
 
-const GOLD = '#C9A84C'
-const BG = '#1E1B17'
+// Current AI by Design visual system. The blue/silver/ink palette supersedes
+// the legacy gold email direction; keep these values aligned with
+// brand/AIxDesign-Brand-Kit/BRAND-GUIDE.md.
+const BLUE = '#2878FF'
+const INK = '#09111F'
+const CYAN = '#73D7F3'
+const PAPER = '#F7F9FC'
+const SILVER = '#E3EAF3'
+const SLATE = '#526071'
 const CALL_URL = 'https://calendly.com/terrysc107/15-min-ai-discovery-call'
 
 /**
@@ -73,63 +80,66 @@ const TYPE = {
 } as const
 
 /**
- * The masthead is TEXT, not an image, and deliberately so: most clients block
- * remote images until the reader allows them, and a brand whose first
- * impression is a grey broken-image box has spent its one impression. The
- * lockup is the one from BRAND-KIT: lowercase `aixdesign` with the x in gold.
+ * Text masthead by design: remote images are blocked by default in many email
+ * clients. The signal bars make the current brand recognizable even with every
+ * image disabled.
  */
 function masthead(): string {
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid rgba(201,168,76,0.22);">
-    <tr><td style="padding:0 0 20px;">
-      <span style="font-family:${SANS};font-size:17px;font-weight:600;color:#ffffff;letter-spacing:-0.2px;">ai<span style="color:${GOLD};">x</span>design</span>
-    </td></tr>
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid ${SILVER};">
+    <tr>
+      <td style="padding:0 0 20px;">
+        <span style="display:inline-block;vertical-align:middle;width:9px;height:9px;border-radius:3px;background:${CYAN};margin-right:8px;"></span>
+        <span style="font-family:${SANS};font-size:17px;font-weight:700;color:${INK};letter-spacing:-0.3px;">AI by Design</span>
+      </td>
+      <td align="right" style="padding:0 0 20px;color:${BLUE};${TYPE.eyebrow}">The Operator Signal</td>
+    </tr>
   </table>`
 }
 
-// Shared dark-luxury email shell. `footer` lets drip emails append an unsubscribe
-// line; `preheader` sets the hidden inbox preview text.
+// Shared current-brand email shell. It stays table-based and fully inline for
+// Gmail and Outlook compatibility; no important meaning depends on an image.
 function wrap(inner: string, footer?: string, preheader?: string): string {
   const preheaderHtml = preheader
     ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;width:0;">${preheader}</div>`
     : ''
   return `<!doctype html>
 <html>
-  <body style="margin:0;padding:0;background:${BG};font-family:${SERIF};">
+  <body style="margin:0;padding:0;background:${PAPER};font-family:${SERIF};">
     ${preheaderHtml}
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${PAPER};padding:32px 14px;">
       <tr><td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#23201b;border:1px solid rgba(201,168,76,0.3);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid ${SILVER};border-radius:18px;">
           <tr><td style="padding:32px 34px 38px;">
             ${masthead()}
-            <div style="height:26px;line-height:26px;">&nbsp;</div>
+            <div style="height:28px;line-height:28px;">&nbsp;</div>
             ${inner}
           </td></tr>
         </table>
-        <p style="margin:20px 0 0;color:rgba(255,255,255,0.25);${TYPE.small}">AI by Design · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
+        <p style="margin:20px 0 0;color:#7A8796;${TYPE.small}">AI by Design · aixdesign.dev${footer ? `<br/>${footer}` : ''}</p>
       </td></tr>
     </table>
   </body>
 </html>`
 }
 
-function goldButton(href: string, label: string): string {
-  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px;"><tr><td style="background:${GOLD};"><a href="${href}" style="display:inline-block;padding:14px 28px;color:${BG};font-family:${SANS};font-size:13px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">${label}</a></td></tr></table>`
+function primaryButton(href: string, label: string): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px;"><tr><td style="background:${BLUE};border-radius:8px;"><a href="${href}" style="display:inline-block;padding:14px 24px;color:#ffffff;font-family:${SANS};font-size:13px;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;font-weight:700;">${label}</a></td></tr></table>`
 }
 
 function eyebrow(text: string): string {
-  return `<p style="margin:0 0 12px;color:${GOLD};${TYPE.eyebrow}">${text}</p>`
+  return `<p style="margin:0 0 12px;color:${BLUE};${TYPE.eyebrow}">${text}</p>`
 }
 
 function h1(text: string): string {
-  return `<h1 style="margin:0 0 18px;color:#ffffff;${TYPE.h1}">${text}</h1>`
+  return `<h1 style="margin:0 0 18px;color:${INK};${TYPE.h1}">${text}</h1>`
 }
 
 function lede(text: string): string {
-  return `<p style="margin:0 0 22px;color:rgba(255,255,255,0.78);${TYPE.lede}">${text}</p>`
+  return `<p style="margin:0 0 22px;color:${INK};${TYPE.lede}">${text}</p>`
 }
 
 function p(text: string): string {
-  return `<p style="margin:0 0 18px;color:rgba(255,255,255,0.66);${TYPE.body}">${text}</p>`
+  return `<p style="margin:0 0 18px;color:${SLATE};${TYPE.body}">${text}</p>`
 }
 
 /**
@@ -143,9 +153,9 @@ function p(text: string): string {
 function figure(src: string, alt: string, caption?: string): string {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
     <tr><td>
-      <img src="${src}" alt="${alt}" width="472" style="display:block;width:100%;max-width:472px;border:1px solid rgba(201,168,76,0.18);" />
+      <img src="${src}" alt="${alt}" width="472" style="display:block;width:100%;max-width:472px;border:1px solid rgba(40,120,255,0.18);" />
     </td></tr>
-    ${caption ? `<tr><td style="padding-top:8px;"><p style="margin:0;color:rgba(255,255,255,0.38);${TYPE.small}">${caption}</p></td></tr>` : ''}
+    ${caption ? `<tr><td style="padding-top:8px;"><p style="margin:0;color:#7A8796;${TYPE.small}">${caption}</p></td></tr>` : ''}
   </table>`
 }
 
@@ -154,7 +164,7 @@ function first(name: string): string {
 }
 
 function unsubFooter(unsubscribeUrl: string): string {
-  return `Not useful? <a href="${unsubscribeUrl}" style="color:rgba(255,255,255,0.4);text-decoration:underline;">Unsubscribe</a> anytime.`
+  return `Not useful? <a href="${unsubscribeUrl}" style="color:#7A8796;text-decoration:underline;">Unsubscribe</a> anytime.`
 }
 
 // ── Guide delivery (sent immediately on signup) ─────────────────────────────
@@ -171,11 +181,11 @@ export function guideEmail(name: string): Email {
       'The Board Method: the cover of the seven-page guide',
     ) +
     p("Five steps to a small board of AI employees that read your real numbers on a schedule and hand you a decision: Charter, Floor, Run, Review, Promote.") +
-    goldButton(GUIDE_PDF_URL, 'Download the PDF →') +
-    p(`Prefer to read it in your browser? <a href="${guideUrl}" style="color:${GOLD};text-decoration:underline;">Open the guide here</a>.`) +
+    primaryButton(GUIDE_PDF_URL, 'Download the PDF →') +
+    p(`Prefer to read it in your browser? <a href="${guideUrl}" style="color:${BLUE};text-decoration:underline;">Open the guide here</a>.`) +
     p(`Over the next few weeks I'll send ${DRIP_TOTAL} short notes, each ending on the most common way that idea fails. No fluff.`) +
     p(`And whenever you want a second set of eyes on your setup, grab a free 15-minute call:`) +
-    `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
+    `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${BLUE};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
     p('— The AI by Design team')
   return {
     subject: 'Your guide: The Board Method',
@@ -203,9 +213,9 @@ export function newsletterWelcomeEmail(name: string | undefined, unsubscribeUrl:
     p(greeting) +
     p("Thanks for subscribing. Roughly once a week I'll send one short, practical note on putting AI and automation to work in a business like yours — real moves, no hype, no filler.") +
     p('Want a head start? Grab the free guide — the 10 things in your business you should never do manually:') +
-    goldButton(`${SITE_URL}/guide`, 'Read the Guide →') +
+    primaryButton(`${SITE_URL}/guide`, 'Read the Guide →') +
     p('And whenever you want a second set of eyes on your setup, book a free 15-minute call:') +
-    `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${GOLD};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
+    `<p style="margin:0 0 18px;"><a href="${CALL_URL}" style="color:${BLUE};font-size:14px;text-decoration:underline;">Book a free discovery call →</a></p>` +
     p('— The AI by Design team')
   const text = `${greeting}
 
@@ -252,7 +262,7 @@ export function buildLabWaitlistEmail(name: string | undefined, unsubscribeUrl: 
     p(
       'In the meantime, the self-paced course covers the same workflow and is complete on its own. You don’t need the Lab to finish it:'
     ) +
-    goldButton('https://runyouraiboard.com', 'See My AI Board →') +
+    primaryButton('https://runyouraiboard.com', 'See My AI Board →') +
     p(
       'You’ll also get the weekly AI by Design note — one short, practical read on putting AI to work in a business. Unsubscribe any time; it won’t affect your spot on the list.'
     ) +
@@ -290,7 +300,7 @@ export function aiFoundationsWaitlistEmail(name: string | undefined, unsubscribe
     p(
       'Enrollment isn’t open yet. When it is, you’ll get one email with the link. Nothing has been charged and nothing is reserved. It’s a list, not a ticket.'
     ) +
-    goldButton('https://aixdesign.dev/education/ai-foundations', 'See what’s inside →') +
+    primaryButton('https://aixdesign.dev/education/ai-foundations', 'See what’s inside →') +
     p(
       'You’ll also get the weekly AI by Design note, one short, practical read on putting AI to work. Unsubscribe any time.'
     ) +
@@ -319,7 +329,7 @@ Unsubscribe: ${unsubscribeUrl}`
 
 export function subscriberNotifyEmail(email: string, source: string): Email {
   const subject = `New newsletter subscriber: ${email}`
-  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1E1B17;">
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:${INK};">
     <p style="margin:0 0 8px;"><strong>New newsletter subscriber</strong></p>
     <p style="margin:0;">Email: <a href="mailto:${email}">${email}</a></p>
     <p style="margin:0;">Source: ${source}</p>
@@ -355,9 +365,9 @@ export function newsletterIssueEmail(
     .join('')
   const featured =
     issue.featured_post_url && issue.featured_post_title
-      ? p(`📄 New on the blog: <a href="${issue.featured_post_url}" style="color:${GOLD};text-decoration:underline;">${issue.featured_post_title}</a>`)
+      ? p(`📄 New on the blog: <a href="${issue.featured_post_url}" style="color:${BLUE};text-decoration:underline;">${issue.featured_post_title}</a>`)
       : ''
-  const cta = issue.cta_url ? goldButton(issue.cta_url, issue.cta_label || 'Read more →') : ''
+  const cta = issue.cta_url ? primaryButton(issue.cta_url, issue.cta_label || 'Read more →') : ''
 
   const inner =
     (issue.hero_image_url ? emailImage(issue.hero_image_url) : '') +
@@ -401,19 +411,19 @@ export function newsletterApprovalEmail(issue: { id: string; subject: string; ap
     p(`The newsletter engine drafted this week’s issue:`) +
     p(`<strong>${issue.subject}</strong>`) +
     p('Preview the full issue and send a test to yourself before approving:') +
-    `<pre style="margin:0 0 18px;padding:14px;background:#1E1B17;color:#C9A84C;font-size:13px;white-space:pre-wrap;border:1px solid rgba(201,168,76,0.3);">${reviewCmd}</pre>` +
-    p('When it looks good, approve it and it sends to all active subscribers on the next run:') +
-    goldButton(approveUrl, 'Approve & Send →') +
-    p('Nothing goes out until you approve.')
+    `<pre style="margin:0 0 18px;padding:14px;background:${INK};color:${CYAN};font-size:13px;white-space:pre-wrap;border:1px solid rgba(115,215,243,0.28);">${reviewCmd}</pre>` +
+    p('When it looks good, open the confirmation page. Opening this link does not approve or send anything:') +
+    primaryButton(approveUrl, 'Review & confirm →') +
+    p('Nothing goes out until you confirm approval on the next page.')
   const text = `This week's newsletter is ready: "${issue.subject}"
 
 Preview + send yourself a test:
 ${reviewCmd}
 
-Approve & send to all subscribers:
+Open the approval confirmation page (opening it does not approve or send):
 ${approveUrl}
 
-Nothing goes out until you approve.
+Nothing goes out until you confirm approval on that page.
 
 — AI by Design newsletter engine`
   return { subject, html: wrap(inner), text }
@@ -538,7 +548,7 @@ export function dripEmail(stage: number, name: string, unsubscribeUrl: string): 
     def.body.slice(0, 1).map(p).join('') +
     (fig ? figure(`${SITE_URL}${fig.src}`, fig.alt) : '') +
     def.body.slice(1).map(p).join('') +
-    goldButton(def.ctaUrl ?? COURSE_URL, def.cta) +
+    primaryButton(def.ctaUrl ?? COURSE_URL, def.cta) +
     p('— The AI by Design team')
   const text = `Hey ${first(name)},
 
@@ -573,7 +583,7 @@ export function contentDraftsReadyEmail(count: number, lane: string): Email {
     h1(`${count} new draft${count === 1 ? '' : 's'} in the queue`) +
     p(`The content engine topped up the <strong>${lane}</strong> lane with ${count} fresh LinkedIn draft${count === 1 ? '' : 's'}.`) +
     p('Review, edit, and approve them — nothing publishes until you approve:') +
-    `<pre style="margin:0 0 18px;padding:14px;background:#1E1B17;color:#C9A84C;font-size:13px;white-space:pre-wrap;border:1px solid rgba(201,168,76,0.3);">${cmd}</pre>` +
+    `<pre style="margin:0 0 18px;padding:14px;background:${INK};color:${CYAN};font-size:13px;white-space:pre-wrap;border:1px solid rgba(115,215,243,0.28);">${cmd}</pre>` +
     p('Approved posts get scheduled to LinkedIn automatically on the next publish run.')
   const text = `${count} new ${lane} post draft(s) are ready to review.
 
@@ -615,7 +625,7 @@ export function intakeInviteEmail(name: string, intakeUrl: string): Email {
     p(`Hey ${first(name)},`) +
     p("You're booked — thank you. To make our time together count, I put together a short intake so I can review your setup beforehand and show up with a plan already half-built, instead of spending the call asking the basics.") +
     p('It takes about 2 minutes. The more you share, the more specific I can be.') +
-    goldButton(intakeUrl, 'Complete the Intake →') +
+    primaryButton(intakeUrl, 'Complete the Intake →') +
     p('You can fill it out now or any time before our call — but the sooner I have it, the more prepared I’ll be.') +
     p('— Terry, AI by Design')
   const text = `Hey ${first(name)},
@@ -669,7 +679,7 @@ export function intakeReminderEmail(name: string, intakeUrl: string, stage: numb
     h1(def.heading) +
     p(`Hey ${first(name)},`) +
     def.body.map(p).join('') +
-    goldButton(intakeUrl, 'Complete the Intake →') +
+    primaryButton(intakeUrl, 'Complete the Intake →') +
     p('— Terry, AI by Design')
   const text = `Hey ${first(name)},
 
